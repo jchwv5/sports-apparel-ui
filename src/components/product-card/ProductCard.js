@@ -10,9 +10,11 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Constants from '../../utils/constants';
+import { useCart } from '../checkout-page/CartContext';
 
 /**
  * @name useStyles
@@ -51,6 +53,23 @@ const useStyles = makeStyles((theme) => ({
 const ProductCard = ({ product }) => {
   const classes = useStyles();
 
+  const { dispatch } = useCart();
+
+  const onAdd = () => {
+    dispatch(
+      {
+        type: 'add',
+        product: {
+          id: product.id,
+          title: product.name,
+          price: product.price,
+          description: product.description,
+          quantity: 1
+        }
+      }
+    );
+  };
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -79,7 +98,7 @@ const ProductCard = ({ product }) => {
         <br />
         <Typography variant="body2" color="textSecondary" component="p">
           Price: $
-          {product.Price}
+          {product.price}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -88,6 +107,9 @@ const ProductCard = ({ product }) => {
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
+        </IconButton>
+        <IconButton aria-label="add to shopping cart" onClick={onAdd}>
+          <AddShoppingCartIcon />
         </IconButton>
       </CardActions>
     </Card>
