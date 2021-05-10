@@ -28,3 +28,6 @@ You will also see any lint errors in the console.
 
 ## Dependencies
 * Sports apparel api must be running. Confer with team resources if you are unsure.
+
+## Testing
+* You can run tests with coverage via `npm run test:coverage`
