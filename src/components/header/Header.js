@@ -43,7 +43,7 @@ const Header = () => {
       {user && <span>{user.lastName}</span>}
       {googleLoginError && <span>{googleLoginError}</span>}
       {apiError && <span>Api Error</span>}
-      {!user ? (
+      {!user && (
         <GoogleLogin
           clientId="912899852587-7996nh9mlpvpa2446q0il4f9hj5o492h.apps.googleusercontent.com"
           buttonText="Login"
@@ -51,10 +51,6 @@ const Header = () => {
           onFailure={handleGoogleLoginFailure}
           cookiePolicy="single_host_origin"
         />
-      ) : (
-        <div>
-          You are logged In
-        </div>
       )}
     </div>
   );

@@ -1,3 +1,4 @@
+import jwtDecode from 'jwt-decode';
 import HttpHelper from '../../utils/HttpHelper';
 
 /**
@@ -17,9 +18,11 @@ const loginUser = (googleUser, setUser, setApiError) => {
       throw new Error(response.statusText);
     })
     .then((response) => {
-      setUser(response.user);
-      document.cookie = `user=${JSON.stringify(response.user)}`;
+      const payload = jwtDecode(response.jwtToken);
+      setUser(payload.user);
+      document.cookie = `user=${JSON.stringify(payload.user)}`;
       document.cookie = `token=${JSON.stringify(response.jwtToken)}`;
+      sessionStorage.setItem('token', JSON.stringify(response.jwtToken));
     })
     .catch(() => {
       setApiError(true);
