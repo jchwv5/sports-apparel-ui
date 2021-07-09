@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import GoogleLogin from 'react-google-login';
+import GoogleLogin, { GoogleLogout } from 'react-google-login';
 import loginUser from './HeaderService';
 
 /**
@@ -9,8 +9,8 @@ import loginUser from './HeaderService';
  * @return component
  */
 const Header = () => {
-  const [user, setUser] = useState();
-  const [googleLoginError, setGoogleLoginError] = useState('');
+  const [user, setUser] = useState('');
+  const [googleError, setGoogleError] = useState('');
   const [apiError, setApiError] = useState(false);
 
   /**
@@ -19,12 +19,14 @@ const Header = () => {
    * @param {Object} response Response object from google
    */
   const handleGoogleLoginSuccess = (response) => {
+    sessionStorage.setItem('token', response.getAuthResponse().id_token);
     const googleUser = {
       email: response.profileObj.email,
       firstName: response.profileObj.givenName,
       lastName: response.profileObj.familyName
     };
     loginUser(googleUser, setUser, setApiError);
+    setGoogleError('');
   };
 
   /**
@@ -32,7 +34,24 @@ const Header = () => {
    * @description Function to run if google login was unsuccessful
    */
   const handleGoogleLoginFailure = () => {
-    setGoogleLoginError('There was a problem logging in with Google. Please try again later.');
+    setGoogleError('There was a problem logging in with Google. Please wait and try again later.');
+  };
+
+  /**
+   * @name handleGoogleLogoutSuccess
+   * @description Function to run if google logout was successful
+   */
+  const handleGoogleLogoutSuccess = () => {
+    setUser('');
+    setGoogleError('');
+  };
+
+  /**
+   * @name handleGoogleLogoutFailure
+   * @description Function to run if google logout was unsuccessful
+   */
+  const handleGoogleLogoutFailure = () => {
+    setGoogleError('There was a problem logging out with Google. Please wait and try again later.');
   };
 
   return (
@@ -41,15 +60,22 @@ const Header = () => {
       <NavLink to="/checkout">Cart</NavLink>
       {user && <span>{user.firstName}</span>}
       {user && <span>{user.lastName}</span>}
-      {googleLoginError && <span>{googleLoginError}</span>}
+      {googleError && <span>{googleError}</span>}
       {apiError && <span>Api Error</span>}
-      {!user && (
+      {!user ? (
         <GoogleLogin
           clientId="912899852587-7996nh9mlpvpa2446q0il4f9hj5o492h.apps.googleusercontent.com"
           buttonText="Login"
           onSuccess={handleGoogleLoginSuccess}
           onFailure={handleGoogleLoginFailure}
           cookiePolicy="single_host_origin"
+        />
+      ) : (
+        <GoogleLogout
+          clientId="912899852587-7996nh9mlpvpa2446q0il4f9hj5o492h.apps.googleusercontent.com"
+          buttonText="Logout"
+          onLogoutSuccess={handleGoogleLogoutSuccess}
+          onSuccess={handleGoogleLogoutFailure}
         />
       )}
     </div>

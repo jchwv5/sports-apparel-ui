@@ -1,10 +1,8 @@
-import jwtDecode from 'jwt-decode';
 import HttpHelper from '../../utils/HttpHelper';
 
 /**
  * @name loginUser
- * @description Sends a login request to the backend to log user in.
- * If successful, saves jwtToken and user info to cookie
+ * @description Sends a login request to the backend and get user information
  * @param {Object} googleUser The googleUser object
  * @param {Function} setUser Sets the user
  * @param {Function} setApiError Sets the Api Error
@@ -18,11 +16,9 @@ const loginUser = (googleUser, setUser, setApiError) => {
       throw new Error(response.statusText);
     })
     .then((response) => {
-      const payload = jwtDecode(response.jwtToken);
-      setUser(payload.user);
-      document.cookie = `user=${JSON.stringify(payload.user)}`;
-      document.cookie = `token=${JSON.stringify(response.jwtToken)}`;
-      sessionStorage.setItem('token', JSON.stringify(response.jwtToken));
+      setUser(response);
+      setApiError(false);
+      document.cookie = `user=${JSON.stringify(response)}`;
     })
     .catch(() => {
       setApiError(true);
