@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import GoogleLogin, { GoogleLogout } from 'react-google-login';
 import loginUser from './HeaderService';
+import constants from '../../utils/constants';
 
 /**
  * @name Header
@@ -64,7 +65,7 @@ const Header = () => {
       {apiError && <span>Api Error</span>}
       {!user ? (
         <GoogleLogin
-          clientId="912899852587-7996nh9mlpvpa2446q0il4f9hj5o492h.apps.googleusercontent.com"
+          clientId={constants.GOOGLE_CLIENT_ID}
           buttonText="Login"
           onSuccess={handleGoogleLoginSuccess}
           onFailure={handleGoogleLoginFailure}
@@ -72,7 +73,7 @@ const Header = () => {
         />
       ) : (
         <GoogleLogout
-          clientId="912899852587-7996nh9mlpvpa2446q0il4f9hj5o492h.apps.googleusercontent.com"
+          clientId={constants.GOOGLE_CLIENT_ID}
           buttonText="Logout"
           onLogoutSuccess={handleGoogleLogoutSuccess}
           onSuccess={handleGoogleLogoutFailure}

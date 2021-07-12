@@ -3,5 +3,6 @@ module.exports = Object.freeze({
   BASE_URL_API: 'http://localhost:8085',
   PLACEHOLDER_IMAGE: 'https://www.signfix.com.au/wp-content/uploads/2017/09/placeholder-600x400.png',
   PURCHASE_ENDPOINT: '/purchases',
-  RUNNING_SHORTS_ENDPOINT: '/products?category=Running&type=Short'
+  RUNNING_SHORTS_ENDPOINT: '/products?category=Running&type=Short',
+  GOOGLE_CLIENT_ID: '984704211148-muiiiq5n5ijont87g1f4blf41lekc75f.apps.googleusercontent.com'
 });
