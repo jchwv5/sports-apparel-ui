@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import GoogleLogin, { GoogleLogout } from 'react-google-login';
 import loginUser from './HeaderService';
 import constants from '../../utils/constants';
+import logo from '../../assets/logo.png';
+import cartLogo from '../../assets/cartLogo.png';
 
 /**
  * @name Header
@@ -35,7 +37,9 @@ const Header = () => {
    * @description Function to run if google login was unsuccessful
    */
   const handleGoogleLoginFailure = () => {
-    setGoogleError('There was a problem logging in with Google. Please wait and try again later.');
+    setGoogleError(
+      'There was a problem logging in with Google. Please wait and try again later.'
+    );
   };
 
   /**
@@ -52,13 +56,19 @@ const Header = () => {
    * @description Function to run if google logout was unsuccessful
    */
   const handleGoogleLogoutFailure = () => {
-    setGoogleError('There was a problem logging out with Google. Please wait and try again later.');
+    setGoogleError(
+      'There was a problem logging out with Google. Please wait and try again later.'
+    );
   };
 
   return (
-    <div>
-      <NavLink to="/home">Home</NavLink>
-      <NavLink to="/checkout">Cart</NavLink>
+    <div className="header">
+      <NavLink to="/home">
+        <img className="logo" src={logo} alt="" />
+      </NavLink>
+      <NavLink to="/checkout">
+        <img className="cart" src={cartLogo} alt="" />
+      </NavLink>
       {user && <span>{user.firstName}</span>}
       {user && <span>{user.lastName}</span>}
       {googleError && <span>{googleError}</span>}
