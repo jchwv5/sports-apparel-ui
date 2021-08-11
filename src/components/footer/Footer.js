@@ -1,9 +1,11 @@
 import React from 'react';
+import './Footer.css';
 
 function Footer() {
   return (
     <div className="footer">
-      <h1>2021 Sports Apparel, Inc.</h1>
+      <hr />
+      <p className="row">&copy; 2021 Sports Apparel, Inc.</p>
     </div>
   );
 }

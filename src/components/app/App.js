@@ -12,15 +12,18 @@ import Footer from '../footer/Footer';
  * @returns component
  */
 const App = () => (
-  <BrowserRouter>
-    <Header />
-    <Switch>
-      <Route exact path="/" render={() => <ProductPage />} />
-      <Route exact path="/checkout" render={() => <CheckoutPage />} />
-      <Route exact path="/confirmation" render={() => <ConfirmationPage />} />
-    </Switch>
-    <Footer />
-  </BrowserRouter>
+  <div className="page-container">
+    <BrowserRouter>
+      <Header />
+      <Switch>
+        <Route exact path="/" render={() => <ProductPage />} />
+        <Route exact path="/checkout" render={() => <CheckoutPage />} />
+        <Route exact path="/confirmation" render={() => <ConfirmationPage />} />
+      </Switch>
+
+      <Footer />
+    </BrowserRouter>
+  </div>
 );
 
 export default App;
