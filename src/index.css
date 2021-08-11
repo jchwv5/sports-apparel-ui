@@ -21,26 +21,33 @@ code {
   align-items: left;
   transition: all 0.7s ease-in;
   position: fixed;
-  padding-bottom: 3px;
   z-index: 1;
-  background-color: #eeeeee;
+  background-color: #ea526f;
 }
 
 .logo {
-  padding-left: 20px;
+  position: right;
+}
+
+.cart {
+  position: absolute;
+  right: 5px;
 }
 
 .header button {
+  margin-top: 5px;
   height: 40px;
+  width: 100px;
 }
 
 .logo,
 .cart {
+  padding: 5px;
   width: 50px;
   height: 40px;
 }
 
 .mainbody,
 .checkoutBody {
-  padding-top: 30px;
+  padding-top: 60px;
 }

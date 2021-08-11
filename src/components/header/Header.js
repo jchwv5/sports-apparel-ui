@@ -63,7 +63,7 @@ const Header = () => {
 
   return (
     <div className="header">
-      <NavLink to="/home">
+      <NavLink to="/">
         <img className="logo" src={logo} alt="" />
       </NavLink>
       <NavLink to="/checkout">
