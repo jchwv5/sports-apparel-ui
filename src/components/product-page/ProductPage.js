@@ -3,6 +3,7 @@ import ProductCard from '../product-card/ProductCard';
 import styles from './ProductPage.module.css';
 import Constants from '../../utils/constants';
 import fetchProducts from './ProductPageService';
+import Sidebar from '../sidebar/Sidebar';
 
 /**
  * @name ProductPage
@@ -20,6 +21,7 @@ const ProductPage = () => {
   return (
     <div>
       {apiError && <p className={styles.errMsg} data-testid="errMsg">{Constants.API_ERROR}</p>}
+      <Sidebar />
       <div className={styles.app}>
         {products.map((product) => (
           <div key={product.id}>
