@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import Toast from '../Toast/Toast';
+import notify from '../Toast/Toast';
 import { useCart } from './CartContext';
 import styles from './CheckoutPage.module.css';
 import ReviewOrderWidget from './ReviewOrderWidget';
