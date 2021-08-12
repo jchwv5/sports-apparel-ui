@@ -5,12 +5,16 @@ import ProductPage from '../product-page/ProductPage';
 import CheckoutPage from '../checkout-page/CheckoutPage';
 import ConfirmationPage from '../confirmation-page/ConfirmationPage';
 import Header from '../header/Header';
+import {ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dis/ReactToastify.css';
 
+toast.configure()
 /**
  * @name App
  * @returns component
  */
 const App = () => (
+    
   <BrowserRouter>
     <Header />
     <Switch>
