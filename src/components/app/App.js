@@ -1,12 +1,11 @@
 import React from 'react';
+import Toast from '../Toast/Toast';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ProductPage from '../product-page/ProductPage';
 import CheckoutPage from '../checkout-page/CheckoutPage';
 import ConfirmationPage from '../confirmation-page/ConfirmationPage';
 import Header from '../header/Header';
-import {ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dis/ReactToastify.css';
 
 toast.configure()
 /**
@@ -14,7 +13,6 @@ toast.configure()
  * @returns component
  */
 const App = () => (
-    
   <BrowserRouter>
     <Header />
     <Switch>
