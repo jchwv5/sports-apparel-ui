@@ -1,6 +1,11 @@
 import React from 'react';
 import './Footer.css';
 
+/**
+ * @name Footer
+ * @description Displays the footer
+ * @return component
+ */
 const Footer = () => (
   <div className="footer">
     <hr />

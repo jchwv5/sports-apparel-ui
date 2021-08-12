@@ -12,15 +12,20 @@ import Footer from '../footer/Footer';
  * @returns component
  */
 const App = () => (
-  <div className="page-container">
+  <div className="app-container">
     <BrowserRouter>
       <Header />
       <Switch>
-        <Route exact path="/" render={() => <ProductPage />} />
-        <Route exact path="/checkout" render={() => <CheckoutPage />} />
-        <Route exact path="/confirmation" render={() => <ConfirmationPage />} />
+        <div className="content-container">
+          <Route exact path="/" render={() => <ProductPage />} />
+          <Route exact path="/checkout" render={() => <CheckoutPage />} />
+          <Route
+            exact
+            path="/confirmation"
+            render={() => <ConfirmationPage />}
+          />
+        </div>
       </Switch>
-
       <Footer />
     </BrowserRouter>
   </div>

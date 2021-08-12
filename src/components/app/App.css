@@ -37,7 +37,8 @@
   }
 }
 
-.page-container {
+.content-container {
   display: flex;
   flex-direction: column;
+  padding-bottom: 6rem;
 }
