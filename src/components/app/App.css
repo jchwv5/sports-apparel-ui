@@ -36,9 +36,12 @@
     transform: rotate(360deg);
   }
 }
-
+.app-container {
+  position: relative;
+  min-height: 100vh;
+}
 .content-container {
   display: flex;
   flex-direction: column;
-  padding-bottom: 6rem;
+  padding-bottom: 3rem;
 }
