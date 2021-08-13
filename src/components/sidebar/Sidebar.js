@@ -1,26 +1,39 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { Component } from 'react';
+import M from 'materialize-css/dist/js/materialize.min';
+import 'materialize-css/dist/css/materialize.min.css';
 
-const Sidebar = () => (
-  <>
-    <ul id="slide-out" className="sidenav">
-      <li>
-        <div className="user-view">
-          <div className="background">
-            <img alt="" src="images/office.jpg" />
-          </div>
-          <a href="#user"><img className="circle" alt="" src="images/yuna.jpg" /></a>
-          <a href="#name"><span className="white-text name">John Doe</span></a>
-          <a href="#email"><span className="white-text email">jdandturk@gmail.com</span></a>
-        </div>
-      </li>
-      <li><a href="#!">Second Link</a></li>
-      <li><div className="divider" /></li>
-      <li><a href="#!" className="subheader">Subheader</a></li>
-      <li><a href="#!" className="waves-effect">Third Link With Waves</a></li>
-    </ul>
-    <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a>
-  </>
-);
+class Sidebar extends Component {
+  componentDidMount() {
+    const elem = document.querySelector('.sidenav');
+    // eslint-disable-next-line no-unused-vars
+    const instance = M.Sidenav.init(elem, {
+      edge: 'left',
+      inDuration: 250,
+      preventScrolling: false
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <ul id="slide-out" className="sidenav">
+          <li />
+          <li>
+            <a href="#!">Men</a>
+          </li>
+          <li>
+            <a href="#!">Women</a>
+          </li>
+          <li>
+            <a href="#!">Kids</a>
+          </li>
+        </ul>
+        <a href="#!" data-target="slide-out" className="sidenav-trigger">
+          <i className="material-icons">menu</i>
+        </a>
+      </div>
+    );
+  }
+}
 
 export default Sidebar;

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../product-card/ProductCard';
 import styles from './ProductPage.module.css';
@@ -13,24 +14,25 @@ import Sidebar from '../sidebar/Sidebar';
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const [apiError, setApiError] = useState(false);
+  const [filterParam, setFilterParam] = useState(['All']);
 
   useEffect(() => {
-    fetchProducts(setProducts, setApiError);
+    fetchProducts(setProducts, setFilterParam, setApiError);
   }, []);
-
-  return (
-    <div>
-      {apiError && <p className={styles.errMsg} data-testid="errMsg">{Constants.API_ERROR}</p>}
-      <Sidebar />
-      <div className={styles.app}>
-        {products.map((product) => (
-          <div key={product.id}>
-            <ProductCard product={product} />
-          </div>
-        ))}
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js" />;
+    return (
+      <div>
+        {apiError && <p className={styles.errMsg} data-testid="errMsg">{Constants.API_ERROR}</p>}
+        <Sidebar />
+        <div className={styles.app}>
+          {products.map((product) => (
+            <div key={product.id}>
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default ProductPage;
