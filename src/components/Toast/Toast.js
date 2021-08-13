@@ -13,6 +13,7 @@ function notify(mode, message) {
     toast.success(message, {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 8000,
+      hideProgressBar: true,
       pauseOnHover: false,
       closeOnClick: true
     });
@@ -21,6 +22,7 @@ function notify(mode, message) {
     toast.error(message, {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 8000,
+      hideProgressBar: true,
       pauseOnHover: false,
       closeOnClick: true
     });
@@ -29,6 +31,7 @@ function notify(mode, message) {
     toast.info(message, {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 8000,
+      hideProgressBar: true,
       pauseOnHover: false,
       closeOnClick: true
     });
@@ -37,6 +40,7 @@ function notify(mode, message) {
     toast.warn(message, {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 8000,
+      hideProgressBar: true,
       pauseOnHover: false,
       closeOnClick: true
     });

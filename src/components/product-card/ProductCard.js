@@ -69,7 +69,7 @@ const ProductCard = ({ product }) => {
         }
       }
     );
-    notify('success', 'yes I would');
+    notify('success', 'Item added');
   };
 
   return (
