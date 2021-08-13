@@ -6,5 +6,6 @@ module.exports = Object.freeze({
   ALL_PRODUCTS_ENDPOINT: '/products',
   ACTIVE_PRODUCTS_ENDPOINT: '/products?active=true',
   RUNNING_SHORTS_ENDPOINT: '/products?category=Running&type=Short',
+  CREATE_PRODUCT_ENDPOINT: '/maintenance/createproduct',
   GOOGLE_CLIENT_ID: '' // ENTER CLIENT ID HERE
 });
