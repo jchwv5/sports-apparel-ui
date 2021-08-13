@@ -17,12 +17,12 @@ const App = () => (
     <BrowserRouter>
       <Header />
       <Switch>
-        {/* <Route exact path="/" render={() => <ProductPage />} />
-        <Route exact path="/checkout" render={() => <CheckoutPage />} />
-        <Route exact path="/confirmation" render={() => <ConfirmationPage />} />
-        <Route exact path="/maintenance" render={() => <ProductList />} /> */}
+        <Route exact path="/" render={() => <ProductList />} />
+        {/* <Route exact path="/checkout" render={() => <CheckoutPage />} /> */}
+        {/* <Route exact path="/confirmation" render={() => <ConfirmationPage />} />  */}
+        {/* <Route exact path="/maintenance" render={() => <ProductList />} /> */}
       </Switch>
-      <ProductList />
+      {/* <ProductList /> */}
       <Footer />
     </BrowserRouter>
   </div>
