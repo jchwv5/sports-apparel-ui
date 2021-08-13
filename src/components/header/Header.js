@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Badge } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import GoogleLogin, { GoogleLogout } from 'react-google-login';
 import loginUser from './HeaderService';
 import constants from '../../utils/constants';
+import { useCart } from '../checkout-page/CartContext';
 
 /**
  * @name Header
@@ -13,6 +15,9 @@ const Header = () => {
   const [user, setUser] = useState('');
   const [googleError, setGoogleError] = useState('');
   const [apiError, setApiError] = useState(false);
+  const {
+    state: { products }
+  } = useCart();
 
   /**
    * @name handleGoogleLoginSuccess
@@ -58,7 +63,9 @@ const Header = () => {
   return (
     <div>
       <NavLink to="/home">Home</NavLink>
-      <NavLink to="/checkout">Cart</NavLink>
+      <Badge badgeContent={products.length} color="secondary">
+        <NavLink to="/checkout">Cart</NavLink>
+      </Badge>
       {user && <span>{user.firstName}</span>}
       {user && <span>{user.lastName}</span>}
       {googleError && <span>{googleError}</span>}
