@@ -1,0 +1,23 @@
+.container {
+  padding: 0 2em;
+
+}
+
+.inputVals {
+	padding: 0em 2em;
+  margin-left: 10px;
+	margin-bottom: 5px;
+}
+
+.errors {
+	padding: 0em 2em;
+  margin-left: 5px;
+	margin-bottom: 5px;
+	color: red;
+}
+
+.addButton {
+	background-color: rgb(155, 226, 155);
+	margin-top: 15px;
+	margin-left: 70px;
+}

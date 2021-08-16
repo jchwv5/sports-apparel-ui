@@ -1,5 +1,5 @@
 {
-  "extends": [
+	"extends": [
     "react-app",
     "airbnb",
     "airbnb/hooks",
