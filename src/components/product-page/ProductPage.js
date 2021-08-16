@@ -13,11 +13,21 @@ import Sidebar from '../sidebar/Sidebar';
  */
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
+  const [filterParam, setFilterParam] = useState('All');
   const [apiError, setApiError] = useState(false);
-  const [filterParam, setFilterParam] = useState(['All']);
+
+  const filterProducts = (el) => {
+    if (filterParam === 'All') {
+      return products.setProducts;
+    } if (el.demographic !== filterParam) {
+      const index = products.indexOf(el);
+      products.splice(index, 1);
+    }
+    return products.setProducts;
+  };
 
   useEffect(() => {
-    fetchProducts(setProducts, setFilterParam, setApiError);
+    fetchProducts(setProducts, setApiError, setFilterParam);
   }, []);
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js" />;
     return (
@@ -25,6 +35,7 @@ const ProductPage = () => {
         {apiError && <p className={styles.errMsg} data-testid="errMsg">{Constants.API_ERROR}</p>}
         <Sidebar />
         <div className={styles.app}>
+          {products.filter(filterProducts)}
           {products.map((product) => (
             <div key={product.id}>
               <ProductCard product={product} />

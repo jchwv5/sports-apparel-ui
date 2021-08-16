@@ -19,13 +19,13 @@ class Sidebar extends Component {
         <ul id="slide-out" className="sidenav">
           <li />
           <li>
-            <a href="#!">Men</a>
+            <a href="#!" value="Men">Men</a>
           </li>
           <li>
-            <a href="#!">Women</a>
+            <a href="#!" value="Women">Women</a>
           </li>
           <li>
-            <a href="#!">Kids</a>
+            <a href="#!" value="Kids">Kids</a>
           </li>
         </ul>
         <a href="#!" data-target="slide-out" className="sidenav-trigger">

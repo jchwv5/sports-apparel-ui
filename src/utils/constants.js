@@ -6,6 +6,8 @@ module.exports = Object.freeze({
   ALL_PRODUCTS_ENDPOINT: '/products',
   ACTIVE_PRODUCTS_ENDPOINT: '/products?active=true',
   MEN_ACTIVE_PRODUCTS_ENDPOINT: '/products?active=true&demographic=Men',
+  WOMEN_ACTIVE_PRODUCTS_ENDPOINT: '/products?active=true&demographic=Women',
+  KIDS_ACTIVE_PRODUCTS_ENDPOINT: '/products?active=true&demographic=Kids',
   RUNNING_SHORTS_ENDPOINT: '/products?category=Running&type=Short',
   GOOGLE_CLIENT_ID: '' // ENTER CLIENT ID HERE
 });
