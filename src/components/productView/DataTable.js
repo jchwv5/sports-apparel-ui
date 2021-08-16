@@ -7,87 +7,78 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import ProductPage from '../product-page/ProductPage';
-import ProductPageService from '../product-page/ProductPageService';
+// import ProductPage from '../product-page/ProductPage';
+// import ProductPageService from '../product-page/ProductPageService';
+import styles from '../product-page/ProductPage.module.css';
+import Constants from '../../utils/constants';
+import fetchProducts from '../product-page/ProductPageService';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650
+  },
+  tableContainer: {
+    borderRadius: 15,
+    margin: '10px 10px',
+    maxWidth: 950
+  },
+  tableHeadCell: {
+    fontWeight: 'bold',
+    backgroundColor: theme.palette.primary.dark,
+    color: theme.palette.getContrastText(theme.palette.primary.dark)
   }
-});
-
-function createData(name, description, category, type, releaseDate) {
-  return { name, description, category, type, releaseDate };
-}
-
-// const rows = [
-//   createData('pants', 'blue', 'short'),
-//   createData('dress', 'black', 'midi'),
-//   createData('shirts', 'green', 'long')
-// ];
+}));
 
 const DataTable = () => {
-  // const classes = useStyles();
+  const [products, setProducts] = useState([]);
+  const [apiError, setApiError] = useState(false);
 
-  //   const [products, setProducts] = useState([]);
-  //   const [apiError, setApiError] = useState(false);
-
-  //   useEffect(() => {
-  //     fetchProducts(setProducts, setApiError);
-  //   }, []);
-
-  //   return (
-  //     <div>
-  //       {apiError && (
-  //         <p className={styles.errMsg} data-testid="errMsg">
-  //           {Constants.API_ERROR}
-  //         </p>
-  //       )}
-  //       <div className={classes}>
-  //         {products.map((product) => (
-  //           <div key={product.id}>
-  //             <ProductCard product={product} />
-  //           </div>
-  //         ))}
-  //       </div>
-  //     </div>
-  //   );
-  // };
-
-  const [tableData, setTableData] = useState([]);
   useEffect(() => {
-    fetch('https://fo4s-sports-apparel-api.herokuapp.com/products').then(
-      (tableData) => setTableData(tableData)
-    );
-  });
+    fetchProducts(setProducts, setApiError);
+  }, []);
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={useStyles.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Products</TableCell>
-            <TableCell align="right">Description</TableCell>
-            <TableCell align="right">Category</TableCell>
-            <TableCell align="right">Type</TableCell>
-            <TableCell align="right">releaseDate</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {tableData.map((item) => (
-            <TableRow key={item.id}>
-              <TableCell component="th" scope="row">
-                {item.name}
+    <div>
+      {apiError && (
+        <p className={styles.errMsg} data-testid="errMsg">
+          {Constants.API_ERROR}
+        </p>
+      )}
+      <TableContainer component={Paper} className={useStyles.tableContainer}>
+        <Table className={useStyles.table} aria-label="simple table">
+          <TableHead className={useStyles.tableHeadCell}>
+            <TableRow>
+              <TableCell className={useStyles.tableHeadCell}>Id</TableCell>
+              <TableCell className={useStyles.tableHeadCell}>Product</TableCell>
+              <TableCell className={useStyles.tableHeadCell}>
+                Description
               </TableCell>
-              <TableCell align="right">{item.description}</TableCell>
-              <TableCell align="right">{item.category}</TableCell>
-              <TableCell align="right">{item.type}</TableCell>
-              <TableCell align="right">{item.releaseDate}</TableCell>
+              <TableCell className={useStyles.tableHeadCell}>
+                Category
+              </TableCell>
+              <TableCell className={useStyles.tableHeadCell}>Type</TableCell>
+              <TableCell className={useStyles.tableHeadCell}>
+                ReleaseDate
+              </TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {products.map((product) => (
+              <TableRow key={product.id}>
+                <TableCell component="th" scope="row">
+                  {product.id}
+                </TableCell>
+                <TableCell align="left">{product.name}</TableCell>
+                <TableCell align="right">{product.description}</TableCell>
+                <TableCell align="right">{product.category}</TableCell>
+                <TableCell align="right">{product.type}</TableCell>
+                <TableCell align="right">{product.releaseDate}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 };
 export default DataTable;

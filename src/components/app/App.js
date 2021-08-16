@@ -17,7 +17,7 @@ const App = () => (
     <BrowserRouter>
       <Header />
       <Switch>
-        <Route exact path="/" render={() => <DataTable />} />
+        <Route exact path="/maintenance" render={() => <DataTable />} />
         {/* <Route exact path="/checkout" render={() => <CheckoutPage />} /> */}
         {/* <Route exact path="/confirmation" render={() => <ConfirmationPage />} />  */}
         {/* <Route exact path="/maintenance" render={() => <ProductList />} /> */}
