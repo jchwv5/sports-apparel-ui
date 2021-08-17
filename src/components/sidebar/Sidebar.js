@@ -6,7 +6,7 @@ import React, { Component, useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min';
 import 'materialize-css/dist/css/materialize.min.css';
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   useEffect(() => {
     const elem = document.querySelector('.sidenav');
     // eslint-disable-next-line no-unused-vars
@@ -18,7 +18,7 @@ const Sidebar = () => {
   }, []);
 
   const handleClick = (e) => {
-    console.log(e.currentTarget.dataset.id);
+    props.onClick(e.target.dataset.id);
   };
 
   return (

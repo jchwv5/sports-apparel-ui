@@ -18,6 +18,10 @@ const ProductPage = () => {
   const [apiError, setApiError] = useState(false);
   const [filterParam, setFilterParam] = useState('All');
 
+  function handleClick(filter) {
+    setFilterParam(filter);
+  }
+
   const filterProducts = (el) => {
     if (filterParam === 'All') {
       return products.setProducts;
@@ -35,7 +39,7 @@ const ProductPage = () => {
     return (
       <div>
         {apiError && <p className={styles.errMsg} data-testid="errMsg">{Constants.API_ERROR}</p>}
-        <Sidebar />
+        <Sidebar filterParam={filterParam} onClick={handleClick} />
         <div className={styles.app}>
           {products.filter(filterProducts)}
           {products.map((product) => (
