@@ -17,6 +17,7 @@ const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const [apiError, setApiError] = useState(false);
   const [filterParam, setFilterParam] = useState('All');
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   function handleClick(filter) {
     setFilterParam(filter);
@@ -24,16 +25,23 @@ const ProductPage = () => {
 
   const filterProducts = (el) => {
     if (filterParam === 'All') {
-      return products.setProducts;
-    } if (el.demographic !== filterParam) {
-      const index = products.indexOf(el);
-      products.splice(index, 1);
+      filteredProducts.push(el);
+      return filteredProducts.setFilteredProducts;
+    } if (el.demographic === filterParam) {
+      filteredProducts.push(el);
     }
-    return products.setProducts;
+    return filteredProducts.setProducts;
+  };
+
+  const clearFilteredProducts = () => {
+    while (filteredProducts.length > 0) {
+      filteredProducts.pop();
+    }
+    return filteredProducts;
   };
 
   useEffect(() => {
-    fetchProducts(setProducts, setApiError, setFilterParam);
+    fetchProducts(setProducts, setApiError);
   }, []);
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js" />;
     return (
@@ -41,8 +49,9 @@ const ProductPage = () => {
         {apiError && <p className={styles.errMsg} data-testid="errMsg">{Constants.API_ERROR}</p>}
         <Sidebar filterParam={filterParam} onClick={handleClick} />
         <div className={styles.app}>
+          {clearFilteredProducts()}
           {products.filter(filterProducts)}
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <div key={product.id}>
               <ProductCard product={product} />
             </div>

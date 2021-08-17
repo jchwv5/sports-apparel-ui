@@ -5,6 +5,7 @@
 import React, { Component, useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min';
 import 'materialize-css/dist/css/materialize.min.css';
+import styles from './Sidebar.css';
 
 const Sidebar = (props) => {
   useEffect(() => {
@@ -25,6 +26,11 @@ const Sidebar = (props) => {
     <div>
       <ul id="slide-out" className="sidenav">
         <li />
+        <div>
+          <li>
+            <a href="#!!" data-id="All" onClick={handleClick.bind(this)}>All</a>
+          </li>
+        </div>
         <div>
           <li>
             <a href="#!!" data-id="Men" onClick={handleClick.bind(this)}>Men</a>
