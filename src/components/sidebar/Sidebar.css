@@ -2,3 +2,11 @@
     height: 0px;
     width: 0px;
 }
+
+.invisible-top {
+    top: 60px;
+  }
+
+.sidenav {
+  position:relative;
+    }

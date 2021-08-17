@@ -1,3 +1,4 @@
+/* eslint-disable react/no-this-in-sfc */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -5,6 +6,7 @@
 import React, { Component, useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min';
 import 'materialize-css/dist/css/materialize.min.css';
+import { Sidenav } from 'rsuite';
 import styles from './Sidebar.css';
 
 const Sidebar = (props) => {
@@ -14,7 +16,8 @@ const Sidebar = (props) => {
     const instance = M.Sidenav.init(elem, {
       edge: 'left',
       inDuration: 250,
-      preventScrolling: false
+      preventScrolling: false,
+      closeOnClick: true
     });
   }, []);
 
@@ -24,7 +27,10 @@ const Sidebar = (props) => {
 
   return (
     <div>
-      <ul id="slide-out" className="sidenav">
+      <ul id="slide-out" className="sidenav invisible-top sidenav-fixed">
+        <a href="#!" data-target="slide-out" className="sidenav-trigger">
+          <i className="material-icons">menu</i>
+        </a>
         <li />
         <div>
           <li>
@@ -47,9 +53,6 @@ const Sidebar = (props) => {
           </li>
         </div>
       </ul>
-      <a href="#!" data-target="slide-out" className="sidenav-trigger">
-        <i className="material-icons">menu</i>
-      </a>
     </div>
   );
 };
