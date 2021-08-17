@@ -1,6 +1,7 @@
 .container {
-  padding: 0 2em;
-
+  display: block;
+  grid-template-columns: 1fr;
+  gap: 1em
 }
 
 .inputVals {
@@ -9,11 +10,10 @@
 	margin-bottom: 5px;
 }
 
-.errors {
-	padding: 0em 2em;
-  margin-left: 5px;
-	margin-bottom: 5px;
-	color: red;
+.errMsg {
+  color: red;
+  font-size: 14px;
+  margin: 0px 2px 4px 4px;
 }
 
 .addButton {
