@@ -23,7 +23,7 @@ const App = () => (
         {/* <Route exact path="/maintenance" render={() => <ProductList />} /> */}
       </Switch>
       {/* <ProductList /> */}
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   </div>
 );

@@ -11,27 +11,118 @@ import styles from '../product-page/ProductPage.module.css';
 import Constants from '../../utils/constants';
 import fetchProducts from '../product-page/ProductPageService';
 import Grid from '@material-ui/core/Grid';
-import { display } from '@material-ui/system';
+import { DataGrid } from '@material-ui/data-grid';
+
+// const useStyles = makeStyles((theme) => ({
+//   // table: {
+//   //   // width: '100%',
+//   //   width: 'auto',
+//   //   tableLayout: 'auto'
+//   // },
+//   tableContainer: {
+//     borderRadius: 15
+//   },
+//   tableHeadCell: {
+//     fontWeight: 'bold',
+//     backgroundColor: theme.palette.primary.dark,
+//     color: theme.palette.getContrastText(theme.palette.primary.dark)
+//   },
+//   tableBodyCell: {
+//     align: 'left'
+//   }
+// }));
 
 const useStyles = makeStyles((theme) => ({
-  // table: {
-  //   // width: '100%',
-  //   width: 'auto',
-  //   tableLayout: 'auto'
-  // },
-  tableContainer: {
-    borderRadius: 15
-  },
-  tableHeadCell: {
-    fontWeight: 'bold',
-    backgroundColor: theme.palette.primary.dark,
-    color: theme.palette.getContrastText(theme.palette.primary.dark)
-  },
-  tableBodyCell: {
-    align: 'left'
+  root: {
+    '& .super-app-theme--header': {
+      backgroundColor: '#add8e6',
+      fontWeight: 'bold'
+    }
+    // color: theme.palette.type === 'light' ? 'rgba(0,0,0,.85)' : 'rgba(255,255,255,0.85)'
   }
 }));
 
+const columns = [
+  { field: 'id', headerName: 'ID', headerClassName: 'super-app-theme--header', hide: true },
+  { field: 'name', headerName: 'Product', headerClassName: 'super-app-theme--header', width: 300 },
+  {
+    field: 'description',
+    headerName: 'Description',
+    headerClassName: 'super-app-theme--header',
+    width: 300
+  },
+  {
+    field: 'category',
+    headerName: 'Category',
+    headerClassName: 'super-app-theme--header',
+    width: 200
+  },
+  {
+    field: 'demographic',
+    headerName: 'Demographic',
+    headerClassName: 'super-app-theme--header',
+    width: 200
+  },
+  { field: 'type', headerName: 'Type', headerClassName: 'super-app-theme--header', width: 150 },
+  {
+    field: 'releaseDate',
+    headerName: 'ReleaseDate',
+    headerClassName: 'super-app-theme--header',
+    width: 200
+  },
+  {
+    field: 'primaryColorCode',
+    headerName: 'PrimaryColorCode',
+    headerClassName: 'super-app-theme--header',
+    width: 250
+  },
+  {
+    field: 'secondaryColorCode',
+    headerName: 'SecondaryColorCode',
+    headerClassName: 'super-app-theme--header',
+    width: 280
+  },
+  {
+    field: 'styleNumber',
+    headerName: 'StyleNumber',
+    headerClassName: 'super-app-theme--header',
+    width: 300
+  },
+  {
+    field: 'globalProductCode',
+    headerName: 'GlobalProductCode',
+    headerClassName: 'super-app-theme--header',
+    width: 250
+  },
+  { field: 'brand', headerName: 'Brand', headerClassName: 'super-app-theme--header', width: 200 },
+  {
+    field: 'material',
+    headerName: 'Material',
+    headerClassName: 'super-app-theme--header',
+    width: 200
+  },
+  {
+    field: 'price',
+    type: 'number',
+    headerName: 'Price',
+    headerClassName: 'super-app-theme--header',
+    width: 200
+  },
+  {
+    field: 'quantity',
+    type: 'number',
+    headerName: 'Quantity',
+    headerClassName: 'super-app-theme--header',
+    width: 200
+  },
+  {
+    field: 'imageSrc',
+    headerName: 'ImageSrc',
+    headerClassName: 'super-app-theme--header',
+    width: 200
+  },
+  { field: 'status', headerName: 'Status', headerClassName: 'super-app-theme--header', width: 200 }
+];
 const DataTable = () => {
   const classes = useStyles();
   const [products, setProducts] = useState([]);
@@ -42,13 +133,16 @@ const DataTable = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ display: 'flex', height: 850, width: '100%' }} className={classes.root}>
       {apiError && (
         <p className={styles.errMsg} data-testid="errMsg">
           {Constants.API_ERROR}
         </p>
       )}
-      <TableContainer component={Paper} className={classes.tableContainer}>
+      <div style={{ flexGrow: 1 }}>
+        <DataGrid rows={products} columns={columns} rowsPerPageOptions={[20]} />
+      </div>
+      {/* <TableContainer component={Paper} className={classes.tableContainer}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead className={classes.tableHeadCell}>
             <TableRow>
@@ -97,7 +191,7 @@ const DataTable = () => {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+      </TableContainer> */}
     </div>
   );
 };
