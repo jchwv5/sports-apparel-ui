@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable react/no-this-in-sfc */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-unused-vars */
@@ -6,7 +7,6 @@
 import React, { Component, useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min';
 import 'materialize-css/dist/css/materialize.min.css';
-import { Sidenav } from 'rsuite';
 import styles from './Sidebar.css';
 
 const Sidebar = (props) => {
@@ -16,8 +16,7 @@ const Sidebar = (props) => {
     const instance = M.Sidenav.init(elem, {
       edge: 'left',
       inDuration: 250,
-      preventScrolling: false,
-      closeOnClick: true
+      preventScrolling: false
     });
   }, []);
 
@@ -26,33 +25,37 @@ const Sidebar = (props) => {
   };
 
   return (
-    <div>
-      <ul id="slide-out" className="sidenav invisible-top sidenav-fixed">
-        <a href="#!" data-target="slide-out" className="sidenav-trigger">
-          <i className="material-icons">menu</i>
+    <div className={styles}>
+      <ul id="slide-out" className="sidenav invisible-top">
+        <a href="#!" data-target="slide-out" className="sidenav-close">
+          <i className="material-icons">arrow_back_ios</i>
         </a>
         <li />
         <div>
           <li>
-            <a href="#!!" data-id="All" onClick={handleClick.bind(this)}>All</a>
+            <a href="#!" data-id="All" onClick={handleClick.bind(this)}>All</a>
           </li>
         </div>
         <div>
           <li>
-            <a href="#!!" data-id="Men" onClick={handleClick.bind(this)}>Men</a>
+            <a href="#!" data-id="Men" onClick={handleClick.bind(this)}>Men</a>
           </li>
         </div>
         <div>
           <li>
-            <a href="#!!!" data-id="Women" onClick={handleClick.bind(this)}>Women</a>
+            <a href="#!" data-id="Women" onClick={handleClick.bind(this)}>Women</a>
           </li>
         </div>
         <div>
           <li>
-            <a href="#!!!!" data-id="Kids" onClick={handleClick.bind(this)}>Kids</a>
+            <a href="#!" data-id="Kids" onClick={handleClick.bind(this)}>Kids</a>
           </li>
         </div>
       </ul>
+      <div />
+      <a href="#!" data-target="slide-out" className="sidenav-trigger">
+        <i className="material-icons">arrow_forward_ios</i>
+      </a>
     </div>
   );
 };

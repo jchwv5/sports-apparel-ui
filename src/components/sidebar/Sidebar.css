@@ -5,8 +5,13 @@
 
 .invisible-top {
     top: 60px;
-  }
+}
 
-.sidenav {
-  position:relative;
-    }
+.sidenav-trigger {
+  position: fixed;
+  margin-top: 15px;
+}
+
+.sidenav-close {
+  float: right;
+}
