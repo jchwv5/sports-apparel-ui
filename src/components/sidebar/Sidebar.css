@@ -4,12 +4,12 @@
 }
 
 .invisible-top {
-    top: 60px;
+    top: 56px;
 }
 
 .sidenav-trigger {
   position: fixed;
-  margin-top: 15px;
+  margin-top: 60px;
 }
 
 .sidenav-close {
