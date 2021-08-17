@@ -5,7 +5,7 @@ import React from 'react';
  * @return component
  */
 const ProductPage = () => (
-  <div>
+  <div className="mainbody">
     Order success!
   </div>
 );

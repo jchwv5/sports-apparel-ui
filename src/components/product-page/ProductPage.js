@@ -43,6 +43,7 @@ const ProductPage = () => {
   useEffect(() => {
     fetchProducts(setProducts, setApiError);
   }, []);
+<<<<<<< HEAD
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js" />;
     return (
       <div>
@@ -57,6 +58,22 @@ const ProductPage = () => {
             </div>
           ))}
         </div>
+=======
+
+  return (
+    <div className="mainbody">
+      {apiError && (
+        <p className={styles.errMsg} data-testid="errMsg">
+          {Constants.API_ERROR}
+        </p>
+      )}
+      <div className={styles.app}>
+        {products.map((product) => (
+          <div key={product.id}>
+            <ProductCard product={product} />
+          </div>
+        ))}
+>>>>>>> sprint2
       </div>
     );
 };
