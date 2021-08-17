@@ -11,28 +11,24 @@ import styles from '../product-page/ProductPage.module.css';
 import Constants from '../../utils/constants';
 import fetchProducts from '../product-page/ProductPageService';
 import Grid from '@material-ui/core/Grid';
-import { Typography } from '@material-ui/core';
+import { display } from '@material-ui/system';
 
 const useStyles = makeStyles((theme) => ({
-  table: {
-    width: '100%'
-  },
+  // table: {
+  //   // width: '100%',
+  //   width: 'auto',
+  //   tableLayout: 'auto'
+  // },
   tableContainer: {
-    borderRadius: 15,
-    margin: '10px 10px'
-
-    // maxWidth: 1500
+    borderRadius: 15
   },
   tableHeadCell: {
     fontWeight: 'bold',
     backgroundColor: theme.palette.primary.dark,
-    color: theme.palette.getContrastText(theme.palette.primary.dark),
-    width: '10%'
+    color: theme.palette.getContrastText(theme.palette.primary.dark)
   },
   tableBodyCell: {
-    fontWeight: 'bold',
-    // width: '0.8%',
-    tableLayout: 'auto'
+    align: 'left'
   }
 }));
 
@@ -56,31 +52,16 @@ const DataTable = () => {
         <Table className={classes.table} aria-label="simple table">
           <TableHead className={classes.tableHeadCell}>
             <TableRow>
-              {/* <TableCell className={classes.tableHeadCell}>Id</TableCell> */}
               <TableCell className={classes.tableHeadCell}>Product</TableCell>
-              <TableCell className={classes.tableHeadCell}>
-                Description
-              </TableCell>
+              <TableCell className={classes.tableHeadCell}>Description</TableCell>
               <TableCell className={classes.tableHeadCell}>Category</TableCell>
-              <TableCell className={classes.tableHeadCell}>
-                Demographic
-              </TableCell>
+              <TableCell className={classes.tableHeadCell}>Demographic</TableCell>
               <TableCell className={classes.tableHeadCell}>Type</TableCell>
-              <TableCell className={classes.tableHeadCell}>
-                ReleaseDate
-              </TableCell>
-              <TableCell className={classes.tableHeadCell}>
-                PrimaryColorCode
-              </TableCell>
-              <TableCell className={classes.tableHeadCell}>
-                SecondaryColorCode
-              </TableCell>
-              <TableCell className={classes.tableHeadCell}>
-                StyleNumber
-              </TableCell>
-              <TableCell className={classes.tableHeadCell}>
-                GlobalProductCode
-              </TableCell>
+              <TableCell className={classes.tableHeadCell}>ReleaseDate</TableCell>
+              <TableCell className={classes.tableHeadCell}>PrimaryColorCode</TableCell>
+              <TableCell className={classes.tableHeadCell}>SecondaryColorCode</TableCell>
+              <TableCell className={classes.tableHeadCell}>StyleNumber</TableCell>
+              <TableCell className={classes.tableHeadCell}>GlobalProductCode</TableCell>
               <TableCell className={classes.tableHeadCell}>Brand</TableCell>
               <TableCell className={classes.tableHeadCell}>Material</TableCell>
               <TableCell className={classes.tableHeadCell}>Price</TableCell>
@@ -92,22 +73,26 @@ const DataTable = () => {
           <TableBody>
             {products.map((product) => (
               <TableRow key={product.id}>
-                <TableCell align="left">{product.name}</TableCell>
-                <TableCell align="left">{product.description}</TableCell>
-                <TableCell align="left">{product.category}</TableCell>
-                <TableCell align="left">{product.demographic}</TableCell>
-                <TableCell align="left">{product.type}</TableCell>
-                <TableCell align="left">{product.releaseDate}</TableCell>
-                <TableCell align="left">{product.primaryColorCode}</TableCell>
-                <TableCell align="left">{product.secondaryColorCode}</TableCell>
-                <TableCell align="left">{product.styleNumber}</TableCell>
-                <TableCell align="left">{product.globalProductCode}</TableCell>
-                <TableCell align="left">{product.brand}</TableCell>
-                <TableCell align="left">{product.material}</TableCell>
-                <TableCell align="left">{product.price}</TableCell>
-                <TableCell align="left">{product.quantity}</TableCell>
-                <TableCell align="left">{product.imageSrc}</TableCell>
-                <TableCell align="left">{product.active}</TableCell>
+                <TableCell>{product.name}</TableCell>
+
+                <TableCell className={classes.tableBodyCell}>{product.description}</TableCell>
+
+                <TableCell className={classes.tableBodyCell}>{product.category}</TableCell>
+                <TableCell className={classes.tableBodyCell}>{product.demographic}</TableCell>
+                <TableCell className={classes.tableBodyCell}>{product.type}</TableCell>
+                <TableCell className={classes.tableBodyCell}>{product.releaseDate}</TableCell>
+                <TableCell className={classes.tableBodyCell}>{product.primaryColorCode}</TableCell>
+                <TableCell className={classes.tableBodyCell}>
+                  {product.secondaryColorCode}
+                </TableCell>
+                <TableCell className={classes.tableBodyCell}>{product.styleNumber}</TableCell>
+                <TableCell className={classes.tableBodyCell}>{product.globalProductCode}</TableCell>
+                <TableCell className={classes.tableBodyCell}>{product.brand}</TableCell>
+                <TableCell className={classes.tableBodyCell}>{product.material}</TableCell>
+                <TableCell className={classes.tableBodyCell}>{product.price}</TableCell>
+                <TableCell className={classes.tableBodyCell}>{product.quantity}</TableCell>
+                <TableCell className={classes.tableBodyCell}>{product.imageSrc}</TableCell>
+                <TableCell className={classes.tableBodyCell}>{product.active}</TableCell>
               </TableRow>
             ))}
           </TableBody>
