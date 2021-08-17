@@ -1,5 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import ProductCard from '../product-card/ProductCard';
 import styles from './ProductPage.module.css';
 import Constants from '../../utils/constants';
@@ -11,10 +12,11 @@ import Sidebar from '../sidebar/Sidebar';
  * @description fetches products from API and displays products as product cards
  * @return component
  */
+
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
-  const [filterParam, setFilterParam] = useState('All');
   const [apiError, setApiError] = useState(false);
+  const [filterParam, setFilterParam] = useState('All');
 
   const filterProducts = (el) => {
     if (filterParam === 'All') {
