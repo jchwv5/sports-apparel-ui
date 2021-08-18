@@ -3,12 +3,18 @@ import styles from './CreateProduct.module.css';
 import FormItem from '../form/FormItem';
 import FormItemDropdown from '../form/FormItemDropdown';
 import CreateProductService from './CreateProductService';
+<<<<<<< HEAD
 import constants from '../../utils/constants';
 import HttpHelper from '../../utils/HttpHelper';
 // import validate from '../../utils/validate';
+=======
+import Constants from '../../utils/constants';
+import notify from '../Toast/Toast';
+>>>>>>> 08d6fb684e7b9d15d99734d60d7c03bcc6fd2c52
 
 const CreateProduct = () => {
   const [apiError, setApiError] = useState(false);
+  const [errorMessages, setErrorMessages] = useState(false);
 
   const [name, setName] = React.useState('');
   const onNameChange = (e) => {
@@ -90,29 +96,29 @@ const CreateProduct = () => {
       message: ''
     };
     if (name === '') {
-      valid.message += 'Name cannot be empty\n';
+      valid.message += '- Name cannot be empty ';
       valid.formIsValid = false;
     }
     if (!description) {
-      valid.message += 'Description cannot be empty\n';
+      valid.message += '- Description cannot be empty ';
       valid.formIsValid = false;
     }
     if (!brand) {
-      valid.message += 'Brand cannot be empty\n';
+      valid.message += '- Brand cannot be empty ';
       valid.formIsValid = false;
     }
     if (!material) {
-      valid.message += 'Material cannot be empty\n';
+      valid.message += '- Material cannot be empty ';
       valid.formIsValid = false;
     }
     if (!price || price.trim() === '') {
-      console.log(price);
-      valid.message += 'Price cannot be empty\n';
+      valid.message += '- Price cannot be empty ';
       valid.formIsValid = false;
     } else if (!((/^\d+(?:\.\d\d)$/).test(price))) {
-      valid.message += 'Price should be in dollars and cents\n';
+      valid.message += '- Price should be in dollars and cents ';
       valid.formIsValid = false;
     }
+<<<<<<< HEAD
     setApiError(valid.message);
 
     if (valid.formIsValid) {
@@ -120,12 +126,17 @@ const CreateProduct = () => {
     }
     console.log(name);
     console.log(valid.message);
+=======
+    setErrorMessages(valid.message);
+    if (!valid.formIsValid) {
+      notify('error', errorMessages);
+    }
+>>>>>>> 08d6fb684e7b9d15d99734d60d7c03bcc6fd2c52
   }
 
   return (
     <div className={styles.container}>
-      {apiError && <p className={styles.errMsg} data-testid="errMsg">{constants.API_ERROR}</p>}
-      {apiError && <p className={styles.errMsg} data-testid="errMsg">{apiError}</p>}
+      {apiError && <p className={styles.errMsg} data-testid="errMsg">{Constants.API_ERROR}</p>}
       <h2>Create new item:</h2>
       <FormItem
         placeholder="Prorduct Name"
@@ -203,7 +214,7 @@ const CreateProduct = () => {
         value={activeStatus.value}
         options={productActive}
       />
-      <button onClick={validate} type="button" className={styles.payButton}>
+      <button onClick={validate} type="button" className={styles.createButton}>
         Add Item
       </button>
     </div>
