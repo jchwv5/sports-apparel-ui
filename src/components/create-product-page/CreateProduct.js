@@ -10,11 +10,8 @@ const CreateProduct = () => {
     description: '',
     errorDescriptionMsg: '',
     demographic: '',
-    errorDemographicMsg: '',
     category: '',
-    errorCategoryMsg: '',
     type: '',
-    errorTypeMsg: '',
     releadeDate: '',
     errorReleaseDateMsg: '',
     primaryColorCode: '',
@@ -35,9 +32,10 @@ const CreateProduct = () => {
     errorQuantityMsg: '',
     imageSrc: '',
     errorImageSrc: '',
-    active: false,
-    errorActiveMsg: ''
+    active: false
   });
+
+  let errors = {name:'', description:'', brand:'', material:'', price:'', date:''};
 
   const onProductChange = (e) => {
     setProductData({ ...productData, [e.target.name]: e.target.value });
@@ -47,7 +45,47 @@ const CreateProduct = () => {
   const types = ['Pant', 'Short', 'Shoe', 'Glove', 'Jacket', 'Tank Top', 'Sock', 'Sunglasses', 'Hat', 'Helmet', 'Belt', 'Visor', 'Shin Guard', 'Elbow Pad', 'Headband', 'Wristband', 'Hoodie', 'Flip Flop', 'Pool Noodle'];
 
   const validate = () => {
-    setProductData({ ...productData, errorIdMsg: 'error message' });
+    //setProductData({ ...productData, errorIdMsg: 'error message' });
+    let noErrors = true;
+
+    if(!productData.name) {
+      errors.name = "name cannot be empty";
+      setProductData({ ...productData, name: '' });
+      noErrors = false;
+    }
+    if(!productData.description) {
+      errors.description = "description cannot be empty";
+      setProductData({ ...productData, description: '' });
+      noErrors = false;
+    }
+    if(!productData.brand) {
+      errors.brand = "brand cannot be empty";
+      setProductData({ ...productData, brand: '' });
+      noErrors = false;
+    }
+    if(!productData.material) {
+      errors.material = "material cannot be empty";
+      setProductData({ ...productData, material: '' });
+      noErrors = false;
+    }
+    if(!productData.price) {
+      errors.price = "price cannot be empty";
+      setProductData({ ...productData, price: '' });
+      noErrors = false;
+    } else if(isNaN(productData.price) || productData.price < 0) {
+      errors.price = "price should be a positive number";
+      setProductData({ ...productData, price: '' });
+      noErrors = false;
+    } else if(productData.price.toString()[productData.price.toString().length - 3] !== '.') {
+      errors.price = "price should be in dollars and cents";
+      setProductData({ ...productData, price: '' });
+      noErrors = false;
+    }
+
+    if(noErrors) {
+      handlesubmit();
+    }
+
   };
 
   return (
@@ -57,7 +95,7 @@ const CreateProduct = () => {
         <div className="input">
           <label className="label" htmlFor="Id:">
             Product Id:
-            <input id="id" className={styles.inputVals} type="number" step="1" Required placeholder="enter id" />
+            <input id="id" name="id"className={styles.inputVals} type="number" step="1" Required placeholder="enter id" />
           </label>
           <span id="errorIdMsg" name="errorIdMsg" className={styles.errors}>{productData.errorIdMsg}</span>
         </div>
@@ -84,7 +122,6 @@ const CreateProduct = () => {
               <option>Kids</option>
             </select>
           </label>
-          <span id="errorNameMsg" name="errorNameMsg" className={styles.errors}>{productData.errorDemographicMsg}</span>
         </div>
         <div className="input">
           <label className="label" htmlFor="Category:">
@@ -97,7 +134,6 @@ const CreateProduct = () => {
               ))}
             </select>
           </label>
-          <span id="errorCategoryMsg" name="errorCategoryMsg" className={styles.errors}>{productData.errorCategoryMsg}</span>
         </div>
         <div className="input">
           <label className="label" htmlFor="Type:">
@@ -110,7 +146,6 @@ const CreateProduct = () => {
               ))}
             </select>
           </label>
-          <span id="errorTypeMsg" name="errorTypeMsg" className={styles.errors}>{productData.errorTypeMsg}</span>
         </div>
         <div className="input">
           <label className="label" htmlFor="ReleaseDate:">
@@ -190,7 +225,6 @@ const CreateProduct = () => {
               <option>false</option>
             </select>
           </label>
-          <span id="errorActiveMsg" name="errorActiveMsg" className={styles.errors}>{productData.errorActiveMsg}</span>
         </div>
         <div className={styles.add}>
           <button onClick={validate} type="button" className={styles.addButton}>
@@ -202,8 +236,6 @@ const CreateProduct = () => {
   );
 };
 
-if (2 > 3) {
-  console.log('Happy');
-}
+
 
 export default CreateProduct;
