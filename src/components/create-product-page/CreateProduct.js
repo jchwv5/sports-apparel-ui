@@ -3,12 +3,15 @@ import styles from './CreateProduct.module.css';
 import FormItem from '../form/FormItem';
 import FormItemDropdown from '../form/FormItemDropdown';
 import CreateProductService from './CreateProductService';
-import Constants from '../../utils/constants';
-import notify from '../Toast/Toast';
+import makeProduct from './makeProduct';
+import constants from '../../utils/constants';
+// import HttpHelper from '../../utils/HttpHelper';
+// import validate from '../../utils/validate';
+// import notify from '../Toast/Toast';
 
 const CreateProduct = () => {
   const [apiError, setApiError] = useState(false);
-  const [errorMessages, setErrorMessages] = useState(false);
+  // const [errorMessages, setErrorMessages] = useState(false);
 
   const [name, setName] = React.useState('');
   const onNameChange = (e) => {
@@ -66,6 +69,23 @@ const CreateProduct = () => {
 
   const productActive = ['Active', 'Inactive'];
 
+  function handleSubmit() {
+    console.log('Its started working');
+    const obj = {
+      name: name.value,
+      description: description.value,
+      demographics: demographics.value,
+      category: category.value,
+      type: type.value,
+      brand: brand.value,
+      material: material.value,
+      price: price.value,
+      active: activeStatus.value
+    };
+    makeProduct(obj);
+    console.log('Its finished working');
+  }
+
   function validate() {
     const valid = {
       formIsValid: true,
@@ -94,15 +114,18 @@ const CreateProduct = () => {
       valid.message += '- Price should be in dollars and cents ';
       valid.formIsValid = false;
     }
-    setErrorMessages(valid.message);
-    if (!valid.formIsValid) {
-      notify('error', errorMessages);
+    setApiError(valid.message);
+
+    if (valid.formIsValid) {
+      handleSubmit();
     }
+    console.log(name);
+    console.log(valid.message);
   }
 
   return (
     <div className={styles.container}>
-      {apiError && <p className={styles.errMsg} data-testid="errMsg">{Constants.API_ERROR}</p>}
+      {apiError && <p className={styles.errMsg} data-testid="errMsg">{constants.API_ERROR}</p>}
       <h2>Create new item:</h2>
       <FormItem
         placeholder="Prorduct Name"
