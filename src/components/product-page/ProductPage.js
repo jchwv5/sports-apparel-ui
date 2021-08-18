@@ -48,7 +48,7 @@ const ProductPage = () => {
       <div>
         {apiError && <p className={styles.errMsg} data-testid="errMsg">{Constants.API_ERROR}</p>}
         <Sidebar filterParam={filterParam} onClick={handleClick} />
-        <div className={styles.app}>
+        <div id="productCards" className={[styles.app]}>
           {clearFilteredProducts()}
           {products.filter(filterProducts)}
           {filteredProducts.map((product) => (

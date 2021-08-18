@@ -4,7 +4,7 @@
   grid-template-columns: repeat(5, auto);
   justify-content: space-evenly;
   margin: 20px;
-  margin-left: 315px;
+  margin-top: 90px;
 }
 
 .errMsg {
@@ -12,3 +12,5 @@
   font-size: 14px;
   margin: 0px 2px 4px 4px;
 }
+
+
