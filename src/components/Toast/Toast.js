@@ -1,3 +1,4 @@
+import React from 'react';
 import { toast } from 'react-toastify';
 
 toast.configure();
@@ -19,7 +20,7 @@ function notify(mode, message) {
     });
   }
   if (mode === 'error') {
-    toast.error(message, {
+    toast.error(<div>{message}</div>, {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 8000,
       hideProgressBar: true,

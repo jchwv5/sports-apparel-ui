@@ -1,7 +1,11 @@
 .container {
   display: block;
   grid-template-columns: 1fr;
-  gap: 1em
+  gap: 1em;
+  margin-bottom: 3em;
+  margin-left: 1.5em;
+  margin-right: 1em;
+  max-width: 800px;
 }
 
 .inputVals {
@@ -16,8 +20,14 @@
   margin: 0px 2px 4px 4px;
 }
 
-.addButton {
-	background-color: rgb(155, 226, 155);
-	margin-top: 15px;
-	margin-left: 70px;
+.createButton {
+  background: #666666;
+  border-radius: 20px;
+  color: #EEEEEE;
+  cursor: pointer;
+  font-weight: 600px;
+  height: 3em;
+  justify-self: center;
+  margin-top: 1em;
+  width: 25%;
 }
