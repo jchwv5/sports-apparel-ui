@@ -16,7 +16,7 @@ import DataTable from '../product-data-view/DataTable';
  */
 const App = () => (
   <div className="app-container">
-    {/* <ToastContainer /> */}
+    <ToastContainer />
     <BrowserRouter>
       <div className="content-container">
         <Header />
