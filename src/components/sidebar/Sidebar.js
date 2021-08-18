@@ -30,7 +30,7 @@ const Sidebar = (props) => {
       outDuration: 250,
       preventScrolling: false,
       onOpenStart: shiftCardsRight,
-      onCloseStart: shiftCardsLeft
+      onCloseEnd: shiftCardsLeft
     });
     instance.open();
   }, []);
@@ -42,9 +42,9 @@ const Sidebar = (props) => {
   return (
     <div className={styles}>
       <ul id="slide-out" className="sidenav invisible-top">
-        <button type="button" data-target="slide-out" className="sidenav-close">
+        <a href="#!" type="button" data-target="slide-out" className="sidenav-close">
           <i className="material-icons">arrow_back_ios</i>
-        </button>
+        </a>
         <li />
         <div>
           <li>
@@ -68,9 +68,9 @@ const Sidebar = (props) => {
         </div>
       </ul>
       <div />
-      <button type="button" data-target="slide-out" className="sidenav-trigger">
+      <a href="#!" type="button" data-target="slide-out" className="sidenav-trigger">
         <i className="material-icons">arrow_forward_ios</i>
-      </button>
+      </a>
     </div>
   );
 };
