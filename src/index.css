@@ -15,7 +15,7 @@ code {
 
 .header {
   width: 100%;
-  min-height: 10.5vh;
+  height: 70px;
   box-sizing: border-box;
   display: flex;
   align-items: left;
@@ -23,7 +23,7 @@ code {
   position: fixed;
   z-index: 1;
   background-color: #ea526f;
-  padding-top: 10px;
+  padding-top: 0px;
   padding-bottom: 5px;
 }
 
@@ -35,12 +35,13 @@ code {
 
 .cartlogo {
   position: absolute;
-  right: 0.5em;
+  right: 0em;
 }
 
 .login {
+  margin-top: 0.5em;
   position: absolute;
-  right: 0em;
+  right: 2.0em;
   width: 33.3em;
   height: 3.5em;
 }
@@ -55,9 +56,9 @@ code {
 
 .logo,
 .cart {
-  padding: 5px;
-  width: 50px;
-  height: 40px;
+  padding: 0px;
+  width: 80px;
+  height: 70px;
 }
 
 .mainbody,
