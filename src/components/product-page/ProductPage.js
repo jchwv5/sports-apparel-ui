@@ -18,7 +18,7 @@ const ProductPage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="mainbody">
       {apiError && (
         <p className={styles.errMsg} data-testid="errMsg">
           {Constants.API_ERROR}

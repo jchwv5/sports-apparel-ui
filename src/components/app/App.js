@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ProductPage from '../product-page/ProductPage';
 import CheckoutPage from '../checkout-page/CheckoutPage';
 import ConfirmationPage from '../confirmation-page/ConfirmationPage';
@@ -13,14 +15,17 @@ import DataTable from '../productView/DataTable';
  * @returns component
  */
 const App = () => (
-  <div className="page-container">
+  <div className="app-container">
+    <ToastContainer />
     <BrowserRouter>
       <Header />
       <Switch>
-        <Route exact path="/" render={() => <ProductPage />} />
-        <Route exact path="/checkout" render={() => <CheckoutPage />} />
-        <Route exact path="/confirmation" render={() => <ConfirmationPage />} />
-        <Route exact path="/maintenance" render={() => <DataTable />} />
+        <div className="content-container">
+          <Route exact path="/" render={() => <ProductPage />} />
+          <Route exact path="/checkout" render={() => <CheckoutPage />} />
+          <Route exact path="/confirmation" render={() => <ConfirmationPage />} />
+          <Route exact path="/maintenance" render={() => <DataTable />} />
+        </div>
       </Switch>
       <Footer />
     </BrowserRouter>
