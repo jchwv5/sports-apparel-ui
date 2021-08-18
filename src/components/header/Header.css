@@ -14,16 +14,21 @@ li {
 }
 
 .header button {
-  margin-top: 13px;
+  margin-top: 17px;
   height: 42px;
   width: 100px;
   position: absolute;
   right: 75px;
 }
 
+span .MuiBadge-colorPrimary {
+  color: #000;
+  background-color: #fceade;
+}
+
 #cart {
   float: right;
-  padding-top: 5px;
+  padding-top: 7px;
   padding-right: 5px;
 }
 

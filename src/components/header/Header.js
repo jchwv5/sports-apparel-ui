@@ -79,8 +79,9 @@ const Header = () => {
         <li id="cart">
           <NavLink to="/checkout">
             <Badge
+              className="root"
               badgeContent={products.length}
-              color="secondary"
+              color="primary"
               overlap="circular"
             >
               {/* <img className="cart" src={cartLogo} alt="" /> */}
