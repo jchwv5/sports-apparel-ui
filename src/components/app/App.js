@@ -18,7 +18,9 @@ const App = () => (
   <div className="app-container">
     {/* <ToastContainer /> */}
     <BrowserRouter>
-      <Header />
+      <div className="content-container">
+        <Header />
+      </div>
       <Switch>
         <div className="content-container">
           <Route exact path="/" render={() => <ProductPage />} />

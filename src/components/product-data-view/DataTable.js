@@ -2,28 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import styles from '../product-page/ProductPage.module.css';
 import Constants from '../../utils/constants';
-import fetchProducts from '../product-page/ProductPageService';
-import Grid from '@material-ui/core/Grid';
-import { DataGrid } from '@material-ui/data-grid';
 
-const useStyles = makeStyles((theme) => ({
+import { DataGrid } from '@material-ui/data-grid';
+import fetchProducts from './DataViewService';
+
+const useStyles = makeStyles({
   root: {
     '& .table-header': {
       backgroundColor: '#add8e6',
       fontWeight: 'bold'
-    },
-    position: 'relative'
+    }
   }
-}));
+});
 
 const columns = [
   { field: 'id', headerName: 'ID', headerClassName: 'table-header', hide: true },
-  { field: 'name', headerName: 'Product', headerClassName: 'table-header', width: 300 },
+  { field: 'name', headerName: 'Product', headerClassName: 'table-header', width: 345 },
   {
     field: 'description',
     headerName: 'Description',
     headerClassName: 'table-header',
-    width: 300
+    width: 650
   },
   {
     field: 'category',
@@ -95,8 +94,14 @@ const columns = [
     headerClassName: 'table-header',
     width: 200
   },
-  { field: 'status', headerName: 'Status', headerClassName: 'table-header', width: 200 }
+  {
+    field: 'active',
+    headerName: 'Status',
+    headerClassName: 'table-header',
+    width: 200
+  }
 ];
+
 const DataTable = () => {
   const classes = useStyles();
   const [products, setProducts] = useState([]);
@@ -107,7 +112,7 @@ const DataTable = () => {
   }, []);
 
   return (
-    <div style={{ display: 'flex', height: 850, width: '100%' }} className={classes.root}>
+    <div style={{ display: 'flex', height: 800, width: '100%' }} className={classes.root}>
       {apiError && (
         <p className={styles.errMsg} data-testid="errMsg">
           {Constants.API_ERROR}
