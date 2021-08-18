@@ -3,18 +3,15 @@ import styles from './CreateProduct.module.css';
 import FormItem from '../form/FormItem';
 import FormItemDropdown from '../form/FormItemDropdown';
 import CreateProductService from './CreateProductService';
-<<<<<<< HEAD
+import makeProduct from './makeProduct';
 import constants from '../../utils/constants';
-import HttpHelper from '../../utils/HttpHelper';
+// import HttpHelper from '../../utils/HttpHelper';
 // import validate from '../../utils/validate';
-=======
-import Constants from '../../utils/constants';
-import notify from '../Toast/Toast';
->>>>>>> 08d6fb684e7b9d15d99734d60d7c03bcc6fd2c52
+// import notify from '../Toast/Toast';
 
 const CreateProduct = () => {
   const [apiError, setApiError] = useState(false);
-  const [errorMessages, setErrorMessages] = useState(false);
+  // const [errorMessages, setErrorMessages] = useState(false);
 
   const [name, setName] = React.useState('');
   const onNameChange = (e) => {
@@ -85,8 +82,7 @@ const CreateProduct = () => {
       price: price.value,
       active: activeStatus.value
     };
-    const res = HttpHelper(constants.CREATE_PRODUCT_ENDPOINT, 'POST', obj);
-    console.log(res);
+    makeProduct(obj);
     console.log('Its finished working');
   }
 
@@ -118,7 +114,6 @@ const CreateProduct = () => {
       valid.message += '- Price should be in dollars and cents ';
       valid.formIsValid = false;
     }
-<<<<<<< HEAD
     setApiError(valid.message);
 
     if (valid.formIsValid) {
@@ -126,17 +121,11 @@ const CreateProduct = () => {
     }
     console.log(name);
     console.log(valid.message);
-=======
-    setErrorMessages(valid.message);
-    if (!valid.formIsValid) {
-      notify('error', errorMessages);
-    }
->>>>>>> 08d6fb684e7b9d15d99734d60d7c03bcc6fd2c52
   }
 
   return (
     <div className={styles.container}>
-      {apiError && <p className={styles.errMsg} data-testid="errMsg">{Constants.API_ERROR}</p>}
+      {apiError && <p className={styles.errMsg} data-testid="errMsg">{constants.API_ERROR}</p>}
       <h2>Create new item:</h2>
       <FormItem
         placeholder="Prorduct Name"
