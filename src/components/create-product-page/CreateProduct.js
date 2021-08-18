@@ -4,6 +4,7 @@ import FormItem from '../form/FormItem';
 import FormItemDropdown from '../form/FormItemDropdown';
 import CreateProductService from './CreateProductService';
 import constants from '../../utils/constants';
+import HttpHelper from '../../utils/HttpHelper';
 // import validate from '../../utils/validate';
 
 const CreateProduct = () => {
@@ -65,6 +66,24 @@ const CreateProduct = () => {
 
   const productActive = ['Active', 'Inactive'];
 
+  function handleSubmit() {
+    console.log('Its started working');
+    const obj = {
+      name: name.value,
+      description: description.value,
+      demographics: demographics.value,
+      category: category.value,
+      type: type.value,
+      brand: brand.value,
+      material: material.value,
+      price: price.value,
+      active: activeStatus.value
+    };
+    const res = HttpHelper(constants.CREATE_PRODUCT_ENDPOINT, 'POST', obj);
+    console.log(res);
+    console.log('Its finished working');
+  }
+
   function validate() {
     const valid = {
       formIsValid: true,
@@ -95,6 +114,10 @@ const CreateProduct = () => {
       valid.formIsValid = false;
     }
     setApiError(valid.message);
+
+    if (valid.formIsValid) {
+      handleSubmit();
+    }
     console.log(name);
     console.log(valid.message);
   }
