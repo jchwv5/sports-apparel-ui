@@ -68,34 +68,44 @@ const Header = () => {
 
   return (
     <div className="header">
-      <NavLink to="/">
-        <img className="logo" src={logo} alt="" />
-      </NavLink>
-      <NavLink to="/checkout">
-        <Badge badgeContent={products.length} color="secondary">
-          <img className="cart" src={cartLogo} alt="" />
-        </Badge>
-      </NavLink>
+      <div className="sitelogo">
+        <NavLink to="/">
+          <img className="logo" src={logo} alt="" />
+        </NavLink>
+      </div>
+      <div className="cartlogo">
+        <NavLink to="/checkout">
+          <Badge
+            badgeContent={products.length}
+            color="secondary"
+            overlap="circular"
+          >
+            <img className="cart" src={cartLogo} alt="" />
+          </Badge>
+        </NavLink>
+      </div>
       {user && <span>{user.firstName}</span>}
       {user && <span>{user.lastName}</span>}
       {googleError && <span>{googleError}</span>}
       {apiError && <span>Api Error</span>}
-      {!user ? (
-        <GoogleLogin
-          clientId={constants.GOOGLE_CLIENT_ID}
-          buttonText="Login"
-          onSuccess={handleGoogleLoginSuccess}
-          onFailure={handleGoogleLoginFailure}
-          cookiePolicy="single_host_origin"
-        />
-      ) : (
-        <GoogleLogout
-          clientId={constants.GOOGLE_CLIENT_ID}
-          buttonText="Logout"
-          onLogoutSuccess={handleGoogleLogoutSuccess}
-          onSuccess={handleGoogleLogoutFailure}
-        />
-      )}
+      <div className="login">
+        {!user ? (
+          <GoogleLogin
+            clientId={constants.GOOGLE_CLIENT_ID}
+            buttonText="Login"
+            onSuccess={handleGoogleLoginSuccess}
+            onFailure={handleGoogleLoginFailure}
+            cookiePolicy="single_host_origin"
+          />
+        ) : (
+          <GoogleLogout
+            clientId={constants.GOOGLE_CLIENT_ID}
+            buttonText="Logout"
+            onLogoutSuccess={handleGoogleLogoutSuccess}
+            onSuccess={handleGoogleLogoutFailure}
+          />
+        )}
+      </div>
     </div>
   );
 };
