@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import styles from '../product-page/ProductPage.module.css';
 import Constants from '../../utils/constants';
 import fetchProducts from '../product-page/ProductPageService';
@@ -15,93 +8,94 @@ import { DataGrid } from '@material-ui/data-grid';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& .super-app-theme--header': {
+    '& .table-header': {
       backgroundColor: '#add8e6',
       fontWeight: 'bold'
-    }
+    },
+    position: 'relative'
   }
 }));
 
 const columns = [
-  { field: 'id', headerName: 'ID', headerClassName: 'super-app-theme--header', hide: true },
-  { field: 'name', headerName: 'Product', headerClassName: 'super-app-theme--header', width: 300 },
+  { field: 'id', headerName: 'ID', headerClassName: 'table-header', hide: true },
+  { field: 'name', headerName: 'Product', headerClassName: 'table-header', width: 300 },
   {
     field: 'description',
     headerName: 'Description',
-    headerClassName: 'super-app-theme--header',
+    headerClassName: 'table-header',
     width: 300
   },
   {
     field: 'category',
     headerName: 'Category',
-    headerClassName: 'super-app-theme--header',
+    headerClassName: 'table-header',
     width: 200
   },
   {
     field: 'demographic',
     headerName: 'Demographic',
-    headerClassName: 'super-app-theme--header',
+    headerClassName: 'table-header',
     width: 200
   },
-  { field: 'type', headerName: 'Type', headerClassName: 'super-app-theme--header', width: 150 },
+  { field: 'type', headerName: 'Type', headerClassName: 'table-header', width: 150 },
   {
     field: 'releaseDate',
     headerName: 'ReleaseDate',
-    headerClassName: 'super-app-theme--header',
+    headerClassName: 'table-header',
     width: 200
   },
   {
     field: 'primaryColorCode',
     headerName: 'PrimaryColorCode',
-    headerClassName: 'super-app-theme--header',
+    headerClassName: 'table-header',
     width: 250
   },
   {
     field: 'secondaryColorCode',
     headerName: 'SecondaryColorCode',
-    headerClassName: 'super-app-theme--header',
+    headerClassName: 'table-header',
     width: 280
   },
   {
     field: 'styleNumber',
     headerName: 'StyleNumber',
-    headerClassName: 'super-app-theme--header',
+    headerClassName: 'table-header',
     width: 300
   },
   {
     field: 'globalProductCode',
     headerName: 'GlobalProductCode',
-    headerClassName: 'super-app-theme--header',
+    headerClassName: 'table-header',
     width: 250
   },
-  { field: 'brand', headerName: 'Brand', headerClassName: 'super-app-theme--header', width: 200 },
+  { field: 'brand', headerName: 'Brand', headerClassName: 'table-header', width: 200 },
   {
     field: 'material',
     headerName: 'Material',
-    headerClassName: 'super-app-theme--header',
+    headerClassName: 'table-header',
     width: 200
   },
   {
     field: 'price',
     type: 'number',
     headerName: 'Price',
-    headerClassName: 'super-app-theme--header',
+    headerClassName: 'table-header',
     width: 200
   },
   {
     field: 'quantity',
     type: 'number',
     headerName: 'Quantity',
-    headerClassName: 'super-app-theme--header',
+    headerClassName: 'table-header',
     width: 200
   },
   {
     field: 'imageSrc',
     headerName: 'ImageSrc',
-    headerClassName: 'super-app-theme--header',
+    headerClassName: 'table-header',
     width: 200
   },
-  { field: 'status', headerName: 'Status', headerClassName: 'super-app-theme--header', width: 200 }
+  { field: 'status', headerName: 'Status', headerClassName: 'table-header', width: 200 }
 ];
 const DataTable = () => {
   const classes = useStyles();
