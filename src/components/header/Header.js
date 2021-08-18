@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Badge } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import GoogleLogin, { GoogleLogout } from 'react-google-login';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import loginUser from './HeaderService';
 import constants from '../../utils/constants';
 import { useCart } from '../checkout-page/CartContext';
 import logo from '../../assets/logo.png';
-import cartLogo from '../../assets/cartLogo.png';
+// import cartLogo from '../../assets/cartLogo.png';
+import './Header.css';
 
 /**
  * @name Header
@@ -68,44 +70,47 @@ const Header = () => {
 
   return (
     <div className="header">
-      <div className="sitelogo">
-        <NavLink to="/">
-          <img className="logo" src={logo} alt="" />
-        </NavLink>
-      </div>
-      <div className="cartlogo">
-        <NavLink to="/checkout">
-          <Badge
-            badgeContent={products.length}
-            color="secondary"
-            overlap="circular"
-          >
-            <img className="cart" src={cartLogo} alt="" />
-          </Badge>
-        </NavLink>
-      </div>
-      {user && <span>{user.firstName}</span>}
-      {user && <span>{user.lastName}</span>}
-      {googleError && <span>{googleError}</span>}
-      {apiError && <span>Api Error</span>}
-      <div className="login">
-        {!user ? (
-          <GoogleLogin
-            clientId={constants.GOOGLE_CLIENT_ID}
-            buttonText="Login"
-            onSuccess={handleGoogleLoginSuccess}
-            onFailure={handleGoogleLoginFailure}
-            cookiePolicy="single_host_origin"
-          />
-        ) : (
-          <GoogleLogout
-            clientId={constants.GOOGLE_CLIENT_ID}
-            buttonText="Logout"
-            onLogoutSuccess={handleGoogleLogoutSuccess}
-            onSuccess={handleGoogleLogoutFailure}
-          />
-        )}
-      </div>
+      <ul>
+        <li>
+          <NavLink to="/">
+            <img className="logo" src={logo} alt="" />
+          </NavLink>
+        </li>
+        <li id="cart">
+          <NavLink to="/checkout">
+            <Badge
+              badgeContent={products.length}
+              color="secondary"
+              overlap="circular"
+            >
+              {/* <img className="cart" src={cartLogo} alt="" /> */}
+              <ShoppingCartIcon style={{ fontSize: 60, color: 'black' }} />
+            </Badge>
+          </NavLink>
+        </li>
+        {user && <span>{user.firstName}</span>}
+        {user && <span>{user.lastName}</span>}
+        {googleError && <span>{googleError}</span>}
+        {apiError && <span>Api Error</span>}
+        <li>
+          {!user ? (
+            <GoogleLogin
+              clientId={constants.GOOGLE_CLIENT_ID}
+              buttonText="Login"
+              onSuccess={handleGoogleLoginSuccess}
+              onFailure={handleGoogleLoginFailure}
+              cookiePolicy="single_host_origin"
+            />
+          ) : (
+            <GoogleLogout
+              clientId={constants.GOOGLE_CLIENT_ID}
+              buttonText="Logout"
+              onLogoutSuccess={handleGoogleLogoutSuccess}
+              onSuccess={handleGoogleLogoutFailure}
+            />
+          )}
+        </li>
+      </ul>
     </div>
   );
 };

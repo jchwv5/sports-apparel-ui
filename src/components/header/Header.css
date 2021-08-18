@@ -1,0 +1,40 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #ea526f;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+li {
+  float: left;
+}
+
+.header button {
+  margin-top: 13px;
+  height: 42px;
+  width: 100px;
+  position: absolute;
+  right: 75px;
+}
+
+#cart {
+  float: right;
+  padding-top: 5px;
+  padding-right: 5px;
+}
+
+.logo {
+  padding-top: 5px;
+  padding-left: 5px;
+  width: 70px;
+  height: 70px;
+}
+
+.mainbody,
+.checkoutBody {
+  padding-top: 60px;
+}
