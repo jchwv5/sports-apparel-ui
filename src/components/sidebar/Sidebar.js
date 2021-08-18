@@ -16,12 +16,11 @@ import styles from './Sidebar.css';
 
 const Sidebar = (props) => {
   useEffect(() => {
-    const cards = document.getElementById("productCards");
     const shiftCardsRight = () => {
-      cards.classList.add("sidenavIsOpen");
+      document.getElementById("productCards").style.marginLeft = "320px";
     };
     const shiftCardsLeft = () => {
-      cards.classList.remove("sidenavIsOpen");
+      document.getElementById("productCards").style.marginLeft = "50px";
     };
     const elem = document.querySelector('.sidenav');
     // eslint-disable-next-line no-unused-vars

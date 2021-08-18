@@ -13,4 +13,6 @@
   margin: 0px 2px 4px 4px;
 }
 
-
+.sidenavIsOpen {
+  margin-left: 320px;
+}
