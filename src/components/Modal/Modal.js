@@ -4,8 +4,6 @@ import { Button } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import style from './Modal.module.css';
-import { useCart } from '../checkout-page/CartContext';
-import notify from '../Toast/Toast';
 
 function ButtonIncrement(num) {
   return (
@@ -39,97 +37,74 @@ const Modal = (props) => {
     decrementCounter = () => setCounter(1);
   }
 
-  const { dispatch } = useCart();
-
-  const onAdd = () => {
-    dispatch(
-      {
-        type: 'add',
-        product: {
-          id: item.id,
-          title: item.name,
-          price: item.price,
-          description: item.description,
-          quantity: counter
-        }
-      }
-    );
-    notify('success', 'Item added');
-  };
 
   return (
     <div className={style.modal}>
-
-      <Button type="button" className={style.closeButton} onClick={onClose}>X</Button>
-      <div className={style.container}>
-        <div>
-          Product Name:
-          {'\u00A0'}
-          {item.name}
-        </div>
-        <div>
-          <img className={style.productImage} src={item.imageSrc} alt="Product" />
-        </div>
-        <div className={style.modalBody}>
-          <div>
-            Product Name:
-            {'\u00A0'}
-            {item.name}
+      <div className={style.gridContainer}>
+            <div className={style.cartButton}>
+              <div className={style.closeDiv}>
+              <Button type="button" className={style.closeButton} onClick={onClose}>X</Button>
+              </div>
+            </div>
           </div>
+          <div className={style.fill}>
+              <img src={item.imageSrc} alt="Product" />
+              </div>
+      <br />
+      <br />
+     <div className={style.container}>
+        <div className={style.nameText}><h1>{item.name}</h1></div>
+      <div className={style.modalBody}>
           <div>
-            Product ID:
+            <b>Product ID:</b>
             {'\u00A0'}
             {item.id}
           </div>
           <div>
-            Product Description:
+            <b>Product Description:</b>
             {'\u00A0'}
             {item.description}
           </div>
           <div>
-            Price: $
-            {item.price}
-          </div>
-          <div>
-            Primary Color Code:
-            {'\u00A0'}
-            {item.primaryColorCode}
-          </div>
-          <div>
-            Secondary Color Code:
-            {'\u00A0'}
-            {item.secondaryColorCode}
-          </div>
-          <div>
-            Category:
+            <b>Category:</b>
             {'\u00A0'}
             {item.category}
           </div>
           <div>
-            Type:
+            <b>Type:</b>
             {'\u00A0'}
             {item.type}
           </div>
           <br />
-          <div className={style.gridContainer}>
-            <div className={style.quantityCounter}>
-              <div>
-                <ButtonDecrement onClickFunc={decrementCounter} />
-                <Display message={counter} />
-                <ButtonIncrement onClickFunc={incrementCounter} />
-              </div>
-            </div>
-            <div className={style.cartButton}>
-              <div className={style.shoppingCart}>
-                <IconButton aria-label="add to shopping cart" onClick={onAdd}>
-                  <AddShoppingCartIcon />
-                </IconButton>
-              </div>
-            </div>
+          <div className={style.colorElements}>
+            <h3>Colors</h3>
+            <span className={style.dot} style={{backgroundColor: item.primaryColorCode}}></span>
+            &nbsp;&nbsp;&nbsp;
+            <span className={style.dot} style={{backgroundColor: item.secondaryColorCode}} ></span>
           </div>
+          <br />
+          <div className={style.priceText}>
+            <h3> $
+            {item.price}
+            </h3>
+          </div>
+          <div className={style.buttons}>
+
+            <div className={style.actn_btn}>
+
+            <ButtonDecrement onClickFunc={decrementCounter} />
+            <Display message={counter} />
+            <ButtonIncrement onClickFunc={incrementCounter} />
+            <IconButton  aria-label="add to shopping cart">
+            <AddShoppingCartIcon />
+            </IconButton>
+        </div>
+
+        </div>
+
         </div>
       </div>
-
+          
     </div>
   );
 };
