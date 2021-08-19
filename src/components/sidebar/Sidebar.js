@@ -1,25 +1,21 @@
-/* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable quotes */
-/* eslint-disable react/no-this-in-sfc */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-restricted-globals */
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min';
 import 'materialize-css/dist/css/materialize.min.css';
 import styles from './Sidebar.css';
-
+/**
+ * Function to initialize sidebar component
+ * @param {*} props sidebar returns filterParam to ProductPage.js
+ */
 const Sidebar = (props) => {
   useEffect(() => {
     const shiftCardsRight = () => {
-      document.getElementById("productCards").style.marginLeft = "320px";
+      document.getElementById('productCards').style.marginLeft = '320px';
     };
     const shiftCardsLeft = () => {
-      document.getElementById("productCards").style.marginLeft = "50px";
+      document.getElementById('productCards').style.marginLeft = '50px';
     };
     const elem = document.querySelector('.sidenav');
     // eslint-disable-next-line no-unused-vars
@@ -33,7 +29,10 @@ const Sidebar = (props) => {
     });
     instance.open();
   }, []);
-
+  /**
+ *Function to pass data-id value of licked link to product page as filterParam
+ * @param {*} e click event target
+ */
   const handleClick = (e) => {
     props.onClick(e.target.dataset.id);
   };

@@ -1,6 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState, Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductCard from '../product-card/ProductCard';
 import styles from './ProductPage.module.css';
 import Constants from '../../utils/constants';
@@ -22,7 +21,12 @@ const ProductPage = () => {
   function handleClick(filter) {
     setFilterParam(filter);
   }
-
+  /**
+ * Filters all products into a separate array based on filterParam
+ * to be returned for setting cards on products page
+ * @param {*} el - product passed in to be filtered
+ * @returns filteredProducts array
+ */
   const filterProducts = (el) => {
     if (filterParam === 'All') {
       filteredProducts.push(el);
@@ -32,7 +36,11 @@ const ProductPage = () => {
     }
     return filteredProducts.setProducts;
   };
-
+  /**
+   * empties the filteredProducts array so that it can be populated from a clean state
+   * whenever the filterProducts function is called
+   * @returns empty filteredProducts array
+   */
   const clearFilteredProducts = () => {
     while (filteredProducts.length > 0) {
       filteredProducts.pop();
