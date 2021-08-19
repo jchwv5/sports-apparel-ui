@@ -9,7 +9,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-restricted-globals */
 import React, { Component, useEffect } from 'react';
-import { $, jquery } from 'jquery';
 import M from 'materialize-css/dist/js/materialize.min';
 import 'materialize-css/dist/css/materialize.min.css';
 import styles from './Sidebar.css';

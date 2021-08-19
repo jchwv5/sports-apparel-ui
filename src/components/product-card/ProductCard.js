@@ -57,18 +57,16 @@ const ProductCard = ({ product }) => {
   const { dispatch } = useCart();
 
   const onAdd = () => {
-    dispatch(
-      {
-        type: 'add',
-        product: {
-          id: product.id,
-          title: product.name,
-          price: product.price,
-          description: product.description,
-          quantity: 1
-        }
+    dispatch({
+      type: 'add',
+      product: {
+        id: product.id,
+        title: product.name,
+        price: product.price,
+        description: product.description,
+        quantity: 1
       }
-    );
+    });
     notify('success', 'Item added');
   };
 
