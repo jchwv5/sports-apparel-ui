@@ -1,5 +1,6 @@
 import HttpHelper from '../../utils/HttpHelper';
 import Constants from '../../utils/constants';
+import notify from '../Toast/Toast';
 
 /**
  *
@@ -52,14 +53,32 @@ async function fetchTypes(setTypes, setApiError) {
  * @param {*} payload product to be saved
  * @returns product creation confirmation response
  */
-async function createProduct(payload) {
+async function productPost(name,
+  description,
+  demographic,
+  category,
+  type,
+  brand,
+  material,
+  price,
+  activeStatus) {
   await HttpHelper(Constants.ALL_PRODUCTS_ENDPOINT, 'POST', {
-    payload
+    name,
+    description,
+    demographic,
+    category,
+    type,
+    brand,
+    material,
+    price,
+    activeStatus
   })
-    .then((response) => response.json())
+    .then((response) => {
+      response.json();
+    })
     .catch(() => {
-      console.error('Failed to create product');
+      notify('error', Constants.API_ERROR);
     });
 }
 
-export default { fetchCategories, fetchTypes, createProduct };
+export default { fetchCategories, fetchTypes, productPost };

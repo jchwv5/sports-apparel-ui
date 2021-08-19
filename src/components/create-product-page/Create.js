@@ -4,13 +4,11 @@ import FormItem from '../form/FormItem';
 import FormItemDropdown from '../form/FormItemDropdown';
 import CreateProductService from './CreateProductService';
 import constants from '../../utils/constants';
-// import HttpHelper from '../../utils/HttpHelper';
-// import validate from '../../utils/validate';
-// import notify from '../Toast/Toast';
+import validate from '../../utils/validate';
+import notify from '../Toast/Toast';
 
-const CreateProduct = () => {
+const Create = () => {
   const [apiError, setApiError] = useState(false);
-  // const [errorMessages, setErrorMessages] = useState(false);
 
   const [name, setName] = React.useState('');
   const onNameChange = (e) => {
@@ -28,7 +26,7 @@ const CreateProduct = () => {
     setDemographic(e.target.value);
   };
 
-  const [categories, setCategories] = React.useState([]);
+  const [categories, setCategories] = React.useState(['[Select category]']);
   useEffect(() => {
     CreateProductService.fetchCategories(setCategories, setApiError);
   }, []);
@@ -37,7 +35,7 @@ const CreateProduct = () => {
     setCategory(e.target.value);
   };
 
-  const [types, setTypes] = React.useState([]);
+  const [types, setTypes] = React.useState(['[Select type]']);
   useEffect(() => {
     CreateProductService.fetchTypes(setTypes, setApiError);
   }, []);
@@ -69,52 +67,38 @@ const CreateProduct = () => {
   const productActive = ['Active', 'Inactive'];
 
   function handleSubmit() {
-    console.log('Its started working');
-    const payload = {
-      name: name.value,
-      description: description.value,
-      demographics: demographics.value,
-      category: category.value,
-      type: type.value,
-      brand: brand.value,
-      material: material.value,
-      price: price.value,
-      active: activeStatus.value
-    };
-    console.log(payload);
+    CreateProductService.productPost(
+      name,
+      description,
+      demographic,
+      category,
+      type,
+      brand,
+      material,
+      price,
+      activeStatus
+    );
+    notify('success', 'Product created successfully');
   }
 
-  function validate() {
-    const valid = {
-      formIsValid: true,
-      message: ''
-    };
-    if (name === '') {
-      valid.message += '- Name cannot be empty ';
-      valid.formIsValid = false;
+  function validateForm() {
+    let formIsValid = true;
+    if (!validate('text', 'Name', name)) {
+      formIsValid = false;
     }
-    if (!description) {
-      valid.message += '- Description cannot be empty ';
-      valid.formIsValid = false;
+    if (!validate('text', 'Description', description)) {
+      formIsValid = false;
     }
-    if (!brand) {
-      valid.message += '- Brand cannot be empty ';
-      valid.formIsValid = false;
+    if (!validate('text', 'Brand', brand)) {
+      formIsValid = false;
     }
-    if (!material) {
-      valid.message += '- Material cannot be empty ';
-      valid.formIsValid = false;
+    if (!validate('text', 'Material', material)) {
+      formIsValid = false;
     }
-    if (!price || price.trim() === '') {
-      valid.message += '- Price cannot be empty ';
-      valid.formIsValid = false;
-    } else if (!((/^\d+(?:\.\d\d)$/).test(price))) {
-      valid.message += '- Price should be in dollars and cents ';
-      valid.formIsValid = false;
+    if (!validate('currency', 'Price', price)) {
+      formIsValid = false;
     }
-    setApiError(valid.message);
-
-    if (valid.formIsValid) {
+    if (formIsValid) {
       handleSubmit();
     }
   }
@@ -199,14 +183,11 @@ const CreateProduct = () => {
         value={activeStatus.value}
         options={productActive}
       />
-      <button onClick={validate} type="button" className={styles.createButton}>
-        Add Item
-      </button>
-      <button onClick={handleSubmit} type="button" className={styles.createButton}>
-        display
+      <button onClick={validateForm} type="button" className={styles.createButton}>
+        Create Product
       </button>
     </div>
   );
 };
 
-export default CreateProduct;
+export default Create;
