@@ -57,34 +57,36 @@ const ProductCard = ({ product }) => {
   const { dispatch } = useCart();
 
   const onAdd = () => {
-    dispatch(
-      {
-        type: 'add',
-        product: {
-          id: product.id,
-          title: product.name,
-          price: product.price,
-          description: product.description,
-          quantity: 1
-        }
+    dispatch({
+      type: 'add',
+      product: {
+        id: product.id,
+        title: product.name,
+        price: product.price,
+        description: product.description,
+        quantity: 1
       }
+<<<<<<< HEAD
     );
+=======
+    });
+>>>>>>> 22c193a253ff71b7b3e5d7e6f661c139d6f449a5
     notify('success', 'Item added to cart!');
   };
 
   return (
     <Card className={classes.root}>
       <CardHeader
-        avatar={(
+        avatar={
           <Avatar aria-label="demographics" className={classes.avatar}>
             {product.demographic.charAt(0)}
           </Avatar>
-        )}
-        action={(
+        }
+        action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
           </IconButton>
-        )}
+        }
         title={product.name}
         subheader={`${product.demographic} ${product.category} ${product.type}`}
       />
@@ -99,8 +101,7 @@ const ProductCard = ({ product }) => {
         </Typography>
         <br />
         <Typography variant="body2" color="textSecondary" component="p">
-          Price: $
-          {product.price}
+          Price: ${product.price}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
