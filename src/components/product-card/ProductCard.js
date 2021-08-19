@@ -66,7 +66,11 @@ const ProductCard = ({ product }) => {
         description: product.description,
         quantity: 1
       }
+<<<<<<< HEAD
+    );
+=======
     });
+>>>>>>> 22c193a253ff71b7b3e5d7e6f661c139d6f449a5
     notify('success', 'Item added to cart!');
   };
 

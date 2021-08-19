@@ -11,6 +11,13 @@ function cartReducer(state, action) {
       };
     }
     case 'add': {
+      const itemInCart = state.products.find((product) => product.title === action.product.title);
+      if (itemInCart) {
+        itemInCart.quantity += 1;
+        return {
+          ...state
+        };
+      }
       return {
         ...state,
         products: [...state.products, action.product]
