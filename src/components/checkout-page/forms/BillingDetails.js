@@ -47,6 +47,7 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             id="billingState"
             label="State"
             onChange={onChange}
+            placeholder="[Select State]"
             value={billingData.billingState}
             options={usStates}
           />

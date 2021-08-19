@@ -1,6 +1,5 @@
 import HttpHelper from '../../utils/HttpHelper';
 import Constants from '../../utils/constants';
-import notify from '../Toast/Toast';
 
 /**
  *
@@ -61,7 +60,8 @@ async function productPost(name,
   brand,
   material,
   price,
-  activeStatus) {
+  active,
+  setApiError) {
   await HttpHelper(Constants.ALL_PRODUCTS_ENDPOINT, 'POST', {
     name,
     description,
@@ -71,13 +71,16 @@ async function productPost(name,
     brand,
     material,
     price,
-    activeStatus
+    active
   })
     .then((response) => {
-      response.json();
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(Constants.API_ERROR);
     })
     .catch(() => {
-      notify('error', Constants.API_ERROR);
+      setApiError(true);
     });
 }
 

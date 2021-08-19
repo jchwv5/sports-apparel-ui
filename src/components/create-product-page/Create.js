@@ -3,7 +3,6 @@ import styles from './CreateProduct.module.css';
 import FormItem from '../form/FormItem';
 import FormItemDropdown from '../form/FormItemDropdown';
 import CreateProductService from './CreateProductService';
-import constants from '../../utils/constants';
 import validate from '../../utils/validate';
 import notify from '../Toast/Toast';
 
@@ -21,24 +20,30 @@ const Create = () => {
   };
 
   const demographics = ['Men', 'Women', 'Kids'];
-  const [demographic, setDemographic] = React.useState('Men');
+  const [demographic, setDemographic] = React.useState('');
   const onDemographicChange = (e) => {
     setDemographic(e.target.value);
   };
 
-  const [categories, setCategories] = React.useState(['[Select category]']);
+  const [categories, setCategories] = React.useState([]);
   useEffect(() => {
     CreateProductService.fetchCategories(setCategories, setApiError);
-  }, []);
+    if (apiError) {
+      notify('error', 'Problem fetching Categories');
+    }
+  }, [apiError]);
   const [category, setCategory] = React.useState('');
   const onCategoryChange = (e) => {
     setCategory(e.target.value);
   };
 
-  const [types, setTypes] = React.useState(['[Select type]']);
+  const [types, setTypes] = React.useState([]);
   useEffect(() => {
     CreateProductService.fetchTypes(setTypes, setApiError);
-  }, []);
+    if (apiError) {
+      notify('error', 'Problem fetching Types');
+    }
+  }, [apiError]);
   const [type, setType] = React.useState('');
   const onTypeChange = (e) => {
     setType(e.target.value);
@@ -67,6 +72,12 @@ const Create = () => {
   const productActive = ['Active', 'Inactive'];
 
   function handleSubmit() {
+    if (activeStatus === 'Active') {
+      setActiveStatus(true);
+    }
+    if (activeStatus === 'Inactive') {
+      setActiveStatus(false);
+    }
     CreateProductService.productPost(
       name,
       description,
@@ -76,9 +87,14 @@ const Create = () => {
       brand,
       material,
       price,
-      activeStatus
+      activeStatus,
+      setApiError
     );
-    notify('success', 'Product created successfully');
+    if (apiError) {
+      notify('error', 'Server connection error');
+    } else {
+      notify('success', 'Product created successfully');
+    }
   }
 
   function validateForm() {
@@ -105,7 +121,6 @@ const Create = () => {
 
   return (
     <div className={styles.container}>
-      {apiError && <p className={styles.errMsg} data-testid="errMsg">{constants.API_ERROR}</p>}
       <h2>Create new item:</h2>
       <FormItem
         placeholder="Prorduct Name"
@@ -129,6 +144,7 @@ const Create = () => {
         id="productDemographic"
         label="Demographic"
         onChange={onDemographicChange}
+        placeholder="[Select Demographic]"
         value={demographic.value}
         options={demographics}
       />
@@ -137,6 +153,7 @@ const Create = () => {
         id="productCategory"
         label="Category"
         onChange={onCategoryChange}
+        placeholder="[Select Category]"
         value={category.value}
         options={categories}
       />
@@ -145,6 +162,7 @@ const Create = () => {
         id="type"
         label="Type"
         onChange={onTypeChange}
+        placeholder="[Select Type]"
         value={type.value}
         options={types}
       />
