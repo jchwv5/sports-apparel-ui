@@ -1,0 +1,18 @@
+.sidenav-overlay {
+    height: 0px;
+    width: 0px;
+}
+
+.invisible-top {
+    top: 76px;
+}
+
+.sidenav-trigger {
+  position: fixed;
+  margin-top: 10px;
+}
+
+.sidenav-close {
+  margin-top: 5px;
+  float: right;
+}

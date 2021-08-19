@@ -69,7 +69,7 @@ const ProductCard = ({ product }) => {
         quantity: 1
       }
     });
-    notify('success', 'Item added');
+    notify('success', 'Item added to cart!');
   };
   const [show, setShow] = useState(false);
   const wrapperRef = useRef(null);
