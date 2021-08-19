@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styles from './CreateProduct.module.css';
 import FormItem from '../form/FormItem';
 import FormItemDropdown from '../form/FormItemDropdown';
 import CreateProductService from './CreateProductService';
 import constants from '../../utils/constants';
 import validate from '../../utils/validate';
-import notify from '../Toast/Toast';
+// import notify from '../Toast/Toast';
 
 const Create = () => {
+  const history = useHistory();
   const [apiError, setApiError] = useState(false);
 
   const [name, setName] = React.useState('');
@@ -77,8 +79,8 @@ const Create = () => {
       material,
       price,
       activeStatus
-    );
-    notify('success', 'Product created successfully');
+    ).then(() => history.push('/'));
+    // notify('success', 'Product created successfully');
   }
 
   function validateForm() {

@@ -74,10 +74,10 @@ async function productPost(name,
     activeStatus
   })
     .then((response) => {
-      response.json();
+      notify('success', response.message);
     })
-    .catch(() => {
-      notify('error', Constants.API_ERROR);
+    .catch((response) => {
+      notify('error', response.message);
     });
 }
 
