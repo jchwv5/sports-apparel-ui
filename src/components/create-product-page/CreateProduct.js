@@ -7,7 +7,6 @@ import makeProduct from './makeProduct';
 import constants from '../../utils/constants';
 // import HttpHelper from '../../utils/HttpHelper';
 // import validate from '../../utils/validate';
-// import notify from '../Toast/Toast';
 
 const CreateProduct = () => {
   const [apiError, setApiError] = useState(false);
