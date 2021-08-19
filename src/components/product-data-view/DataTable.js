@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-<<<<<<< HEAD
 import { DataGrid } from '@material-ui/data-grid';
 import styles from '../product-page/ProductPage.module.css';
 import Constants from '../../utils/constants';
-=======
-import styles from '../product-page/ProductPage.module.css';
-import Constants from '../../utils/constants';
-
-import { DataGrid } from '@material-ui/data-grid';
->>>>>>> sprint2
 import fetchProducts from './DataViewService';
 
 const useStyles = makeStyles({
@@ -22,17 +15,12 @@ const useStyles = makeStyles({
 });
 
 const columns = [
-<<<<<<< HEAD
   {
     field: 'id', headerName: 'ID', headerClassName: 'table-header', hide: true
   },
   {
     field: 'name', headerName: 'Product', headerClassName: 'table-header', width: 345
   },
-=======
-  { field: 'id', headerName: 'ID', headerClassName: 'table-header', hide: true },
-  { field: 'name', headerName: 'Product', headerClassName: 'table-header', width: 345 },
->>>>>>> sprint2
   {
     field: 'description',
     headerName: 'Description',
@@ -51,13 +39,9 @@ const columns = [
     headerClassName: 'table-header',
     width: 200
   },
-<<<<<<< HEAD
   {
     field: 'type', headerName: 'Type', headerClassName: 'table-header', width: 150
   },
-=======
-  { field: 'type', headerName: 'Type', headerClassName: 'table-header', width: 150 },
->>>>>>> sprint2
   {
     field: 'releaseDate',
     headerName: 'ReleaseDate',
@@ -88,7 +72,9 @@ const columns = [
     headerClassName: 'table-header',
     width: 250
   },
-  { field: 'brand', headerName: 'Brand', headerClassName: 'table-header', width: 200 },
+  {
+    field: 'brand', headerName: 'Brand', headerClassName: 'table-header', width: 200
+  },
   {
     field: 'material',
     headerName: 'Material',
