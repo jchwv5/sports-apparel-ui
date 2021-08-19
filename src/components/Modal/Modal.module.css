@@ -1,0 +1,58 @@
+.container {
+    color: black;
+    display: flex;
+    flex-direction: column;
+    font-family: inherit;
+    font-size: 20px;
+    justify-content: flex-start;
+    margin: auto;
+    padding: 16px;
+}
+
+.modal {
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 4px;
+    box-shadow: 10px 5px 10px 5px rgba(0, 0, 0, 0.2);
+    height: auto;
+    left: 50%;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    z-index: 1000;
+}
+
+.closeButton {
+    top:0;
+    right: 0;
+    height: 10%;
+    width: 10%;
+    text-align: right;
+   
+}
+.cartButton{
+    margin-left: 50%; 
+    height: 50px; 
+    text-align: center;
+}
+.quantityCounter{
+    width: 50%; 
+    height: 50px; 
+    float: left; 
+    text-align: center;
+}
+
+.grid-container {
+    width: 100%;
+}
+
+.productImage{
+    text-align: center;
+}
+
+.quantityButtons{
+    margin-left: .75rem;
+
+}
+
