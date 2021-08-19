@@ -28,6 +28,7 @@
     justify-content: flex-start;
     margin: auto;
     padding: 16px;
+    max-height: 90%;
 }
 
 .closeDiv{
