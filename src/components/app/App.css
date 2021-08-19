@@ -41,6 +41,7 @@
 .app-container {
   position: relative;
   min-height: 100vh;
+  overflow-y: hidden;
 }
 .content-container {
   display: flex;

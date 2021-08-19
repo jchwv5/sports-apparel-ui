@@ -17,8 +17,7 @@ function notify(mode, message) {
       pauseOnHover: false,
       closeOnClick: true
     });
-  }
-  if (mode === 'error') {
+  } else if (mode === 'error') {
     toast.error(message, {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 8000,
@@ -26,8 +25,7 @@ function notify(mode, message) {
       pauseOnHover: false,
       closeOnClick: true
     });
-  }
-  if (mode === 'info') {
+  } else if (mode === 'info') {
     toast.info(message, {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 8000,
@@ -35,8 +33,7 @@ function notify(mode, message) {
       pauseOnHover: false,
       closeOnClick: true
     });
-  }
-  if (mode === 'warning') {
+  } else if (mode === 'warning') {
     toast.warn(message, {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 8000,
