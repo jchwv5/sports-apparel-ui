@@ -149,8 +149,14 @@ const DataTable = () => {
         </p>
       )}
       <div
-        style={{ flexGrow: 1, display: 'flex', height: 700, width: '100%' }}
-        className={classes.root}>
+        style={{
+          flexGrow: 1,
+          display: 'flex',
+          height: 700,
+          width: '100%'
+        }}
+        className={classes.root}
+      >
         <DataGrid rows={products} columns={columns} rowsPerPageOptions={[20]} />
       </div>
       <div className={classes.root}>
