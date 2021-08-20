@@ -4,22 +4,35 @@ import { DataGrid } from '@material-ui/data-grid';
 import styles from '../product-page/ProductPage.module.css';
 import Constants from '../../utils/constants';
 import fetchProducts from './DataViewService';
+import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
   root: {
     '& .table-header': {
       backgroundColor: '#add8e6',
       fontWeight: 'bold'
+      // padding: '1000px'
     }
+  },
+  button: {
+    position: 'relative',
+    bottom: '10px'
   }
 });
 
 const columns = [
   {
-    field: 'id', headerName: 'ID', headerClassName: 'table-header', hide: true
+    field: 'id',
+    headerName: 'ID',
+    headerClassName: 'table-header',
+    hide: true
   },
   {
-    field: 'name', headerName: 'Product', headerClassName: 'table-header', width: 345
+    field: 'name',
+    headerName: 'Product',
+    headerClassName: 'table-header',
+    width: 345
   },
   {
     field: 'description',
@@ -40,7 +53,10 @@ const columns = [
     width: 200
   },
   {
-    field: 'type', headerName: 'Type', headerClassName: 'table-header', width: 150
+    field: 'type',
+    headerName: 'Type',
+    headerClassName: 'table-header',
+    width: 150
   },
   {
     field: 'releaseDate',
@@ -73,7 +89,10 @@ const columns = [
     width: 250
   },
   {
-    field: 'brand', headerName: 'Brand', headerClassName: 'table-header', width: 200
+    field: 'brand',
+    headerName: 'Brand',
+    headerClassName: 'table-header',
+    width: 200
   },
   {
     field: 'material',
@@ -119,7 +138,7 @@ const DataTable = () => {
   }, []);
 
   return (
-    <div style={{ display: 'flex', height: 800, width: '100%' }} className={classes.root}>
+    <div style={{ display: 'flex', height: 700, width: '100%' }} className={classes.root}>
       {apiError && (
         <p className={styles.errMsg} data-testid="errMsg">
           {Constants.API_ERROR}
@@ -127,6 +146,11 @@ const DataTable = () => {
       )}
       <div style={{ flexGrow: 1 }}>
         <DataGrid rows={products} columns={columns} rowsPerPageOptions={[20]} />
+      </div>
+      <div className={classes.button}>
+        <Button component="Link" to="/maintenace/create" color="primary">
+          Create
+        </Button>
       </div>
     </div>
   );
