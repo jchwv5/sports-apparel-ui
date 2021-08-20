@@ -76,7 +76,7 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="checkoutBody">
+    <div className="checkoutContainer">
       <div className={styles.checkoutContainer}>
         <div className={`${styles.step} ${styles.order}`}>
           <h3 className={styles.title}>1. Review Order</h3>
