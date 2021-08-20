@@ -63,13 +63,7 @@ const Modal = (props) => {
       <br />
       <br />
       <div className={style.container}>
-<<<<<<< HEAD
-        <div className={style.nameText}>
-          <h1>{item.name}</h1>
-        </div>
-=======
         <div className={style.nameText}><h1>{item.name}</h1></div>
->>>>>>> 642ca0271cb94f2733cfe077d7f4376d652134e4
         <div className={style.modalBody}>
           <div>
             <b>Product ID:</b>
@@ -94,21 +88,9 @@ const Modal = (props) => {
           <br />
           <div className={style.colorElements}>
             <h3>Colors</h3>
-<<<<<<< HEAD
-            <span
-              className={style.dot}
-              style={{ backgroundColor: item.primaryColorCode }}
-            />
-            &nbsp;&nbsp;&nbsp;
-            <span
-              className={style.dot}
-              style={{ backgroundColor: item.secondaryColorCode }}
-            />
-=======
             <span className={style.dot} style={{ backgroundColor: item.primaryColorCode }} />
             &nbsp;&nbsp;&nbsp;
             <span className={style.dot} style={{ backgroundColor: item.secondaryColorCode }} />
->>>>>>> 642ca0271cb94f2733cfe077d7f4376d652134e4
           </div>
           <br />
           <div className={style.priceText}>
@@ -119,10 +101,6 @@ const Modal = (props) => {
           </div>
           <div className={style.buttons}>
             <div className={style.actn_btn}>
-<<<<<<< HEAD
-=======
-
->>>>>>> 642ca0271cb94f2733cfe077d7f4376d652134e4
               <ButtonDecrement onClickFunc={decrementCounter} />
               <Display message={counter} />
               <ButtonIncrement onClickFunc={incrementCounter} />
@@ -130,18 +108,12 @@ const Modal = (props) => {
                 <AddShoppingCartIcon />
               </IconButton>
             </div>
-<<<<<<< HEAD
-          </div>
-        </div>
-      </div>
-=======
 
           </div>
 
         </div>
       </div>
 
->>>>>>> 642ca0271cb94f2733cfe077d7f4376d652134e4
     </div>
   );
 };
