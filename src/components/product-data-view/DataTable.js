@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 
     '& .MuiButton-root': {
       position: 'absolute',
-      bottom: '100px',
+      bottom: '1px',
       left: '50%'
       // display: 'flex'
     }

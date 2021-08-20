@@ -48,5 +48,5 @@
   flex-direction: column;
   padding-bottom: 3rem;
   box-sizing: border-box;
-  
+  position: relative;
 }
