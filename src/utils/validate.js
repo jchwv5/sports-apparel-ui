@@ -1,5 +1,14 @@
 import notify from '../components/Toast/Toast';
 
+/**
+ *
+ * @name validate
+ * @description validates required fields of a form
+ * @param {String} type - field type (text, currency, drop-down)
+ * @param {String} name - to be displayed in the error toast
+ * @param {String} data - value of the form field
+ * @returns boolean if the field is valid
+ */
 const validate = (type, name, data) => {
   let dataIsValid = true;
   switch (type) {
@@ -16,6 +25,12 @@ const validate = (type, name, data) => {
       } else if (!((/^\$?\d+(?:\.\d\d)$/).test(data))) {
         dataIsValid = false;
         notify('error', `${name} should be in dollars and cents`);
+      }
+      break;
+    case 'drop-down':
+      if (!data || data.charAt(0) === '[') {
+        notify('error', `Please select a ${name} from the drop down`);
+        dataIsValid = false;
       }
       break;
     default:
