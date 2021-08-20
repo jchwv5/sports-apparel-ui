@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
+import Button from '@material-ui/core/Button';
+// import { Link } from 'react-router-dom';
 import styles from '../product-page/ProductPage.module.css';
 import Constants from '../../utils/constants';
 import fetchProducts from './DataViewService';
-import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
   root: {
     '& .table-header': {
       backgroundColor: '#add8e6',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontSize: '20px'
       // padding: '1000px'
+    },
+    '& .MuiDataGrid-root .MuiDataGrid-cell': {
+      fontSize: '17px'
     }
   },
   button: {
@@ -32,7 +36,7 @@ const columns = [
     field: 'name',
     headerName: 'Product',
     headerClassName: 'table-header',
-    width: 345
+    width: 300
   },
   {
     field: 'description',
@@ -50,7 +54,7 @@ const columns = [
     field: 'demographic',
     headerName: 'Demographic',
     headerClassName: 'table-header',
-    width: 200
+    width: 250
   },
   {
     field: 'type',
@@ -62,31 +66,31 @@ const columns = [
     field: 'releaseDate',
     headerName: 'ReleaseDate',
     headerClassName: 'table-header',
-    width: 200
+    width: 250
   },
   {
     field: 'primaryColorCode',
     headerName: 'PrimaryColorCode',
     headerClassName: 'table-header',
-    width: 250
+    width: 290
   },
   {
     field: 'secondaryColorCode',
     headerName: 'SecondaryColorCode',
     headerClassName: 'table-header',
-    width: 280
+    width: 290
   },
   {
     field: 'styleNumber',
     headerName: 'StyleNumber',
     headerClassName: 'table-header',
-    width: 300
+    width: 250
   },
   {
     field: 'globalProductCode',
     headerName: 'GlobalProductCode',
     headerClassName: 'table-header',
-    width: 250
+    width: 270
   },
   {
     field: 'brand',
@@ -105,26 +109,26 @@ const columns = [
     type: 'number',
     headerName: 'Price',
     headerClassName: 'table-header',
-    width: 200
+    width: 150
   },
   {
     field: 'quantity',
     type: 'number',
     headerName: 'Quantity',
     headerClassName: 'table-header',
-    width: 200
+    width: 150
   },
   {
     field: 'imageSrc',
     headerName: 'ImageSrc',
     headerClassName: 'table-header',
-    width: 200
+    width: 700
   },
   {
     field: 'active',
     headerName: 'Status',
     headerClassName: 'table-header',
-    width: 200
+    width: 150
   }
 ];
 
