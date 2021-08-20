@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
-// import { Link } from 'react-router-dom';
+import { Grid } from '@material-ui/core';
 import styles from '../product-page/ProductPage.module.css';
 import Constants from '../../utils/constants';
 import fetchProducts from './DataViewService';
+import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles({
   root: {
@@ -17,11 +19,14 @@ const useStyles = makeStyles({
     },
     '& .MuiDataGrid-root .MuiDataGrid-cell': {
       fontSize: '17px'
+    },
+
+    '& .MuiButton-root': {
+      position: 'absolute',
+      bottom: '100px',
+      left: '50%'
+      // display: 'flex'
     }
-  },
-  button: {
-    position: 'relative',
-    bottom: '10px'
   }
 });
 
@@ -142,17 +147,19 @@ const DataTable = () => {
   }, []);
 
   return (
-    <div style={{ display: 'flex', height: 700, width: '100%' }} className={classes.root}>
+    <div>
       {apiError && (
         <p className={styles.errMsg} data-testid="errMsg">
           {Constants.API_ERROR}
         </p>
       )}
-      <div style={{ flexGrow: 1 }}>
+      <div
+        style={{ flexGrow: 1, display: 'flex', height: 700, width: '100%' }}
+        className={classes.root}>
         <DataGrid rows={products} columns={columns} rowsPerPageOptions={[20]} />
       </div>
-      <div className={classes.button}>
-        <Button component="Link" to="/maintenace/create" color="primary">
+      <div className={classes.root}>
+        <Button href="/maintenace/create" color="primary" variant="contained">
           Create
         </Button>
       </div>
