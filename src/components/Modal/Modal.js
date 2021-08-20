@@ -7,15 +7,22 @@ import style from './Modal.module.css';
 
 function ButtonIncrement(num) {
   return (
-    <button type="button" className={style.quantityButtons} onClick={num.onClickFunc}>
+    <button
+      type="button"
+      className={style.quantityButtons}
+      onClick={num.onClickFunc}
+    >
       +
     </button>
   );
 }
 function ButtonDecrement(num) {
   return (
-
-    <button type="button" className={style.quantityButtons} onClick={num.onClickFunc}>
+    <button
+      type="button"
+      className={style.quantityButtons}
+      onClick={num.onClickFunc}
+    >
       -
     </button>
   );
@@ -23,9 +30,7 @@ function ButtonDecrement(num) {
 function Display(num) {
   return (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
-    <label className={style.quantityButtons}>
-      {num.message}
-    </label>
+    <label className={style.quantityButtons}>{num.message}</label>
   );
 }
 const Modal = (props) => {
@@ -37,24 +42,31 @@ const Modal = (props) => {
     decrementCounter = () => setCounter(1);
   }
 
-
   return (
     <div className={style.modal}>
       <div className={style.gridContainer}>
-            <div className={style.cartButton}>
-              <div className={style.closeDiv}>
-              <Button type="button" className={style.closeButton} onClick={onClose}>X</Button>
-              </div>
-            </div>
+        <div className={style.cartButton}>
+          <div className={style.closeDiv}>
+            <Button
+              type="button"
+              className={style.closeButton}
+              onClick={onClose}
+            >
+              X
+            </Button>
           </div>
-          <div className={style.fill}>
-              <img src={item.imageSrc} alt="Product" />
-              </div>
+        </div>
+      </div>
+      <div className={style.fill}>
+        <img src={item.imageSrc} alt="Product" />
+      </div>
       <br />
       <br />
-     <div className={style.container}>
-        <div className={style.nameText}><h1>{item.name}</h1></div>
-      <div className={style.modalBody}>
+      <div className={style.container}>
+        <div className={style.nameText}>
+          <h1>{item.name}</h1>
+        </div>
+        <div className={style.modalBody}>
           <div>
             <b>Product ID:</b>
             {'\u00A0'}
@@ -78,33 +90,35 @@ const Modal = (props) => {
           <br />
           <div className={style.colorElements}>
             <h3>Colors</h3>
-            <span className={style.dot} style={{backgroundColor: item.primaryColorCode}}></span>
+            <span
+              className={style.dot}
+              style={{ backgroundColor: item.primaryColorCode }}
+            />
             &nbsp;&nbsp;&nbsp;
-            <span className={style.dot} style={{backgroundColor: item.secondaryColorCode}} ></span>
+            <span
+              className={style.dot}
+              style={{ backgroundColor: item.secondaryColorCode }}
+            />
           </div>
           <br />
           <div className={style.priceText}>
-            <h3> $
-            {item.price}
+            <h3>
+              $
+              {item.price}
             </h3>
           </div>
           <div className={style.buttons}>
-
             <div className={style.actn_btn}>
-
-            <ButtonDecrement onClickFunc={decrementCounter} />
-            <Display message={counter} />
-            <ButtonIncrement onClickFunc={incrementCounter} />
-            <IconButton  aria-label="add to shopping cart">
-            <AddShoppingCartIcon />
-            </IconButton>
-        </div>
-
-        </div>
-
+              <ButtonDecrement onClickFunc={decrementCounter} />
+              <Display message={counter} />
+              <ButtonIncrement onClickFunc={incrementCounter} />
+              <IconButton aria-label="add to shopping cart">
+                <AddShoppingCartIcon />
+              </IconButton>
+            </div>
+          </div>
         </div>
       </div>
-          
     </div>
   );
 };
