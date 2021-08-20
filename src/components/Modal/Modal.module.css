@@ -28,7 +28,7 @@
     justify-content: flex-start;
     margin: auto;
     padding: 16px;
-    max-height: 90%;
+    max-height: 70%;
 }
 
 .closeDiv{
@@ -107,7 +107,6 @@
 
 .quantityButtons{
     margin-left: .75rem;
-
 }
 
 .quantityCounter{
