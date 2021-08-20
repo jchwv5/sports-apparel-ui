@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from 'react';
-import M from 'materialize-css/dist/js/materialize.min';
+import M from 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import styles from './Sidebar.css';
 /**
@@ -30,9 +30,9 @@ const Sidebar = (props) => {
     instance.open();
   }, []);
   /**
- *Function to pass data-id value of licked link to product page as filterParam
- * @param {*} e click event target
- */
+   *Function to pass data-id value of licked link to product page as filterParam
+   * @param {*} e click event target
+   */
   const handleClick = (e) => {
     props.onClick(e.target.dataset.id);
   };
@@ -40,33 +40,51 @@ const Sidebar = (props) => {
   return (
     <div className={styles}>
       <ul id="slide-out" className="sidenav invisible-top">
-        <a href="#!" type="button" data-target="slide-out" className="sidenav-close">
+        <a
+          href="#!"
+          type="button"
+          data-target="slide-out"
+          className="sidenav-close"
+        >
           <i className="material-icons">arrow_back_ios</i>
         </a>
         <li />
         <div>
           <li>
-            <a data-id="All" onClick={handleClick.bind(this)}>All</a>
+            <a data-id="All" onClick={handleClick.bind(this)}>
+              All
+            </a>
           </li>
         </div>
         <div>
           <li>
-            <a data-id="Men" onClick={handleClick.bind(this)}>Men</a>
+            <a data-id="Men" onClick={handleClick.bind(this)}>
+              Men
+            </a>
           </li>
         </div>
         <div>
           <li>
-            <a data-id="Women" onClick={handleClick.bind(this)}>Women</a>
+            <a data-id="Women" onClick={handleClick.bind(this)}>
+              Women
+            </a>
           </li>
         </div>
         <div>
           <li>
-            <a data-id="Kids" onClick={handleClick.bind(this)}>Kids</a>
+            <a data-id="Kids" onClick={handleClick.bind(this)}>
+              Kids
+            </a>
           </li>
         </div>
       </ul>
       <div />
-      <a href="#!" type="button" data-target="slide-out" className="sidenav-trigger">
+      <a
+        href="#!"
+        type="button"
+        data-target="slide-out"
+        className="sidenav-trigger"
+      >
         <i className="material-icons">arrow_forward_ios</i>
       </a>
     </div>
