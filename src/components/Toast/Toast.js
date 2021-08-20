@@ -1,4 +1,3 @@
-import React from 'react';
 import { toast } from 'react-toastify';
 
 toast.configure();
@@ -18,17 +17,15 @@ function notify(mode, message) {
       pauseOnHover: false,
       closeOnClick: true
     });
-  }
-  if (mode === 'error') {
-    toast.error(<div>{message}</div>, {
+  } else if (mode === 'error') {
+    toast.error(message, {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 8000,
       hideProgressBar: true,
       pauseOnHover: false,
       closeOnClick: true
     });
-  }
-  if (mode === 'info') {
+  } else if (mode === 'info') {
     toast.info(message, {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 8000,
@@ -36,8 +33,7 @@ function notify(mode, message) {
       pauseOnHover: false,
       closeOnClick: true
     });
-  }
-  if (mode === 'warning') {
+  } else if (mode === 'warning') {
     toast.warn(message, {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 8000,

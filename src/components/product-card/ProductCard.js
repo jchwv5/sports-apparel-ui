@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import OutsideClickHandler from 'react-outside-click-handler';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -16,6 +17,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import notify from '../Toast/Toast';
 import Constants from '../../utils/constants';
 import { useCart } from '../checkout-page/CartContext';
+// eslint-disable-next-line import/no-cycle
+import Modal from '../Modal/Modal';
 
 /**
  * @name useStyles
@@ -53,68 +56,73 @@ const useStyles = makeStyles((theme) => ({
  */
 const ProductCard = ({ product }) => {
   const classes = useStyles();
-
   const { dispatch } = useCart();
 
   const onAdd = () => {
-    dispatch(
-      {
-        type: 'add',
-        product: {
-          id: product.id,
-          title: product.name,
-          price: product.price,
-          description: product.description,
-          quantity: 1
-        }
+    dispatch({
+      type: 'add',
+      product: {
+        id: product.id,
+        title: product.name,
+        price: product.price,
+        description: product.description,
+        quantity: 1
       }
-    );
-    notify('success', 'Item added');
+    });
+    notify('success', 'Item added to cart!');
   };
+  const [show, setShow] = useState(false);
 
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        avatar={(
-          <Avatar aria-label="demographics" className={classes.avatar}>
-            {product.demographic.charAt(0)}
-          </Avatar>
+    <>
+      <OutsideClickHandler onOutsideClick={() => setShow(false)}>
+        {show && <Modal onClose={() => setShow(false)} item={product} />}
+      </OutsideClickHandler>
+      <Card className={classes.root}>
+        <CardHeader
+          onClick={() => setShow(true)}
+          avatar={(
+            <Avatar aria-label="demographics" className={classes.avatar}>
+              {product.demographic.charAt(0)}
+            </Avatar>
         )}
-        action={(
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
+          action={(
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+        )}
+          title={product.name}
+          subheader={`${product.demographic} ${product.category} ${product.type}`}
+        />
+        <CardMedia
+          className={classes.media}
+          image={Constants.PLACEHOLDER_IMAGE}
+          title="placeholder"
+          onClick={() => setShow(true)}
+        />
+        <CardContent onClick={() => setShow(true)}>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {product.description}
+          </Typography>
+          <br />
+          <Typography variant="body2" color="textSecondary" component="p">
+            Price: $
+            {product.price}
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing>
+          <IconButton aria-label="add to favorites">
+            <FavoriteIcon />
           </IconButton>
-        )}
-        title={product.name}
-        subheader={`${product.demographic} ${product.category} ${product.type}`}
-      />
-      <CardMedia
-        className={classes.media}
-        image={Constants.PLACEHOLDER_IMAGE}
-        title="placeholder"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {product.description}
-        </Typography>
-        <br />
-        <Typography variant="body2" color="textSecondary" component="p">
-          Price: $
-          {product.price}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <IconButton aria-label="add to shopping cart" onClick={onAdd}>
-          <AddShoppingCartIcon />
-        </IconButton>
-      </CardActions>
-    </Card>
+          <IconButton aria-label="share">
+            <ShareIcon />
+          </IconButton>
+          <IconButton aria-label="add to shopping cart" onClick={onAdd}>
+            <AddShoppingCartIcon />
+          </IconButton>
+        </CardActions>
+      </Card>
+    </>
   );
 };
 
