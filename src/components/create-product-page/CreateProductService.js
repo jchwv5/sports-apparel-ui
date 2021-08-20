@@ -48,10 +48,19 @@ async function fetchTypes(setTypes, setApiError) {
 
 /**
  *
- * @name createProduct
- * @description sends a request to create a new product
- * @param {*} payload product to be saved
- * @returns product creation confirmation response
+ * @name productPost
+ * @description Utilizes HttpHelper to make a POST request to an API
+ * @param {String} name - product name
+ * @param {String} description - product description
+ * @param {String} demographic - product deomographic
+ * @param {String} category - product category
+ * @param {String} type - product type
+ * @param {String} brand - product brand
+ * @param {String} material - product material
+ * @param {Number} price - product price
+ * @param {Boolean} active - active status of product
+ * @param {Function} setApiError - useState function to set apiError if error occurs
+ * @returns response if POST is successfull with a toast, or error toast if failure
  */
 async function productPost(name,
   description,

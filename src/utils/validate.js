@@ -1,5 +1,14 @@
 import notify from '../components/Toast/Toast';
 
+/**
+ *
+ * @name validate
+ * @description validates required fields of a form
+ * @param {String} type - field type (text, currency, drop-down)
+ * @param {String} name - to be displayed in the error toast
+ * @param {String} data - value of the form field
+ * @returns boolean if the field is valid
+ */
 const validate = (type, name, data) => {
   let dataIsValid = true;
   switch (type) {
