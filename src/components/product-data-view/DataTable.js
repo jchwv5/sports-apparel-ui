@@ -160,7 +160,7 @@ const DataTable = () => {
         <DataGrid rows={products} columns={columns} rowsPerPageOptions={[20]} />
       </div>
       <div className={classes.root}>
-        <Button href="/maintenace/create" color="primary" variant="contained">
+        <Button href="/maintenance/create" color="primary" variant="contained">
           Create
         </Button>
       </div>
