@@ -20,6 +20,7 @@ async function fetchCategories(setCategories, setApiError) {
     })
     .then(setCategories)
     .catch(() => {
+      notify('error', 'A database connection error occured');
       setApiError(true);
     });
 }

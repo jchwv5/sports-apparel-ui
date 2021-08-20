@@ -5,6 +5,7 @@ import FormItem from '../form/FormItem';
 import FormItemDropdown from '../form/FormItemDropdown';
 import CreateProductService from './CreateProductService';
 import validate from '../../utils/validate';
+import Constants from '../../utils/constants';
 
 const Create = () => {
   const history = useHistory();
@@ -97,6 +98,10 @@ const Create = () => {
     return priceAsNumber;
   }
 
+  function handleRedirect() {
+    history.push('/maintenance');
+  }
+
   /**
    *
    * @name handleSubmit
@@ -116,7 +121,8 @@ const Create = () => {
       price,
       active,
       setApiError
-    ).then(() => history.push('/'));
+    );
+    handleRedirect();
   }
 
   /**
@@ -159,92 +165,98 @@ const Create = () => {
   }
 
   return (
-    <div className={styles.container}>
-      { apiError && <div>{ apiError }</div>}
-      <h2>Create new item:</h2>
-      <FormItem
-        placeholder="Enter Product Name"
-        type="text"
-        id="name"
-        label="Name"
-        onChange={onNameChange}
-        value={name.value}
-      />
+    <div>
+      {apiError && <p className={styles.errMsg} data-testid="errMsg">{Constants.API_ERROR}</p>}
+      {!apiError && (
+      <div className={styles.container}>
+        <>
+          <h2>Create new item:</h2>
+          <FormItem
+            placeholder="Enter Product Name"
+            type="text"
+            id="name"
+            label="Name"
+            onChange={onNameChange}
+            value={name.value}
+          />
 
-      <FormItem
-        placeholder="Enter Product Description"
-        type="textarea"
-        id="description"
-        label="Description"
-        onChange={onDescriptionChange}
-        value={description.value}
-      />
+          <FormItem
+            placeholder="Enter Product Description"
+            type="textarea"
+            id="description"
+            label="Description"
+            onChange={onDescriptionChange}
+            value={description.value}
+          />
 
-      <FormItemDropdown
-        id="productDemographic"
-        label="Demographic"
-        onChange={onDemographicChange}
-        placeholder="[Select Product Demographic]"
-        value={demographic.value}
-        options={demographics}
-      />
+          <FormItemDropdown
+            id="productDemographic"
+            label="Demographic"
+            onChange={onDemographicChange}
+            placeholder="[Select Product Demographic]"
+            value={demographic.value}
+            options={demographics}
+          />
 
-      <FormItemDropdown
-        id="productCategory"
-        label="Category"
-        onChange={onCategoryChange}
-        placeholder="[Select Product Category]"
-        value={category.value}
-        options={categories}
-      />
+          <FormItemDropdown
+            id="productCategory"
+            label="Category"
+            onChange={onCategoryChange}
+            placeholder="[Select Product Category]"
+            value={category.value}
+            options={categories}
+          />
 
-      <FormItemDropdown
-        id="type"
-        label="Type"
-        onChange={onTypeChange}
-        placeholder="[Select Product Type]"
-        value={type.value}
-        options={types}
-      />
+          <FormItemDropdown
+            id="type"
+            label="Type"
+            onChange={onTypeChange}
+            placeholder="[Select Product Type]"
+            value={type.value}
+            options={types}
+          />
 
-      <FormItem
-        placeholder="Enter Product Brand"
-        type="text"
-        id="brand"
-        label="Brand"
-        onChange={onBrandChange}
-        value={brand.value}
-      />
+          <FormItem
+            placeholder="Enter Product Brand"
+            type="text"
+            id="brand"
+            label="Brand"
+            onChange={onBrandChange}
+            value={brand.value}
+          />
 
-      <FormItem
-        placeholder="Enter Product Material"
-        type="text"
-        id="material"
-        label="Material"
-        onChange={onMaterialChange}
-        value={material.value}
-      />
+          <FormItem
+            placeholder="Enter Product Material"
+            type="text"
+            id="material"
+            label="Material"
+            onChange={onMaterialChange}
+            value={material.value}
+          />
 
-      <FormItem
-        placeholder="Enter Product Price"
-        type="text"
-        id="price"
-        label="Price"
-        onChange={onPriceChange}
-        value={priceAsString.value}
-      />
+          <FormItem
+            placeholder="Enter Product Price"
+            type="text"
+            id="price"
+            label="Price"
+            onChange={onPriceChange}
+            value={priceAsString.value}
+          />
 
-      <FormItemDropdown
-        id="activeStatus"
-        label="Active Status"
-        onChange={onActiveStatusChange}
-        placeholder="[Choose Product Status]"
-        value={activeStatus.value}
-        options={activeChoices}
-      />
-      <button onClick={validateForm} type="button" className={styles.createButton}>
-        Create Product
-      </button>
+          <FormItemDropdown
+            id="activeStatus"
+            label="Active Status"
+            onChange={onActiveStatusChange}
+            placeholder="[Choose Product Status]"
+            value={activeStatus.value}
+            options={activeChoices}
+          />
+          <button onClick={validateForm} type="button" className={styles.createButton}>
+            Create Product
+          </button>
+        </>
+      </div>
+      )}
     </div>
   );
 };
