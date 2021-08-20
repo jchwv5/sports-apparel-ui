@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -72,23 +72,11 @@ const ProductCard = ({ product }) => {
     notify('success', 'Item added to cart!');
   };
   const [show, setShow] = useState(false);
-  const wrapperRef = useRef(null);
 
-  const handleClickOutside = (event) => {
-    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-      setShow(false);
-    }
-  };
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside, false);
-    return () => {
-      document.removeEventListener('click', handleClickOutside, false);
-    };
-  }, []);
   return (
     <>
       <OutsideClickHandler onOutsideClick={() => setShow(false)}>
-        {show && <Modal onClose={() => setShow(false)} item={product} ref={wrapperRef} />}
+        {show && <Modal onClose={() => setShow(false)} item={product} />}
       </OutsideClickHandler>
       <Card className={classes.root}>
         <CardHeader
