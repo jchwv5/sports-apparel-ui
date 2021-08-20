@@ -7,7 +7,7 @@ import styles from './FormItem.module.css';
  * @return component
  */
 const FormItemDropdown = ({
-  onChange, value, id, label, options
+  onChange, placeholder, value, id, label, options
 }) => (
 
   <div>
@@ -20,6 +20,12 @@ const FormItemDropdown = ({
           onBlur={onChange}
           value={value}
         >
+          <option
+            value={placeholder}
+            key={placeholder}
+          >
+            {placeholder}
+          </option>
           {options.map((optionText) => (
             <option
               value={optionText}

@@ -1,0 +1,33 @@
+.container {
+  display: block;
+  grid-template-columns: 1fr;
+  gap: 1em;
+  margin-bottom: 3em;
+  margin-left: 1.5em;
+  margin-right: 1em;
+  max-width: 800px;
+}
+
+.inputVals {
+	padding: 0em 2em;
+  margin-left: 10px;
+	margin-bottom: 5px;
+}
+
+.errMsg {
+  color: red;
+  font-size: 14px;
+  margin: 0px 2px 4px 4px;
+}
+
+.createButton {
+  background: #666666;
+  border-radius: 20px;
+  color: #EEEEEE;
+  cursor: pointer;
+  font-weight: 600px;
+  height: 3em;
+  justify-self: center;
+  margin-top: 1em;
+  width: 25%;
+}

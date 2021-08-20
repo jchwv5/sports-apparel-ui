@@ -60,6 +60,7 @@ const DeliveryAddress = ({ onChange, deliveryData }) => {
         id="state"
         label="State"
         onChange={onChange}
+        placeholder="[Select State]"
         value={deliveryData.state}
         options={usStates}
       />
