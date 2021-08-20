@@ -1,11 +1,7 @@
 .deliveryAddress {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1em
-}
-
-select #state {
-  display: inline-block !important;
+  gap: 1em;
 }
 
 .label {

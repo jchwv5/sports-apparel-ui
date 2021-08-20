@@ -10,8 +10,19 @@
   margin: 2em 0;
 }
 
+[type='checkbox']:not(:checked),
+[type='checkbox']:checked {
+  position: unset;
+  opacity: unset;
+  pointer-events: unset;
+}
+
 .delivery {
   grid-area: delivery;
+}
+
+select {
+  display: inline;
 }
 
 .order {
