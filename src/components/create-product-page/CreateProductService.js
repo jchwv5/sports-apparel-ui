@@ -1,5 +1,6 @@
 import HttpHelper from '../../utils/HttpHelper';
 import Constants from '../../utils/constants';
+import notify from '../Toast/Toast';
 
 /**
  *
@@ -75,11 +76,13 @@ async function productPost(name,
   })
     .then((response) => {
       if (response.ok) {
+        notify('success', 'Product created successfully');
         return response.json();
       }
       throw new Error(Constants.API_ERROR);
     })
     .catch(() => {
+      notify('error', 'A database connection error occured');
       setApiError(true);
     });
 }

@@ -18,6 +18,12 @@ const validate = (type, name, data) => {
         notify('error', `${name} should be in dollars and cents`);
       }
       break;
+    case 'drop-down':
+      if (!data || data.charAt(0) === '[') {
+        notify('error', `Please select a ${name} from the drop down`);
+        dataIsValid = false;
+      }
+      break;
     default:
       dataIsValid = false;
       notify('error', `No data provided for ${name} field`);

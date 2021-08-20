@@ -4,7 +4,6 @@ import FormItem from '../form/FormItem';
 import FormItemDropdown from '../form/FormItemDropdown';
 import CreateProductService from './CreateProductService';
 import validate from '../../utils/validate';
-import notify from '../Toast/Toast';
 
 const Create = () => {
   const [apiError, setApiError] = useState(false);
@@ -28,10 +27,7 @@ const Create = () => {
   const [categories, setCategories] = React.useState([]);
   useEffect(() => {
     CreateProductService.fetchCategories(setCategories, setApiError);
-    if (apiError) {
-      notify('error', 'Problem fetching Categories');
-    }
-  }, [apiError]);
+  }, []);
   const [category, setCategory] = React.useState('');
   const onCategoryChange = (e) => {
     setCategory(e.target.value);
@@ -40,10 +36,7 @@ const Create = () => {
   const [types, setTypes] = React.useState([]);
   useEffect(() => {
     CreateProductService.fetchTypes(setTypes, setApiError);
-    if (apiError) {
-      notify('error', 'Problem fetching Types');
-    }
-  }, [apiError]);
+  }, []);
   const [type, setType] = React.useState('');
   const onTypeChange = (e) => {
     setType(e.target.value);
@@ -64,20 +57,36 @@ const Create = () => {
     setPrice(e.target.value);
   };
 
-  const [activeStatus, setActiveStatus] = React.useState('Active');
+  const activeChoices = ['Active', 'Inactive'];
+  const [activeStatus, setActiveStatus] = React.useState('');
   const onActiveStatusChange = (e) => {
     setActiveStatus(e.target.value);
   };
 
-  const productActive = ['Active', 'Inactive'];
+  /**
+   *
+   * @name statusToBoolean
+   * @description converts user selected drop down options
+   * @param {String} isActive - string to be converted to boolean
+   * @returns true if 'Active' - false if 'Inactive' - the original string if something else
+   */
+  function statusToBoolean(isActive) {
+    let status = isActive;
+    if (isActive === 'Active') {
+      status = true;
+    } else if (isActive === 'Inactive') {
+      status = false;
+    }
+    return status;
+  }
 
+  /**
+   *
+   * @name handleSubmit
+   * @description sends request to save valid form data, then displays status toast
+   */
   function handleSubmit() {
-    if (activeStatus === 'Active') {
-      setActiveStatus(true);
-    }
-    if (activeStatus === 'Inactive') {
-      setActiveStatus(false);
-    }
+    const active = statusToBoolean(activeStatus);
     CreateProductService.productPost(
       name,
       description,
@@ -87,22 +96,31 @@ const Create = () => {
       brand,
       material,
       price,
-      activeStatus,
+      active,
       setApiError
     );
-    if (apiError) {
-      notify('error', 'Server connection error');
-    } else {
-      notify('success', 'Product created successfully');
-    }
   }
 
+  /**
+   *
+   * @name validateForm
+   * @description validates all form fields then submits data if valid
+   */
   function validateForm() {
     let formIsValid = true;
     if (!validate('text', 'Name', name)) {
       formIsValid = false;
     }
     if (!validate('text', 'Description', description)) {
+      formIsValid = false;
+    }
+    if (!validate('drop-down', 'demographic', demographic)) {
+      formIsValid = false;
+    }
+    if (!validate('drop-down', 'category', category)) {
+      formIsValid = false;
+    }
+    if (!validate('drop-down', 'type', type)) {
       formIsValid = false;
     }
     if (!validate('text', 'Brand', brand)) {
@@ -114,6 +132,9 @@ const Create = () => {
     if (!validate('currency', 'Price', price)) {
       formIsValid = false;
     }
+    if (!validate('drop-down', 'status', activeStatus)) {
+      formIsValid = false;
+    }
     if (formIsValid) {
       handleSubmit();
     }
@@ -121,9 +142,10 @@ const Create = () => {
 
   return (
     <div className={styles.container}>
+      { apiError && <div>{ apiError }</div>}
       <h2>Create new item:</h2>
       <FormItem
-        placeholder="Prorduct Name"
+        placeholder="Enter Product Name"
         type="text"
         id="name"
         label="Name"
@@ -132,7 +154,7 @@ const Create = () => {
       />
 
       <FormItem
-        placeholder="Product Description"
+        placeholder="Enter Product Description"
         type="textarea"
         id="description"
         label="Description"
@@ -144,7 +166,7 @@ const Create = () => {
         id="productDemographic"
         label="Demographic"
         onChange={onDemographicChange}
-        placeholder="[Select Demographic]"
+        placeholder="[Select Product Demographic]"
         value={demographic.value}
         options={demographics}
       />
@@ -153,7 +175,7 @@ const Create = () => {
         id="productCategory"
         label="Category"
         onChange={onCategoryChange}
-        placeholder="[Select Category]"
+        placeholder="[Select Product Category]"
         value={category.value}
         options={categories}
       />
@@ -162,13 +184,13 @@ const Create = () => {
         id="type"
         label="Type"
         onChange={onTypeChange}
-        placeholder="[Select Type]"
+        placeholder="[Select Product Type]"
         value={type.value}
         options={types}
       />
 
       <FormItem
-        placeholder="Product Brand"
+        placeholder="Enter Product Brand"
         type="text"
         id="brand"
         label="Brand"
@@ -177,7 +199,7 @@ const Create = () => {
       />
 
       <FormItem
-        placeholder="Product Material"
+        placeholder="Enter Product Material"
         type="text"
         id="material"
         label="Material"
@@ -186,7 +208,7 @@ const Create = () => {
       />
 
       <FormItem
-        placeholder="Product Price"
+        placeholder="Enter Product Price"
         type="text"
         id="price"
         label="Price"
@@ -196,10 +218,11 @@ const Create = () => {
 
       <FormItemDropdown
         id="activeStatus"
-        label="Active"
+        label="Active Status"
         onChange={onActiveStatusChange}
+        placeholder="[Choose Product Status]"
         value={activeStatus.value}
-        options={productActive}
+        options={activeChoices}
       />
       <button onClick={validateForm} type="button" className={styles.createButton}>
         Create Product
