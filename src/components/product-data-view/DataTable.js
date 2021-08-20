@@ -2,12 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
-import { Grid } from '@material-ui/core';
 import styles from '../product-page/ProductPage.module.css';
 import Constants from '../../utils/constants';
 import fetchProducts from './DataViewService';
-import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles({
   root: {
@@ -15,7 +12,6 @@ const useStyles = makeStyles({
       backgroundColor: '#add8e6',
       fontWeight: 'bold',
       fontSize: '20px'
-      // padding: '1000px'
     },
     '& .MuiDataGrid-root .MuiDataGrid-cell': {
       fontSize: '17px'
@@ -25,7 +21,6 @@ const useStyles = makeStyles({
       position: 'absolute',
       bottom: '1px',
       left: '50%'
-      // display: 'flex'
     }
   }
 });
