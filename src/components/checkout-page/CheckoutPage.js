@@ -76,47 +76,45 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="checkoutBody">
-      <div className={styles.checkoutContainer}>
-        <div className={`${styles.step} ${styles.order}`}>
-          <h3 className={styles.title}>1. Review Order</h3>
-          <ReviewOrderWidget />
-        </div>
-        <div className={`${styles.step} ${styles.delivery}`}>
-          <h3 className={styles.title}>2. Delivery Address</h3>
-          <DeliveryAddress
-            onChange={onDeliveryChange}
-            deliveryData={deliveryData}
-          />
-          <label htmlFor="useSame" className={styles.sameAddressText}>
-            <div className={styles.useSameAddress}>
-              <input
-                id="useSame"
-                onChange={handleCheck}
-                type="checkbox"
-                value={checked}
-              />
-            </div>
-            Same Billing Address
-          </label>
-        </div>
-        <div className={`${styles.step} ${styles.payment}`}>
-          <h3 className={styles.title}>3. Billing Details</h3>
-          <BillingDetails
-            onChange={onBillingChange}
-            billingData={billingData}
-            useShippingForBilling={checked}
-          />
-        </div>
-        <div className={styles.payNow}>
-          <button
-            onClick={handlePay}
-            type="button"
-            className={styles.payButton}
-          >
-            Checkout
-          </button>
-        </div>
+    <div className={styles.checkoutContainer}>
+      <div className={`${styles.step} ${styles.order}`}>
+        <h3 className={styles.title}>1. Review Order</h3>
+        <ReviewOrderWidget />
+      </div>
+      <div className={`${styles.step} ${styles.delivery}`}>
+        <h3 className={styles.title}>2. Delivery Address</h3>
+        <DeliveryAddress
+          onChange={onDeliveryChange}
+          deliveryData={deliveryData}
+        />
+        <label htmlFor="useSame" className={styles.sameAddressText}>
+          <div className={styles.useSameAddress}>
+            <input
+              id="useSame"
+              onChange={handleCheck}
+              type="checkbox"
+              value={checked}
+            />
+          </div>
+          Same Billing Address
+        </label>
+      </div>
+      <div className={`${styles.step} ${styles.payment}`}>
+        <h3 className={styles.title}>3. Billing Details</h3>
+        <BillingDetails
+          onChange={onBillingChange}
+          billingData={billingData}
+          useShippingForBilling={checked}
+        />
+      </div>
+      <div className={styles.payNow}>
+        <button
+          onClick={handlePay}
+          type="button"
+          className={styles.payButton}
+        >
+          Checkout
+        </button>
       </div>
     </div>
   );

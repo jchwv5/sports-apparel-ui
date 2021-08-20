@@ -4,6 +4,10 @@
   gap: 1em
 }
 
+select #state {
+  display: inline-block !important;
+}
+
 .label {
   font-weight: 700;
   color: #666666;
