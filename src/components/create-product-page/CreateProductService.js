@@ -73,8 +73,8 @@ async function productPost(name,
     price,
     activeStatus
   })
-    .then((response) => {
-      notify('success', response.message);
+    .then(() => {
+      notify('success', 'posted successfully');
     })
     .catch((response) => {
       notify('error', response.message);
