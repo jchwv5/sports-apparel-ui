@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styles from './CreateProduct.module.css';
 import FormItem from '../form/FormItem';
 import FormItemDropdown from '../form/FormItemDropdown';
@@ -6,6 +7,7 @@ import CreateProductService from './CreateProductService';
 import validate from '../../utils/validate';
 
 const Create = () => {
+  const history = useHistory();
   const [apiError, setApiError] = useState(false);
 
   const [name, setName] = React.useState('');
@@ -114,7 +116,7 @@ const Create = () => {
       price,
       active,
       setApiError
-    );
+    ).then(() => history.push('/'));
   }
 
   /**
