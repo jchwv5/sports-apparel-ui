@@ -52,9 +52,9 @@ const Create = () => {
     setMaterial(e.target.value);
   };
 
-  const [price, setPrice] = React.useState('');
+  const [priceAsString, setPriceAsString] = React.useState('');
   const onPriceChange = (e) => {
-    setPrice(e.target.value);
+    setPriceAsString(e.target.value);
   };
 
   const activeChoices = ['Active', 'Inactive'];
@@ -67,17 +67,32 @@ const Create = () => {
    *
    * @name statusToBoolean
    * @description converts user selected drop down options
-   * @param {String} isActive - string to be converted to boolean
+   * @param {String} statusAsString - string to be converted to boolean
    * @returns true if 'Active' - false if 'Inactive' - the original string if something else
    */
-  function statusToBoolean(isActive) {
-    let status = isActive;
-    if (isActive === 'Active') {
-      status = true;
-    } else if (isActive === 'Inactive') {
-      status = false;
+  function statusToBoolean(statusAsString) {
+    let statusAsBoolean = statusAsString;
+    if (statusAsString === 'Active') {
+      statusAsBoolean = true;
+    } else if (statusAsString === 'Inactive') {
+      statusAsBoolean = false;
     }
-    return status;
+    return statusAsBoolean;
+  }
+
+  /**
+   *
+   * @name removeDollarSign
+   * @description takes in a string and removes leading dollar signs $$
+   * @param {String} priceString string containing dollar signs and a price
+   * @returns price without dollar signs as a number
+   */
+  function removeDollarSign(priceString) {
+    let priceAsNumber = priceString;
+    while (priceAsNumber.charAt(0) === '$') {
+      priceAsNumber = priceAsNumber.substring(1);
+    }
+    return priceAsNumber;
   }
 
   /**
@@ -87,6 +102,7 @@ const Create = () => {
    */
   function handleSubmit() {
     const active = statusToBoolean(activeStatus);
+    const price = removeDollarSign(priceAsString);
     CreateProductService.productPost(
       name,
       description,
@@ -129,7 +145,7 @@ const Create = () => {
     if (!validate('text', 'Material', material)) {
       formIsValid = false;
     }
-    if (!validate('currency', 'Price', price)) {
+    if (!validate('currency', 'Price', priceAsString)) {
       formIsValid = false;
     }
     if (!validate('drop-down', 'status', activeStatus)) {
@@ -213,7 +229,7 @@ const Create = () => {
         id="price"
         label="Price"
         onChange={onPriceChange}
-        value={price.value}
+        value={priceAsString.value}
       />
 
       <FormItemDropdown
