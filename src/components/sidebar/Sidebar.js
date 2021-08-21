@@ -40,12 +40,7 @@ const Sidebar = (props) => {
   return (
     <div className={styles}>
       <ul id="slide-out" className="sidenav invisible-top">
-        <a
-          href="#!"
-          type="button"
-          data-target="slide-out"
-          className="sidenav-close"
-        >
+        <a type="button" data-target="slide-out" className="sidenav-close">
           <i className="material-icons">arrow_back_ios</i>
         </a>
         <li />
