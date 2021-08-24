@@ -1,5 +1,5 @@
 .checkoutContainer {
-  display:grid;
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas:
     "order    delivery    payment"
@@ -10,8 +10,19 @@
   margin: 2em 0;
 }
 
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: unset;
+  opacity: unset;
+  pointer-events: unset;
+}
+
 .delivery {
   grid-area: delivery;
+}
+
+select {
+  display: inline;
 }
 
 .order {
@@ -24,7 +35,7 @@
 
 .payNow {
   grid-area: payNow;
-  display:grid;
+  display: grid;
 }
 
 .payButton {
@@ -41,7 +52,7 @@
 .step {
   background: #fff;
   border-radius: 2px;
-  box-shadow: .2em .2em .2em rgba(0,0,0,0.23);
+  box-shadow: .2em .2em .2em rgba(0, 0, 0, 0.23);
   padding: 1em;
 }
 

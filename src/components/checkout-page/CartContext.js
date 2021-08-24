@@ -11,6 +11,13 @@ function cartReducer(state, action) {
       };
     }
     case 'add': {
+      const itemInCart = state.products.find((product) => product.title === action.product.title);
+      if (itemInCart) {
+        itemInCart.quantity += 1;
+        return {
+          ...state
+        };
+      }
       return {
         ...state,
         products: [...state.products, action.product]
@@ -24,22 +31,7 @@ function cartReducer(state, action) {
 
 function CartProvider({ children }) {
   const initialProducts = {
-    products: [
-      {
-        id: null,
-        title: 'Sport Shoes',
-        price: 49.99,
-        description: 'Sporty shoes for sporty people',
-        quantity: 2
-      },
-      {
-        id: null,
-        title: 'Sport Shorts',
-        price: 39.99,
-        description: 'Sporty shorts for sporty people',
-        quantity: 5
-      }
-    ],
+    products: [],
     setProducts: () => { }
   };
   const [state, dispatch] = React.useReducer(cartReducer, initialProducts);

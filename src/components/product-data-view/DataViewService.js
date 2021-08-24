@@ -1,5 +1,5 @@
 import HttpHelper from '../../utils/HttpHelper';
-import Constants from '../../utils/constants';
+import constants from '../../utils/constants';
 
 /**
  *
@@ -9,14 +9,13 @@ import Constants from '../../utils/constants';
  * @param {*} setApiError sets error if response other than 200 is returned
  * @returns sets state for products if 200 response, else sets state for apiError
  */
-
 export default async function fetchProducts(setProducts, setApiError) {
-  await HttpHelper(Constants.ACTIVE_PRODUCTS_ENDPOINT, 'GET')
+  await HttpHelper(constants.ALL_PRODUCTS_ENDPOINT, 'GET')
     .then((response) => {
       if (response.ok) {
         return response.json();
       }
-      throw new Error(Constants.API_ERROR);
+      throw new Error(constants.API_ERROR);
     })
     .then(setProducts)
     .catch(() => {

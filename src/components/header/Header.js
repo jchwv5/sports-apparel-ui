@@ -1,8 +1,15 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
+import { Badge } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import GoogleLogin, { GoogleLogout } from 'react-google-login';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import loginUser from './HeaderService';
 import constants from '../../utils/constants';
+import { useCart } from '../checkout-page/CartContext';
+import logo from '../../assets/logo.png';
+// import cartLogo from '../../assets/cartLogo.png';
+import './Header.css';
 
 /**
  * @name Header
@@ -13,6 +20,9 @@ const Header = () => {
   const [user, setUser] = useState('');
   const [googleError, setGoogleError] = useState('');
   const [apiError, setApiError] = useState(false);
+  const {
+    state: { products }
+  } = useCart();
 
   /**
    * @name handleGoogleLoginSuccess
@@ -35,7 +45,9 @@ const Header = () => {
    * @description Function to run if google login was unsuccessful
    */
   const handleGoogleLoginFailure = () => {
-    setGoogleError('There was a problem logging in with Google. Please wait and try again later.');
+    setGoogleError(
+      'There was a problem logging in with Google. Please wait and try again later.'
+    );
   };
 
   /**
@@ -52,33 +64,55 @@ const Header = () => {
    * @description Function to run if google logout was unsuccessful
    */
   const handleGoogleLogoutFailure = () => {
-    setGoogleError('There was a problem logging out with Google. Please wait and try again later.');
+    setGoogleError(
+      'There was a problem logging out with Google. Please wait and try again later.'
+    );
   };
 
   return (
-    <div>
-      <NavLink to="/home">Home</NavLink>
-      <NavLink to="/checkout">Cart</NavLink>
-      {user && <span>{user.firstName}</span>}
-      {user && <span>{user.lastName}</span>}
-      {googleError && <span>{googleError}</span>}
-      {apiError && <span>Api Error</span>}
-      {!user ? (
-        <GoogleLogin
-          clientId={constants.GOOGLE_CLIENT_ID}
-          buttonText="Login"
-          onSuccess={handleGoogleLoginSuccess}
-          onFailure={handleGoogleLoginFailure}
-          cookiePolicy="single_host_origin"
-        />
-      ) : (
-        <GoogleLogout
-          clientId={constants.GOOGLE_CLIENT_ID}
-          buttonText="Logout"
-          onLogoutSuccess={handleGoogleLogoutSuccess}
-          onSuccess={handleGoogleLogoutFailure}
-        />
-      )}
+    <div className="header">
+      <ul>
+        <li>
+          <NavLink to="/">
+            <img className="logo" src={logo} alt="" />
+          </NavLink>
+        </li>
+        <li id="cart">
+          <NavLink to="/checkout">
+            <Badge
+              className="root"
+              badgeContent={products.length}
+              color="primary"
+              overlap="circular"
+            >
+              {/* <img className="cart" src={cartLogo} alt="" /> */}
+              <ShoppingCartIcon style={{ fontSize: 60, color: 'black' }} />
+            </Badge>
+          </NavLink>
+        </li>
+        {user && <span>{user.firstName}</span>}
+        {user && <span>{user.lastName}</span>}
+        {googleError && <span>{googleError}</span>}
+        {apiError && <span>Api Error</span>}
+        <li>
+          {!user ? (
+            <GoogleLogin
+              clientId={constants.GOOGLE_CLIENT_ID}
+              buttonText="Login"
+              onSuccess={handleGoogleLoginSuccess}
+              onFailure={handleGoogleLoginFailure}
+              cookiePolicy="single_host_origin"
+            />
+          ) : (
+            <GoogleLogout
+              clientId={constants.GOOGLE_CLIENT_ID}
+              buttonText="Logout"
+              onLogoutSuccess={handleGoogleLogoutSuccess}
+              onSuccess={handleGoogleLogoutFailure}
+            />
+          )}
+        </li>
+      </ul>
     </div>
   );
 };
