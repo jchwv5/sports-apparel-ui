@@ -67,7 +67,8 @@ const ProductCard = ({ product }) => {
         title: product.name,
         price: product.price,
         description: product.description,
-        quantity: 1
+        quantity: 1,
+        image: product.imageSrc
       }
     });
     notify('success', 'Item added to cart!');
