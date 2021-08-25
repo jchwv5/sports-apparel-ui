@@ -25,17 +25,14 @@
     flex-direction: column;
     font-family: inherit;
     font-size: 20px;
-    justify-content:flex-start;
+    justify-content: flex-start;
     margin: auto;
-    
-    
-    
-    
+    padding: 16px;
+    max-height: 70%;
 }
 
 .closeDiv{
     text-align: right; 
-    margin: auto;
    
  }
  .closeButton {
@@ -57,7 +54,6 @@
     width: 40px;
     border-radius: 50%;
     display: inline-block;
-
  }
 
  .fill {
@@ -76,8 +72,6 @@
     min-width: 100%;
     min-height: 100%;
     text-align: center;
-    margin: auto;
-    flex: auto;
 }
 
 .grid-container {
@@ -86,20 +80,16 @@
 
 .modal {
     background-color:#eeeeee;
-    border: 1px solid gray;
+    border: 1px solid grey;
     border-radius: 4px;
-    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 10px 5px 10px 5px rgba(0, 0, 0, 0.2);
     height: auto;
     left: 50%;
     position: fixed;
     top: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1000;
     width: auto;
-    max-height: 90%;
-    display: flex;
-    flex-direction: column;
-    
+    z-index: 1000;
 }
 
 .nameText {
