@@ -25,9 +25,15 @@ const SidebarFilter = () => {
           <div className="collapsible-header">
             Price
           </div>
+          <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+        </li>
+        <li>
           <div className="collapsible-header">
             Color
           </div>
+          <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+        </li>
+        <li>
           <div className="collapsible-header">
             Material
           </div>
