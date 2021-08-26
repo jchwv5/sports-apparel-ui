@@ -36,7 +36,7 @@ span{
     justify-content: flex-start;
     margin: auto;
     padding: 16px;
-    max-height: 45%;
+    max-height: 70%;
 }
 
 .closeDiv{
@@ -91,7 +91,7 @@ span{
     border: 1px solid grey;
     border-radius: 4px;
     box-shadow: 10px 5px 10px 5px rgba(0, 0, 0, 0.2);
-    height: inherit;
+    height: auto;
     left: 50%;
     position: fixed;
     top: 50%;
