@@ -11,22 +11,25 @@ const SidebarFilter = () => {
       <ul className="collapsible">
         <li>
           <div className="collapsible-header">
-            <i className="material-icons">filter_drama</i>
-            First
+            Brand
           </div>
           <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
         </li>
         <li>
           <div className="collapsible-header">
-            <i className="material-icons">place</i>
-            Second
+            Category
           </div>
           <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
         </li>
         <li>
           <div className="collapsible-header">
-            <i className="material-icons">whatshot</i>
-            Third
+            Price
+          </div>
+          <div className="collapsible-header">
+            Color
+          </div>
+          <div className="collapsible-header">
+            Material
           </div>
           <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
         </li>
