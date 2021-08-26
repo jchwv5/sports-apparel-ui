@@ -1,5 +1,3 @@
-import notify from '../components/Toast/Toast';
-
 /**
  *
  * @name validate
@@ -7,39 +5,40 @@ import notify from '../components/Toast/Toast';
  * @param {String} type - field type (text, currency, drop-down)
  * @param {String} name - to be displayed in the error toast
  * @param {String} data - value of the form field
- * @returns boolean if the field is valid
+ * @returns boolean whether the field is valid, error message if any in the form of an array.
  */
 const validate = (type, name, data) => {
   let dataIsValid = true;
+  let errorMsg = '';
   switch (type) {
     case 'text':
-      if (!data) {
+      if (!data || data.trim() === '') {
         dataIsValid = false;
-        notify('error', `${name} field must not be left empty`);
+        errorMsg = `${name} field must not be left empty`;
       }
       break;
     case 'currency':
       if (!data || data.trim() === '') {
         dataIsValid = false;
-        notify('error', `${name} field must not be left empty`);
+        errorMsg = `${name} field must not be left empty`;
       } else if (!((/^\$?\d+(?:\.\d\d)$/).test(data))) {
         dataIsValid = false;
-        notify('error', `${name} should be in dollars and cents`);
+        errorMsg = `${name} should be in dollars and cents`;
       }
       break;
     case 'drop-down':
       if (!data || data.charAt(0) === '[') {
-        notify('error', `Please select a ${name} from the drop down`);
+        errorMsg = `Please select a ${name} from the drop down`;
         dataIsValid = false;
       }
       break;
     default:
       dataIsValid = false;
-      notify('error', `No data provided for ${name} field`);
+      errorMsg = `No data provided for ${name} field`;
       break;
   }
 
-  return (dataIsValid);
+  return [dataIsValid, errorMsg];
 };
 
 export default validate;
