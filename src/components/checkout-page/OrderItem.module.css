@@ -1,3 +1,12 @@
+img {
+  text-align: center;
+  object-fit: contain;
+  height: 160px;
+  overflow: hidden;
+  position: relative;
+  width: 80%;
+}
+
 p {
   color: #666666;
 }
