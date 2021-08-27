@@ -1,12 +1,22 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import M from 'materialize-css/dist/js/materialize.min';
 import styles from './Filter.css';
+import fetchProducts from '../product-page/ProductPageService';
 
 const SidebarFilter = () => {
+  const [products, setProducts] = useState([]);
+  const [apiError, setApiError] = useState(false);
   const elems = document.querySelectorAll('.collapsible');
-  const instances = M.Collapsible.init(elems, {});
+  const instance = M.Collapsible.init(elems, {});
+  useEffect(() => {
+    fetchProducts(setProducts, setApiError);
+  }, []);
+  const getUniqueBrands = (a) => {
+    const uniqueBrands = [...new Set(products.map((data) => data.brand))];
+    console.log(uniqueBrands);
+  };
   return (
     <div className={styles}>
       <ul className="collapsible">
@@ -81,6 +91,7 @@ const SidebarFilter = () => {
           </div>
           <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
         </li>
+        <button type="button" onClick={getUniqueBrands}>CLICK </button>
       </ul>
     </div>
   );
