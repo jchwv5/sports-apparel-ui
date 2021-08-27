@@ -10,13 +10,14 @@ const SidebarFilter = () => {
   const [apiError, setApiError] = useState(false);
   const elems = document.querySelectorAll('.collapsible');
   const instance = M.Collapsible.init(elems, {});
+  const brands = [...new Set(products.map((data) => data.brand))];
+  const categories = [...new Set(products.map((data) => data.category))];
+  const colors = [...new Set(products.map((data) => data.primaryColorCode
+    && data.secondaryColorCode))];
+  const materials = [...new Set(products.map((data) => data.material))];
   useEffect(() => {
     fetchProducts(setProducts, setApiError);
   }, []);
-  const getUniqueBrands = (a) => {
-    const uniqueBrands = [...new Set(products.map((data) => data.brand))];
-    console.log(uniqueBrands);
-  };
   return (
     <div className={styles}>
       <ul className="collapsible">
@@ -25,53 +26,26 @@ const SidebarFilter = () => {
             Brand
           </div>
           <div className="collapsible-body">
-            <li>
-              <input type="checkbox" />
-              Adidas
-            </li>
-            <li>
-              <input type="checkbox" />
-              Champion
-            </li>
-            <li>
-              <input type="checkbox" />
-              Columbia Sportswear
-            </li>
-            <li>
-              <input type="checkbox" />
-              Jordan
-            </li>
-            <li>
-              <input type="checkbox" />
-              New Balance
-            </li>
-            <li>
-              <input type="checkbox" />
-              Nike
-            </li>
-            <li>
-              <input type="checkbox" />
-              Patagonia
-            </li>
-            <li>
-              <input type="checkbox" />
-              Puma
-            </li>
-            <li>
-              <input type="checkbox" />
-              Reebok
-            </li>
-            <li>
-              <input type="checkbox" />
-              Under Armour
-            </li>
+            {brands.map((brand) => (
+              <li data-id={brand}>
+                <input type="checkbox" />
+                {brand}
+              </li>
+            ))}
           </div>
         </li>
         <li>
           <div className="collapsible-header">
             Category
           </div>
-          <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+          <div className="collapsible-body">
+            {categories.map((category) => (
+              <li data-id={category}>
+                <input type="checkbox" />
+                {category}
+              </li>
+            ))}
+          </div>
         </li>
         <li>
           <div className="collapsible-header">
@@ -83,15 +57,30 @@ const SidebarFilter = () => {
           <div className="collapsible-header">
             Color
           </div>
-          <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+          <div className="collapsible-body">
+            {colors.map((color) => (
+              <li data-id={color}>
+                <input type="checkbox" />
+                {color}
+              </li>
+            ))}
+          </div>
         </li>
         <li>
           <div className="collapsible-header">
             Material
           </div>
-          <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+          <div className="collapsible-body">
+            {materials.map((material) => (
+              <li data-id={material}>
+                <input type="checkbox" />
+                {material}
+              </li>
+            ))}
+          </div>
         </li>
-        <button type="button" onClick={getUniqueBrands}>CLICK </button>
+        <button type="button">Submit</button>
+        <button type="button">Clear</button>
       </ul>
     </div>
   );
