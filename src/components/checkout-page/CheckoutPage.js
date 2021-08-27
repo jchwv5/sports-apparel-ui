@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useCart } from './CartContext';
 import styles from './CheckoutPage.module.css';
@@ -6,6 +6,7 @@ import ReviewOrderWidget from './ReviewOrderWidget';
 import DeliveryAddress from './forms/DeliveryAddress';
 import BillingDetails from './forms/BillingDetails';
 import makePurchase from './CheckoutService';
+import Spinner from '../Spinner/Spinner';
 
 /**
  * @name CheckoutPage
@@ -35,7 +36,7 @@ const CheckoutPage = () => {
   const handleCheck = () => {
     setChecked(!checked);
   };
-
+  const [isLoading, setLoading] = useState(false);
   const handlePay = () => {
     const productData = products.map(({ id, quantity }) => ({ id, quantity }));
     const deliveryAddress = {
@@ -109,8 +110,14 @@ const CheckoutPage = () => {
           />
         </div>
         <div className={styles.payNow}>
+          {isLoading ? <Spinner /> : null }
           <button
-            onClick={handlePay}
+            onClick={() => {
+              setLoading(true); setTimeout(() => {
+                setLoading(false);
+                handlePay();
+              }, 5000);
+            }}
             type="button"
             className={styles.payButton}
           >
