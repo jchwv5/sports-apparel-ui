@@ -6,6 +6,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
+import Constants from '../../utils/constants';
 
 const useStyles = makeStyles({
   underline: {
@@ -24,6 +26,7 @@ const useStyles = makeStyles({
 
 const PromoDialog = (props) => {
   const classes = useStyles();
+  const history = useHistory();
   const { handleClose, open } = props;
   const [title, setTitle] = useState('');
   const [code, setCode] = useState('');
@@ -49,14 +52,24 @@ const PromoDialog = (props) => {
       setCodeError(true);
     }
     if (title & code) {
-      console.log('you');
+      fetch(Constants.ALL_PRODUCTS_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({ title, code })
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error(Constants.API_ERROR);
+        })
+        .then(() => history.push('/maintenance'));
     }
   };
 
   const handleCancel = () => {
     console.log('call');
-    debugger;
-    setTitle('00');
+    setTitle('');
     setCode('');
     // setOpen(false)
   };
@@ -73,6 +86,7 @@ const PromoDialog = (props) => {
               className={classes.field}
               required
               varian="standard"
+              value={title}
               helperText="Must be filled out"
               onChange={handleTitleChange}
               error={titleError}
@@ -84,6 +98,7 @@ const PromoDialog = (props) => {
               // disableUnderline="true"
               className={classes.field}
               required
+              value={code}
               varian="standard"
               helperText="Must be filled out"
               onChange={handleCodeChange}
