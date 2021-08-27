@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import styles from '../product-page/ProductPage.module.css';
 import Constants from '../../utils/constants';
 import fetchProducts from './DataViewService';
+import PromoDialog from './PromoDialog';
 
 const useStyles = makeStyles({
   root: {
@@ -19,8 +20,9 @@ const useStyles = makeStyles({
 
     '& .MuiButton-root': {
       position: 'absolute',
-      bottom: '1px',
-      left: '50%'
+      diplay: 'inline-block',
+      bottom: '0.25px',
+      left: '60%'
     }
   }
 });
@@ -141,6 +143,14 @@ const DataTable = () => {
     fetchProducts(setProducts, setApiError);
   }, []);
 
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div>
       {apiError && (
@@ -150,16 +160,26 @@ const DataTable = () => {
       )}
       <div
         style={{
-          flexGrow: 1, display: 'flex', height: 700, width: '100%'
+          flexGrow: 1,
+          display: 'flex',
+          height: 700,
+          width: '100%'
         }}
-        className={classes.root}
-      >
+        className={classes.root}>
         <DataGrid rows={products} columns={columns} rowsPerPageOptions={[20]} />
       </div>
       <div className={classes.root}>
         <Button href="/maintenance/create" color="primary" variant="contained">
           Create
         </Button>
+        <Button
+          style={{ marginLeft: '130px' }}
+          color="primary"
+          variant="contained"
+          onClick={handleClickOpen}>
+          Create Promo
+        </Button>
+        <PromoDialog open={open} onClose={handleClose} />
       </div>
     </div>
   );
