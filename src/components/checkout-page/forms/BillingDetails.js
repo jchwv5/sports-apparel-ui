@@ -84,7 +84,7 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             value={billingData.billingStreet}
           />
 
-          <div className="errorArea" id="streetArea">
+          <div className="errorArea" id="billingStreetArea">
             {/* Empty Error Area Area */}
           </div>
 
@@ -94,10 +94,11 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             id="billingStreet2"
             label="Street 2 (Optional)"
             onChange={onChange}
+            defaultValue=""
             value={billingData.billingStreet2}
           />
 
-          <div className="errorArea" id="street2Area">
+          <div className="errorArea" id="billingStreet2Area">
             {/* Empty Error Area Area */}
           </div>
 
@@ -106,10 +107,11 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             id="billingCity"
             label="City"
             onChange={onChange}
+            defaultValue=""
             value={billingData.billingCity}
           />
 
-          <div className="errorArea" id="cityArea">
+          <div className="errorArea" id="billingCityArea">
             {/* Empty Error Area Area */}
           </div>
 
@@ -118,11 +120,12 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             label="State"
             onChange={onChange}
             placeholder="[Select State]"
+            defaultValue=""
             value={billingData.billingState}
             options={usStates}
           />
 
-          <div className="errorArea" id="stateArea">
+          <div className="errorArea" id="billingStateArea">
             {/* Empty Error Area Area */}
           </div>
 
@@ -132,10 +135,11 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             id="billingZip"
             label="Zip"
             onChange={onChange}
+            defaultValue=""
             value={billingData.billingZip}
           />
 
-          <div className="errorArea" id="zipArea">
+          <div className="errorArea" id="billingZipArea">
             {/* Empty Error Area Area */}
           </div>
 
@@ -147,6 +151,7 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         id="email"
         label="Email"
         onChange={onChange}
+        defaultValue=""
         value={billingData.email}
       />
 
@@ -160,6 +165,7 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         id="phone"
         label="Phone"
         onChange={onChange}
+        defaultValue=""
         value={billingData.phone}
       />
 
@@ -176,7 +182,7 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         value={billingData.creditCard}
       />
 
-      <div className="errorArea" id="cardArea">
+      <div className="errorArea" id="cardNumberArea">
         {/* Empty Error Area Area */}
       </div>
 
@@ -186,6 +192,7 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         id="cvv"
         label="CVV"
         onChange={onChange}
+        defaultValue=""
         value={billingData.cvv}
       />
 
@@ -199,6 +206,7 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         id="expiration"
         label="Expiration"
         onChange={onChange}
+        defaultValue=""
         value={billingData.expiration}
       />
 
@@ -211,9 +219,10 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         id="cardholder"
         label="Cardholder Name"
         onChange={onChange}
+        defaultValue=""
         value={billingData.cardholder}
       />
-      <div className="errorArea" id="cardNameArea">
+      <div className="errorArea" id="cardholderArea">
         {/* Empty Error Area Area */}
       </div>
 

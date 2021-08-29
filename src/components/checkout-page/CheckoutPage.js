@@ -7,6 +7,8 @@ import DeliveryAddress from './forms/DeliveryAddress';
 import BillingDetails from './forms/BillingDetails';
 import makePurchase from './CheckoutService';
 import validate from './CheckoutValidation';
+import notify from '../Toast/Toast';
+import writeErrors from './WriteErrors';
 
 /**
  * @name CheckoutPage
@@ -77,9 +79,15 @@ const CheckoutPage = () => {
       billingAddress,
       creditCard
     };
-    makePurchase(productData, deliveryAddress, billingAddress, creditCard).then(
-      () => history.push('/confirmation')
-    );
+    const errors = validate(values);
+    if (Object.keys(errors).length === 0) {
+      makePurchase(productData, deliveryAddress, billingAddress, creditCard).then(
+        () => history.push('/confirmation')
+      );
+    } else {
+      notify('error', 'There were problems processing your payment, you have not been charged');
+    }
+    writeErrors(errors, checked);
   };
 
   return (

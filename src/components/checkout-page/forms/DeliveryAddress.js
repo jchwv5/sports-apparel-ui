@@ -21,7 +21,9 @@ const DeliveryAddress = ({ onChange, deliveryData }) => {
         onChange={onChange}
         value={deliveryData.firstName}
       />
-
+      <div className="errorArea" id="firstNameArea">
+        {/* Empty Error Area Area */}
+      </div>
       <FormItem
         type="text"
         id="lastName"
@@ -29,7 +31,9 @@ const DeliveryAddress = ({ onChange, deliveryData }) => {
         onChange={onChange}
         value={deliveryData.lastName}
       />
-
+      <div className="errorArea" id="lastNameArea">
+        {/* Empty Error Area Area */}
+      </div>
       <FormItem
         placeholder="e.g. 123 Sesame Street"
         type="text"
@@ -38,7 +42,9 @@ const DeliveryAddress = ({ onChange, deliveryData }) => {
         onChange={onChange}
         value={deliveryData.street}
       />
-
+      <div className="errorArea" id="deliveryStreetArea">
+        {/* Empty Error Area Area */}
+      </div>
       <FormItem
         placeholder="e.g. Unit #1"
         type="text"
@@ -47,6 +53,9 @@ const DeliveryAddress = ({ onChange, deliveryData }) => {
         onChange={onChange}
         value={deliveryData.street2}
       />
+      <div className="errorArea" id="deliveryStreet2Area">
+        {/* Empty Error Area Area */}
+      </div>
 
       <FormItem
         type="text"
@@ -55,6 +64,9 @@ const DeliveryAddress = ({ onChange, deliveryData }) => {
         onChange={onChange}
         value={deliveryData.city}
       />
+      <div className="errorArea" id="deliveryCityArea">
+        {/* Empty Error Area Area */}
+      </div>
 
       <FormItemDropdown
         id="state"
@@ -64,6 +76,9 @@ const DeliveryAddress = ({ onChange, deliveryData }) => {
         value={deliveryData.state}
         options={usStates}
       />
+      <div className="errorArea" id="deliveryStateArea">
+        {/* Empty Error Area Area */}
+      </div>
 
       <FormItem
         placeholder="e.g. 12345"
@@ -73,6 +88,9 @@ const DeliveryAddress = ({ onChange, deliveryData }) => {
         onChange={onChange}
         value={deliveryData.zip}
       />
+      <div className="errorArea" id="deliveryZipArea">
+        {/* Empty Error Area Area */}
+      </div>
     </div>
 
   );
