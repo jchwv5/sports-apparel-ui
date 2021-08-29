@@ -33,7 +33,7 @@ export default function validate(values) {
   /* Delivery Zip validation */
   if (values.deliveryAddress.zip === undefined || values.deliveryAddress.zip === '') {
     errors.deliveryZip = 'Zip code must be filled out';
-  } else if (!/^\d{5}$/.test(values.billingAddress.zip)) {
+  } else if (!/^\d{5}$/.test(values.deliveryAddress.zip)) {
     errors.deliveryZip = 'Zip code is invalid';
   }
 

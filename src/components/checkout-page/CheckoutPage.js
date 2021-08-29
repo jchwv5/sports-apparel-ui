@@ -86,8 +86,8 @@ const CheckoutPage = () => {
       );
     } else {
       notify('error', 'There were problems processing your payment, you have not been charged');
+      writeErrors(errors, checked);
     }
-    writeErrors(errors, checked);
   };
 
   return (
