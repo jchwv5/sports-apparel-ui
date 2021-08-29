@@ -93,7 +93,7 @@ export default function validate(values) {
   /* Billing Cardholder validation */
   if (values.creditCard.cardholder === undefined || values.creditCard.cardholder === '') {
     errors.cardholder = 'Cardholder must be filled out';
-  } else if (!/^[a-zA-Z\s]+$/.test(values.billingAddress.cardholder)) {
+  } else if (!/^[a-zA-Z\s]+$/.test(values.creditCard.cardholder)) {
     errors.cardholder = 'Cardholder can only be alphabetic characters';
   }
   return errors;

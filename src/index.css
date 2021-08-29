@@ -13,4 +13,6 @@ code {
 
 div.errorArea {
   color: #f00;
+  position: relative;
+  top: -1.3em;
 }
