@@ -6,6 +6,7 @@ import ReviewOrderWidget from './ReviewOrderWidget';
 import DeliveryAddress from './forms/DeliveryAddress';
 import BillingDetails from './forms/BillingDetails';
 import makePurchase from './CheckoutService';
+import validate from './CheckoutValidation';
 
 /**
  * @name CheckoutPage
@@ -69,6 +70,12 @@ const CheckoutPage = () => {
       cvv: billingData.cvv,
       expiration: billingData.expiration,
       cardholder: billingData.cardholder
+    };
+
+    const values = {
+      deliveryAddress,
+      billingAddress,
+      creditCard
     };
     makePurchase(productData, deliveryAddress, billingAddress, creditCard).then(
       () => history.push('/confirmation')

@@ -9,14 +9,72 @@ import styles from './DeliveryAddress.module.css';
  * @return component
  */
 const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
-  const usStates = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Federated States of Micronesia', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+  const usStates = [
+    'Alabama',
+    'Alaska',
+    'American Samoa',
+    'Arizona',
+    'Arkansas',
+    'California',
+    'Colorado',
+    'Connecticut',
+    'Delaware',
+    'District of Columbia',
+    'Federated States of Micronesia',
+    'Florida',
+    'Georgia',
+    'Guam',
+    'Hawaii',
+    'Idaho',
+    'Illinois',
+    'Indiana',
+    'Iowa',
+    'Kansas',
+    'Kentucky',
+    'Louisiana',
+    'Maine',
+    'Marshall Islands',
+    'Maryland',
+    'Massachusetts',
+    'Michigan',
+    'Minnesota',
+    'Mississippi',
+    'Missouri',
+    'Montana',
+    'Nebraska',
+    'Nevada',
+    'New Hampshire',
+    'New Jersey',
+    'New Mexico',
+    'New York',
+    'North Carolina',
+    'North Dakota',
+    'Northern Mariana Islands',
+    'Ohio',
+    'Oklahoma',
+    'Oregon',
+    'Palau',
+    'Pennsylvania',
+    'Puerto Rico',
+    'Rhode Island',
+    'South Carolina',
+    'South Dakota',
+    'Tennessee',
+    'Texas',
+    'Utah',
+    'Vermont',
+    'Virgin Island',
+    'Virginia',
+    'Washington',
+    'West Virginia',
+    'Wisconsin',
+    'Wyoming'
+  ];
 
   return (
-
     <div className={styles.deliveryAddress}>
       {!useShippingForBilling && (
         <>
-
           <FormItem
             placeholder="e.g. 123 Sesame Street"
             type="text"
@@ -25,6 +83,10 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             onChange={onChange}
             value={billingData.billingStreet}
           />
+
+          <div className="errorArea" id="streetArea">
+            {/* Empty Error Area Area */}
+          </div>
 
           <FormItem
             placeholder="e.g. Unit #1"
@@ -35,6 +97,10 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             value={billingData.billingStreet2}
           />
 
+          <div className="errorArea" id="street2Area">
+            {/* Empty Error Area Area */}
+          </div>
+
           <FormItem
             type="text"
             id="billingCity"
@@ -42,6 +108,10 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             onChange={onChange}
             value={billingData.billingCity}
           />
+
+          <div className="errorArea" id="cityArea">
+            {/* Empty Error Area Area */}
+          </div>
 
           <FormItemDropdown
             id="billingState"
@@ -52,6 +122,10 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             options={usStates}
           />
 
+          <div className="errorArea" id="stateArea">
+            {/* Empty Error Area Area */}
+          </div>
+
           <FormItem
             placeholder="e.g. 12345"
             type="text"
@@ -60,6 +134,11 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             onChange={onChange}
             value={billingData.billingZip}
           />
+
+          <div className="errorArea" id="zipArea">
+            {/* Empty Error Area Area */}
+          </div>
+
         </>
       )}
       <FormItem
@@ -71,6 +150,10 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         value={billingData.email}
       />
 
+      <div className="errorArea" id="emailArea">
+        {/* Empty Error Area Area */}
+      </div>
+
       <FormItem
         placeholder="e.g. 555-555-5555"
         type="text"
@@ -79,6 +162,10 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         onChange={onChange}
         value={billingData.phone}
       />
+
+      <div className="errorArea" id="phoneArea">
+        {/* Empty Error Area Area */}
+      </div>
 
       <FormItem
         placeholder="e.g. 1234567812345678"
@@ -89,6 +176,10 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         value={billingData.creditCard}
       />
 
+      <div className="errorArea" id="cardArea">
+        {/* Empty Error Area Area */}
+      </div>
+
       <FormItem
         placeholder="e.g. 555"
         type="text"
@@ -97,6 +188,10 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         onChange={onChange}
         value={billingData.cvv}
       />
+
+      <div className="errorArea" id="cvvArea">
+        {/* Empty Error Area Area */}
+      </div>
 
       <FormItem
         placeholder="e.g. 05/21"
@@ -107,6 +202,10 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         value={billingData.expiration}
       />
 
+      <div className="errorArea" id="expirationArea">
+        {/* Empty Error Area Area */}
+      </div>
+
       <FormItem
         type="text"
         id="cardholder"
@@ -114,8 +213,11 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         onChange={onChange}
         value={billingData.cardholder}
       />
-    </div>
+      <div className="errorArea" id="cardNameArea">
+        {/* Empty Error Area Area */}
+      </div>
 
+    </div>
   );
 };
 

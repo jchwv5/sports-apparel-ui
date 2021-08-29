@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
  */
 const ProductCard = ({ product }) => {
   const classes = useStyles();
+
   const { dispatch } = useCart();
 
   const onAdd = () => {
@@ -71,7 +72,7 @@ const ProductCard = ({ product }) => {
         image: product.imageSrc
       }
     });
-    notify('success', 'Item added to cart!');
+    notify('success', 'Item added');
   };
   const [show, setShow] = useState(false);
 
@@ -87,12 +88,12 @@ const ProductCard = ({ product }) => {
             <Avatar aria-label="demographics" className={classes.avatar}>
               {product.demographic.charAt(0)}
             </Avatar>
-        )}
+          )}
           action={(
             <IconButton aria-label="settings">
               <MoreVertIcon />
             </IconButton>
-        )}
+          )}
           title={product.name}
           subheader={`${product.demographic} ${product.category} ${product.type}`}
         />
