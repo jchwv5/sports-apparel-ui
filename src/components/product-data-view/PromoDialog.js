@@ -8,30 +8,38 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import Constants from '../../utils/constants';
+import MenuItem from '@material-ui/core/MenuItem';
+import HttpHelper from '../../utils/HttpHelper';
 
 const useStyles = makeStyles({
-  underline: {
-    '&&&:before': {
-      borderBottom: 'none'
-    },
-    '&&:after': {
-      borderBottom: 'none'
-    }
+  root: {
+    backgroundColor: 'white'
   },
+
   field: {
     width: '400px',
     margin: '20px'
+    // display: 'flex'
+  },
+  li: {
+    // float: 'right',
+    // clear: 'both'
   }
 });
 
 const PromoDialog = (props) => {
   const classes = useStyles();
   const history = useHistory();
-  const { handleClose, open } = props;
+  const { handleClose, open, setOpen } = props;
+  const [id, setId] = useState('1');
   const [title, setTitle] = useState('');
   const [code, setCode] = useState('');
   const [titleError, setTitleError] = useState(false);
   const [codeError, setCodeError] = useState(false);
+
+  const handleIdChange = () => {
+    setTitle(id++);
+  };
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -45,44 +53,42 @@ const PromoDialog = (props) => {
     event.preventDefault();
     setTitleError(false);
     setCodeError(false);
-    if (title == '') {
+    if (title === '') {
       setTitleError(true);
     }
-    if (code == '') {
+    if (code === '') {
       setCodeError(true);
     }
-    if (title & code) {
-      fetch(Constants.ALL_PRODUCTS_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify({ title, code })
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          }
-          throw new Error(Constants.API_ERROR);
-        })
-        .then(() => history.push('/maintenance'));
+    if (title && code) {
+      async function fetchPromotion(setPromotion, setApiError) {
+        await HttpHelper(Constants.PRODUCTS_SALE_ENDPOINT, 'POST')
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error(Constants.API_ERROR);
+          })
+          .then(setPromotion)
+          .catch(() => {
+            setApiError(true);
+          });
+      }
     }
   };
 
-  const handleCancel = () => {
-    console.log('call');
+  const handleReset = () => {
     setTitle('');
     setCode('');
-    // setOpen(false)
   };
 
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle id="promo-dialog-title">Create a Promo</DialogTitle>
+        <DialogTitle>Create a Promo</DialogTitle>
         <form noValidate autoComplete="off">
           <div>
             <TextField
               label="Promotion Title"
-              // disableUnderline="true"
               className={classes.field}
               required
               varian="standard"
@@ -90,25 +96,29 @@ const PromoDialog = (props) => {
               helperText="Must be filled out"
               onChange={handleTitleChange}
               error={titleError}
+              InputProps={{ disableUnderline: true }}
             />
           </div>
           <div>
             <TextField
+              select
               label="Promotion Code"
-              // disableUnderline="true"
               className={classes.field}
               required
               value={code}
-              varian="standard"
               helperText="Must be filled out"
               onChange={handleCodeChange}
-              error={codeError}
-            />
+              error={codeError}>
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={'$10'}>$10</MenuItem>
+              <MenuItem value={'10%'}>10%</MenuItem>
+            </TextField>
           </div>
-
           <DialogActions>
-            <Button onClick={handleCancel} color="primary" variant="contained">
-              Cancel
+            <Button onClick={handleReset} color="primary" variant="contained">
+              Reset
             </Button>
             <Button onClick={handleSubmit} color="primary" variant="contained">
               Submit
