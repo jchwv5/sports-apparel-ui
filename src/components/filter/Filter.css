@@ -3,7 +3,13 @@
     background: transparent;
 }
 
-.Color-Sample {
-    white-space: nowrap;
-    display: inline;
+.filterContents {
+    display: inline-block;
+    margin-left: 20px;
+    vertical-align: middle;
+}
+
+.filterColor {
+    display: inline-flex;
+    margin-left: 20px;
 }

@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { Brightness1 } from '@material-ui/icons';
+import { GetColorName } from 'hex-color-to-color-name';
 import M from 'materialize-css/dist/js/materialize.min';
 import ReactColorSquare from 'react-color-square';
 import styles from './Filter.css';
@@ -17,6 +18,7 @@ const SidebarFilter = () => {
   const colors = [...new Set(products.map((data) => data.primaryColorCode
     && data.secondaryColorCode))];
   const materials = [...new Set(products.map((data) => data.material))];
+
   useEffect(() => {
     fetchProducts(setProducts, setApiError);
   }, []);
@@ -29,7 +31,7 @@ const SidebarFilter = () => {
           </div>
           <div className="collapsible-body">
             {brands.map((brand) => (
-              <li data-id={brand}>
+              <li data-id={brand} className="filterContents">
                 <input type="checkbox" />
                 {brand}
               </li>
@@ -42,7 +44,7 @@ const SidebarFilter = () => {
           </div>
           <div className="collapsible-body">
             {categories.map((category) => (
-              <li data-id={category}>
+              <li data-id={category} className="filterContents">
                 <input type="checkbox" />
                 {category}
               </li>
@@ -61,9 +63,9 @@ const SidebarFilter = () => {
           </div>
           <div className="collapsible-body">
             {colors.map((color) => (
-              <li data-id={color}>
+              <li data-id={color} className="filterColor">
                 <input type="checkbox" />
-                <ReactColorSquare className="Color-sample" height={20} width={20} borderColor="black" color={color} text={color} />
+                <ReactColorSquare height={20} width={20} color={color} />
               </li>
             ))}
           </div>
@@ -74,7 +76,7 @@ const SidebarFilter = () => {
           </div>
           <div className="collapsible-body">
             {materials.map((material) => (
-              <li data-id={material}>
+              <li data-id={material} className="filterContents">
                 <input type="checkbox" />
                 {material}
               </li>
