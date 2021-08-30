@@ -13,3 +13,8 @@
     display: inline-flex;
     margin-left: 20px;
 }
+
+.square {
+    border-width: 1;
+    border-color: black;
+}
