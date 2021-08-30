@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
+import { Brightness1 } from '@material-ui/icons';
 import M from 'materialize-css/dist/js/materialize.min';
+import ReactColorSquare from 'react-color-square';
 import styles from './Filter.css';
 import fetchProducts from '../product-page/ProductPageService';
 
@@ -61,7 +63,7 @@ const SidebarFilter = () => {
             {colors.map((color) => (
               <li data-id={color}>
                 <input type="checkbox" />
-                {color}
+                <ReactColorSquare className="Color-sample" height={20} width={20} borderColor="black" color={color} text={color} />
               </li>
             ))}
           </div>

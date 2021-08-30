@@ -2,3 +2,8 @@
     position: relative;
     background: transparent;
 }
+
+.Color-Sample {
+    white-space: nowrap;
+    display: inline;
+}
