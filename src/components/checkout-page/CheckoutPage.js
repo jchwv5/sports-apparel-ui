@@ -109,8 +109,12 @@ const CheckoutPage = () => {
             useShippingForBilling={checked}
           />
         </div>
+
         <div className={styles.payNow}>
-          {isLoading ? <Spinner /> : null }
+          <span>
+            {isLoading ? <Spinner /> : null }
+          </span>
+          <br />
           <button
             onClick={() => {
               setLoading(true); setTimeout(() => {
