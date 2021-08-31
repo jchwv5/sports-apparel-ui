@@ -11,10 +11,12 @@ import notify from '../Toast/Toast';
  * @param {*} setApiError sets error if response other than 200 is returned
  * @returns sets state for promotions if 200 response, else sets state for apiError
  */
-export default async function postPromotions(title, code, setApiError) {
+export default async function postPromotions(code, type, percentage, flat, setApiError) {
   await HttpHelper(constants.PRODUCTS_PROMOTIONS_ENDPOINT, 'POST', {
-    title,
-    code
+    code,
+    type,
+    percentage,
+    flat
   })
     .then((response) => {
       if (response.ok) {
@@ -23,8 +25,11 @@ export default async function postPromotions(title, code, setApiError) {
       }
       throw new Error(constants.API_ERROR);
     })
+    .then(function (response) {
+      console.log(response.data);
+    })
     .catch(() => {
-      notify('error', 'Promotion not created');
+      notify('error', 'Error. Promotion not created');
       setApiError(true);
     });
 }
