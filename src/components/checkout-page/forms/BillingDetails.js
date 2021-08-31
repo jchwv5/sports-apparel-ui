@@ -8,7 +8,9 @@ import styles from './DeliveryAddress.module.css';
  * @description Allows entry of Billing Details
  * @return component
  */
-const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
+const BillingDetails = ({
+  errors, onChange, billingData, useShippingForBilling
+}) => {
   const usStates = [
     'Alabama',
     'Alaska',
@@ -82,12 +84,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             label="Street"
             onChange={onChange}
             value={billingData.billingStreet}
+            error={errors.billingStreet}
           />
-
-          <div className="errorArea" id="billingStreetArea">
-            {/* Empty Error Area Area */}
-          </div>
-
           <FormItem
             placeholder="e.g. Unit #1"
             type="text"
@@ -97,11 +95,6 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             defaultValue=""
             value={billingData.billingStreet2}
           />
-
-          <div className="errorArea" id="billingStreet2Area">
-            {/* Empty Error Area Area */}
-          </div>
-
           <FormItem
             type="text"
             id="billingCity"
@@ -109,12 +102,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             onChange={onChange}
             defaultValue=""
             value={billingData.billingCity}
+            error={errors.billingCity}
           />
-
-          <div className="errorArea" id="billingCityArea">
-            {/* Empty Error Area Area */}
-          </div>
-
           <FormItemDropdown
             id="billingState"
             label="State"
@@ -123,12 +112,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             defaultValue=""
             value={billingData.billingState}
             options={usStates}
+            error={errors.billingState}
           />
-
-          <div className="errorArea" id="billingStateArea">
-            {/* Empty Error Area Area */}
-          </div>
-
           <FormItem
             placeholder="e.g. 12345"
             type="text"
@@ -137,12 +122,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             onChange={onChange}
             defaultValue=""
             value={billingData.billingZip}
+            error={errors.billingZip}
           />
-
-          <div className="errorArea" id="billingZipArea">
-            {/* Empty Error Area Area */}
-          </div>
-
         </>
       )}
       <FormItem
@@ -153,12 +134,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         onChange={onChange}
         defaultValue=""
         value={billingData.email}
+        error={errors.email}
       />
-
-      <div className="errorArea" id="emailArea">
-        {/* Empty Error Area Area */}
-      </div>
-
       <FormItem
         placeholder="e.g. 555-555-5555"
         type="text"
@@ -167,12 +144,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         onChange={onChange}
         defaultValue=""
         value={billingData.phone}
+        error={errors.phone}
       />
-
-      <div className="errorArea" id="phoneArea">
-        {/* Empty Error Area Area */}
-      </div>
-
       <FormItem
         placeholder="e.g. 1234567812345678"
         type="text"
@@ -180,12 +153,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         label="Credit Card"
         onChange={onChange}
         value={billingData.creditCard}
+        error={errors.cardNumber}
       />
-
-      <div className="errorArea" id="cardNumberArea">
-        {/* Empty Error Area Area */}
-      </div>
-
       <FormItem
         placeholder="e.g. 555"
         type="text"
@@ -194,12 +163,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         onChange={onChange}
         defaultValue=""
         value={billingData.cvv}
+        error={errors.cvv}
       />
-
-      <div className="errorArea" id="cvvArea">
-        {/* Empty Error Area Area */}
-      </div>
-
       <FormItem
         placeholder="e.g. 05/21"
         type="text"
@@ -208,12 +173,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         onChange={onChange}
         defaultValue=""
         value={billingData.expiration}
+        error={errors.expiration}
       />
-
-      <div className="errorArea" id="expirationArea">
-        {/* Empty Error Area Area */}
-      </div>
-
       <FormItem
         type="text"
         id="cardholder"
@@ -221,11 +182,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         onChange={onChange}
         defaultValue=""
         value={billingData.cardholder}
+        error={errors.cardholder}
       />
-      <div className="errorArea" id="cardholderArea">
-        {/* Empty Error Area Area */}
-      </div>
-
     </div>
   );
 };

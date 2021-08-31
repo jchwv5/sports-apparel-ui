@@ -14,5 +14,10 @@ code {
 div.errorArea {
   color: #f00;
   position: relative;
-  top: -1.3em;
+  top: -5px;
+  bottom: 2px;
+}
+div .errorField {
+  outline-style:solid;
+  outline-color: #f00;
 }

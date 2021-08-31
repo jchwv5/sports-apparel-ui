@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useCart } from './CartContext';
 import styles from './CheckoutPage.module.css';
@@ -6,9 +7,8 @@ import ReviewOrderWidget from './ReviewOrderWidget';
 import DeliveryAddress from './forms/DeliveryAddress';
 import BillingDetails from './forms/BillingDetails';
 import makePurchase from './CheckoutService';
-import validate from './CheckoutValidation';
+import validate from '../../utils/validate';
 import notify from '../Toast/Toast';
-import writeErrors from './WriteErrors';
 
 /**
  * @name CheckoutPage
@@ -17,6 +17,8 @@ import writeErrors from './WriteErrors';
  */
 const CheckoutPage = () => {
   const history = useHistory();
+
+  const [errors, setErrors] = useState({});
 
   const {
     state: { products }
@@ -41,22 +43,24 @@ const CheckoutPage = () => {
 
   const handlePay = () => {
     const productData = products.map(({ id, quantity }) => ({ id, quantity }));
+    let formIsValid = false;
+    let errorCount = 0;
     const deliveryAddress = {
       firstName: deliveryData.firstName,
       lastName: deliveryData.lastName,
-      street: deliveryData.street,
-      street2: deliveryData.street2,
-      city: deliveryData.city,
-      state: deliveryData.state,
-      zip: deliveryData.zip
+      street: deliveryData.deliveryStreet,
+      street2: deliveryData.deliveryStreet2,
+      city: deliveryData.deliveryCity,
+      state: deliveryData.deliveryState,
+      zip: deliveryData.deliveryZip
     };
     const billingAddress = {};
     if (checked) {
-      billingAddress.street = deliveryAddress.street;
-      billingAddress.street2 = deliveryAddress.street2;
-      billingAddress.city = deliveryAddress.city;
-      billingAddress.state = deliveryAddress.state;
-      billingAddress.zip = deliveryAddress.zip;
+      billingAddress.street = deliveryAddress.deliveryStreet;
+      billingAddress.street2 = deliveryAddress.deliveryStreet2;
+      billingAddress.city = deliveryAddress.deliveryCity;
+      billingAddress.state = deliveryAddress.deliveryState;
+      billingAddress.zip = deliveryAddress.deliveryZip;
     } else {
       billingAddress.street = billingData.billingStreet;
       billingAddress.street2 = billingData.billingStreet2;
@@ -73,20 +77,37 @@ const CheckoutPage = () => {
       expiration: billingData.expiration,
       cardholder: billingData.cardholder
     };
-
-    const values = {
-      deliveryAddress,
-      billingAddress,
-      creditCard
-    };
-    const errors = validate(values);
-    if (Object.keys(errors).length === 0) {
+    setErrors({
+      firstName: validate('text', 'First name', deliveryAddress.firstName),
+      lastName: validate('text', 'Last name', deliveryAddress.lastName),
+      deliveryStreet: validate('alphaNum', 'Delivery street', deliveryAddress.street),
+      deliveryCity: validate('text', 'Delivery city', deliveryAddress.city),
+      deliveryState: validate('drop-down', 'delivery state', deliveryAddress.state),
+      deliveryZip: validate('zip', 'Delivery zip', deliveryAddress.zip),
+      billingStreet: validate('alphaNum', 'Billing street', billingAddress.street),
+      billingCity: validate('text', 'Billing city', billingAddress.city),
+      billingState: validate('drop-down', 'billing state', billingAddress.state),
+      billingZip: validate('zip', 'Billing zip', billingAddress.zip),
+      email: validate('email', 'E-mail', billingAddress.email),
+      phone: validate('phone', 'Phone', billingAddress.phone),
+      cardNumber: validate('credit-card', 'Credit card', creditCard.cardNumber),
+      cvv: validate('cvv', 'CVV', creditCard.cvv),
+      expiration: validate('date', 'Expiration', creditCard.expiration),
+      cardholder: validate('text', 'Cardholder', creditCard.cardholder)
+    });
+    Object.values(errors).forEach((e) => {
+      if (!e[0]) {
+        // eslint-disable-next-line no-plusplus
+        errorCount++;
+      }
+    });
+    if (errorCount === 0) formIsValid = true;
+    if (formIsValid) {
       makePurchase(productData, deliveryAddress, billingAddress, creditCard).then(
         () => history.push('/confirmation')
       );
     } else {
-      notify('error', 'There were problems processing your payment, you have not been charged');
-      writeErrors(errors, checked);
+      notify('error', 'There was a problem processing your payment, you have not been charged');
     }
   };
 
@@ -102,6 +123,7 @@ const CheckoutPage = () => {
           <DeliveryAddress
             onChange={onDeliveryChange}
             deliveryData={deliveryData}
+            errors={errors}
           />
           <label htmlFor="useSame" className={styles.sameAddressText}>
             <div className={styles.useSameAddress}>
@@ -121,6 +143,7 @@ const CheckoutPage = () => {
             onChange={onBillingChange}
             billingData={billingData}
             useShippingForBilling={checked}
+            errors={errors}
           />
         </div>
         <div className={styles.payNow}>

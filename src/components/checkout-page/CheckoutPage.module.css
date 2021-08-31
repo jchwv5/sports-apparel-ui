@@ -21,6 +21,11 @@
   grid-area: delivery;
 }
 
+div .errorField {
+  outline-style:solid;
+  outline-color: #f00;
+}
+
 select {
   display: inline;
 }
@@ -86,4 +91,5 @@ select {
   color: #666666;
   font-weight: 700;
 }
+
 
