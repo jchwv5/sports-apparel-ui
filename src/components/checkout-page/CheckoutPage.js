@@ -9,6 +9,7 @@ import BillingDetails from './forms/BillingDetails';
 import makePurchase from './CheckoutService';
 import validate from '../../utils/validate';
 import notify from '../Toast/Toast';
+import Spinner from '../Spinner/Spinner';
 
 /**
  * @name CheckoutPage
@@ -40,7 +41,7 @@ const CheckoutPage = () => {
   const handleCheck = () => {
     setChecked(!checked);
   };
-
+  const [isLoading, setLoading] = useState(false);
   const handlePay = () => {
     const productData = products.map(({ id, quantity }) => ({ id, quantity }));
     let formIsValid = false;
@@ -146,9 +147,19 @@ const CheckoutPage = () => {
             errors={errors}
           />
         </div>
+
         <div className={styles.payNow}>
+          <span>
+            {isLoading ? <Spinner /> : null }
+          </span>
+          <br />
           <button
-            onClick={handlePay}
+            onClick={() => {
+              setLoading(true); setTimeout(() => {
+                setLoading(false);
+                handlePay();
+              }, 5000);
+            }}
             type="button"
             className={styles.payButton}
           >
