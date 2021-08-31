@@ -179,7 +179,7 @@ const DataTable = () => {
           onClick={handleClickOpen}>
           Create Promo
         </Button>
-        <PromoDialog open={open} onClose={handleClose} />
+        <PromoDialog open={open} handleClose={handleClose} />
       </div>
     </div>
   );

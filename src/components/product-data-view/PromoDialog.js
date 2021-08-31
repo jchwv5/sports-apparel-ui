@@ -6,10 +6,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
-import Constants from '../../utils/constants';
 import MenuItem from '@material-ui/core/MenuItem';
-import HttpHelper from '../../utils/HttpHelper';
+
+import postPromotions from './PromoDialogService';
 
 const useStyles = makeStyles({
   root: {
@@ -27,19 +26,13 @@ const useStyles = makeStyles({
   }
 });
 
-const PromoDialog = (props) => {
+const PromoDialog = ({ open, handleClose }) => {
   const classes = useStyles();
-  const history = useHistory();
-  const { handleClose, open, setOpen } = props;
-  const [id, setId] = useState('1');
   const [title, setTitle] = useState('');
   const [code, setCode] = useState('');
   const [titleError, setTitleError] = useState(false);
   const [codeError, setCodeError] = useState(false);
-
-  const handleIdChange = () => {
-    setTitle(id++);
-  };
+  const [apiError, setApiError] = useState(false);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -49,7 +42,13 @@ const PromoDialog = (props) => {
     setCode(event.target.value);
   };
 
+  const handleReset = () => {
+    setTitle('');
+    setCode('');
+  };
+
   const handleSubmit = (event) => {
+    handleReset();
     event.preventDefault();
     setTitleError(false);
     setCodeError(false);
@@ -60,25 +59,9 @@ const PromoDialog = (props) => {
       setCodeError(true);
     }
     if (title && code) {
-      async function fetchPromotion(setPromotion, setApiError) {
-        await HttpHelper(Constants.PRODUCTS_SALE_ENDPOINT, 'POST')
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            }
-            throw new Error(Constants.API_ERROR);
-          })
-          .then(setPromotion)
-          .catch(() => {
-            setApiError(true);
-          });
-      }
+      postPromotions(title, code, setApiError);
+      handleClose();
     }
-  };
-
-  const handleReset = () => {
-    setTitle('');
-    setCode('');
   };
 
   return (
@@ -114,6 +97,10 @@ const PromoDialog = (props) => {
               </MenuItem>
               <MenuItem value={'$10'}>$10</MenuItem>
               <MenuItem value={'10%'}>10%</MenuItem>
+              <MenuItem value={'$20'}>$20</MenuItem>
+              <MenuItem value={'20%'}>20%</MenuItem>
+              <MenuItem value={'$30'}>$30</MenuItem>
+              <MenuItem value={'30%'}>30%</MenuItem>
             </TextField>
           </div>
           <DialogActions>
