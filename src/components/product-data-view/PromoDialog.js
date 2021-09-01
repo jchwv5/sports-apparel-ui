@@ -13,6 +13,8 @@ import { RadioGroup } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +28,12 @@ const useStyles = makeStyles((theme) => ({
     width: '400px',
     height: '500x',
     margin: theme.spacing(2)
+  },
+  button: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: '10px',
+    color: theme.palette.grey[500]
   }
 }));
 
@@ -94,8 +102,18 @@ const PromoDialog = ({ open, handleClose }) => {
     <div>
       <Dialog open={open} onClose={handleClose} className={classes.root}>
         <DialogTitle>Create a Promo</DialogTitle>
+        <div>
+          <IconButton onClick={handleClose} className={classes.button}>
+            <CloseIcon />
+          </IconButton>
+        </div>
         <form noValidate autoComplete="off">
           <FormControl>
+            {/* <div>
+              <IconButton onClick={handleClose} className={classes.button}>
+                <CloseIcon />
+              </IconButton>
+            </div> */}
             <div className={classes.field}>
               <TextField
                 label="Promotion Code"
