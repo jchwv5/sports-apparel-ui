@@ -55,7 +55,16 @@ const SidebarFilter = () => {
           <div className="collapsible-header">
             Price
           </div>
-          <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+          <div className="collapsible-body">
+            <div className="filterContents">
+              <label htmlFor="priceMin">Min.</label>
+              <input type="text" id="priceMin" />
+            </div>
+            <div className="filterContents">
+              <label htmlFor="priceMxan">Max.</label>
+              <input type="text" id="priceMax" />
+            </div>
+          </div>
         </li>
         <li>
           <div className="collapsible-header">
@@ -65,7 +74,9 @@ const SidebarFilter = () => {
             {colors.map((color) => (
               <li data-id={color} className="filterColor">
                 <input type="checkbox" />
-                <ReactColorSquare className="square" height={20} width={20} color={color} />
+                <div className="square">
+                  <ReactColorSquare className="square" height={20} width={20} color={color} />
+                </div>
               </li>
             ))}
           </div>
