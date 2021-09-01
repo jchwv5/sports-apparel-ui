@@ -16,17 +16,16 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: 'red',
-    display: 'flex',
-    flexWrap: 'wrap'
+    '& .MuiPaper-root': {
+      backgroundColor: '#F8F8FF',
+      display: 'flex',
+      flexWrap: 'wrap'
+    }
   },
-
   field: {
     width: '400px',
-    // margin: '30px',
     height: '500x',
     margin: theme.spacing(2)
-    // display: 'flex'
   }
 }));
 
@@ -85,32 +84,15 @@ const PromoDialog = ({ open, handleClose }) => {
     setPercentageError(false);
     setFlatError(false);
 
-    if (code === '') {
-      setCodeError(true);
-    }
-    if (type === '') {
-      setTypeError(true);
-    }
-    if (percentage === '') {
-      setPercentageError(true);
-    }
-    if (flat === '') {
-      setFlatError(true);
-    }
-
     if ((code && type && percentage) || (code && type && flat)) {
       postPromotions(code, type, percentage, flat, setApiError);
       handleClose();
     }
-    // } else if (code && type && flat) {
-    //   postPromotions(code, type, flat, setApiError);
-    //   handleClose();
-    // }
   };
 
   return (
-    <div className={classes.root}>
-      <Dialog open={open} onClose={handleClose}>
+    <div>
+      <Dialog open={open} onClose={handleClose} className={classes.root}>
         <DialogTitle>Create a Promo</DialogTitle>
         <form noValidate autoComplete="off">
           <FormControl>
@@ -132,9 +114,6 @@ const PromoDialog = ({ open, handleClose }) => {
                 name="discount type"
                 value={type}
                 onChange={handleTypeChange}
-                // className={classes.field}
-                required
-                helperText="Must be filled out"
                 error={typeError}>
                 <FormControlLabel value="Percentage" control={<Radio />} label="Percentage" />
                 <FormControlLabel value="Flat" control={<Radio />} label="Flat Dollar Amount" />
@@ -144,10 +123,10 @@ const PromoDialog = ({ open, handleClose }) => {
               <div className={classes.field}>
                 <TextField
                   label="Discount Amount %"
-                  // className={classes.field}
                   required
                   varian="standard"
                   value={percentage}
+                  type="number"
                   helperText="Must be filled out"
                   onChange={handlePercentageChange}
                   error={percentageError}
@@ -160,10 +139,8 @@ const PromoDialog = ({ open, handleClose }) => {
             )}
             {flatIsVisible && (
               <div className={classes.field}>
-                {/* <InputLabel htmlFor="input-with-icon-adornment">With a start adornment</InputLabel> */}
                 <TextField
                   label="Discount Amount $"
-                  // className={classes.field}
                   required
                   varian="standard"
                   InputProps={{
@@ -171,14 +148,13 @@ const PromoDialog = ({ open, handleClose }) => {
                     disableUnderline: true
                   }}
                   value={flat}
+                  type="number"
                   helperText="Must be filled out"
                   onChange={handleFlatChange}
                   error={flatError}
-                  // InputProps={}
                 />
               </div>
             )}
-
             <DialogActions>
               <Button onClick={handleReset} color="primary" variant="contained">
                 Reset

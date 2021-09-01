@@ -23,13 +23,14 @@ export default async function postPromotions(code, type, percentage, flat, setAp
         notify('success', 'Promotion created successfully');
         return response.json();
       }
+      let result = response.status;
+      if (result === 409) {
+        notify('error', 'Error! Promo code already exists');
+      }
+
       throw new Error(constants.API_ERROR);
     })
-    .then(function (response) {
-      console.log(response.data);
-    })
     .catch(() => {
-      notify('error', 'Error. Promotion not created');
       setApiError(true);
     });
 }
