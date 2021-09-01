@@ -53,7 +53,6 @@ const PromoDialog = ({ open, handleClose }) => {
   const [percentIsVisible, setPercentIsVisible] = useState(false);
   const [flatIsVisible, setFlatIsVisible] = useState(false);
   const [codeError, setCodeError] = useState(false);
-  // const [typeError, setTypeError] = useState(false);
   const [percentageError, setPercentageError] = useState(false);
   const [flatError, setFlatError] = useState(false);
   const [apiError, setApiError] = useState(false);
