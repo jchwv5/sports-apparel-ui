@@ -100,7 +100,6 @@ const CheckoutPage = () => {
       expiration: validate('date', 'Expiration', creditCard.expiration),
       cardholder: validate('text', 'Cardholder', creditCard.cardholder)
     });
-    forceUpdate();
   };
 
   /**
@@ -114,6 +113,7 @@ const CheckoutPage = () => {
    * @returns either true or false, depending on whether the data submitted has errors.
    */
   const hasErrors = (deliveryInfo, billingInfo) => {
+    forceUpdate();
     const errorList = [];
 
     Object.values(deliveryInfo).forEach((e) => {
@@ -166,7 +166,7 @@ const CheckoutPage = () => {
     };
 
     verifyInfo(deliveryAddress, billingAddress, creditCard);
-    // forceUpdate();
+
     if (hasErrors(deliveryErrors, billingErrors) === false) {
       makePurchase(productData, deliveryAddress, billingAddress, creditCard).then(
         () => history.push('/confirmation')
