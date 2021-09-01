@@ -15,6 +15,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,8 +33,13 @@ const useStyles = makeStyles((theme) => ({
   button: {
     position: 'absolute',
     right: theme.spacing(1),
-    top: '10px',
+    top: '20px',
     color: theme.palette.grey[500]
+  },
+  amountLabel: {
+    '& .MuiFormLabel-root': {
+      fontSize: '16px'
+    }
   }
 }));
 
@@ -51,6 +57,7 @@ const PromoDialog = ({ open, handleClose }) => {
   const [percentageError, setPercentageError] = useState(false);
   const [flatError, setFlatError] = useState(false);
   const [apiError, setApiError] = useState(false);
+  const [helperText, setHelperText] = useState('Must select a type!');
 
   const handleCodeChange = (event) => {
     setCode(event.target.value);
@@ -91,7 +98,6 @@ const PromoDialog = ({ open, handleClose }) => {
     setTypeError(false);
     setPercentageError(false);
     setFlatError(false);
-
     if ((code && type && percentage) || (code && type && flat)) {
       postPromotions(code, type, percentage, flat, setApiError);
       handleClose();
@@ -109,11 +115,6 @@ const PromoDialog = ({ open, handleClose }) => {
         </div>
         <form noValidate autoComplete="off">
           <FormControl>
-            {/* <div>
-              <IconButton onClick={handleClose} className={classes.button}>
-                <CloseIcon />
-              </IconButton>
-            </div> */}
             <div className={classes.field}>
               <TextField
                 label="Promotion Code"
@@ -136,6 +137,7 @@ const PromoDialog = ({ open, handleClose }) => {
                 <FormControlLabel value="Percentage" control={<Radio />} label="Percentage" />
                 <FormControlLabel value="Flat" control={<Radio />} label="Flat Dollar Amount" />
               </RadioGroup>
+              <FormHelperText>{helperText}</FormHelperText>
             </div>
             {percentIsVisible && (
               <div className={classes.field}>
