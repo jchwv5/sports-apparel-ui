@@ -27,7 +27,6 @@ export default async function postPromotions(code, type, percentage, flat, setAp
       if (result === 409) {
         notify('error', 'Error! Promo code already exists');
       }
-
       throw new Error(constants.API_ERROR);
     })
     .catch(() => {

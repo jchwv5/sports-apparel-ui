@@ -53,11 +53,11 @@ const PromoDialog = ({ open, handleClose }) => {
   const [percentIsVisible, setPercentIsVisible] = useState(false);
   const [flatIsVisible, setFlatIsVisible] = useState(false);
   const [codeError, setCodeError] = useState(false);
-  const [typeError, setTypeError] = useState(false);
+  // const [typeError, setTypeError] = useState(false);
   const [percentageError, setPercentageError] = useState(false);
   const [flatError, setFlatError] = useState(false);
   const [apiError, setApiError] = useState(false);
-  const [helperText, setHelperText] = useState('Must select a type!');
+  const [helperTextError, setHelperTextError] = useState('');
 
   const handleCodeChange = (event) => {
     setCode(event.target.value);
@@ -87,19 +87,34 @@ const PromoDialog = ({ open, handleClose }) => {
     setType('');
     setPercentage('');
     setFlat('');
+    setCodeError(false);
+    setPercentageError(false);
+    setFlatError(false);
+    setHelperTextError(false);
     setPercentIsVisible(false);
     setFlatIsVisible(false);
   };
 
   const handleSubmit = (event) => {
-    handleReset();
     event.preventDefault();
-    setCodeError(false);
-    setTypeError(false);
-    setPercentageError(false);
-    setFlatError(false);
+    if (code === '') {
+      setCodeError(true);
+    }
+    if (type === '') {
+      setHelperTextError(true);
+    }
+
+    if (type === 'Percentage' && percentage === '') {
+      setPercentageError(true);
+    }
+
+    if (type === 'Flat' && flat === '') {
+      setFlatError(true);
+    }
+
     if ((code && type && percentage) || (code && type && flat)) {
       postPromotions(code, type, percentage, flat, setApiError);
+      handleReset();
       handleClose();
     }
   };
@@ -129,15 +144,11 @@ const PromoDialog = ({ open, handleClose }) => {
             </div>
             <div className={classes.field}>
               <FormLabel>Discount Type</FormLabel>
-              <RadioGroup
-                name="discount type"
-                value={type}
-                onChange={handleTypeChange}
-                error={typeError}>
+              <RadioGroup name="discount type" value={type} onChange={handleTypeChange}>
                 <FormControlLabel value="Percentage" control={<Radio />} label="Percentage" />
                 <FormControlLabel value="Flat" control={<Radio />} label="Flat Dollar Amount" />
               </RadioGroup>
-              <FormHelperText>{helperText}</FormHelperText>
+              <FormHelperText error={helperTextError}>Must select a type</FormHelperText>
             </div>
             {percentIsVisible && (
               <div className={classes.field}>
