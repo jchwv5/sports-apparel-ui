@@ -7,7 +7,7 @@ import styles from './FormItem.module.css';
  * @return component
  */
 const FormItem = ({
-  onChange, value, id, label, placeholder, type, error
+  onChange, value, id, label, placeholder, type, isValid, errorMessage
 }) => (
 
   <div>
@@ -15,17 +15,17 @@ const FormItem = ({
       {label}
       <div>
         <input
-          className={`${styles.input} ${error !== undefined ? '.errorArea' : ''}`}
+          className={`${isValid === false ? styles.inputError : styles.input}`}
           id={id}
           onChange={onChange}
           placeholder={placeholder}
           type={type}
           value={value}
         />
-        {error !== undefined
+        {isValid === false
         && (
-        <div className="errorArea">
-          {error[1]}
+        <div className={styles.errorText}>
+          {errorMessage}
         </div>
         )}
       </div>

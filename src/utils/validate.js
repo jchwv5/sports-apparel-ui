@@ -18,103 +18,107 @@ const phoneRegex = /^([0-9]( |-)?)?(\(?[0-9]{3}\)?|[0-9]{3})( |-)?([0-9]{3}( |-)
 const emailRegex = /\S+@\S+\.\S+/;
 
 const validate = (type, name, data) => {
-  let dataIsValid = true;
+  // const data = JSON.parse(JSON.stringify(dataProp));
+  let isDataValid = true;
   let errorMsg = '';
   switch (type) {
     case 'text':
       if (!data || data.trim() === '') {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} field must not be left empty`;
       } else if (!(alphaRegex).test(data)) {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} should be letters only`;
       }
       break;
     case 'phone':
       if (!data || data.trim() === '') {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} field must not be left empty`;
       } else if (!(phoneRegex.test(data))) {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} should be numbers only, and in the proper format ( (XXX)-XXX-XXXX)`;
       }
       break;
     case 'email':
       if (!data || data.trim() === '') {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} field must not be left empty`;
       } else if (!(emailRegex.test(data))) {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} is invalid`;
       }
       break;
     case 'credit-card':
       if (!data || data.trim() === '') {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} field must not be left empty`;
       } else if (!(cardRegex.test(data))) {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} provided is invalid`;
       }
       break;
     case 'date':
       if (!data || data.trim() === '') {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} field must not be left empty`;
       } else if (!(dateRegex.test(data))) {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} must be in the proper format (DD/MM)`;
       }
       break;
     case 'currency':
       if (!data || data.trim() === '') {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} field must not be left empty`;
       } else if (!(currencyRegex.test(data))) {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} should be in dollars and cents`;
       }
       break;
     case 'cvv':
       if (!data || data.trim() === '') {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} field must not be left empty`;
       } else if (!(cvvRegex.test(data))) {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} should be 3-4 digits`;
       }
       break;
     case 'drop-down':
       if (!data || data.charAt(0) === '[') {
         errorMsg = `Please select a ${name} from the drop down`;
-        dataIsValid = false;
+        isDataValid = false;
       }
       break;
     case 'zip':
       if (!data || data.trim() === '') {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} field must not be left empty`;
       } else if (!(zipRegex.test(data))) {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} field must be 5 numbers`;
       }
       break;
     case 'alphaNum':
       if (!data || data.trim() === '') {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} field must not be left empty`;
       } else if (!(alphaNumRegex.test(data))) {
-        dataIsValid = false;
+        isDataValid = false;
         errorMsg = `${name} field should be alphabetic or numeric`;
       }
       break;
     default:
-      dataIsValid = false;
+      isDataValid = false;
       errorMsg = `No data provided for ${name} field`;
       break;
   }
 
-  return [dataIsValid, errorMsg];
+  return {
+    dataIsValid: isDataValid,
+    errorMessage: errorMsg
+  };
 };
 
 export default validate;

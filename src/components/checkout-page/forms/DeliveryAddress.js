@@ -9,7 +9,7 @@ import styles from './DeliveryAddress.module.css';
  * @return component
  */
 
-const DeliveryAddress = ({ errors, onChange, deliveryData }) => {
+const DeliveryAddress = ({ errorInfo, onChange, deliveryData }) => {
   const usStates = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Federated States of Micronesia', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 
   return (
@@ -21,7 +21,8 @@ const DeliveryAddress = ({ errors, onChange, deliveryData }) => {
         label="First Name"
         onChange={onChange}
         value={deliveryData.firstName}
-        error={errors.firstName}
+        isValid={errorInfo.firstName.dataIsValid}
+        errorMessage={errorInfo.firstName.errorMessage}
       />
       <FormItem
         type="text"
@@ -29,7 +30,8 @@ const DeliveryAddress = ({ errors, onChange, deliveryData }) => {
         label="Last Name"
         onChange={onChange}
         value={deliveryData.lastName}
-        error={errors.lastName}
+        errorMessage={errorInfo.lastName.errorMessage}
+        isValid={errorInfo.lastName.dataIsValid}
       />
       <FormItem
         placeholder="e.g. 123 Sesame Street"
@@ -38,7 +40,8 @@ const DeliveryAddress = ({ errors, onChange, deliveryData }) => {
         label="Street"
         onChange={onChange}
         value={deliveryData.street}
-        error={errors.deliveryStreet}
+        errorMessage={errorInfo.deliveryStreet.errorMessage}
+        isValid={errorInfo.deliveryStreet.dataIsValid}
       />
       <FormItem
         placeholder="e.g. Unit #1"
@@ -49,12 +52,14 @@ const DeliveryAddress = ({ errors, onChange, deliveryData }) => {
         value={deliveryData.street2}
       />
       <FormItem
+        placeholder="e.g. Denver"
         type="text"
         id="deliveryCity"
         label="City"
         onChange={onChange}
         value={deliveryData.city}
-        error={errors.deliveryCity}
+        errorMessage={errorInfo.deliveryCity.errorMessage}
+        isValid={errorInfo.deliveryCity.dataIsValid}
       />
       <FormItemDropdown
         id="deliveryState"
@@ -63,7 +68,8 @@ const DeliveryAddress = ({ errors, onChange, deliveryData }) => {
         placeholder="[Select State]"
         value={deliveryData.state}
         options={usStates}
-        error={errors.deliveryState}
+        errorMessage={errorInfo.deliveryState.errorMessage}
+        isValid={errorInfo.deliveryState.dataIsValid}
       />
       <FormItem
         placeholder="e.g. 12345"
@@ -72,7 +78,8 @@ const DeliveryAddress = ({ errors, onChange, deliveryData }) => {
         label="Zip"
         onChange={onChange}
         value={deliveryData.zip}
-        error={errors.deliveryZip}
+        errorMessage={errorInfo.deliveryZip.errorMessage}
+        isValid={errorInfo.deliveryZip.dataIsValid}
       />
     </div>
   );

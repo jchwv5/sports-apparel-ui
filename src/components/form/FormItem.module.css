@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 
-input.errorArea {
+.inputError {
   margin-top: .5em;
   width: 100%;
   padding: .5em;
@@ -21,6 +21,6 @@ input.errorArea {
   margin-bottom: .5em;
 }
 
-div.errorArea {
+.errorText {
   color: #f00;
 }

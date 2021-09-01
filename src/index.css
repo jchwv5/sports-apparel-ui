@@ -10,14 +10,3 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-
-div.errorArea {
-  color: #f00;
-  position: relative;
-  top: -5px;
-  bottom: 2px;
-}
-div .errorField {
-  outline-style:solid;
-  outline-color: #f00;
-}

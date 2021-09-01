@@ -9,7 +9,7 @@ import styles from './DeliveryAddress.module.css';
  * @return component
  */
 const BillingDetails = ({
-  errors, onChange, billingData, useShippingForBilling
+  errorInfo, onChange, billingData, useShippingForBilling
 }) => {
   const usStates = [
     'Alabama',
@@ -84,7 +84,8 @@ const BillingDetails = ({
             label="Street"
             onChange={onChange}
             value={billingData.billingStreet}
-            error={errors.billingStreet}
+            errorMessage={errorInfo.billingStreet.errorMessage}
+            isValid={errorInfo.billingStreet.dataIsValid}
           />
           <FormItem
             placeholder="e.g. Unit #1"
@@ -96,13 +97,15 @@ const BillingDetails = ({
             value={billingData.billingStreet2}
           />
           <FormItem
+            placeholder="e.g. Chicago"
             type="text"
             id="billingCity"
             label="City"
             onChange={onChange}
             defaultValue=""
             value={billingData.billingCity}
-            error={errors.billingCity}
+            errorMessage={errorInfo.billingCity.errorMessage}
+            isValid={errorInfo.billingCity.dataIsValid}
           />
           <FormItemDropdown
             id="billingState"
@@ -112,7 +115,8 @@ const BillingDetails = ({
             defaultValue=""
             value={billingData.billingState}
             options={usStates}
-            error={errors.billingState}
+            errorMessage={errorInfo.billingState.errorMessage}
+            isValid={errorInfo.billingState.dataIsValid}
           />
           <FormItem
             placeholder="e.g. 12345"
@@ -122,7 +126,8 @@ const BillingDetails = ({
             onChange={onChange}
             defaultValue=""
             value={billingData.billingZip}
-            error={errors.billingZip}
+            errorMessage={errorInfo.billingZip.errorMessage}
+            isValid={errorInfo.billingZip.dataIsValid}
           />
         </>
       )}
@@ -134,7 +139,8 @@ const BillingDetails = ({
         onChange={onChange}
         defaultValue=""
         value={billingData.email}
-        error={errors.email}
+        errorMessage={errorInfo.email.errorMessage}
+        isValid={errorInfo.email.dataIsValid}
       />
       <FormItem
         placeholder="e.g. 555-555-5555"
@@ -144,7 +150,8 @@ const BillingDetails = ({
         onChange={onChange}
         defaultValue=""
         value={billingData.phone}
-        error={errors.phone}
+        errorMessage={errorInfo.phone.errorMessage}
+        isValid={errorInfo.phone.dataIsValid}
       />
       <FormItem
         placeholder="e.g. 1234567812345678"
@@ -153,7 +160,8 @@ const BillingDetails = ({
         label="Credit Card"
         onChange={onChange}
         value={billingData.creditCard}
-        error={errors.cardNumber}
+        errorMessage={errorInfo.cardNumber.errorMessage}
+        isValid={errorInfo.cardNumber.dataIsValid}
       />
       <FormItem
         placeholder="e.g. 555"
@@ -163,7 +171,8 @@ const BillingDetails = ({
         onChange={onChange}
         defaultValue=""
         value={billingData.cvv}
-        error={errors.cvv}
+        errorMessage={errorInfo.cvv.errorMessage}
+        isValid={errorInfo.cvv.dataIsValid}
       />
       <FormItem
         placeholder="e.g. 05/21"
@@ -173,7 +182,8 @@ const BillingDetails = ({
         onChange={onChange}
         defaultValue=""
         value={billingData.expiration}
-        error={errors.expiration}
+        errorMessage={errorInfo.expiration.errorMessage}
+        isValid={errorInfo.expiration.dataIsValid}
       />
       <FormItem
         type="text"
@@ -182,7 +192,8 @@ const BillingDetails = ({
         onChange={onChange}
         defaultValue=""
         value={billingData.cardholder}
-        error={errors.cardholder}
+        errorMessage={errorInfo.cardholder.errorMessage}
+        isValid={errorInfo.cardholder.dataIsValid}
       />
     </div>
   );
