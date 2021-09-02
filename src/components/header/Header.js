@@ -79,7 +79,8 @@ const Header = () => {
               className="root"
               badgeContent={products.length}
               color="primary"
-              overlap="circular">
+              overlap="circular"
+            >
               {/* <img className="cart" src={cartLogo} alt="" /> */}
               <ShoppingCartIcon style={{ fontSize: 60, color: 'black' }} />
             </Badge>

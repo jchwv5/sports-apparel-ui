@@ -1,21 +1,19 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { FormControl } from '@material-ui/core';
-import { Radio } from '@material-ui/core';
-import postPromotions from './PromoDialogService';
-import { RadioGroup } from '@material-ui/core';
+import { FormControl, Radio, RadioGroup } from '@material-ui/core';
+
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import postPromotions from './PromoDialogService';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,7 +53,8 @@ const PromoDialog = ({ open, handleClose }) => {
   const [codeError, setCodeError] = useState(false);
   const [percentageError, setPercentageError] = useState(false);
   const [flatError, setFlatError] = useState(false);
-  const [apiError, setApiError] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [apiError, setApiError] = useState('');
   const [helperTextError, setHelperTextError] = useState('');
 
   const handleCodeChange = (event) => {

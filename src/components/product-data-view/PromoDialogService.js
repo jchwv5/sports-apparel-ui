@@ -23,7 +23,7 @@ export default async function postPromotions(code, type, percentage, flat, setAp
         notify('success', 'Promotion created successfully');
         return response.json();
       }
-      let result = response.status;
+      const result = response.status;
       if (result === 409) {
         notify('error', 'Error! Promo code already exists');
       }

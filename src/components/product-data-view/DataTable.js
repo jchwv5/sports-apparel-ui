@@ -165,7 +165,8 @@ const DataTable = () => {
           height: 700,
           width: '100%'
         }}
-        className={classes.root}>
+        className={classes.root}
+      >
         <DataGrid rows={products} columns={columns} rowsPerPageOptions={[20]} />
       </div>
       <div className={classes.root}>
@@ -176,7 +177,8 @@ const DataTable = () => {
           style={{ marginLeft: '130px' }}
           color="primary"
           variant="contained"
-          onClick={handleClickOpen}>
+          onClick={handleClickOpen}
+        >
           Create Promo
         </Button>
         <PromoDialog open={open} handleClose={handleClose} />
