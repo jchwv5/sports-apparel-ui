@@ -10,7 +10,7 @@ import Constants from '../../utils/constants';
  * @returns payment confirmation response
  */
 export default async function makePurchase(products, deliveryAddress, billingAddress, creditCard) {
-  await HttpHelper(Constants.PURCHASE_ENDPOINT, 'POST', {
+  await HttpHelper(Constants.SAVE_PURCHASE_ENDPOINT, 'POST', {
     products,
     deliveryAddress,
     billingAddress,

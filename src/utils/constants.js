@@ -1,9 +1,11 @@
 module.exports = Object.freeze({
   API_ERROR: 'Oops, something went wrong',
-  BASE_URL_API: 'https://fo4s-sports-apparel-api.herokuapp.com',
+  // BASE_URL_API: 'https://fo4s-sports-apparel-api.herokuapp.com',
+  BASE_URL_API: 'http://localhost:8085',
   PLACEHOLDER_IMAGE:
     'https://www.signfix.com.au/wp-content/uploads/2017/09/placeholder-600x400.png',
   PURCHASE_ENDPOINT: '/purchases',
+  SAVE_PURCHASE_ENDPOINT: '/purchases/create',
   ALL_PRODUCTS_ENDPOINT: '/products',
   ACTIVE_PRODUCTS_ENDPOINT: '/products?active=true',
   CREATE_PRODUCT_ENDPOINT: '/maintenance/create',

@@ -1,5 +1,6 @@
+/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { object } from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { useCart } from './CartContext';
@@ -19,7 +20,6 @@ import Spinner from '../Spinner/Spinner';
  */
 const CheckoutPage = () => {
   const history = useHistory();
-  const [, updateState] = useState();
   const [isLoading, setLoading] = useState(false);
   const [billingData, setBillingData] = React.useState({});
   const [deliveryData, setDeliveryData] = React.useState({});
@@ -59,61 +59,16 @@ const CheckoutPage = () => {
   };
 
   /**
-   * Supposed to force-update the state so it fixes the double-click bug but doesn't
-   * do what I expected it to?
-   */
-  const forceUpdate = useCallback(
-    () => {
-      updateState({});
-    },
-    []
-  );
-  /**
-   * Takes in three objects with the form data and sets that information to the state
-   * and validates it at the same time.
-   *
-   * @param {Object} deliveryAddress - The data from the delivery fields related to address
-   * and name
-   * @param {Object} billingAddress - The data from the billing fields related to address
-   * @param {Object} creditCard - The data from the billing fields related to the
-   * credit card.
-   */
-
-  const verifyInfo = (deliveryAddress, billingAddress, creditCard) => {
-    setDeliveryErrors({
-      firstName: validate('text', 'First name', deliveryAddress.firstName),
-      lastName: validate('text', 'Last name', deliveryAddress.lastName),
-      deliveryStreet: validate('alphaNum', 'Delivery street', deliveryAddress.street),
-      deliveryCity: validate('text', 'Delivery city', deliveryAddress.city),
-      deliveryState: validate('drop-down', 'delivery state', deliveryAddress.state),
-      deliveryZip: validate('zip', 'Delivery zip', deliveryAddress.zip)
-    });
-    setBillingErrors({
-      billingStreet: validate('alphaNum', 'Billing street', billingAddress.street),
-      billingCity: validate('text', 'Billing city', billingAddress.city),
-      billingState: validate('drop-down', 'billing state', billingAddress.state),
-      billingZip: validate('zip', 'Billing zip', billingAddress.zip),
-      email: validate('email', 'E-mail', billingAddress.email),
-      phone: validate('phone', 'Phone', billingAddress.phone),
-      cardNumber: validate('credit-card', 'Credit card', creditCard.cardNumber),
-      cvv: validate('cvv', 'CVV', creditCard.cvv),
-      expiration: validate('date', 'Expiration', creditCard.expiration),
-      cardholder: validate('text', 'Cardholder', creditCard.cardholder)
-    });
-  };
-
-  /**
-   * Loops over deliveryInfo and billingInfo, pulling just the error booleans themselves
-   * and puts them into array to interate through.
-   *
-   * @param {*} deliveryInfo - Object that holds the results of the verification to
-   * go through and find out whether the form is valid or not
-   * @param {*} billingInfo - Object that holds the results of the verification to
-   * go through and find out whether the form is valid or not
-   * @returns either true or false, depending on whether the data submitted has errors.
-   */
+  * Loops over deliveryInfo and billingInfo, pulling just the error booleans themselves
+  * and puts them into array to interate through.
+  *
+  * @param {*} deliveryInfo - Object that holds the results of the verification to
+  * go through and find out whether the form is valid or not
+  * @param {*} billingInfo - Object that holds the results of the verification to
+  * go through and find out whether the form is valid or not
+  * @returns either true or false, depending on whether the data submitted has errors.
+  */
   const hasErrors = (deliveryInfo, billingInfo) => {
-    forceUpdate();
     const errorList = [];
 
     Object.values(deliveryInfo).forEach((e) => {
@@ -129,9 +84,49 @@ const CheckoutPage = () => {
     if (errorList.length > 0) return true;
     return false;
   };
+  /**
+   * Takes in three objects, runs the validate function on all the values from the form inside of the objects and then sets them to the state and passes
+   * the actual objects themselves back to handlePay so it can run hasErrors on it to check for any problems with the form itself.
+   *
+   * @param {Object} deliveryAddress - The data from the delivery fields related to address
+   * and name
+   * @param {Object} billingAddress - The data from the billing fields related to address
+   * @param {Object} creditCard - The data from the billing fields related to the
+   * credit card.
+   */
+  const verifyInfo = (deliveryAddress, billingAddress, creditCard) => {
+    const statelessDeliveryErrors = {
+      ...deliveryErrors,
+      firstName: validate('text', 'First name', deliveryAddress.firstName),
+      lastName: validate('text', 'Last name', deliveryAddress.lastName),
+      deliveryStreet: validate('alphaNum', 'Delivery street', deliveryAddress.street),
+      deliveryCity: validate('text', 'Delivery city', deliveryAddress.city),
+      deliveryState: validate('drop-down', 'delivery state', deliveryAddress.state),
+      deliveryZip: validate('zip', 'Delivery zip', deliveryAddress.zip)
+    };
+    const statelessBillingErrors = {
+      ...billingErrors,
+      billingStreet: validate('alphaNum', 'Billing street', billingAddress.street),
+      billingCity: validate('text', 'Billing city', billingAddress.city),
+      billingState: validate('drop-down', 'billing state', billingAddress.state),
+      billingZip: validate('zip', 'Billing zip', billingAddress.zip),
+      email: validate('email', 'E-mail', billingAddress.email),
+      phone: validate('phone', 'Phone', billingAddress.phone),
+      cardNumber: validate('credit-card', 'Credit card', creditCard.cardNumber),
+      cvv: validate('cvv', 'CVV', creditCard.cvv),
+      expiration: validate('date', 'Expiration', creditCard.expiration),
+      cardholder: validate('text', 'Cardholder', creditCard.cardholder)
+    };
+
+    setDeliveryErrors(statelessDeliveryErrors);
+    setBillingErrors(statelessBillingErrors);
+
+    return { statelessDeliveryErrors, statelessBillingErrors };
+  };
 
   const handlePay = () => {
     const productData = products.map(({ id, quantity }) => ({ id, quantity }));
+    console.log(productData);
     const deliveryAddress = {
       firstName: deliveryData.firstName,
       lastName: deliveryData.lastName,
@@ -165,12 +160,18 @@ const CheckoutPage = () => {
       cardholder: billingData.cardholder
     };
 
-    verifyInfo(deliveryAddress, billingAddress, creditCard);
+    const {
+      statelessDeliveryErrors,
+      statelessBillingErrors
+    } = verifyInfo(deliveryAddress, billingAddress, creditCard);
 
-    if (hasErrors(deliveryErrors, billingErrors) === false) {
+    // eslint-disable-next-line max-len
+    if (hasErrors(statelessDeliveryErrors, statelessBillingErrors) === false && productData.length > 0) {
       makePurchase(productData, deliveryAddress, billingAddress, creditCard).then(
         () => history.push('/confirmation')
       );
+    } else if (productData.length === 0) {
+      notify('error', 'You must have items in your cart to make a purchase');
     } else {
       notify('error', 'There was a problem processing your payment, you have not been charged');
     }

@@ -18,7 +18,6 @@ const phoneRegex = /^([0-9]( |-)?)?(\(?[0-9]{3}\)?|[0-9]{3})( |-)?([0-9]{3}( |-)
 const emailRegex = /\S+@\S+\.\S+/;
 
 const validate = (type, name, data) => {
-  // const data = JSON.parse(JSON.stringify(dataProp));
   let isDataValid = true;
   let errorMsg = '';
   switch (type) {
