@@ -5,13 +5,14 @@
 
 
 .filterContents {
+    margin-right: 20px;
     margin-left: 20px;
     vertical-align: middle;
 }
 
 .filterColor {
     display: inline-flex;
-    margin-left: 20px;
+    margin-left: 20px
 }
 
 .square {

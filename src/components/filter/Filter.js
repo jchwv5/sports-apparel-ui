@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { Brightness1 } from '@material-ui/icons';
@@ -18,6 +21,51 @@ const SidebarFilter = () => {
     && data.secondaryColorCode))];
   const materials = [...new Set(products.map((data) => data.material))];
 
+  function toggleBrandsArrow() {
+    const toggleElement = document.getElementById('brandsArrow');
+    if (toggleElement.innerHTML === 'keyboard_arrow_right') {
+      toggleElement.innerHTML = 'keyboard_arrow_down';
+    } else {
+      toggleElement.innerHTML = 'keyboard_arrow_right';
+    }
+  }
+
+  function toggleCategoryArrow() {
+    const toggleElement = document.getElementById('categoryArrow');
+    if (toggleElement.innerHTML === 'keyboard_arrow_right') {
+      toggleElement.innerHTML = 'keyboard_arrow_down';
+    } else {
+      toggleElement.innerHTML = 'keyboard_arrow_right';
+    }
+  }
+
+  function togglePriceArrow() {
+    const toggleElement = document.getElementById('priceArrow');
+    if (toggleElement.innerHTML === 'keyboard_arrow_right') {
+      toggleElement.innerHTML = 'keyboard_arrow_down';
+    } else {
+      toggleElement.innerHTML = 'keyboard_arrow_right';
+    }
+  }
+
+  function toggleColorArrow() {
+    const toggleElement = document.getElementById('colorArrow');
+    if (toggleElement.innerHTML === 'keyboard_arrow_right') {
+      toggleElement.innerHTML = 'keyboard_arrow_down';
+    } else {
+      toggleElement.innerHTML = 'keyboard_arrow_right';
+    }
+  }
+
+  function toggleMaterialArrow() {
+    const toggleElement = document.getElementById('materialArrow');
+    if (toggleElement.innerHTML === 'keyboard_arrow_right') {
+      toggleElement.innerHTML = 'keyboard_arrow_down';
+    } else {
+      toggleElement.innerHTML = 'keyboard_arrow_right';
+    }
+  }
+
   useEffect(() => {
     fetchProducts(setProducts, setApiError);
   }, []);
@@ -25,8 +73,9 @@ const SidebarFilter = () => {
     <div className={styles}>
       <ul className="collapsible">
         <li>
-          <div className="collapsible-header">
+          <div className="collapsible-header" onClick={toggleBrandsArrow}>
             Brand
+            <i id="brandsArrow" className="material-icons">keyboard_arrow_right</i>
           </div>
           <div className="collapsible-body">
             {brands.sort().map((brand) => (
@@ -38,8 +87,9 @@ const SidebarFilter = () => {
           </div>
         </li>
         <li>
-          <div className="collapsible-header">
+          <div className="collapsible-header" onClick={toggleCategoryArrow}>
             Category
+            <i id="categoryArrow" className="material-icons">keyboard_arrow_right</i>
           </div>
           <div className="collapsible-body">
             {categories.sort().map((category) => (
@@ -51,14 +101,23 @@ const SidebarFilter = () => {
           </div>
         </li>
         <li>
-          <div className="collapsible-header">
+          <div className="collapsible-header" onClick={togglePriceArrow}>
             Price
+            <i id="priceArrow" className="material-icons">keyboard_arrow_right</i>
           </div>
-          <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+          <div className="collapsible-body">
+            <div className="filterContents">
+              <label htmlFor="priceMin">Min.</label>
+              <input id="priceMin" type="text" />
+              <label htmlFor="priceMax">Max</label>
+              <input id="priceMax" type="text" />
+            </div>
+          </div>
         </li>
         <li>
-          <div className="collapsible-header">
+          <div className="collapsible-header" onClick={toggleColorArrow}>
             Color
+            <i id="colorArrow" className="material-icons">keyboard_arrow_right</i>
           </div>
           <div className="collapsible-body">
             {colors.map((color) => (
@@ -72,8 +131,9 @@ const SidebarFilter = () => {
           </div>
         </li>
         <li>
-          <div className="collapsible-header">
+          <div className="collapsible-header" onClick={toggleMaterialArrow}>
             Material
+            <i id="materialArrow" className="material-icons">keyboard_arrow_right</i>
           </div>
           <div className="collapsible-body">
             {materials.sort().map((material) => (
