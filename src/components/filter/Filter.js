@@ -75,7 +75,7 @@ const SidebarFilter = () => {
               <li data-id={color} className="filterColor">
                 <input type="checkbox" />
                 <div className="square">
-                  <ReactColorSquare className="square" height={20} width={20} color={color} />
+                  <ReactColorSquare className="square" height={21} width={21} color={color} />
                 </div>
               </li>
             ))}

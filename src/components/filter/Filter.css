@@ -1,11 +1,10 @@
 .collapsible {
     position: relative;
-    background-color: rgba(55, 56, 56, 0.075);
+    background-color: transparent;
 }
 
 
 .filterContents {
-    display: inline-block;
     margin-left: 20px;
     vertical-align: middle;
 }
