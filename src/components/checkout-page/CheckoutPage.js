@@ -19,6 +19,10 @@ import Spinner from '../Spinner/Spinner';
  * @return component
  */
 const CheckoutPage = () => {
+  const {
+    state: { products }
+  } = useCart();
+
   const history = useHistory();
   const [isLoading, setLoading] = useState(false);
   const [billingData, setBillingData] = React.useState({});
@@ -44,9 +48,6 @@ const CheckoutPage = () => {
     expiration: { dataIsValid: false, errorMessage: '' },
     cardholder: { dataIsValid: false, errorMessage: '' }
   });
-  const {
-    state: { products }
-  } = useCart();
 
   const onDeliveryChange = (e) => {
     setDeliveryData((prevValue) => ({ ...prevValue, [e.target.id]: e.target.value }));
@@ -126,7 +127,7 @@ const CheckoutPage = () => {
 
   const handlePay = () => {
     const productData = products.map(({ id, quantity }) => ({ id, quantity }));
-    console.log(productData);
+    console.log(JSON.stringify(productData));
     const deliveryAddress = {
       firstName: deliveryData.firstName,
       lastName: deliveryData.lastName,
@@ -170,10 +171,9 @@ const CheckoutPage = () => {
       makePurchase(productData, deliveryAddress, billingAddress, creditCard).then(
         () => history.push('/confirmation')
       );
-    } else if (productData.length === 0) {
-      notify('error', 'You must have items in your cart to make a purchase');
     } else {
       notify('error', 'There was a problem processing your payment, you have not been charged');
+      if (productData.length === 0) notify('error', 'You must have items in your cart to make a purchase');
     }
   };
 
