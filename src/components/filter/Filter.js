@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { Brightness1 } from '@material-ui/icons';
@@ -55,16 +54,7 @@ const SidebarFilter = () => {
           <div className="collapsible-header">
             Price
           </div>
-          <div className="collapsible-body">
-            <div className="filterContents">
-              <label htmlFor="priceMin">Min.</label>
-              <input type="text" id="priceMin" />
-            </div>
-            <div className="filterContents">
-              <label htmlFor="priceMxan">Max.</label>
-              <input type="text" id="priceMax" />
-            </div>
-          </div>
+          <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
         </li>
         <li>
           <div className="collapsible-header">
@@ -75,7 +65,7 @@ const SidebarFilter = () => {
               <li data-id={color} className="filterColor">
                 <input type="checkbox" />
                 <div className="square">
-                  <ReactColorSquare className="square" height={21} width={21} color={color} />
+                  <ReactColorSquare className="square" height={20} width={20} color={color} />
                 </div>
               </li>
             ))}
@@ -94,9 +84,9 @@ const SidebarFilter = () => {
             ))}
           </div>
         </li>
+        <button type="button">Submit</button>
+        <button type="button">Clear</button>
       </ul>
-      <button type="button">Submit</button>
-      <button type="button">Clear</button>
     </div>
   );
 };
