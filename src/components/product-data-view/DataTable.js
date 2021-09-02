@@ -7,6 +7,11 @@ import Constants from '../../utils/constants';
 import fetchProducts from './DataViewService';
 import PromoDialog from './PromoDialog';
 
+/**
+ * @name DataTable
+ * @description create a table view of products
+ * @return component
+ */
 const useStyles = makeStyles({
   root: {
     '& .table-header': {

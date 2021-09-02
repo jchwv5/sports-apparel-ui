@@ -6,8 +6,10 @@ import notify from '../Toast/Toast';
  *
  * @name postPromotions
  * @description Utilizes HttpHelper to make a post request to an API
- * @param {*} title, title for promotions
  * @param {*} code, title for promotions
+ * @param {*} type, type for promotions
+ * @param {*} percentage, percentage amount for discount
+ * @param {*} flat, flat dollar amount for discount
  * @param {*} setApiError sets error if response other than 200 is returned
  * @returns sets state for promotions if 200 response, else sets state for apiError
  */

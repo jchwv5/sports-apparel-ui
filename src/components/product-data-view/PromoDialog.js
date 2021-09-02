@@ -15,6 +15,11 @@ import CloseIcon from '@material-ui/icons/Close';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import postPromotions from './PromoDialogService';
 
+/**
+ * @name PromoDialog
+ * @description create a dialog for entering promotion disoucnt
+ * @return component
+ */
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiPaper-root': {
@@ -54,7 +59,7 @@ const PromoDialog = ({ open, handleClose }) => {
   const [percentageError, setPercentageError] = useState(false);
   const [flatError, setFlatError] = useState(false);
   // eslint-disable-next-line no-unused-vars
-  const [apiError, setApiError] = useState('');
+  const [apiError, setApiError] = useState(false);
   const [helperTextError, setHelperTextError] = useState('');
 
   const handleCodeChange = (event) => {
