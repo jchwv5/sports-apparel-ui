@@ -66,6 +66,16 @@ const Create = () => {
     setActiveStatus(e.target.value);
   };
 
+  const [nameError, setNameError] = React.useState('');
+  const [descriptionError, setDescriptionError] = React.useState('');
+  const [demographicError, setDemographicError] = React.useState('');
+  const [categoryError, setCategoryError] = React.useState('');
+  const [typeError, setTypeError] = React.useState('');
+  const [brandError, setBrandError] = React.useState('');
+  const [materialError, setMaterialError] = React.useState('');
+  const [priceError, setPriceError] = React.useState('');
+  const [activeError, setActiveError] = React.useState('');
+
   /**
    *
    * @name statusToBoolean
@@ -132,31 +142,49 @@ const Create = () => {
    */
   function validateForm() {
     let formIsValid = true;
-    if (!validate('text', 'Name', name)) {
+    let result = validate('text', 'Name', name);
+    setNameError(result[1]);
+    if (!result[0]) {
       formIsValid = false;
     }
-    if (!validate('text', 'Description', description)) {
+    result = validate('text', 'Description', description);
+    setDescriptionError(result[1]);
+    if (!result[0]) {
       formIsValid = false;
     }
-    if (!validate('drop-down', 'demographic', demographic)) {
+    result = validate('drop-down', 'demographic', demographic);
+    setDemographicError(result[1]);
+    if (!result[0]) {
       formIsValid = false;
     }
-    if (!validate('drop-down', 'category', category)) {
+    result = validate('drop-down', 'category', category);
+    setCategoryError(result[1]);
+    if (!result[0]) {
       formIsValid = false;
     }
-    if (!validate('drop-down', 'type', type)) {
+    result = validate('drop-down', 'type', type);
+    setTypeError(result[1]);
+    if (!result[0]) {
       formIsValid = false;
     }
-    if (!validate('text', 'Brand', brand)) {
+    result = validate('text', 'Brand', brand);
+    setBrandError(result[1]);
+    if (!result[0]) {
       formIsValid = false;
     }
-    if (!validate('text', 'Material', material)) {
+    result = validate('text', 'Material', material);
+    setMaterialError(result[1]);
+    if (!result[0]) {
       formIsValid = false;
     }
-    if (!validate('currency', 'Price', priceAsString)) {
+    result = validate('currency', 'Price', priceAsString);
+    setPriceError(result[1]);
+    if (!result[0]) {
       formIsValid = false;
     }
-    if (!validate('drop-down', 'status', activeStatus)) {
+    result = validate('drop-down', 'status', activeStatus);
+    setActiveError(result[1]);
+    if (!result[0]) {
       formIsValid = false;
     }
     if (formIsValid) {
@@ -173,12 +201,13 @@ const Create = () => {
           <h2>Create new item:</h2>
           <FormItem
             placeholder="Enter Product Name"
-            type="text"
+            type="textarea"
             id="name"
             label="Name"
             onChange={onNameChange}
             value={name.value}
           />
+          {nameError && <p className={styles.errMsg}>{nameError}</p>}
 
           <FormItem
             placeholder="Enter Product Description"
@@ -188,6 +217,7 @@ const Create = () => {
             onChange={onDescriptionChange}
             value={description.value}
           />
+          {descriptionError && <p className={styles.errMsg}>{descriptionError}</p>}
 
           <FormItemDropdown
             id="productDemographic"
@@ -197,6 +227,7 @@ const Create = () => {
             value={demographic.value}
             options={demographics}
           />
+          {demographicError && <p className={styles.errMsg}>{demographicError}</p>}
 
           <FormItemDropdown
             id="productCategory"
@@ -206,6 +237,7 @@ const Create = () => {
             value={category.value}
             options={categories}
           />
+          {categoryError && <p className={styles.errMsg}>{categoryError}</p>}
 
           <FormItemDropdown
             id="type"
@@ -215,33 +247,37 @@ const Create = () => {
             value={type.value}
             options={types}
           />
+          {typeError && <p className={styles.errMsg}>{typeError}</p>}
 
           <FormItem
             placeholder="Enter Product Brand"
-            type="text"
+            type="textarea"
             id="brand"
             label="Brand"
             onChange={onBrandChange}
             value={brand.value}
           />
+          {brandError && <p className={styles.errMsg}>{brandError}</p>}
 
           <FormItem
             placeholder="Enter Product Material"
-            type="text"
+            type="textarea"
             id="material"
             label="Material"
             onChange={onMaterialChange}
             value={material.value}
           />
+          {materialError && <p className={styles.errMsg}>{materialError}</p>}
 
           <FormItem
             placeholder="Enter Product Price"
-            type="text"
+            type="textarea"
             id="price"
             label="Price"
             onChange={onPriceChange}
             value={priceAsString.value}
           />
+          {priceError && <p className={styles.errMsg}>{priceError}</p>}
 
           <FormItemDropdown
             id="activeStatus"
@@ -251,6 +287,7 @@ const Create = () => {
             value={activeStatus.value}
             options={activeChoices}
           />
+          {activeError && <p className={styles.errMsg}>{activeError}</p>}
           <button onClick={validateForm} type="button" className={styles.createButton}>
             Create Product
           </button>
