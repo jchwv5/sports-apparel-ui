@@ -100,17 +100,17 @@ const CheckoutPage = () => {
       ...deliveryErrors,
       firstName: validate('text', 'First name', deliveryAddress.firstName),
       lastName: validate('text', 'Last name', deliveryAddress.lastName),
-      deliveryStreet: validate('alphaNum', 'Delivery street', deliveryAddress.street),
-      deliveryCity: validate('text', 'Delivery city', deliveryAddress.city),
-      deliveryState: validate('drop-down', 'delivery state', deliveryAddress.state),
-      deliveryZip: validate('zip', 'Delivery zip', deliveryAddress.zip)
+      deliveryStreet: validate('alphaNum', 'Delivery street', deliveryAddress.deliveryStreet),
+      deliveryCity: validate('text', 'Delivery city', deliveryAddress.deliveryCity),
+      deliveryState: validate('drop-down', 'delivery state', deliveryAddress.deliveryState),
+      deliveryZip: validate('zip', 'Delivery zip', deliveryAddress.deliveryZip)
     };
     const statelessBillingErrors = {
       ...billingErrors,
-      billingStreet: validate('alphaNum', 'Billing street', billingAddress.street),
-      billingCity: validate('text', 'Billing city', billingAddress.city),
-      billingState: validate('drop-down', 'billing state', billingAddress.state),
-      billingZip: validate('zip', 'Billing zip', billingAddress.zip),
+      billingStreet: validate('alphaNum', 'Billing street', billingAddress.billingStreet),
+      billingCity: validate('text', 'Billing city', billingAddress.billingCity),
+      billingState: validate('drop-down', 'billing state', billingAddress.billingState),
+      billingZip: validate('zip', 'Billing zip', billingAddress.billingZip),
       email: validate('email', 'E-mail', billingAddress.email),
       phone: validate('phone', 'Phone', billingAddress.phone),
       cardNumber: validate('credit-card', 'Credit card', creditCard.cardNumber),
@@ -127,29 +127,28 @@ const CheckoutPage = () => {
 
   const handlePay = () => {
     const productData = products.map(({ id, quantity }) => ({ id, quantity }));
-    console.log(JSON.stringify(productData));
     const deliveryAddress = {
       firstName: deliveryData.firstName,
       lastName: deliveryData.lastName,
-      street: deliveryData.deliveryStreet,
-      street2: deliveryData.deliveryStreet2,
-      city: deliveryData.deliveryCity,
-      state: deliveryData.deliveryState,
-      zip: deliveryData.deliveryZip
+      deliveryStreet: deliveryData.deliveryStreet,
+      deliveryStreet2: deliveryData.deliveryStreet2,
+      deliveryCity: deliveryData.deliveryCity,
+      deliveryState: deliveryData.deliveryState,
+      deliveryZip: deliveryData.deliveryZip
     };
     const billingAddress = {};
     if (checked) {
-      billingAddress.street = deliveryAddress.deliveryStreet;
-      billingAddress.street2 = deliveryAddress.deliveryStreet2;
-      billingAddress.city = deliveryAddress.deliveryCity;
-      billingAddress.state = deliveryAddress.deliveryState;
-      billingAddress.zip = deliveryAddress.deliveryZip;
+      billingAddress.billingStreet = deliveryData.deliveryStreet;
+      billingAddress.billingStreet2 = deliveryData.deliveryStreet2;
+      billingAddress.billingCity = deliveryData.deliveryCity;
+      billingAddress.billingState = deliveryData.deliveryState;
+      billingAddress.billingZip = deliveryData.deliveryZip;
     } else {
-      billingAddress.street = billingData.billingStreet;
-      billingAddress.street2 = billingData.billingStreet2;
-      billingAddress.city = billingData.billingCity;
-      billingAddress.state = billingData.billingState;
-      billingAddress.zip = billingData.billingZip;
+      billingAddress.billingStreet = billingData.billingStreet;
+      billingAddress.billingStreet2 = billingData.billingStreet2;
+      billingAddress.billingCity = billingData.billingCity;
+      billingAddress.billingState = billingData.billingState;
+      billingAddress.billingZip = billingData.billingZip;
     }
     billingAddress.email = billingData.email;
     billingAddress.phone = billingData.phone;
