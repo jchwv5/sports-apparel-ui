@@ -1,3 +1,5 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-param-reassign */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -66,6 +68,21 @@ const SidebarFilter = () => {
     }
   }
 
+  function uncheckAll() {
+    document.querySelectorAll('input[type="checkbox"]')
+      .forEach((el) => el.checked = false);
+  }
+
+  function clearPrice() {
+    document.getElementById('priceMin').value = '';
+    document.getElementById('priceMax').value = '';
+  }
+
+  function clearAll() {
+    clearPrice();
+    uncheckAll();
+  }
+
   useEffect(() => {
     fetchProducts(setProducts, setApiError);
   }, []);
@@ -108,9 +125,9 @@ const SidebarFilter = () => {
           <div className="collapsible-body">
             <div className="filterContents">
               <label htmlFor="priceMin">Min.</label>
-              <input id="priceMin" type="text" />
+              <input id="priceMin" type="number" />
               <label htmlFor="priceMax">Max</label>
-              <input id="priceMax" type="text" />
+              <input id="priceMax" type="number" />
             </div>
           </div>
         </li>
@@ -145,7 +162,7 @@ const SidebarFilter = () => {
           </div>
         </li>
         <button type="button">Submit</button>
-        <button type="button">Clear</button>
+        <button type="button" onClick={clearAll}>Clear</button>
       </ul>
     </div>
   );
