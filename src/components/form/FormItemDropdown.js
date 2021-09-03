@@ -19,6 +19,7 @@ const FormItemDropdown = ({
           id={id}
           onBlur={onChange}
           value={value}
+          autoComplete="off"
         >
           <option
             value={placeholder}

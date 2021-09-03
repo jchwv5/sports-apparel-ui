@@ -1,7 +1,5 @@
 /* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
-import { object } from 'prop-types';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useCart } from './CartContext';
 import styles from './CheckoutPage.module.css';
@@ -24,10 +22,14 @@ const CheckoutPage = () => {
   } = useCart();
 
   const history = useHistory();
+
   const [isLoading, setLoading] = useState(false);
+
   const [billingData, setBillingData] = React.useState({});
   const [deliveryData, setDeliveryData] = React.useState({});
+
   const [checked, setChecked] = React.useState(false);
+
   const [deliveryErrors, setDeliveryErrors] = React.useState({
     firstName: { dataIsValid: false, errorMessage: '' },
     lastName: { dataIsValid: false, errorMessage: '' },
@@ -60,25 +62,16 @@ const CheckoutPage = () => {
   };
 
   /**
-  * Loops over deliveryInfo and billingInfo, pulling just the error booleans themselves
-  * and puts them into array to interate through.
+  * Loops over the errors provided and pulls the boolean for whether the data is validated. If it fails, it returns true otherwise it returns false if the information is all valid.
   *
-  * @param {*} deliveryInfo - Object that holds the results of the verification to
-  * go through and find out whether the form is valid or not
-  * @param {*} billingInfo - Object that holds the results of the verification to
-  * go through and find out whether the form is valid or not
+  * @param {*} errorInfo - Object that holds the results of the verification to go through and find out whether the form is valid or not.
   * @returns either true or false, depending on whether the data submitted has errors.
   */
-  const hasErrors = (deliveryInfo, billingInfo) => {
+  const hasErrors = (errorInfo) => {
     const errorList = [];
 
-    Object.values(deliveryInfo).forEach((e) => {
+    Object.values(errorInfo).forEach((e) => {
       if (e.dataIsValid === false) {
-        errorList.push(e.dataIsValid);
-      }
-    });
-    Object.values(billingInfo).forEach((e) => {
-      if (e.dataIsvalid === false) {
         errorList.push(e.dataIsValid);
       }
     });
@@ -125,8 +118,12 @@ const CheckoutPage = () => {
     return { statelessDeliveryErrors, statelessBillingErrors };
   };
 
+  /**
+   * The handlePay function is called when checkout is clicked. It packs up the relevant info to be both validated and then sent to the API when successfully validated. If the info
+   * is not valid, it will refuse the transaction and send a toast message to the user depending on why it failed.
+   */
   const handlePay = () => {
-    const productData = products.map(({ id, quantity }) => ({ id, quantity }));
+    const productData = products.map(({ id, quantity }) => ({ quantity, id }));
     const deliveryAddress = {
       firstName: deliveryData.firstName,
       lastName: deliveryData.lastName,
@@ -164,8 +161,10 @@ const CheckoutPage = () => {
       statelessBillingErrors
     } = verifyInfo(deliveryAddress, billingAddress, creditCard);
 
-    // eslint-disable-next-line max-len
-    if (hasErrors(statelessDeliveryErrors, statelessBillingErrors) === false && productData.length > 0) {
+    const hasBillingErrors = hasErrors(statelessBillingErrors);
+    const hasDeliveryErrors = hasErrors(statelessDeliveryErrors);
+
+    if ((!hasBillingErrors && !hasDeliveryErrors) && productData.length > 0) {
       makePurchase(productData, deliveryAddress, billingAddress, creditCard).then(
         () => history.push('/confirmation')
       );

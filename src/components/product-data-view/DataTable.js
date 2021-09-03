@@ -5,7 +5,13 @@ import Button from '@material-ui/core/Button';
 import styles from '../product-page/ProductPage.module.css';
 import Constants from '../../utils/constants';
 import fetchProducts from './DataViewService';
+import PromoDialog from './PromoDialog';
 
+/**
+ * @name DataTable
+ * @description create a table view of products
+ * @return component
+ */
 const useStyles = makeStyles({
   root: {
     '& .table-header': {
@@ -19,8 +25,9 @@ const useStyles = makeStyles({
 
     '& .MuiButton-root': {
       position: 'absolute',
-      bottom: '1px',
-      left: '50%'
+      diplay: 'inline-block',
+      bottom: '0.25px',
+      left: '60%'
     }
   }
 });
@@ -141,6 +148,14 @@ const DataTable = () => {
     fetchProducts(setProducts, setApiError);
   }, []);
 
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div>
       {apiError && (
@@ -163,6 +178,15 @@ const DataTable = () => {
         <Button href="/maintenance/create" color="primary" variant="contained">
           Create
         </Button>
+        <Button
+          style={{ marginLeft: '130px' }}
+          color="primary"
+          variant="contained"
+          onClick={handleClickOpen}
+        >
+          Create Promo
+        </Button>
+        <PromoDialog open={open} handleClose={handleClose} />
       </div>
     </div>
   );
