@@ -2,11 +2,24 @@
   margin-top: .5em;
   width: 100%;
   padding: .5em;
+}
+
+.inputError {
+  margin-top: .5em;
+  width: 100%;
+  padding: .5em;
   box-sizing: border-box;
+  border-color: #F00 !important;
+  border-width: .001em !important;
+  border-style: solid !important;
 }
 
 .label {
   font-weight: 700;
   color: #666666;
   margin-bottom: .5em;
+}
+
+.errorText {
+  color: #f00;
 }

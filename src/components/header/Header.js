@@ -9,6 +9,7 @@ import constants from '../../utils/constants';
 import { useCart } from '../checkout-page/CartContext';
 import logo from '../../assets/logo.png';
 // import cartLogo from '../../assets/cartLogo.png';
+import style from './Header.module.css';
 import './Header.css';
 
 /**
@@ -45,7 +46,9 @@ const Header = () => {
    * @description Function to run if google login was unsuccessful
    */
   const handleGoogleLoginFailure = () => {
-    setGoogleError('There was a problem logging in with Google. Please wait and try again later.');
+    setGoogleError(
+      'There was a problem logging in with Google. Please wait and try again later.'
+    );
   };
 
   /**
@@ -62,37 +65,35 @@ const Header = () => {
    * @description Function to run if google logout was unsuccessful
    */
   const handleGoogleLogoutFailure = () => {
-    setGoogleError('There was a problem logging out with Google. Please wait and try again later.');
+    setGoogleError(
+      'There was a problem logging out with Google. Please wait and try again later.'
+    );
   };
 
   return (
-    <div className="header">
-      <ul className="ul">
-        <li className="li">
+    <div className={style.header}>
+      <ul>
+        <li>
           <NavLink to="/">
-            <img className="logo" src={logo} alt="" />
+            <img className={style.logo} src={logo} alt="" />
           </NavLink>
         </li>
-        <li id="cart" className="li">
+        <li id={style.cart}>
           <NavLink to="/checkout">
             <Badge
-              className="root"
+              className={style.root}
               badgeContent={products.length}
               color="primary"
               overlap="circular"
             >
-              {/* <img className="cart" src={cartLogo} alt="" /> */}
               <ShoppingCartIcon style={{ fontSize: 60, color: 'black' }} />
             </Badge>
           </NavLink>
         </li>
-        {user && <span className="nameStyle">Welcome, </span>}
-        {user && <span className="nameStyle">{user.firstName}</span>}
-        &nbsp;
-        {user && <span className="nameStyle">{user.lastName}</span>}
+        {user && <span className={style.user}>{user.email}</span>}
         {googleError && <span>{googleError}</span>}
         {apiError && <span>Api Error</span>}
-        <li className="li">
+        <li>
           {!user ? (
             <GoogleLogin
               clientId={constants.GOOGLE_CLIENT_ID}
