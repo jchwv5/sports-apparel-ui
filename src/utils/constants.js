@@ -5,6 +5,7 @@ module.exports = Object.freeze({
   PLACEHOLDER_IMAGE:
     'https://www.signfix.com.au/wp-content/uploads/2017/09/placeholder-600x400.png',
   PURCHASE_ENDPOINT: '/purchases',
+  SAVE_PURCHASE_ENDPOINT: '/purchases',
   ALL_PRODUCTS_ENDPOINT: '/products',
   ACTIVE_PRODUCTS_ENDPOINT: '/products?active=true',
   CREATE_PRODUCT_ENDPOINT: '/maintenance/create',

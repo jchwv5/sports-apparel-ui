@@ -107,10 +107,10 @@ const CheckoutPage = () => {
     };
     const statelessBillingErrors = {
       ...billingErrors,
-      billingStreet: validate('alphaNum', 'Billing street', billingAddress.street),
-      billingCity: validate('text', 'Billing city', billingAddress.city),
-      billingState: validate('drop-down', 'billing state', billingAddress.state),
-      billingZip: validate('zip', 'Billing zip', billingAddress.zip),
+      billingStreet: validate('alphaNum', 'Billing street', billingAddress.billingStreet),
+      billingCity: validate('text', 'Billing city', billingAddress.billingCity),
+      billingState: validate('drop-down', 'billing state', billingAddress.billingState),
+      billingZip: validate('zip', 'Billing zip', billingAddress.billingZip),
       email: validate('email', 'E-mail', billingAddress.email),
       phone: validate('phone', 'Phone', billingAddress.phone),
       cardNumber: validate('credit-card', 'Credit card', creditCard.cardNumber),
@@ -138,17 +138,17 @@ const CheckoutPage = () => {
     };
     const billingAddress = {};
     if (checked) {
-      billingAddress.street = deliveryData.deliveryStreet;
-      billingAddress.street2 = deliveryData.deliveryStreet2;
-      billingAddress.city = deliveryData.deliveryCity;
-      billingAddress.state = deliveryData.deliveryState;
-      billingAddress.zip = deliveryData.deliveryZip;
+      billingAddress.billingStreet = deliveryData.deliveryStreet;
+      billingAddress.billingStreet2 = deliveryData.deliveryStreet2;
+      billingAddress.billingCity = deliveryData.deliveryCity;
+      billingAddress.billingState = deliveryData.deliveryState;
+      billingAddress.billingZip = deliveryData.deliveryZip;
     } else {
-      billingAddress.street = billingData.billingStreet;
-      billingAddress.street2 = billingData.billingStreet2;
-      billingAddress.city = billingData.billingCity;
-      billingAddress.state = billingData.billingState;
-      billingAddress.zip = billingData.billingZip;
+      billingAddress.billingStreet = billingData.billingStreet;
+      billingAddress.billingStreet2 = billingData.billingStreet2;
+      billingAddress.billingCity = billingData.billingCity;
+      billingAddress.billingState = billingData.billingState;
+      billingAddress.billingZip = billingData.billingZip;
     }
     billingAddress.email = billingData.email;
     billingAddress.phone = billingData.phone;

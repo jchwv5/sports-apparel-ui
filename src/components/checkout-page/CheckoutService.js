@@ -17,7 +17,7 @@ export default async function makePurchase(products, deliveryAddress, billingAdd
     creditCard
   })
     .then((response) => response.json())
-    .catch(() => {
-      console.error('Failed to purchase');
+    .catch((err) => {
+      console.error(err);
     });
 }
