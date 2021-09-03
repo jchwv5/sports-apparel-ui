@@ -86,8 +86,10 @@ const Header = () => {
             </Badge>
           </NavLink>
         </li>
-        {user && <span>{user.firstName}</span>}
-        {user && <span>{user.lastName}</span>}
+        {user && <span className="nameStyle">Welcome, </span>}
+        {user && <span className="nameStyle">{user.firstName}</span>}
+        &nbsp;
+        {user && <span className="nameStyle">{user.lastName}</span>}
         {googleError && <span>{googleError}</span>}
         {apiError && <span>Api Error</span>}
         <li className="li">

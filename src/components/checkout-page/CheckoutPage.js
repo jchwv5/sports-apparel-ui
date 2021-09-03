@@ -72,7 +72,7 @@ const CheckoutPage = () => {
       cardholder: billingData.cardholder
     };
     makePurchase(productData, deliveryAddress, billingAddress, creditCard).then(
-      () => history.push('/confirmation')
+      () => setLoading(false), history.push('/confirmation')
     );
   };
 
@@ -118,9 +118,9 @@ const CheckoutPage = () => {
           <button
             onClick={() => {
               setLoading(true); setTimeout(() => {
-                setLoading(false);
+                // setLoading(false);
                 handlePay();
-              }, 5000);
+              }, 1000);
             }}
             type="button"
             className={styles.payButton}

@@ -53,3 +53,7 @@ span .MuiBadge-colorPrimary {
   display: block;
   text-align: center;
 }
+.nameStyle {
+  font-size: large;
+  margin-top: 4px;
+}
