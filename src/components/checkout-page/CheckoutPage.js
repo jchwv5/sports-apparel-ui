@@ -218,9 +218,9 @@ const CheckoutPage = () => {
           <button
             onClick={() => {
               setLoading(true); setTimeout(() => {
-                setLoading(false);
+                // setLoading(false);
                 handlePay();
-              });
+              }, 1000);
             }}
             type="button"
             className={styles.payButton}
