@@ -6,7 +6,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { Brightness1 } from '@material-ui/icons';
-import { GetColorName } from 'hex-color-to-color-name';
 import M from 'materialize-css/dist/js/materialize.min';
 import ReactColorSquare from 'react-color-square';
 import styles from './Filter.css';
