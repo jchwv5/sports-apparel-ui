@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from 'react';
-import M from 'materialize-css';
+import M from 'materialize-css/dist/js/materialize.min';
 import 'materialize-css/dist/css/materialize.min.css';
 import styles from './Sidebar.css';
 import SidebarFilter from '../filter/Filter';
@@ -31,9 +31,9 @@ const Sidebar = (props) => {
     instance.open();
   }, []);
   /**
-   *Function to pass data-id value of licked link to product page as filterParam
-   * @param {*} e click event target
-   */
+ *Function to pass data-id value of licked link to product page as filterParam
+ * @param {*} e click event target
+ */
   const handleClick = (e) => {
     props.onClick(e.target.dataset.id);
   };
@@ -71,12 +71,7 @@ const Sidebar = (props) => {
         </div>
       </ul>
       <div />
-      <a
-        href="#!"
-        type="button"
-        data-target="slide-out"
-        className="sidenav-trigger"
-      >
+      <a href="#!" type="button" data-target="slide-out" className="sidenav-trigger">
         <i className="material-icons">arrow_forward_ios</i>
       </a>
     </div>

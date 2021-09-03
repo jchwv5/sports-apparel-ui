@@ -5,8 +5,9 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import ReactColorSquare from 'react-color-square';
+import { Brightness1 } from '@material-ui/icons';
 import M from 'materialize-css/dist/js/materialize.min';
+import ReactColorSquare from 'react-color-square';
 import styles from './Filter.css';
 import fetchProducts from '../product-page/ProductPageService';
 
