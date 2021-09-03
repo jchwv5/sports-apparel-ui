@@ -5,7 +5,6 @@ import styles from './ProductPage.module.css';
 import Constants from '../../utils/constants';
 import fetchProducts from './ProductPageService';
 import Sidebar from '../sidebar/Sidebar';
-import SidebarFilter from '../filter/Filter';
 
 /**
  * @name ProductPage
@@ -56,7 +55,7 @@ const ProductPage = () => {
     return (
       <div>
         {apiError && <p className={styles.errMsg} data-testid="errMsg">{Constants.API_ERROR}</p>}
-        <Sidebar filterParam={filterParam} onClick={handleClick} products={products} />
+        <Sidebar filterParam={filterParam} onClick={handleClick} />
         <div id="productCards" className={styles.app}>
           {clearFilteredProducts()}
           {products.filter(filterProducts)}

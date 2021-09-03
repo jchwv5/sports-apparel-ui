@@ -15,6 +15,7 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import notify from '../Toast/Toast';
+import Constants from '../../utils/constants';
 import { useCart } from '../checkout-page/CartContext';
 // eslint-disable-next-line import/no-cycle
 import Modal from '../Modal/Modal';
@@ -26,11 +27,9 @@ import Modal from '../Modal/Modal';
  */
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100%',
     maxWidth: 345
   },
   media: {
-    backgroundSize: '50%',
     height: 0,
     paddingTop: '56.25%'
   },
@@ -57,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
  */
 const ProductCard = ({ product }) => {
   const classes = useStyles();
-
   const { dispatch } = useCart();
 
   const onAdd = () => {
@@ -68,11 +66,10 @@ const ProductCard = ({ product }) => {
         title: product.name,
         price: product.price,
         description: product.description,
-        quantity: 1,
-        image: product.imageSrc
+        quantity: 1
       }
     });
-    notify('success', 'Item added');
+    notify('success', 'Item added to cart!');
   };
   const [show, setShow] = useState(false);
 
@@ -88,18 +85,18 @@ const ProductCard = ({ product }) => {
             <Avatar aria-label="demographics" className={classes.avatar}>
               {product.demographic.charAt(0)}
             </Avatar>
-          )}
+        )}
           action={(
             <IconButton aria-label="settings">
               <MoreVertIcon />
             </IconButton>
-          )}
+        )}
           title={product.name}
           subheader={`${product.demographic} ${product.category} ${product.type}`}
         />
         <CardMedia
           className={classes.media}
-          image={product.imageSrc}
+          image={Constants.PLACEHOLDER_IMAGE}
           title="placeholder"
           onClick={() => setShow(true)}
         />

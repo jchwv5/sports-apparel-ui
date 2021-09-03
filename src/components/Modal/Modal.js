@@ -49,45 +49,49 @@ const Modal = (props) => {
       <div className={style.fill}>
         <img src={item.imageSrc} alt="Product" />
       </div>
+      <br />
+      <br />
       <div className={style.container}>
-        <div className={style.nameText}><h3>{item.name}</h3></div>
+        <div className={style.nameText}><h1>{item.name}</h1></div>
         <div className={style.modalBody}>
-          <div className={style.word}>
+          <div>
             <b>Product ID:</b>
             {'\u00A0'}
             {item.id}
           </div>
-          <div className={style.word}>
+          <div>
             <b>Product Description:</b>
             {'\u00A0'}
             {item.description}
           </div>
-          <div className={style.word}>
+          <div>
             <b>Category:</b>
             {'\u00A0'}
             {item.category}
           </div>
-          <div className={style.word}>
+          <div>
             <b>Type:</b>
             {'\u00A0'}
             {item.type}
           </div>
+          <br />
           <div className={style.colorElements}>
-            <p>
-              <h6>Colors</h6>
-              <span className={style.dot} style={{ backgroundColor: item.primaryColorCode }} />
+            <h3>Colors</h3>
+            <span className={style.dot} style={{ backgroundColor: item.primaryColorCode }} />
             &nbsp;&nbsp;&nbsp;
-              <span className={style.dot} style={{ backgroundColor: item.secondaryColorCode }} />
-              <h6>
-                $
-                {item.price}
-              </h6>
-            </p>
+            <span className={style.dot} style={{ backgroundColor: item.secondaryColorCode }} />
+          </div>
+          <br />
+          <div className={style.priceText}>
+            <h3>
+              $
+              {item.price}
+            </h3>
           </div>
           <div className={style.buttons}>
 
             <div className={style.actn_btn}>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
               <ButtonDecrement onClickFunc={decrementCounter} />
               <Display message={counter} />
               <ButtonIncrement onClickFunc={incrementCounter} />

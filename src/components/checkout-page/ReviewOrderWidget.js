@@ -16,7 +16,7 @@ const ReviewOrderWidget = () => {
   return (
     <>
       {products.map(({
-        price, title, description, quantity, image
+        price, title, description, quantity
       }) => (
         <OrderItem
           key={title}
@@ -24,7 +24,6 @@ const ReviewOrderWidget = () => {
           title={title}
           description={description}
           quantity={quantity}
-          image={image}
         />
       ))}
       <hr />
