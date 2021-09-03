@@ -63,7 +63,8 @@ async function fetchTypes(setTypes, setApiError) {
  * @param {Function} setApiError - useState function to set apiError if error occurs
  * @returns response if POST is successfull with a toast, or error toast if failure
  */
-async function productPost(name,
+async function productPost(
+  name,
   description,
   demographic,
   category,
@@ -72,7 +73,8 @@ async function productPost(name,
   material,
   price,
   active,
-  setApiError) {
+  setApiError
+) {
   await HttpHelper(Constants.ALL_PRODUCTS_ENDPOINT, 'POST', {
     name,
     description,
