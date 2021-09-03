@@ -24,11 +24,6 @@ span {
   grid-area: delivery;
 }
 
-div .errorField {
-  outline-style:solid;
-  outline-color: #f00;
-}
-
 select {
   display: inline;
 }

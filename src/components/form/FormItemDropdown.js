@@ -15,7 +15,7 @@ const FormItemDropdown = ({
       {label}
       <div>
         <select
-          className={styles.input}
+          className={`${errorMessage ? styles.inputError : styles.input}`}
           id={id}
           onBlur={onChange}
           value={value}

@@ -100,10 +100,10 @@ const CheckoutPage = () => {
       ...deliveryErrors,
       firstName: validate('text', 'First name', deliveryAddress.firstName),
       lastName: validate('text', 'Last name', deliveryAddress.lastName),
-      deliveryStreet: validate('alphaNum', 'Delivery street', deliveryAddress.street),
-      deliveryCity: validate('text', 'Delivery city', deliveryAddress.city),
-      deliveryState: validate('drop-down', 'delivery state', deliveryAddress.state),
-      deliveryZip: validate('zip', 'Delivery zip', deliveryAddress.zip)
+      deliveryStreet: validate('alphaNum', 'Delivery street', deliveryAddress.deliveryStreet),
+      deliveryCity: validate('text', 'Delivery city', deliveryAddress.deliveryCity),
+      deliveryState: validate('drop-down', 'delivery state', deliveryAddress.deliveryState),
+      deliveryZip: validate('zip', 'Delivery zip', deliveryAddress.deliveryZip)
     };
     const statelessBillingErrors = {
       ...billingErrors,
@@ -127,23 +127,22 @@ const CheckoutPage = () => {
 
   const handlePay = () => {
     const productData = products.map(({ id, quantity }) => ({ id, quantity }));
-    console.log(JSON.stringify(productData));
     const deliveryAddress = {
       firstName: deliveryData.firstName,
       lastName: deliveryData.lastName,
-      street: deliveryData.deliveryStreet,
-      street2: deliveryData.deliveryStreet2,
-      city: deliveryData.deliveryCity,
-      state: deliveryData.deliveryState,
-      zip: deliveryData.deliveryZip
+      deliveryStreet: deliveryData.deliveryStreet,
+      deliveryStreet2: deliveryData.deliveryStreet2,
+      deliveryCity: deliveryData.deliveryCity,
+      deliveryState: deliveryData.deliveryState,
+      deliveryZip: deliveryData.deliveryZip
     };
     const billingAddress = {};
     if (checked) {
-      billingAddress.street = deliveryAddress.deliveryStreet;
-      billingAddress.street2 = deliveryAddress.deliveryStreet2;
-      billingAddress.city = deliveryAddress.deliveryCity;
-      billingAddress.state = deliveryAddress.deliveryState;
-      billingAddress.zip = deliveryAddress.deliveryZip;
+      billingAddress.street = deliveryData.deliveryStreet;
+      billingAddress.street2 = deliveryData.deliveryStreet2;
+      billingAddress.city = deliveryData.deliveryCity;
+      billingAddress.state = deliveryData.deliveryState;
+      billingAddress.zip = deliveryData.deliveryZip;
     } else {
       billingAddress.street = billingData.billingStreet;
       billingAddress.street2 = billingData.billingStreet2;
@@ -160,7 +159,6 @@ const CheckoutPage = () => {
       expiration: billingData.expiration,
       cardholder: billingData.cardholder
     };
-
     const {
       statelessDeliveryErrors,
       statelessBillingErrors

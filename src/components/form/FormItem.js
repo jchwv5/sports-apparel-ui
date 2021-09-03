@@ -15,7 +15,7 @@ const FormItem = ({
       {label}
       <div>
         <input
-          className={`${isValid === false ? styles.inputError : styles.input}`}
+          className={`${errorMessage ? styles.inputError : styles.input}`}
           id={id}
           onChange={onChange}
           placeholder={placeholder}

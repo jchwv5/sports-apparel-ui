@@ -2,7 +2,6 @@
   margin-top: .5em;
   width: 100%;
   padding: .5em;
-  box-sizing: border-box;
 }
 
 .inputError {
@@ -10,9 +9,9 @@
   width: 100%;
   padding: .5em;
   box-sizing: border-box;
-  border-color: #F00;
-  border-width: 50px;
-  border-style: solid
+  border-color: #F00 !important;
+  border-width: .01em !important;
+  border-style: solid !important;
 }
 
 .label {
