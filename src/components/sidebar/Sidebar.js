@@ -5,7 +5,6 @@ import React, { useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min';
 import 'materialize-css/dist/css/materialize.min.css';
 import styles from './Sidebar.css';
-import SidebarFilter from '../filter/Filter';
 /**
  * Function to initialize sidebar component
  * @param {*} props sidebar returns filterParam to ProductPage.js
@@ -41,32 +40,28 @@ const Sidebar = (props) => {
   return (
     <div className={styles}>
       <ul id="slide-out" className="sidenav invisible-top">
-        <a href="#!" type="button" data-target="slide-out" className="sidenav-close">
+        <a type="button" data-target="slide-out" className="sidenav-close">
           <i className="material-icons">arrow_back_ios</i>
         </a>
+        <li />
         <div>
           <li>
-            <a href="#!" data-id="All" onClick={handleClick.bind(this)}>All</a>
+            <a data-id="All" onClick={handleClick.bind(this)}>All</a>
           </li>
         </div>
         <div>
           <li>
-            <a href="#!" data-id="Men" onClick={handleClick.bind(this)}>Men</a>
+            <a data-id="Men" onClick={handleClick.bind(this)}>Men</a>
           </li>
         </div>
         <div>
           <li>
-            <a href="#!" data-id="Women" onClick={handleClick.bind(this)}>Women</a>
+            <a data-id="Women" onClick={handleClick.bind(this)}>Women</a>
           </li>
         </div>
         <div>
           <li>
-            <a href="#!" data-id="Kids" onClick={handleClick.bind(this)}>Kids</a>
-          </li>
-        </div>
-        <div>
-          <li>
-            <SidebarFilter />
+            <a data-id="Kids" onClick={handleClick.bind(this)}>Kids</a>
           </li>
         </div>
       </ul>

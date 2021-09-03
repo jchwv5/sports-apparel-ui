@@ -10,7 +10,6 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "linebreak-style": 0,
     "comma-dangle": ["error", "never"],
-    "react/prop-types": 0,
-    "import/no-named-as-default": 0
-   }
+    "react/prop-types": 0
+  }
 }

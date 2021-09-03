@@ -8,11 +8,11 @@ import { toPrice } from './ReviewOrderWidgetService';
  * @return component
  */
 const OrderItem = ({
-  price, title, description, quantity, image
+  price, title, description, quantity
 }) => (
   <div className={styles.orderItem}>
     <div className={styles.image}>
-      <img src={image} alt={title} />
+      IMAGE HERE
     </div>
     <div className={styles.item}>
       <p className={styles.itemTitle}>{title}</p>

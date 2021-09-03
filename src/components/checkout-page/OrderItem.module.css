@@ -1,18 +1,5 @@
-img {
-  text-align: center;
-  object-fit: contain;
-  height: 160px;
-  overflow: hidden;
-  position: relative;
-  width: 80%;
-}
-
 p {
   color: #666666;
-}
-
-.itemTitle {
-  font-weight: 700;
 }
 
 .orderItem {
@@ -21,6 +8,10 @@ p {
   grid-template-rows: 1fr;
   gap: 0px 1em;
   align-items: center;
+}
+
+.itemTitle {
+  font-weight: 700;
 }
 
 .price {
