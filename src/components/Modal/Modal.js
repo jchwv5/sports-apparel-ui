@@ -7,15 +7,22 @@ import style from './Modal.module.css';
 
 function ButtonIncrement(num) {
   return (
-    <button type="button" className={style.quantityButtons} onClick={num.onClickFunc}>
+    <button
+      type="button"
+      className={style.quantityButtons}
+      onClick={num.onClickFunc}
+    >
       +
     </button>
   );
 }
 function ButtonDecrement(num) {
   return (
-
-    <button type="button" className={style.quantityButtons} onClick={num.onClickFunc}>
+    <button
+      type="button"
+      className={style.quantityButtons}
+      onClick={num.onClickFunc}
+    >
       -
     </button>
   );
@@ -23,9 +30,7 @@ function ButtonDecrement(num) {
 function Display(num) {
   return (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
-    <label className={style.quantityButtons}>
-      {num.message}
-    </label>
+    <label className={style.quantityButtons}>{num.message}</label>
   );
 }
 const Modal = (props) => {
@@ -42,7 +47,13 @@ const Modal = (props) => {
       <div className={style.gridContainer}>
         <div className={style.cartButton}>
           <div className={style.closeDiv}>
-            <Button type="button" className={style.closeButton} onClick={onClose}>X</Button>
+            <Button
+              type="button"
+              className={style.closeButton}
+              onClick={onClose}
+            >
+              X
+            </Button>
           </div>
         </div>
       </div>
@@ -85,7 +96,6 @@ const Modal = (props) => {
             </p>
           </div>
           <div className={style.buttons}>
-
             <div className={style.actn_btn}>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <ButtonDecrement onClickFunc={decrementCounter} />
