@@ -46,7 +46,9 @@ const Header = () => {
    * @description Function to run if google login was unsuccessful
    */
   const handleGoogleLoginFailure = () => {
-    setGoogleError('There was a problem logging in with Google. Please wait and try again later.');
+    setGoogleError(
+      'There was a problem logging in with Google. Please wait and try again later.'
+    );
   };
 
   /**
@@ -63,7 +65,9 @@ const Header = () => {
    * @description Function to run if google logout was unsuccessful
    */
   const handleGoogleLogoutFailure = () => {
-    setGoogleError('There was a problem logging out with Google. Please wait and try again later.');
+    setGoogleError(
+      'There was a problem logging out with Google. Please wait and try again later.'
+    );
   };
 
   return (
