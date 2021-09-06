@@ -18,6 +18,7 @@ import notify from '../Toast/Toast';
 import { useCart } from '../checkout-page/CartContext';
 // eslint-disable-next-line import/no-cycle
 import Modal from '../Modal/Modal';
+import styles from './ProductCard.module.css';
 
 /**
  * @name useStyles
@@ -26,7 +27,7 @@ import Modal from '../Modal/Modal';
  */
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100%',
+    height: '85%',
     maxWidth: 345
   },
   media: {
@@ -46,6 +47,11 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  actions: {
+    boxSizing: 'border-box',
+    postition: 'sticky',
+    bottom: 'auto'
   }
 }));
 
@@ -82,48 +88,58 @@ const ProductCard = ({ product }) => {
         {show && <Modal onClose={() => setShow(false)} item={product} />}
       </OutsideClickHandler>
       <Card className={classes.root}>
-        <CardHeader
-          onClick={() => setShow(true)}
-          avatar={(
-            <Avatar aria-label="demographics" className={classes.avatar}>
-              {product.demographic.charAt(0)}
-            </Avatar>
+        <div className={styles.parent}>
+          <div className={styles.div1}>
+            <CardHeader
+              onClick={() => setShow(true)}
+              avatar={(
+                <Avatar aria-label="demographics" className={classes.avatar}>
+                  {product.demographic.charAt(0)}
+                </Avatar>
           )}
-          action={(
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
+              action={(
+                <IconButton aria-label="settings">
+                  <MoreVertIcon />
+                </IconButton>
           )}
-          title={product.name}
-          subheader={`${product.demographic} ${product.category} ${product.type}`}
-        />
-        <CardMedia
-          className={classes.media}
-          image={product.imageSrc}
-          title="placeholder"
-          onClick={() => setShow(true)}
-        />
-        <CardContent onClick={() => setShow(true)}>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {product.description}
-          </Typography>
-          <br />
-          <Typography variant="body2" color="textSecondary" component="p">
-            Price: $
-            {product.price}
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
-          <IconButton aria-label="add to shopping cart" onClick={onAdd}>
-            <AddShoppingCartIcon />
-          </IconButton>
-        </CardActions>
+              title={product.name}
+              subheader={`${product.demographic} ${product.category} ${product.type}`}
+            />
+          </div>
+          <div className={styles.div2}>
+            <CardMedia
+              className={classes.media}
+              image={product.imageSrc}
+              title="placeholder"
+              onClick={() => setShow(true)}
+            />
+          </div>
+          <div className={styles.div3}>
+            <CardContent onClick={() => setShow(true)}>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {product.description}
+              </Typography>
+              <br />
+              <Typography variant="body2" color="textSecondary" component="p">
+                Price: $
+                {product.price}
+              </Typography>
+            </CardContent>
+          </div>
+          <div className={styles.div4}>
+            <CardActions className={classes.actions} disableSpacing>
+              <IconButton aria-label="add to favorites">
+                <FavoriteIcon />
+              </IconButton>
+              <IconButton aria-label="share">
+                <ShareIcon />
+              </IconButton>
+              <IconButton aria-label="add to shopping cart" onClick={onAdd}>
+                <AddShoppingCartIcon />
+              </IconButton>
+            </CardActions>
+          </div>
+        </div>
       </Card>
     </>
   );
