@@ -143,48 +143,48 @@ const Create = () => {
   function validateForm() {
     let formIsValid = true;
     let result = validate('text', 'Name', name);
-    setNameError(result[1]);
-    if (!result[0]) {
+    setNameError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
-    result = validate('text', 'Description', description);
-    setDescriptionError(result[1]);
-    if (!result[0]) {
+    result = validate('description', 'Description', description);
+    setDescriptionError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
     result = validate('drop-down', 'demographic', demographic);
-    setDemographicError(result[1]);
-    if (!result[0]) {
+    setDemographicError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
     result = validate('drop-down', 'category', category);
-    setCategoryError(result[1]);
-    if (!result[0]) {
+    setCategoryError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
     result = validate('drop-down', 'type', type);
-    setTypeError(result[1]);
-    if (!result[0]) {
+    setTypeError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
     result = validate('text', 'Brand', brand);
-    setBrandError(result[1]);
-    if (!result[0]) {
+    setBrandError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
     result = validate('text', 'Material', material);
-    setMaterialError(result[1]);
-    if (!result[0]) {
+    setMaterialError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
     result = validate('currency', 'Price', priceAsString);
-    setPriceError(result[1]);
-    if (!result[0]) {
+    setPriceError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
     result = validate('drop-down', 'status', activeStatus);
-    setActiveError(result[1]);
-    if (!result[0]) {
+    setActiveError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
     if (formIsValid) {

@@ -20,7 +20,7 @@ async function fetchCategories(setCategories, setApiError) {
     })
     .then(setCategories)
     .catch(() => {
-      notify('error', 'A database connection error occured');
+      notify('error', 'A database connection error occured, product not saved.');
       setApiError(true);
     });
 }
