@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import styles from './CreateProduct.module.css';
 import FormItem from '../form/FormItem';
 import FormItemDropdown from '../form/FormItemDropdown';
@@ -10,6 +12,7 @@ import Constants from '../../utils/constants';
 const Create = () => {
   const history = useHistory();
   const [apiError, setApiError] = useState(false);
+  const [releaseDate, setReleaseDate] = useState(new Date());
 
   const [name, setName] = React.useState('');
   const onNameChange = (e) => {
@@ -126,6 +129,7 @@ const Create = () => {
       demographic,
       category,
       type,
+      new Date(releaseDate.toDateString().split('T')[0]),
       brand,
       material,
       price,
@@ -248,6 +252,11 @@ const Create = () => {
             options={types}
           />
           {typeError && <p className={styles.errMsg}>{typeError}</p>}
+
+          <DatePicker
+            selected={releaseDate}
+            onChange={(date) => setReleaseDate(date)}
+          />
 
           <FormItem
             placeholder="Enter Product Brand"

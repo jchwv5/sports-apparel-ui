@@ -20,7 +20,7 @@ async function fetchCategories(setCategories, setApiError) {
     })
     .then(setCategories)
     .catch(() => {
-      notify('error', 'A database connection error occured, product not saved.');
+      notify('error', 'A database connection error occured.');
       setApiError(true);
     });
 }
@@ -56,6 +56,7 @@ async function fetchTypes(setTypes, setApiError) {
  * @param {String} demographic - product deomographic
  * @param {String} category - product category
  * @param {String} type - product type
+ * @param {Date} releaseDate - product release date
  * @param {String} brand - product brand
  * @param {String} material - product material
  * @param {Number} price - product price
@@ -69,6 +70,7 @@ async function productPost(
   demographic,
   category,
   type,
+  releaseDate,
   brand,
   material,
   price,
@@ -81,6 +83,7 @@ async function productPost(
     demographic,
     category,
     type,
+    releaseDate,
     brand,
     material,
     price,
@@ -94,7 +97,7 @@ async function productPost(
       throw new Error(Constants.API_ERROR);
     })
     .catch(() => {
-      notify('error', 'A database connection error occured');
+      notify('error', 'A database connection error occured, product not created.');
       setApiError(true);
     });
 }
