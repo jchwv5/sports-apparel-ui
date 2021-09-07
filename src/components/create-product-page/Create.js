@@ -129,7 +129,7 @@ const Create = () => {
       demographic,
       category,
       type,
-      new Date(releaseDate.toDateString().split('T')[0]),
+      releaseDate,
       brand,
       material,
       price,
