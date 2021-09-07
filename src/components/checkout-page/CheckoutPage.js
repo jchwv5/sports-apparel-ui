@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { trackPromise, usePromiseTracker } from 'react-promise-tracker';
 import { useCart } from './CartContext';
 import styles from './CheckoutPage.module.css';
 import ReviewOrderWidget from './ReviewOrderWidget';
@@ -22,8 +23,7 @@ const CheckoutPage = () => {
   } = useCart();
 
   const history = useHistory();
-
-  const [isLoading, setLoading] = useState(false);
+  const { promiseInProgress } = usePromiseTracker();
 
   const [billingData, setBillingData] = React.useState({});
   const [deliveryData, setDeliveryData] = React.useState({});
@@ -165,8 +165,10 @@ const CheckoutPage = () => {
     const hasDeliveryErrors = hasErrors(statelessDeliveryErrors);
 
     if ((!hasBillingErrors && !hasDeliveryErrors) && productData.length > 0) {
-      makePurchase(productData, deliveryAddress, billingAddress, creditCard).then(
-        () => history.push('/confirmation')
+      trackPromise(
+        makePurchase(productData, deliveryAddress, billingAddress, creditCard).then(
+          () => history.push('/confirmation')
+        )
       );
     } else {
       notify('error', 'There was a problem processing your payment, you have not been charged');
@@ -211,17 +213,13 @@ const CheckoutPage = () => {
         </div>
 
         <div className={styles.payNow}>
-          <span>
-            {isLoading ? <Spinner /> : null }
-          </span>
           <br />
+          <br />
+          <span>
+            {(promiseInProgress === true) ? <Spinner /> : null}
+          </span>
           <button
-            onClick={() => {
-              setLoading(true); setTimeout(() => {
-                // setLoading(false);
-                handlePay();
-              }, 1000);
-            }}
+            onClick={handlePay}
             type="button"
             className={styles.payButton}
           >

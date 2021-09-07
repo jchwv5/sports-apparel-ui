@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import styles from './CreateProduct.module.css';
 import FormItem from '../form/FormItem';
 import FormItemDropdown from '../form/FormItemDropdown';
@@ -10,6 +12,7 @@ import Constants from '../../utils/constants';
 const Create = () => {
   const history = useHistory();
   const [apiError, setApiError] = useState(false);
+  const [releaseDate, setReleaseDate] = useState(new Date());
 
   const [name, setName] = React.useState('');
   const onNameChange = (e) => {
@@ -126,6 +129,7 @@ const Create = () => {
       demographic,
       category,
       type,
+      releaseDate,
       brand,
       material,
       price,
@@ -143,48 +147,48 @@ const Create = () => {
   function validateForm() {
     let formIsValid = true;
     let result = validate('text', 'Name', name);
-    setNameError(result[1]);
-    if (!result[0]) {
+    setNameError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
-    result = validate('text', 'Description', description);
-    setDescriptionError(result[1]);
-    if (!result[0]) {
+    result = validate('description', 'Description', description);
+    setDescriptionError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
     result = validate('drop-down', 'demographic', demographic);
-    setDemographicError(result[1]);
-    if (!result[0]) {
+    setDemographicError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
     result = validate('drop-down', 'category', category);
-    setCategoryError(result[1]);
-    if (!result[0]) {
+    setCategoryError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
     result = validate('drop-down', 'type', type);
-    setTypeError(result[1]);
-    if (!result[0]) {
+    setTypeError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
     result = validate('text', 'Brand', brand);
-    setBrandError(result[1]);
-    if (!result[0]) {
+    setBrandError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
     result = validate('text', 'Material', material);
-    setMaterialError(result[1]);
-    if (!result[0]) {
+    setMaterialError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
     result = validate('currency', 'Price', priceAsString);
-    setPriceError(result[1]);
-    if (!result[0]) {
+    setPriceError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
     result = validate('drop-down', 'status', activeStatus);
-    setActiveError(result[1]);
-    if (!result[0]) {
+    setActiveError(result.errorMessage);
+    if (!result.dataIsValid) {
       formIsValid = false;
     }
     if (formIsValid) {
@@ -248,6 +252,11 @@ const Create = () => {
             options={types}
           />
           {typeError && <p className={styles.errMsg}>{typeError}</p>}
+
+          <DatePicker
+            selected={releaseDate}
+            onChange={(date) => setReleaseDate(date)}
+          />
 
           <FormItem
             placeholder="Enter Product Brand"

@@ -30,6 +30,12 @@ const validate = (type, name, data) => {
         errorMsg = `${name} should be letters only`;
       }
       break;
+    case 'description':
+      if (!data || data.trim() === '') {
+        isDataValid = false;
+        errorMsg = `${name} field must not be left empty`;
+      }
+      break;
     case 'phone':
       if (!data || data.trim() === '') {
         isDataValid = false;
