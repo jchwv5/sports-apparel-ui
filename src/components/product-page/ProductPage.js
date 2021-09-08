@@ -5,6 +5,7 @@ import styles from './ProductPage.module.css';
 import Constants from '../../utils/constants';
 import fetchProducts from './ProductPageService';
 import Sidebar from '../sidebar/Sidebar';
+import SidebarFilter from '../filter/Filter';
 
 /**
  * @name ProductPage

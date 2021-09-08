@@ -1,3 +1,6 @@
+span {
+  text-align: center;
+}
 .checkoutContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -36,6 +39,7 @@ select {
 .payNow {
   grid-area: payNow;
   display: grid;
+  text-align: center;
 }
 
 .payButton {

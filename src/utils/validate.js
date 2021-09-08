@@ -1,5 +1,3 @@
-import notify from '../components/Toast/Toast';
-
 /**
  *
  * @name validate
@@ -7,7 +5,7 @@ import notify from '../components/Toast/Toast';
  * @param {String} type - field type (text, currency, drop-down)
  * @param {String} name - to be displayed in the error toast
  * @param {String} data - value of the form field
- * @returns boolean if the field is valid
+ * @returns boolean whether the field is valid, error message if any in the form of an array.
  */
 const currencyRegex = /^\$?\d+(?:\.\d\d)$/;
 const alphaRegex = /^[a-zA-Z\s]+$/;
