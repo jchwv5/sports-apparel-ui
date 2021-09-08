@@ -211,6 +211,7 @@ const CheckoutPage = () => {
             errorInfo={billingErrors}
           />
         </div>
+
         <div className={styles.payNow}>
           <br />
           <br />
