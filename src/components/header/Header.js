@@ -4,6 +4,7 @@ import { Badge } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import GoogleLogin, { GoogleLogout } from 'react-google-login';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import loginUser from './HeaderService';
 import constants from '../../utils/constants';
 import { useCart } from '../checkout-page/CartContext';
@@ -89,6 +90,19 @@ const Header = () => {
               <ShoppingCartIcon style={{ fontSize: 60, color: 'black' }} />
             </Badge>
           </NavLink>
+        </li>
+        <li>
+          {user && (
+          <NavLink to={{
+            pathname: '/user',
+            state: { firstName: user.firstName, lastName: user.lastName }
+          }}
+          >
+            <AccountBoxIcon
+              className={style.user}
+            />
+          </NavLink>
+          )}
         </li>
         {user && <span className={style.user}>{user.email}</span>}
         {googleError && <span>{googleError}</span>}
