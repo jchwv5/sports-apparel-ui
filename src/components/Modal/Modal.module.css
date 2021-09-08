@@ -1,11 +1,3 @@
-h6 {
-    color: black;
-    
-}
-
-span{
-    color: black;
-}
 .action_btn {
     width: 200px;
     margin: 0 auto;
@@ -33,14 +25,17 @@ span{
     flex-direction: column;
     font-family: inherit;
     font-size: 20px;
-    justify-content: flex-start;
+    justify-content:flex-start;
     margin: auto;
-    padding: 16px;
-    max-height: 70%;
+    
+    
+    
+    
 }
 
 .closeDiv{
     text-align: right; 
+    margin: auto;
    
  }
  .closeButton {
@@ -53,14 +48,16 @@ span{
  }
 
  .colorElements {
+  
     text-align: center;
  }
  
  .dot{
-    height: 20px;
-    width:20px;
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
     display: inline-block;
+
  }
 
  .fill {
@@ -73,14 +70,14 @@ span{
     width: 300px;
     margin: auto;
     background-color: white;
-    
-    
 }
 .fill img {
-    flex-shrink: 1;
+    flex-shrink: 0;
     min-width: 100%;
     min-height: 100%;
     text-align: center;
+    margin: auto;
+    flex: auto;
 }
 
 .grid-container {
@@ -89,24 +86,20 @@ span{
 
 .modal {
     background-color:#eeeeee;
-    border: 1px solid grey;
+    border: 1px solid gray;
     border-radius: 4px;
-    box-shadow: 10px 5px 10px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
     height: auto;
     left: 50%;
     position: fixed;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: inherit;
     z-index: 1000;
-    max-width: 600px;
-    word-wrap: break-word;
-   
-    
-}
-.modalBody {
-    word-wrap: break-word;
     width: auto;
+    max-height: 90%;
+    display: flex;
+    flex-direction: column;
+    
 }
 
 .nameText {
@@ -132,6 +125,10 @@ span{
     text-align: right;
 }
 
-.word {
-    word-wrap: break-word;
-}
+
+    
+
+
+
+
+
