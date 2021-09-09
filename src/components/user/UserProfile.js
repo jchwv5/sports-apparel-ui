@@ -23,6 +23,7 @@ const UserProfile = () => {
       )}
 
       <div className={style.userProfile}>
+
         <table className={style.userTable}>
 
           <div id={style.firstName}>
@@ -68,6 +69,7 @@ const UserProfile = () => {
           </tr>
         </div>
         )}
+
           {userInfo.streetAddress && (
             <div id={style.streetAddress}>
               <tr className={style.tableRows} id={style.street}>
@@ -98,6 +100,7 @@ const UserProfile = () => {
           </tr>
         </div>
         )}
+
           {userInfo.city && (
             <div id={style.city}>
               <tr className={style.tableRows} id={style.city}>
@@ -127,6 +130,7 @@ const UserProfile = () => {
           </tr>
         </div>
         )}
+
           {userInfo.state && (
             <div id={style.state}>
               <tr className={style.tableRows} id={style.state}>
@@ -145,7 +149,7 @@ const UserProfile = () => {
         && (
         <div id={style.zipCode}>
           <tr className={style.tableRows} id={style.zip}>
-            <td className={style.columnOne}>Zip</td>
+            <td className={style.columnOne}>Zip:</td>
             <td className={style.columnTwo}>
               <input
                 type="text"
@@ -155,6 +159,7 @@ const UserProfile = () => {
           </tr>
         </div>
         )}
+
           {userInfo.zipCode && (
             <div id={style.zipCode}>
               <tr className={style.tableRows} id={style.zip}>
@@ -183,6 +188,7 @@ const UserProfile = () => {
           </tr>
         </div>
         )}
+
           {userInfo.phoneNumber && (
             <div id={style.phoneNumber}>
               <tr className={style.tableRows} id={style.phone}>
@@ -196,8 +202,10 @@ const UserProfile = () => {
               </tr>
             </div>
           )}
+
         </table>
       </div>
+
       <button type="button" className={style.saveButton}>
         Save changes
       </button>

@@ -20,24 +20,24 @@ td.columnTwo {
 }
 
 .userProfile {
-    overflow: scroll;
+    overflow: auto;
     position: absolute;
-    right: 19.5em;
-    top: 2.5em;
+    right: 38em;
+    top: 5em;
     width: 60em;
-    height: 30em;
+    height: 35em;
 }
 
 .saveButton {
     position: absolute;
-    top: 33.5em;
+    top: 40em;
     left: 25em;
 }
 
 .historyButton {
     position: absolute;
-    top: 33.5em;
-    left: 55em;
+    top: 40em;
+    left: 65em;
 }
 
 .saveButton, .historyButton {
