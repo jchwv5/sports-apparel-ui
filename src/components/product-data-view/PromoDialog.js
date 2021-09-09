@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -33,17 +33,42 @@ const useStyles = makeStyles((theme) => ({
     height: '500x',
     margin: theme.spacing(2)
   },
-  button: {
+  closeButton: {
     position: 'absolute',
     right: theme.spacing(1),
     top: '20px',
-    color: theme.palette.grey[500]
+    color: theme.palette.grey[1000]
   },
   amountLabel: {
     '& .MuiFormLabel-root': {
       fontSize: '16px'
     }
+  },
+  submitButton: {
+    '& .MuiButton-root': {
+      background: '#666666',
+      borderRadius: '20px',
+      cursor: 'pointer',
+      height: '3em',
+      marginTop: '1em'
+    }
+  },
+  cancelButton: {
+    '& .MuiButton-root': {
+      background: '#f50057',
+      borderRadius: '20px',
+      cursor: 'pointer',
+      height: '3em',
+      marginTop: '1em'
+
+    }
+  },
+  buttonLabel: {
+    '& .MuiButton-label': {
+      color: '#EEEEEE'
+    }
   }
+
 }));
 
 const PromoDialog = ({ open, handleClose }) => {
@@ -53,8 +78,6 @@ const PromoDialog = ({ open, handleClose }) => {
   const [percentage, setPercentage] = useState('');
   const [flat, setFlat] = useState('');
 
-  const [percentIsVisible, setPercentIsVisible] = useState(false);
-  const [flatIsVisible, setFlatIsVisible] = useState(false);
   const [codeError, setCodeError] = useState(false);
   const [percentageError, setPercentageError] = useState(false);
   const [flatError, setFlatError] = useState(false);
@@ -68,13 +91,6 @@ const PromoDialog = ({ open, handleClose }) => {
 
   const handleTypeChange = (event) => {
     setType(event.target.value);
-    if (event.target.value === 'Percentage') {
-      setFlatIsVisible(false);
-      setPercentIsVisible(true);
-    } else {
-      setPercentIsVisible(false);
-      setFlatIsVisible(true);
-    }
   };
 
   const handlePercentageChange = (event) => {
@@ -94,9 +110,11 @@ const PromoDialog = ({ open, handleClose }) => {
     setPercentageError(false);
     setFlatError(false);
     setHelperTextError(false);
-    setPercentIsVisible(false);
-    setFlatIsVisible(false);
   };
+
+  useEffect(() => {
+    handleReset();
+  }, [handleClose]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -111,8 +129,16 @@ const PromoDialog = ({ open, handleClose }) => {
       setPercentageError(true);
     }
 
+    if (type === 'Flat' && percentage === '') {
+      setPercentageError(false);
+    }
+
     if (type === 'Flat' && flat === '') {
       setFlatError(true);
+    }
+
+    if (type === 'Percentage' && flat === '') {
+      setFlatError(false);
     }
 
     if ((code && type && percentage) || (code && type && flat)) {
@@ -127,7 +153,7 @@ const PromoDialog = ({ open, handleClose }) => {
       <Dialog open={open} onClose={handleClose} className={classes.root}>
         <DialogTitle>Create a Promo</DialogTitle>
         <div>
-          <IconButton onClick={handleClose} className={classes.button}>
+          <IconButton onClick={handleClose} className={classes.closeButton}>
             <CloseIcon />
           </IconButton>
         </div>
@@ -153,49 +179,50 @@ const PromoDialog = ({ open, handleClose }) => {
               </RadioGroup>
               <FormHelperText error={helperTextError}>Must select a type</FormHelperText>
             </div>
-            {percentIsVisible && (
-              <div className={classes.field}>
-                <TextField
-                  label="Discount Amount %"
-                  required
-                  varian="standard"
-                  value={percentage}
-                  type="number"
-                  helperText="Must be filled out"
-                  onChange={handlePercentageChange}
-                  error={percentageError}
-                  InputProps={{
-                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                    disableUnderline: true
-                  }}
-                />
-              </div>
-            )}
-            {flatIsVisible && (
-              <div className={classes.field}>
-                <TextField
-                  label="Discount Amount $"
-                  required
-                  varian="standard"
-                  InputProps={{
-                    startAdornment: <InputAdornment position="start">$</InputAdornment>,
-                    disableUnderline: true
-                  }}
-                  value={flat}
-                  type="number"
-                  helperText="Must be filled out"
-                  onChange={handleFlatChange}
-                  error={flatError}
-                />
-              </div>
-            )}
+            <div className={classes.field}>
+              <TextField
+                label="Discount Amount %"
+                required
+                varian="standard"
+                value={percentage}
+                type="number"
+                helperText="Must be filled out"
+                onChange={handlePercentageChange}
+                error={percentageError}
+                InputProps={{
+                  endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                  disableUnderline: true
+                }}
+              />
+            </div>
+            <div className={classes.field}>
+              <TextField
+                label="Discount Amount $"
+                shrink="false"
+                required
+                varian="standard"
+                InputProps={{
+                  startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                  disableUnderline: true
+                }}
+                value={flat}
+                type="number"
+                helperText="Must be filled out"
+                onChange={handleFlatChange}
+                error={flatError}
+              />
+            </div>
             <DialogActions>
-              <Button onClick={handleReset} color="primary" variant="contained">
-                Reset
-              </Button>
-              <Button onClick={handleSubmit} color="primary" variant="contained">
-                Submit
-              </Button>
+              <div className={classes.cancelButton}>
+                <Button onClick={handleReset} className={classes.buttonLabel} variant="contained">
+                  Cancel
+                </Button>
+              </div>
+              <div className={classes.submitButton}>
+                <Button onClick={handleSubmit} className={classes.buttonLabel} variant="contained">
+                  Submit
+                </Button>
+              </div>
             </DialogActions>
           </FormControl>
         </form>
