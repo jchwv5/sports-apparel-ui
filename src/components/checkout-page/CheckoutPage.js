@@ -215,7 +215,7 @@ const CheckoutPage = () => {
         <div className={styles.payNow}>
           <br />
           <br />
-          <span>
+          <span className={styles.span}>
             {(promiseInProgress === true) ? <Spinner /> : null}
           </span>
           <button
