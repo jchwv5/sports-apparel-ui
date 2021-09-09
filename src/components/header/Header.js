@@ -72,8 +72,8 @@ const Header = () => {
 
   return (
     <div className={style.header}>
-      <ul>
-        <li>
+      <ul className={style.ul}>
+        <li className={style.li}>
           <NavLink to="/">
             <img className={style.logo} src={logo} alt="" />
           </NavLink>
@@ -93,7 +93,7 @@ const Header = () => {
         {user && <span className={style.user}>{user.email}</span>}
         {googleError && <span>{googleError}</span>}
         {apiError && <span>Api Error</span>}
-        <li>
+        <li className={style.li}>
           {!user ? (
             <GoogleLogin
               clientId={constants.GOOGLE_CLIENT_ID}
