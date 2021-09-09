@@ -35,7 +35,7 @@ const UserProfile = () => {
                 <input
                   type="text"
                   value={userInfo.firstName}
-                  id={style.firstName}
+                  id={style.firstNameColumn}
                 />
               </td>
             </tr>
@@ -43,12 +43,12 @@ const UserProfile = () => {
 
           <div id={style.lastName}>
             <tr className={style.tableRows} id={style.lastName}>
-              <td className={style.columnOne}> Last name: </td>
+              <td className={style.columnOne} id={style.lastNameRow}> Last name: </td>
               <td className={style.columnTwo}>
                 <input
                   type="text"
                   value={userInfo.lastName}
-                  id={style.lastName}
+                  id={style.lastNameColumn}
                 />
               </td>
             </tr>
@@ -63,7 +63,7 @@ const UserProfile = () => {
               <input
                 type="text"
                 value="There is no street provided for this account."
-                id={style.street}
+                id={style.streetColumn}
               />
             </td>
           </tr>
@@ -78,7 +78,7 @@ const UserProfile = () => {
                   <input
                     type="text"
                     value={userInfo.streetAddress}
-                    id={style.street}
+                    id={style.streetColumn}
                   />
                 </td>
               </tr>
@@ -94,7 +94,7 @@ const UserProfile = () => {
               <input
                 type="text"
                 value="There is no city provided for this account."
-                id={style.city}
+                id={style.cityColumn}
               />
             </td>
           </tr>
@@ -109,6 +109,7 @@ const UserProfile = () => {
                   <input
                     type="text"
                     value={userInfo.city}
+                    id={style.cityColumn}
                   />
                 </td>
               </tr>
@@ -124,7 +125,7 @@ const UserProfile = () => {
               <input
                 type="text"
                 value="There is no state provided for this account."
-                id={style.state}
+                id={style.stateColumn}
               />
             </td>
           </tr>
@@ -139,6 +140,7 @@ const UserProfile = () => {
                   <input
                     type="text"
                     value={userInfo.state}
+                    id={style.stateColumn}
                   />
                 </td>
               </tr>
@@ -154,6 +156,7 @@ const UserProfile = () => {
               <input
                 type="text"
                 value="There is no zip provided for this account."
+                id={style.zipColumn}
               />
             </td>
           </tr>
@@ -163,11 +166,14 @@ const UserProfile = () => {
           {userInfo.zipCode && (
             <div id={style.zipCode}>
               <tr className={style.tableRows} id={style.zip}>
-                <td className={style.columnOne}>Zip:</td>
+                <td className={style.columnOne}>
+                  Zip:
+                </td>
                 <td className={style.columnTwo}>
                   <input
                     type="text"
                     value={userInfo.zipCode}
+                    id={style.zipColumn}
                   />
                 </td>
               </tr>
@@ -183,6 +189,7 @@ const UserProfile = () => {
               <input
                 type="text"
                 value="There is no phone number provided for this account."
+                id={style.phoneColumn}
               />
             </td>
           </tr>
@@ -197,6 +204,7 @@ const UserProfile = () => {
                   <input
                     type="text"
                     value={userInfo.phoneNumber}
+                    id={style.phoneColumn}
                   />
                 </td>
               </tr>

@@ -24,10 +24,6 @@ span {
   grid-area: delivery;
 }
 
-select {
-  display: inline;
-}
-
 .order {
   grid-area: order;
 }
@@ -90,5 +86,3 @@ select {
   color: #666666;
   font-weight: 700;
 }
-
-

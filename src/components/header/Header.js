@@ -4,7 +4,7 @@ import { Badge } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import GoogleLogin, { GoogleLogout } from 'react-google-login';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import PersonIcon from '@material-ui/icons/Person';
 import loginUser from './HeaderService';
 import constants from '../../utils/constants';
 import { useCart } from '../checkout-page/CartContext';
@@ -98,7 +98,7 @@ const Header = () => {
             state: { email: user.email }
           }}
           >
-            <AccountBoxIcon
+            <PersonIcon
               className={style.profileIcon}
               style={{ fontSize: 60, color: 'black' }}
             />
@@ -108,7 +108,7 @@ const Header = () => {
         {user && <span className={style.user}>{user.email}</span>}
         {googleError && <span>{googleError}</span>}
         {apiError && <span>Api Error</span>}
-        <li>
+        <li className={style.googleLogin}>
           {!user ? (
             <GoogleLogin
               clientId={constants.GOOGLE_CLIENT_ID}
@@ -116,6 +116,7 @@ const Header = () => {
               onSuccess={handleGoogleLoginSuccess}
               onFailure={handleGoogleLoginFailure}
               cookiePolicy="single_host_origin"
+              id={style.login}
             />
           ) : (
             <GoogleLogout
@@ -123,6 +124,7 @@ const Header = () => {
               buttonText="Logout"
               onLogoutSuccess={handleGoogleLogoutSuccess}
               onSuccess={handleGoogleLogoutFailure}
+              id={style.logout}
             />
           )}
         </li>
