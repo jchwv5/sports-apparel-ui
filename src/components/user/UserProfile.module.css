@@ -7,47 +7,126 @@
     width: 40em;
 }
 
+.userContainer {
+    position: absolute;
+    top: 6em;
+    width: 100%;
+}
 .userProfile {
     overflow: auto;
     position: absolute;
-    right: 21em;
-    top: 2em;
-    width: 60em;
+    right: 27em;
+    top: -1em;
+    width: 50em;
     height: 30em;
+    margin-left: 1em;
+    border-style: solid;
+    border-width: 1em;
+    border-color: #666666;
 }
 
-.saveButton {
+#firstNameRow {
     position: absolute;
-    top: 33em;
-    left: 25em;
-}
-
-.historyButton {
-    position: absolute;
-    top: 33em;
-    left: 60em;
+    top: 2em;
+    left: 1em;
 }
 
 #firstNameColumn {
     position: absolute;
-    top: -.05em;
-    left: 8em;
-    width: 10em;
+    top: .51em;
+    left: 3.2em;
+    width: 13em;
 }
 
 #lastNameRow {
     position: absolute;
-    top: -.05em;
+    top: 2em;
     left: 24em;
 }
 
 #lastNameColumn {
     position: absolute;
-    top: -.05em;
+    top: 1em;
     left: 30em;
-    width: 10em;
+    width: 13em;
 }
 
+#streetRow {
+    position: absolute;
+    top: 5.8em;
+    left: 2em;
+}
+
+#streetColumn {
+    position: absolute;
+    top: 2.3em;
+    left: 3.2em;
+    width: 13em;
+}
+
+#cityRow {
+    position: absolute;
+    top: 5.8em;
+    left: 25em;
+}
+
+#cityColumn {
+    position: absolute;
+    top: 2.3em;
+    left: 15.5em;
+    width: 13em;
+}
+
+#stateRow {
+    position: absolute;
+    top: 9.8em;
+    left: 25em;
+}
+
+#stateColumn {
+    position: absolute;
+    top: 4.2em;
+    left: 15.5em;
+    width: 13em;
+}
+
+#zipRow {
+    position: absolute;
+    top: 9.8em;
+    left: 2em;
+}
+
+#zipColumn {
+    position: absolute;
+    top: 4.2em;
+    left: 3.2em;
+    width: 13em;
+}
+
+#phoneRow {
+    position: absolute;
+    top: 14em;
+    left: 11em;
+}
+
+#phoneColumn {
+    position: absolute;
+    top: 6.3em;
+    left: 9.8em;
+    width: 13em;
+}
+
+.saveButton {
+    position: absolute;
+    top: 18em;
+    left: 12em;
+}
+
+.historyButton {
+    position: absolute;
+    top: 18em;
+    left: 30em;
+}
 .saveButton, .historyButton {
     background: #666666;
     border-radius: 20px;
@@ -70,27 +149,125 @@
         width: 40em;
     }
     
-    .userProfile {
-        overflow: auto;
+    .userContainer {
         position: absolute;
-        right: 37em;
+        top: 6em;
+        width: 100%;
+    }
+    .userProfile {
+        position: absolute;
+        right: 40em;
         top: 2em;
-        width: 60em;
-        height: 50em;
+        width: 50em;
+        height: 30em;
+        margin-left: 1em;
+        border-style: solid;
+        border-width: 1em;
+        border-color: #666666;
+    }
+    
+    #firstNameRow {
+        position: absolute;
+        top: 2em;
+        left: 1em;
+    }
+    
+    #firstNameColumn {
+        position: absolute;
+        top: .51em;
+        left: 3.2em;
+        width: 13em;
+    }
+    
+    #lastNameRow {
+        position: absolute;
+        top: 2em;
+        left: 24em;
+    }
+    
+    #lastNameColumn {
+        position: absolute;
+        top: 1em;
+        left: 30em;
+        width: 13em;
+    }
+    
+    #streetRow {
+        position: absolute;
+        top: 5.8em;
+        left: 2em;
+    }
+    
+    #streetColumn {
+        position: absolute;
+        top: 2.3em;
+        left: 3.2em;
+        width: 13em;
+    }
+    
+    #cityRow {
+        position: absolute;
+        top: 5.8em;
+        left: 25em;
+    }
+    
+    #cityColumn {
+        position: absolute;
+        top: 2.3em;
+        left: 15.5em;
+        width: 13em;
+    }
+    
+    #stateRow {
+        position: absolute;
+        top: 9.8em;
+        left: 25em;
+    }
+    
+    #stateColumn {
+        position: absolute;
+        top: 4.2em;
+        left: 15.5em;
+        width: 13em;
+    }
+    
+    #zipRow {
+        position: absolute;
+        top: 9.8em;
+        left: 2em;
+    }
+    
+    #zipColumn {
+        position: absolute;
+        top: 4.2em;
+        left: 3.2em;
+        width: 13em;
+    }
+    
+    #phoneRow {
+        position: absolute;
+        top: 14em;
+        left: 11em;
+    }
+    
+    #phoneColumn {
+        position: absolute;
+        top: 6.3em;
+        left: 9.8em;
+        width: 13em;
     }
     
     .saveButton {
         position: absolute;
-        top: 45em;
-        left: 34em;
+        top: 18em;
+        left: 12em;
     }
     
     .historyButton {
         position: absolute;
-        top: 45em;
-        left: 64em;
+        top: 18em;
+        left: 30em;
     }
-    
     .saveButton, .historyButton {
         background: #666666;
         border-radius: 20px;
@@ -100,6 +277,6 @@
         height: 3em;
         justify-self: center;
         margin-top: 1em;
-        width: 10%;
+        width: 15%;
+      }
     }
-}

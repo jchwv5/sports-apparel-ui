@@ -73,8 +73,8 @@ const Header = () => {
 
   return (
     <div className={style.header}>
-      <ul>
-        <li>
+      <ul className={style.ul}>
+        <li className={style.li}>
           <NavLink to="/">
             <img className={style.logo} src={logo} alt="" />
           </NavLink>
