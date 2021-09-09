@@ -99,7 +99,8 @@ const Header = () => {
           }}
           >
             <AccountBoxIcon
-              className={style.user}
+              className={style.profileIcon}
+              style={{ fontSize: 60, color: 'black' }}
             />
           </NavLink>
           )}

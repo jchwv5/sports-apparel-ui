@@ -1,0 +1,53 @@
+#tableHead {
+    background-color: #89f77d;
+    color: #89f77d;
+    margin-bottom: 5em;
+    padding-top: 2em;
+    height: 2em;
+    width: 60em;
+    overflow: hidden;
+    position: -webkit-sticky;
+    position: fixed;
+    z-index: 50;
+}
+
+td.columnOne {
+    width: 8em;
+}
+
+td.columnTwo {
+    width: 30em;
+}
+
+.userProfile {
+    overflow: scroll;
+    position: absolute;
+    right: 19.5em;
+    top: 2.5em;
+    width: 60em;
+    height: 30em;
+}
+
+.saveButton {
+    position: absolute;
+    top: 33.5em;
+    left: 25em;
+}
+
+.historyButton {
+    position: absolute;
+    top: 33.5em;
+    left: 55em;
+}
+
+.saveButton, .historyButton {
+    background: #666666;
+    border-radius: 20px;
+    color: #EEEEEE;
+    cursor: pointer;
+    font-weight: 600px;
+    height: 3em;
+    justify-self: center;
+    margin-top: 1em;
+    width: 25%;
+  }

@@ -43,9 +43,15 @@ li {
 .user {
   position: absolute;
   font-weight: 775;
-  right: 12.35em;
-  top: 1.6em;
+  right: 16.35em;
+  top: 1.8em;
   background-color: #ea526f;
+}
+
+.profileIcon {
+  position: absolute; 
+  top: .13em;
+  right: 3em;
 }
 
 .mainbody,
