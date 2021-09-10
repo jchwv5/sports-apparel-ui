@@ -15,7 +15,7 @@ import Sidebar from '../sidebar/Sidebar';
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const [apiError, setApiError] = useState(false);
-  const [filterParam, setFilterParam] = useState('Men');
+  const [filterParam, setFilterParam] = useState('All');
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   function handleClick(filter) {
@@ -55,7 +55,7 @@ const ProductPage = () => {
     return (
       <div>
         {apiError && <p className={styles.errMsg} data-testid="errMsg">{Constants.API_ERROR}</p>}
-        <Sidebar filterParam={filterParam} onClick={() => handleClick} products={products} />
+        <Sidebar filterParam={filterParam} onClick={handleClick} />
         <div id="productCards" className={styles.app}>
           {clearFilteredProducts()}
           {products.filter(filterProducts)}
