@@ -5,7 +5,6 @@ import styles from './ProductPage.module.css';
 import Constants from '../../utils/constants';
 import fetchProducts from './ProductPageService';
 import Sidebar from '../sidebar/Sidebar';
-import SidebarFilter from '../filter/Filter';
 
 /**
  * @name ProductPage
@@ -16,7 +15,7 @@ import SidebarFilter from '../filter/Filter';
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const [apiError, setApiError] = useState(false);
-  const [filterParam, setFilterParam] = useState('All');
+  const [filterParam, setFilterParam] = useState('Men');
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   function handleClick(filter) {
