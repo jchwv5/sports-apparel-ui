@@ -13,7 +13,7 @@ import SidebarFilter from '../filter/Filter';
 const Sidebar = (props) => {
   useEffect(() => {
     const shiftCardsRight = () => {
-      document.getElementById('productCards').style.marginLeft = '320px';
+      document.getElementById('productCards').style.marginLeft = '400px';
     };
     const shiftCardsLeft = () => {
       document.getElementById('productCards').style.marginLeft = '50px';
