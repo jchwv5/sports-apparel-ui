@@ -1,282 +1,92 @@
-@media only screen and (min-width: 1536px) {
-.columnOne {
-    width: 15em;
-}
 
-.columnTwo {
-    width: 40em;
-}
-
-.userContainer {
-    position: absolute;
-    top: 6em;
-    width: 100%;
-}
-.userProfile {
-    overflow: auto;
-    position: absolute;
-    right: 27em;
-    top: -1em;
-    width: 50em;
-    height: 30em;
-    margin-left: 1em;
-    border-style: solid;
-    border-width: 1em;
-    border-color: #666666;
-}
-
-#firstNameRow {
-    position: absolute;
-    top: 2em;
-    left: 1em;
-}
-
-#firstNameColumn {
-    position: absolute;
-    top: .51em;
-    left: 3.2em;
-    width: 13em;
-}
-
-#lastNameRow {
-    position: absolute;
-    top: 2em;
-    left: 24em;
-}
-
-#lastNameColumn {
-    position: absolute;
-    top: 1em;
-    left: 30em;
-    width: 13em;
-}
-
-#streetRow {
-    position: absolute;
-    top: 5.8em;
-    left: 2em;
-}
-
-#streetColumn {
-    position: absolute;
-    top: 2.3em;
-    left: 3.2em;
-    width: 13em;
-}
-
-#cityRow {
-    position: absolute;
-    top: 5.8em;
-    left: 25em;
-}
-
-#cityColumn {
-    position: absolute;
-    top: 2.3em;
-    left: 15.5em;
-    width: 13em;
-}
-
-#stateRow {
-    position: absolute;
-    top: 9.8em;
-    left: 25em;
-}
-
-#stateColumn {
-    position: absolute;
-    top: 4.2em;
-    left: 15.5em;
-    width: 13em;
-}
-
-#zipRow {
-    position: absolute;
-    top: 9.8em;
-    left: 2em;
-}
-
-#zipColumn {
-    position: absolute;
-    top: 4.2em;
-    left: 3.2em;
-    width: 13em;
-}
-
-#phoneRow {
-    position: absolute;
-    top: 14em;
-    left: 11em;
-}
-
-#phoneColumn {
-    position: absolute;
-    top: 6.3em;
-    left: 9.8em;
-    width: 13em;
-}
-
-.saveButton {
-    position: absolute;
-    top: 18em;
-    left: 12em;
-}
-
-.historyButton {
-    position: absolute;
-    top: 18em;
-    left: 30em;
-}
-.saveButton, .historyButton {
-    background: #666666;
-    border-radius: 20px;
-    color: #EEEEEE;
-    cursor: pointer;
-    font-weight: 600px;
-    height: 3em;
-    justify-self: center;
-    margin-top: 1em;
-    width: 15%;
-  }
-}
-
-@media only screen and (min-width: 1920px) {
-    .columnOne {
-        width: 15em;
-    }
-    
-    .columnTwo {
-        width: 40em;
-    }
-    
-    .userContainer {
+    .form {
+        height: 700px;
+        width: 500px;
+        border: none;
         position: absolute;
-        top: 6em;
+        left: 49%;
+        padding: 0.35em 0.35em 0.35em 0.35em;
+        transform: translate(-50%);
+        font-weight: 700;
+        color: #666666;
+    }
+    .legend {
+        position: relative;
+        top: 676px;
+        left: 229px;
+        font-weight: 700;
+        color: #666666;
+    }​
+    .input {
+        margin-top: .5em;
         width: 100%;
-    }
-    .userProfile {
+        padding: .5em;
+      }
+      
+      .inputError {
+        margin-top: .5em;
+        width: 100%;
+        padding: .5em;
+        box-sizing: border-box;
+        border-color: #F00 !important;
+        border-width: .001em !important;
+        border-style: solid !important;
+      }
+      
+      .checkEdit {
+        font-weight: 700;
+        font-size: 18px;
+        color: #666666;
+        margin-bottom: .5em;
+        padding: 20px;
+      }
+      
+      .errorText {
+        color: #f00;
+      }
+      .edit {
+        display: none;
+      }
+
+      .fieldset {
+        height: 700px;
+        border: none;
         position: absolute;
-        right: 40em;
-        top: 2em;
-        width: 50em;
-        height: 30em;
-        margin-left: 1em;
-        border-style: solid;
-        border-width: 1em;
-        border-color: #666666;
-    }
-    
-    #firstNameRow {
-        position: absolute;
-        top: 2em;
-        left: 1em;
-    }
-    
-    #firstNameColumn {
-        position: absolute;
-        top: .51em;
-        left: 3.2em;
-        width: 13em;
-    }
-    
-    #lastNameRow {
-        position: absolute;
-        top: 2em;
-        left: 24em;
-    }
-    
-    #lastNameColumn {
-        position: absolute;
-        top: 1em;
-        left: 30em;
-        width: 13em;
-    }
-    
-    #streetRow {
-        position: absolute;
-        top: 5.8em;
-        left: 2em;
-    }
-    
-    #streetColumn {
-        position: absolute;
-        top: 2.3em;
-        left: 3.2em;
-        width: 13em;
-    }
-    
-    #cityRow {
-        position: absolute;
-        top: 5.8em;
-        left: 25em;
-    }
-    
-    #cityColumn {
-        position: absolute;
-        top: 2.3em;
-        left: 15.5em;
-        width: 13em;
-    }
-    
-    #stateRow {
-        position: absolute;
-        top: 9.8em;
-        left: 25em;
-    }
-    
-    #stateColumn {
-        position: absolute;
-        top: 4.2em;
-        left: 15.5em;
-        width: 13em;
-    }
-    
-    #zipRow {
-        position: absolute;
-        top: 9.8em;
-        left: 2em;
-    }
-    
-    #zipColumn {
-        position: absolute;
-        top: 4.2em;
-        left: 3.2em;
-        width: 13em;
-    }
-    
-    #phoneRow {
-        position: absolute;
-        top: 14em;
-        left: 11em;
-    }
-    
-    #phoneColumn {
-        position: absolute;
-        top: 6.3em;
-        left: 9.8em;
-        width: 13em;
-    }
-    
-    .saveButton {
-        position: absolute;
-        top: 18em;
-        left: 12em;
-    }
-    
-    .historyButton {
-        position: absolute;
-        top: 18em;
-        left: 30em;
-    }
-    .saveButton, .historyButton {
+        left: 49%;
+        padding: 0.35em 0.35em 0.35em 0.35em;
+        transform: translate(-50%);
+        font-weight: 700;
+        color: #666666;
+      }
+      .userInfo {
+        width: 500px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1em;
+        background: #fff;
+        border-radius: 2px;
+        box-shadow: 0.2em 0.2em 0.2em rgb(0 0 0 / 23%);
+        padding: 1em;
+      }
+
+    .saveButton1, .historyButton1 {
         background: #666666;
         border-radius: 20px;
         color: #EEEEEE;
         cursor: pointer;
-        font-weight: 600px;
         height: 3em;
-        justify-self: center;
-        margin-top: 1em;
-        width: 15%;
+        margin-top: 2em;
+        width: 12em;
       }
-    }
+      
+      .fieldset1 {
+        height: 80px;
+        border: none;
+        position: absolute;
+        left: 21%;
+        top: 676px;
+        padding: 0.35em 0.35em 0.35em 0.35em;
+        transform: translate(-50%);
+        font-weight: 700;
+        color: #666666;
+      }
