@@ -7,18 +7,6 @@
         padding: 0.35em 0.35em 0.35em 0.35em;
         transform: translate(-50%);
     }
-    .legend {
-        position: relative;
-        top: 800px;
-        left: 229px;
-        font-weight: 700;
-        color: #666666;
-    }​
-    .input {
-        margin-top: .5em;
-        width: 100%;
-        padding: .5em;
-      }
       
       .inputError {
         margin-top: .5em;
@@ -29,15 +17,7 @@
         border-width: .001em !important;
         border-style: solid !important;
       }
-      
-      .checkEdit {
-        font-weight: 700;
-        font-size: 18px;
-        color: #666666;
-        margin-bottom: .5em;
-        padding: 20px;
-      }
-      
+
       .errorText {
         color: #f00;
       }
@@ -45,16 +25,6 @@
         display: none;
       }
 
-      .fieldset {
-        height: 800px;
-        border: none;
-        position: relative;
-        left: 50%;
-        padding: 0.35em 0.35em 0.35em 0.35em;
-        transform: translate(-50%);
-        font-weight: 700;
-        color: #666666;
-      }
       .userInfo {
         height: 710px;
         width: 500px;
@@ -78,14 +48,3 @@
         width: 12em;
       }
       
-      .fieldset1 {
-        height: 80px;
-        border: none;
-        position: absolute;
-        left: 21%;
-        top: 800px;
-        padding: 0.35em 0.35em 0.35em 0.35em;
-        transform: translate(-50%);
-        font-weight: 700;
-        color: #666666;
-      }
