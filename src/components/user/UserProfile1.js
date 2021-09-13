@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { TextField } from '@material-ui/core';
 import { useLocation } from 'react-router-dom';
 import EditIcon from '@material-ui/icons/Edit';
-// import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import fetchUserInfo from './UserProfileService';
 import FormItemDropdown from '../form/FormItemDropdown';
 import style from './UserProfile.module.css';
 import usStates from './usStates';
+import FormItem from '../form/FormItem';
 
 const UserProfile1 = ({ onChange }) => {
   const location = useLocation();
@@ -23,21 +22,21 @@ const UserProfile1 = ({ onChange }) => {
       <form className={style.form}>
         <fieldset className={style.fieldset} disabled={!enable}>
           <div className={style.userInfo}>
-            <TextField
+            <FormItem
               type="text"
               id="firstName"
               label="First Name"
               onChange={onChange}
               value={userInfo.firstName}
             />
-            <TextField
+            <FormItem
               type="text"
               id="lastName"
               label="Last Name"
               onChange={onChange}
               value={userInfo.lastName}
             />
-            <TextField
+            <FormItem
               placeholder="e.g. 123 Sesame Street"
               type="text"
               id="userStreet"
@@ -45,7 +44,7 @@ const UserProfile1 = ({ onChange }) => {
               onChange={onChange}
               value={userInfo.street}
             />
-            <TextField
+            <FormItem
               placeholder="e.g. Unit #1"
               type="text"
               id="deliveryStreet2"
@@ -53,7 +52,7 @@ const UserProfile1 = ({ onChange }) => {
               onChange={onChange}
               value={userInfo.street2}
             />
-            <TextField
+            <FormItem
               placeholder="e.g. Denver"
               type="text"
               id="userCity"
@@ -70,7 +69,7 @@ const UserProfile1 = ({ onChange }) => {
               value={userInfo.state}
               options={usStates}
             />
-            <TextField
+            <FormItem
               placeholder="e.g. 12345"
               type="text"
               id="deliveryZip"
