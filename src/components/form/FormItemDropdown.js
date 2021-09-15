@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-onchange */
 import React from 'react';
 import styles from './FormItem.module.css';
 
@@ -17,7 +18,7 @@ const FormItemDropdown = ({
         <select
           className={`${errorMessage ? styles.inputError : styles.input}`}
           id={id}
-          onBlur={onChange}
+          onChange={onChange}
           value={value}
           autoComplete="off"
         >
