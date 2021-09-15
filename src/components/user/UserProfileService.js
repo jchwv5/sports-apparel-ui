@@ -25,8 +25,21 @@ async function fetchUserInfo(setUserInfo, setApiError, email) {
       setApiError(true);
     });
 }
-
+/**
+ * @ userUpdate
+ * @param {Long} id user id
+ * @param {String} firstName user first name
+ * @param {String} lastName user last name
+ * @param {String} streetAddress user street address
+ * @param {String} streetAddress2 user street address optional
+ * @param {String} city user city
+ * @param {String} state user state
+ * @param {String} zipCode user zip code
+ * @param {String} phoneNumber user phone number
+ * @param {Function} setApiError useState function to set apiError if error occurs
+ */
 async function userUpdate(
+  id,
   firstName,
   lastName,
   streetAddress,
@@ -37,7 +50,8 @@ async function userUpdate(
   phoneNumber,
   setApiError
 ) {
-  await HttpHelper(Constants.USER__UPDATE_BY_EMAIL_ENDPOINT, 'PUT', {
+  await HttpHelper(`${Constants.USER__UPDATE_BY_EMAIL_ENDPOINT}/${id}`, 'PUT', {
+    id,
     firstName,
     lastName,
     streetAddress,
@@ -57,7 +71,6 @@ async function userUpdate(
     })
     .catch(() => {
       notify('error', 'A database connection error occured, user not updated.');
-      setApiError(true);
     });
 }
 export default { fetchUserInfo, userUpdate };

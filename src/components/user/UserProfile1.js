@@ -2,26 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { TextInput } from 'react-materialize';
 import { useLocation } from 'react-router-dom';
 import UserProfileService from './UserProfileService';
-import FormItemDropdown from '../form/FormItemDropdown';
+// import TextInputDropdown from '../form/TextInputDropdown';
 import style from './UserProfile.module.css';
-import usStates from './usStates';
-import FormItem from '../form/FormItem';
+// import usStates from './usStates';
 import Constants from '../../utils/constants';
 
 const UserProfile1 = () => {
   const location = useLocation();
   const { email } = location.state;
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, setUserInfo] = React.useState([]);
   const [apiError, setApiError] = useState(false);
-  const handleChange = (e) => {
-    setUserInfo({ value: e.target.value });
+
+  const onUserChange = (e) => {
+    setUserInfo((prevValue) => ({ ...prevValue, [e.target.id]: e.target.value }));
   };
+
   useEffect(() => {
     UserProfileService.fetchUserInfo(setUserInfo, setApiError, email);
   }, [email]);
 
   function handleSubmit() {
     UserProfileService.userUpdate(
+      userInfo.id,
       userInfo.firstName,
       userInfo.lastName,
       userInfo.streetAddress,
@@ -45,56 +47,63 @@ const UserProfile1 = () => {
                 type="text"
                 id="firstName"
                 label="First Name"
-                onChange={handleChange}
+                onChange={onUserChange}
                 value={userInfo.firstName}
               />
-              <FormItem
+              <TextInput
                 type="text"
                 id="lastName"
                 label="Last Name"
-                onChange={handleChange}
+                onChange={onUserChange}
                 value={userInfo.lastName}
               />
-              <FormItem
+              <TextInput
                 placeholder="e.g. 123 Sesame Street"
                 type="text"
-                id="userStreet"
+                id="streetAddress"
                 label="Street"
-                onChange={handleChange}
-                value={userInfo.street}
+                onChange={onUserChange}
+                value={userInfo.streetAddress}
               />
-              <FormItem
+              <TextInput
                 placeholder="e.g. Unit #1"
                 type="text"
-                id="deliveryStreet2"
+                id="streetAddress2"
                 label="Street 2 (Optional)"
-                onChange={handleChange}
-                value={userInfo.street2}
+                onChange={onUserChange}
+                value={userInfo.streetAddress2}
               />
-              <FormItem
+              <TextInput
                 placeholder="e.g. Denver"
                 type="text"
-                id="userCity"
+                id="city"
                 label="City"
-                onChange={handleChange}
+                onChange={onUserChange}
                 value={userInfo.city}
               />
-              <FormItemDropdown
-                id="userState"
-                label="State"
+              <TextInput
+                id="state"
+                label="state"
                 color="secondary"
-                onChange={handleChange}
+                onChange={onUserChange}
                 placeholder="[Select State]"
                 value={userInfo.state}
-                options={usStates}
               />
-              <FormItem
+              <TextInput
                 placeholder="e.g. 12345"
                 type="text"
-                id="deliveryZip"
+                id="zipCode"
                 label="Zip"
-                onChange={handleChange}
-                value={userInfo.zip}
+                onChange={onUserChange}
+                value={userInfo.zipCode}
+              />
+              <TextInput
+                placeholder="XXX-XXX-XXXX"
+                type="text"
+                id="phoneNumber"
+                label="Phone"
+                onChange={onUserChange}
+                value={userInfo.phoneNumber}
               />
             </div>
             <button onClick={handleSubmit} type="button" className={style.saveButton1}>
