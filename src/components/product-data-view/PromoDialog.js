@@ -5,11 +5,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-// import { FormControl, Radio, RadioGroup } from '@material-ui/core';
 import { Radio, RadioGroup } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
-// import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -67,15 +65,7 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiButton-label': {
       color: '#EEEEEE'
     }
-  },
-  transformLabel: {
-    '&.MuiInputLabel-shrink': {
-      marginTop: theme.spacing(3)
-    // transform: 'translate(0, 1.5px) scale(0.75)',
-    // transformOrigin: 'top left'
-    }
   }
-
 }));
 
 const PromoDialog = ({ open, handleClose }) => {
@@ -187,7 +177,6 @@ const PromoDialog = ({ open, handleClose }) => {
           </div>
           <div className={classes.field}>
             <TextField
-                // className={classes.transformLabel}
               label="Discount Amount %"
               required
               varian="outlined"
@@ -197,15 +186,12 @@ const PromoDialog = ({ open, handleClose }) => {
               onChange={handlePercentageChange}
               error={percentageError}
               InputProps={{
-                // endAdornment: <InputAdornment position="end">%</InputAdornment>,
                 disableUnderline: true
-                // shrink: true
               }}
             />
           </div>
           <div className={classes.field}>
             <TextField
-              // className={classes.transformLabel}
               label="Discount Amount $"
               required
               varian="outlined"
@@ -214,8 +200,8 @@ const PromoDialog = ({ open, handleClose }) => {
               helperText="Must be filled out"
               onChange={handleFlatChange}
               error={flatError}
+              sx={{ m: 1, width: '25ch' }}
               InputProps={{
-                // startAdornment: <InputAdornment position="start">$</InputAdornment>,
                 disableUnderline: true,
                 shrink: true
               }}
