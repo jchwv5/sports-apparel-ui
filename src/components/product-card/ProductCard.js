@@ -18,7 +18,6 @@ import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import notify from '../Toast/Toast';
 import { useCart } from '../checkout-page/CartContext';
-// eslint-disable-next-line import/no-cycle
 import Modal from '../Modal/Modal';
 import ProductReview from '../product-page/ProductReview';
 
