@@ -17,16 +17,17 @@
         border-width: .001em !important;
         border-style: solid !important;
       }
-
-      .errorText {
-        color: #f00;
+      .errMsg {
+        color: red;
+        font-size: 14px;
+        margin: 0px 2px 4px 4px;
       }
       .edit {
         display: none;
       }
 
       .userInfo {
-        height: 910px;
+        height: 710px;
         width: 500px;
         display: grid;
         grid-template-columns: 1fr;
