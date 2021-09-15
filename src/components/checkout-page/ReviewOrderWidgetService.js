@@ -18,3 +18,10 @@ export const getSubtotal = (products) => {
   }
   return toPrice(0.00);
 };
+
+export const getShippingSubtotal = (shippingSubtotal) => {
+  if (shippingSubtotal === 0) {
+    return (`Free Shipping\u00A0\u00A0\u00A0\u00A0\u00A0-\u00A0\u00A0\u00A0\u00A0\u00A0${toPrice(shippingSubtotal)}`);
+  }
+  return toPrice(shippingSubtotal);
+};

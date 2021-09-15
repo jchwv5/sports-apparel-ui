@@ -95,7 +95,7 @@ const SidebarFilter = () => {
           <div className="collapsible-body">
             {brands.sort().map((brand) => (
               <li data-id={brand} className="filterContents">
-                <input type="checkbox" />
+                <input type="checkbox" className="checkbox" />
                 {brand}
               </li>
             ))}
@@ -109,7 +109,7 @@ const SidebarFilter = () => {
           <div className="collapsible-body">
             {categories.sort().map((category) => (
               <li data-id={category} className="filterContents">
-                <input type="checkbox" />
+                <input type="checkbox" className="checkbox" />
                 {category}
               </li>
             ))}
@@ -137,7 +137,7 @@ const SidebarFilter = () => {
           <div className="collapsible-body">
             {colors.map((color) => (
               <li data-id={color} className="filterColor">
-                <input type="checkbox" />
+                <input type="checkbox" className="checkbox" />
                 <div className="square">
                   <ReactColorSquare className="square" height={20} width={20} color={color} />
                 </div>
@@ -153,7 +153,7 @@ const SidebarFilter = () => {
           <div className="collapsible-body">
             {materials.sort().map((material) => (
               <li data-id={material} className="filterContents">
-                <input type="checkbox" />
+                <input type="checkbox" className="checkbox" />
                 {material}
               </li>
             ))}
