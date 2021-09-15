@@ -1,16 +1,17 @@
 /* eslint-disable max-len */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { trackPromise, usePromiseTracker } from 'react-promise-tracker';
 import { useCart } from './CartContext';
-import styles from './CheckoutPage.module.css';
-import ReviewOrderWidget from './ReviewOrderWidget';
-import DeliveryAddress from './forms/DeliveryAddress';
+import makePurchase, { getDeliverySubtotal } from './CheckoutService';
 import BillingDetails from './forms/BillingDetails';
-import makePurchase from './CheckoutService';
-import validate from '../../utils/validate';
+import DeliveryAddress from './forms/DeliveryAddress';
+import ReviewOrderWidget from './ReviewOrderWidget';
+import fetchShippingRates from './ShippingRateService';
 import notify from '../Toast/Toast';
 import Spinner from '../Spinner/Spinner';
+import styles from './CheckoutPage.module.css';
+import validate from '../../utils/validate';
 
 /**
  * @name CheckoutPage
@@ -24,13 +25,14 @@ const CheckoutPage = () => {
 
   const history = useHistory();
   const { promiseInProgress } = usePromiseTracker();
+  const [apiError, setApiError] = useState(false);
 
-  const [billingData, setBillingData] = React.useState({});
-  const [deliveryData, setDeliveryData] = React.useState({});
+  const [billingData, setBillingData] = useState({});
+  const [deliveryData, setDeliveryData] = useState({});
 
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = useState(false);
 
-  const [deliveryErrors, setDeliveryErrors] = React.useState({
+  const [deliveryErrors, setDeliveryErrors] = useState({
     firstName: { dataIsValid: false, errorMessage: '' },
     lastName: { dataIsValid: false, errorMessage: '' },
     deliveryStreet: { dataIsValid: false, errorMessage: '' },
@@ -38,7 +40,7 @@ const CheckoutPage = () => {
     deliveryState: { dataIsValid: false, errorMessage: '' },
     deliveryZip: { dataIsValid: false, errorMessage: '' }
   });
-  const [billingErrors, setBillingErrors] = React.useState({
+  const [billingErrors, setBillingErrors] = useState({
     billingStreet: { dataIsValid: false, errorMessage: '' },
     billingCity: { dataIsValid: false, errorMessage: '' },
     billingState: { dataIsValid: false, errorMessage: '' },
@@ -51,9 +53,34 @@ const CheckoutPage = () => {
     cardholder: { dataIsValid: false, errorMessage: '' }
   });
 
+  const [shippingSubtotal, setShippingSubtotal] = useState(0);
+  const [shippingRates, setShippingRates] = useState([]);
+
+  useEffect(() => {
+    fetchShippingRates(setShippingRates, setApiError);
+  }, [setShippingRates, setApiError]);
+
+  useEffect(() => {
+    getDeliverySubtotal(
+      setShippingSubtotal,
+      shippingRates,
+      ' ',
+      products
+    );
+  }, [shippingRates, products]);
+
   const onDeliveryChange = (e) => {
     setDeliveryData((prevValue) => ({ ...prevValue, [e.target.id]: e.target.value }));
+    if (e.target.id === 'deliveryState') {
+      getDeliverySubtotal(
+        setShippingSubtotal,
+        shippingRates,
+        e.target.value,
+        products
+      );
+    }
   };
+
   const onBillingChange = (e) => {
     setBillingData((prevValue) => ({ ...prevValue, [e.target.id]: e.target.value }));
   };
@@ -181,7 +208,10 @@ const CheckoutPage = () => {
       <div className={styles.checkoutContainer}>
         <div className={`${styles.step} ${styles.order}`}>
           <h3 className={styles.title}>1. Review Order</h3>
-          <ReviewOrderWidget />
+          <ReviewOrderWidget
+            shippingSubtotal={shippingSubtotal}
+            apiError={apiError}
+          />
         </div>
         <div className={`${styles.step} ${styles.delivery}`}>
           <h3 className={styles.title}>2. Delivery Address</h3>
