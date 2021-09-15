@@ -24,6 +24,7 @@ const UserProfile1 = () => {
   function handleSubmit() {
     UserProfileService.userUpdate(
       userInfo.id,
+      userInfo.email,
       userInfo.firstName,
       userInfo.lastName,
       userInfo.streetAddress,

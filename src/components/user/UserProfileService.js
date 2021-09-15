@@ -40,6 +40,7 @@ async function fetchUserInfo(setUserInfo, setApiError, email) {
  */
 async function userUpdate(
   id,
+  email,
   firstName,
   lastName,
   streetAddress,
@@ -52,6 +53,7 @@ async function userUpdate(
 ) {
   await HttpHelper(`${Constants.USER__UPDATE_BY_EMAIL_ENDPOINT}/${id}`, 'PUT', {
     id,
+    email,
     firstName,
     lastName,
     streetAddress,
