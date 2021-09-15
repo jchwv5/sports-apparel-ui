@@ -5,11 +5,11 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { FormControl, Radio, RadioGroup } from '@material-ui/core';
-
+// import { FormControl, Radio, RadioGroup } from '@material-ui/core';
+import { Radio, RadioGroup } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
+// import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -66,6 +66,13 @@ const useStyles = makeStyles((theme) => ({
   buttonLabel: {
     '& .MuiButton-label': {
       color: '#EEEEEE'
+    }
+  },
+  transformLabel: {
+    '&.MuiInputLabel-shrink': {
+      marginTop: theme.spacing(3)
+    // transform: 'translate(0, 1.5px) scale(0.75)',
+    // transformOrigin: 'top left'
     }
   }
 
@@ -158,73 +165,74 @@ const PromoDialog = ({ open, handleClose }) => {
           </IconButton>
         </div>
         <form noValidate autoComplete="off">
-          <FormControl>
-            <div className={classes.field}>
-              <TextField
-                label="Promotion Code"
-                required
-                varian="standard"
-                value={code}
-                helperText="Must be filled out"
-                onChange={handleCodeChange}
-                error={codeError}
-                InputProps={{ disableUnderline: true }}
-              />
+          <div className={classes.field}>
+            <TextField
+              label="Promotion Code"
+              required
+              varian="outlined"
+              value={code}
+              helperText="Must be filled out"
+              onChange={handleCodeChange}
+              error={codeError}
+              InputProps={{ disableUnderline: true }}
+            />
+          </div>
+          <div className={classes.field}>
+            <FormLabel>Discount Type</FormLabel>
+            <RadioGroup name="discount type" value={type} onChange={handleTypeChange}>
+              <FormControlLabel value="Percentage" control={<Radio />} label="Percentage" />
+              <FormControlLabel value="Flat" control={<Radio />} label="Flat Dollar Amount" />
+            </RadioGroup>
+            <FormHelperText error={helperTextError}>Must select a type</FormHelperText>
+          </div>
+          <div className={classes.field}>
+            <TextField
+                // className={classes.transformLabel}
+              label="Discount Amount %"
+              required
+              varian="outlined"
+              value={percentage}
+              type="number"
+              helperText="Must be filled out"
+              onChange={handlePercentageChange}
+              error={percentageError}
+              InputProps={{
+                // endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                disableUnderline: true
+                // shrink: true
+              }}
+            />
+          </div>
+          <div className={classes.field}>
+            <TextField
+              // className={classes.transformLabel}
+              label="Discount Amount $"
+              required
+              varian="outlined"
+              value={flat}
+              type="number"
+              helperText="Must be filled out"
+              onChange={handleFlatChange}
+              error={flatError}
+              InputProps={{
+                // startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                disableUnderline: true,
+                shrink: true
+              }}
+            />
+          </div>
+          <DialogActions>
+            <div className={classes.cancelButton}>
+              <Button onClick={handleReset} className={classes.buttonLabel} variant="contained">
+                Cancel
+              </Button>
             </div>
-            <div className={classes.field}>
-              <FormLabel>Discount Type</FormLabel>
-              <RadioGroup name="discount type" value={type} onChange={handleTypeChange}>
-                <FormControlLabel value="Percentage" control={<Radio />} label="Percentage" />
-                <FormControlLabel value="Flat" control={<Radio />} label="Flat Dollar Amount" />
-              </RadioGroup>
-              <FormHelperText error={helperTextError}>Must select a type</FormHelperText>
+            <div className={classes.submitButton}>
+              <Button onClick={handleSubmit} className={classes.buttonLabel} variant="contained">
+                Submit
+              </Button>
             </div>
-            <div className={classes.field}>
-              <TextField
-                label="Discount Amount %"
-                required
-                varian="standard"
-                value={percentage}
-                type="number"
-                helperText="Must be filled out"
-                onChange={handlePercentageChange}
-                error={percentageError}
-                InputProps={{
-                  endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                  disableUnderline: true
-                }}
-              />
-            </div>
-            <div className={classes.field}>
-              <TextField
-                label="Discount Amount $"
-                shrink="false"
-                required
-                varian="standard"
-                InputProps={{
-                  startAdornment: <InputAdornment position="start">$</InputAdornment>,
-                  disableUnderline: true
-                }}
-                value={flat}
-                type="number"
-                helperText="Must be filled out"
-                onChange={handleFlatChange}
-                error={flatError}
-              />
-            </div>
-            <DialogActions>
-              <div className={classes.cancelButton}>
-                <Button onClick={handleReset} className={classes.buttonLabel} variant="contained">
-                  Cancel
-                </Button>
-              </div>
-              <div className={classes.submitButton}>
-                <Button onClick={handleSubmit} className={classes.buttonLabel} variant="contained">
-                  Submit
-                </Button>
-              </div>
-            </DialogActions>
-          </FormControl>
+          </DialogActions>
         </form>
       </Dialog>
     </div>
