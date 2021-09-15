@@ -7,7 +7,7 @@ import styles from './FormItem.module.css';
  * @return component
  */
 const FormItem = ({
-  onChange, value, id, label, placeholder, type, isValid, errorMessage
+  onChange, value, id, label, placeholder, type, isValid, errorMessage, defaultValue
 }) => (
 
   <div>
@@ -21,6 +21,7 @@ const FormItem = ({
           placeholder={placeholder}
           type={type}
           value={value}
+          defaultValue={defaultValue}
         />
         {isValid === false
         && (
