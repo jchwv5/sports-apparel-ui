@@ -4,7 +4,7 @@
 }
 
 .form {
-    width: 900px;
+    width: 800px;
     height: 75%;
     border: none;
     position: absolute;
@@ -12,7 +12,7 @@
     overflow-x: hidden;
     top: 2%;
     padding: 0.35em 0.35em 0.35em 0.35em;
-    transform: translate(-6%);
+    transform: translate(-24%);
 }
   
   .inputError {
@@ -45,17 +45,21 @@
     margin-bottom: 0rem;
 }
   .buttons {
-    margin-left: 9em;
+    margin: 0 auto;
     padding-top: 30em;
   }
+  .historyButton {
+    margin-left: 4em;
+  }
 
+  .saveButton {
+    margin-top: 2em;
+  }
 .saveButton, .historyButton {
     background: #666666;
     border-radius: 20px;
     color: #EEEEEE;
     cursor: pointer;
     height: 3em;
-    margin-top: 2em;
-    margin-right: 10em;
     width: 12em;
   }
