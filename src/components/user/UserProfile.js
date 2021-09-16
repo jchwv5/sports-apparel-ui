@@ -1,189 +1,163 @@
 import React, { useEffect, useState } from 'react';
+import { TextInput } from 'react-materialize';
 import { useLocation } from 'react-router-dom';
+import UserProfileService from './UserProfileService';
+// import TextInputDropdown from '../form/TextInputDropdown';
 import style from './UserProfile.module.css';
-import fetchUserInfo from './UserProfileService';
+// import usStates from './usStates';
+import validate from '../../utils/validate';
 import Constants from '../../utils/constants';
 
 const UserProfile = () => {
   const location = useLocation();
   const { email } = location.state;
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, setUserInfo] = React.useState([]);
   const [apiError, setApiError] = useState(false);
+  const [nameError, setNameError] = React.useState('');
+  const [descriptionError, setDescriptionError] = React.useState('');
+  const [demographicError, setDemographicError] = React.useState('');
+  const [categoryError, setCategoryError] = React.useState('');
+  const [typeError, setTypeError] = React.useState('');
+  const [materialError, setMaterialError] = React.useState('');
+  const onUserChange = (e) => {
+    setUserInfo((prevValue) => ({ ...prevValue, [e.target.id]: e.target.value }));
+  };
 
   useEffect(() => {
-    fetchUserInfo(setUserInfo, setApiError, email);
+    UserProfileService.fetchUserInfo(setUserInfo, setApiError, email);
   }, [email]);
+  /**
+   *
+   * @name handleSubmit
+   * @description sends request to save valid form data, then displays status toast
+   */
+  function handleSubmit() {
+    UserProfileService.userUpdate(
+      userInfo.id,
+      userInfo.email,
+      userInfo.firstName,
+      userInfo.lastName,
+      userInfo.streetAddress,
+      userInfo.streetAddress2,
+      userInfo.city,
+      userInfo.state,
+      userInfo.zipCode,
+      userInfo.phoneNumber,
+      setApiError
+    );
+  }
+  function validateForm() {
+    let formIsValid = true;
+    let result = validate('text', 'First Name', userInfo.firstName);
+    setNameError(result.errorMessage);
+    if (!result.dataIsValid) {
+      formIsValid = false;
+    }
+    result = validate('text', 'Last Name', userInfo.lastName);
+    setDescriptionError(result.errorMessage);
+    if (!result.dataIsValid) {
+      formIsValid = false;
+    }
+    result = validate('alphaNum', 'Street', userInfo.streetAddress);
+    setDemographicError(result.errorMessage);
+    if (!result.dataIsValid) {
+      formIsValid = false;
+    }
+    result = validate('text', 'City', userInfo.city);
+    setCategoryError(result.errorMessage);
+    if (!result.dataIsValid) {
+      formIsValid = false;
+    }
+    result = validate('text', 'State', userInfo.state);
+    setTypeError(result.errorMessage);
+    if (!result.dataIsValid) {
+      formIsValid = false;
+    }
+    result = validate('zip', 'Zip', userInfo.zipCode);
+    setMaterialError(result.errorMessage);
+    if (!result.dataIsValid) {
+      formIsValid = false;
+    }
+    if (formIsValid) {
+      handleSubmit();
+    }
+  }
   return (
-    <div className={style.userContainer}>
-      {' '}
-      {apiError && (
-      <p className={style.errMsg} data-testid="errMsg">
-        {Constants.API_ERROR}
-      </p>
+    <div className={style.userField}>
+      {apiError && <p className={style.errMsg} data-testid="errMsg">{Constants.API_ERROR}</p>}
+      {!apiError && (
+      <div className={style.form}>
+        <>
+          <form>
+            <div className={style.userInfo}>
+              <TextInput
+                type="text"
+                id="firstName"
+                label="First Name"
+                onChange={onUserChange}
+                value={userInfo.firstName}
+              />
+              {nameError && <p className={style.errMsg}>{nameError}</p>}
+              <TextInput
+                type="text"
+                id="lastName"
+                label="Last Name"
+                onChange={onUserChange}
+                value={userInfo.lastName}
+              />
+              {nameError && <p className={style.errMsg}>{nameError}</p>}
+              <TextInput
+                placeholder="e.g. 123 Sesame Street"
+                type="text"
+                id="streetAddress"
+                label="Street"
+                onChange={onUserChange}
+                value={userInfo.streetAddress}
+              />
+              {descriptionError && <p className={style.errMsg}>{descriptionError}</p>}
+              <TextInput
+                placeholder="e.g. Unit #1"
+                type="text"
+                id="streetAddress2"
+                label="Street 2 (Optional)"
+                onChange={onUserChange}
+                value={userInfo.streetAddress2}
+              />
+              {demographicError && <p className={style.errMsg}>{demographicError}</p>}
+              <TextInput
+                placeholder="e.g. Denver"
+                type="text"
+                id="city"
+                label="City"
+                onChange={onUserChange}
+                value={userInfo.city}
+              />
+              {categoryError && <p className={style.errMsg}>{categoryError}</p>}
+              <TextInput
+                id="state"
+                label="State"
+                color="secondary"
+                onChange={onUserChange}
+                placeholder="[Select State]"
+                value={userInfo.state}
+              />
+              {typeError && <p className={style.errMsg}>{typeError}</p>}
+              <TextInput
+                placeholder="e.g. 12345"
+                type="text"
+                id="zipCode"
+                label="Zip"
+                onChange={onUserChange}
+                value={userInfo.zipCode}
+              />
+              {materialError && <p className={style.errMsg}>{materialError}</p>}
+            </div>
+          </form>
+        </>
+      </div>
       )}
-
-      <div className={style.userProfile}>
-
-        <div id={style.firstName}>
-          <div className={style.columnOne} id={style.firstNameRow}>
-            First Name:
-          </div>
-          <div className={style.columnTwo} id={style.firstNameColumn}>
-            <input
-              type="text"
-              value={userInfo.firstName}
-              id={style.firstNameColumn}
-            />
-          </div>
-        </div>
-
-        <div id={style.lastName}>
-          <div id={style.lastNameRow}> Last name: </div>
-          <div className={style.columnTwo}>
-            <input
-              type="text"
-              value={userInfo.lastName}
-              id={style.lastNameColumn}
-            />
-          </div>
-        </div>
-
-        {!userInfo.streetAddress
-        && (
-        <div id={style.streetAddress}>
-          <div className={style.columnOne} id={style.streetRow}> Street:</div>
-          <div className={style.columnTwo} id={style.streetColumn}>
-            <input
-              type="text"
-              value="No street provided"
-              id={style.streetColumn}
-            />
-          </div>
-        </div>
-        )}
-
-        {userInfo.streetAddress && (
-        <div id={style.streetAddress}>
-          <div className={style.columnOne} id={style.streetRow}> Street:</div>
-          <div className={style.columnTwo} id={style.streetColumn}>
-            <input
-              type="text"
-              value={userInfo.streetAddress}
-              id={style.streetColumn}
-            />
-          </div>
-        </div>
-        )}
-
-        {!userInfo.city
-        && (
-        <div id={style.city}>
-          <div className={style.columnOne} id={style.cityRow}>City: </div>
-          <div className={style.columnTwo} id={style.cityColumn}>
-            <input
-              type="text"
-              value="No city provided"
-              id={style.cityColumn}
-            />
-          </div>
-        </div>
-        )}
-
-        {userInfo.city && (
-        <div id={style.city}>
-          <div className={style.columnOne} id={style.cityRow}>City: </div>
-          <div className={style.columnTwo} id={style.cityColumn}>
-            <input
-              type="text"
-              value={userInfo.city}
-              id={style.cityColumn}
-            />
-          </div>
-        </div>
-        )}
-
-        {!userInfo.state
-        && (
-        <div id={style.state}>
-          <div className={style.columnOne} id={style.stateRow}>State:</div>
-          <div className={style.columnTwo} id={style.stateColumn}>
-            <input
-              type="text"
-              value="No state provided"
-              id={style.stateColumn}
-            />
-          </div>
-        </div>
-        )}
-
-        {userInfo.state && (
-        <div id={style.state}>
-          <div className={style.columnOne} id={style.stateRow}>State:</div>
-          <div className={style.columnTwo} id={style.stateColumn}>
-            <input
-              type="text"
-              value={userInfo.state}
-              id={style.stateColumn}
-            />
-          </div>
-        </div>
-        )}
-
-        {!userInfo.zipCode
-        && (
-        <div id={style.zipCode}>
-          <div className={style.columnOne} id={style.zipRow}>Zip:</div>
-          <div className={style.columnTwo} id={style.zipColumn}>
-            <input
-              type="text"
-              value="No zip provided"
-              id={style.zipColumn}
-            />
-          </div>
-        </div>
-        )}
-
-        {userInfo.zipCode && (
-        <div id={style.zipCode}>
-          <div className={style.columnOne} id={style.zipRow}>Zip:</div>
-          <div className={style.columnTwo} id={style.zipColumn}>
-            <input
-              type="text"
-              value={userInfo.zip}
-              id={style.zipColumn}
-            />
-          </div>
-        </div>
-        )}
-
-        {!userInfo.phoneNumber
-        && (
-        <div id={style.phoneNumber}>
-          <div className={style.columnOne} id={style.phoneRow}>Phone number:</div>
-          <div className={style.columnTwo} id={style.phoneColumn}>
-            <input
-              type="text"
-              value="No phone provided"
-              id={style.phoneColumn}
-            />
-          </div>
-        </div>
-        )}
-
-        {userInfo.phoneNumber && (
-        <div id={style.phoneNumber}>
-          <div className={style.columnOne} id={style.phoneRow}>Phone number:</div>
-          <div className={style.columnTwo} id={style.phoneColumn}>
-            <input
-              type="text"
-              value={userInfo.phoneNumber}
-              id={style.phoneColumn}
-            />
-          </div>
-        </div>
-        )}
-
-        <button type="button" className={style.saveButton}>
+      <div className={style.buttons}>
+        <button onClick={validateForm} type="button" className={style.saveButton}>
           Save changes
         </button>
         <button type="button" className={style.historyButton}>
