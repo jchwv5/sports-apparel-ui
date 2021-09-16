@@ -100,7 +100,7 @@ const Header = () => {
           >
             <PersonIcon
               className={style.profileIcon}
-              style={{ fontSize: 60, color: 'black' }}
+              style={{ fontSize: 72, color: 'black' }}
             />
           </NavLink>
           )}
