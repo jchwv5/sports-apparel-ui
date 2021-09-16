@@ -74,6 +74,8 @@ const PromoDialog = ({ open, handleClose }) => {
   const [type, setType] = useState('');
   const [percentage, setPercentage] = useState('');
   const [flat, setFlat] = useState('');
+  const [percentageDisabled, setPercentageDisabled] = useState(false);
+  const [flatDisabled, setFlatDisabled] = useState(false);
 
   const [codeError, setCodeError] = useState(false);
   const [percentageError, setPercentageError] = useState(false);
@@ -88,6 +90,12 @@ const PromoDialog = ({ open, handleClose }) => {
 
   const handleTypeChange = (event) => {
     setType(event.target.value);
+    if (event.target.value === 'Percentage') {
+      setFlatDisabled(true);
+    }
+    if (event.target.value === 'Flat') {
+      setPercentageDisabled(true);
+    }
   };
 
   const handlePercentageChange = (event) => {
@@ -107,6 +115,8 @@ const PromoDialog = ({ open, handleClose }) => {
     setPercentageError(false);
     setFlatError(false);
     setHelperTextError(false);
+    setFlatDisabled(false);
+    setPercentageDisabled(false);
   };
 
   useEffect(() => {
@@ -188,6 +198,7 @@ const PromoDialog = ({ open, handleClose }) => {
               InputProps={{
                 disableUnderline: true
               }}
+              disabled={percentageDisabled}
             />
           </div>
           <div className={classes.field}>
@@ -200,11 +211,11 @@ const PromoDialog = ({ open, handleClose }) => {
               helperText="Must be filled out"
               onChange={handleFlatChange}
               error={flatError}
-              sx={{ m: 1, width: '25ch' }}
               InputProps={{
                 disableUnderline: true,
                 shrink: true
               }}
+              disabled={flatDisabled}
             />
           </div>
           <DialogActions>
