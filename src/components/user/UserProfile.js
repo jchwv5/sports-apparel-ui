@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { TextInput } from 'react-materialize';
 import { useLocation } from 'react-router-dom';
+import FormItemDropdown from '../form/FormItemDropdown';
 import UserProfileService from './UserProfileService';
 // import TextInputDropdown from '../form/TextInputDropdown';
 import style from './UserProfile.module.css';
 // import usStates from './usStates';
 import validate from '../../utils/validate';
 import Constants from '../../utils/constants';
+import usStates from './usStates';
 
 const UserProfile = () => {
   const location = useLocation();
   const { email } = location.state;
   const [userInfo, setUserInfo] = React.useState([]);
   const [apiError, setApiError] = useState(false);
-  const [nameError, setNameError] = React.useState('');
-  const [descriptionError, setDescriptionError] = React.useState('');
-  const [demographicError, setDemographicError] = React.useState('');
-  const [categoryError, setCategoryError] = React.useState('');
-  const [typeError, setTypeError] = React.useState('');
-  const [materialError, setMaterialError] = React.useState('');
+  const [firstNameError, setFirstNameError] = React.useState('');
+  const [lastNameError, setLastNameError] = React.useState('');
+  const [streetAddressError, setStreetAddressError] = React.useState('');
+  const [cityError, setCityError] = React.useState('');
+  const [stateError, setStateError] = React.useState('');
+  const [zipCodeError, setZipCodeError] = React.useState('');
   const onUserChange = (e) => {
     setUserInfo((prevValue) => ({ ...prevValue, [e.target.id]: e.target.value }));
   };
@@ -49,32 +51,32 @@ const UserProfile = () => {
   function validateForm() {
     let formIsValid = true;
     let result = validate('text', 'First Name', userInfo.firstName);
-    setNameError(result.errorMessage);
+    setFirstNameError(result.errorMessage);
     if (!result.dataIsValid) {
       formIsValid = false;
     }
     result = validate('text', 'Last Name', userInfo.lastName);
-    setDescriptionError(result.errorMessage);
+    setLastNameError(result.errorMessage);
     if (!result.dataIsValid) {
       formIsValid = false;
     }
-    result = validate('alphaNum', 'Street', userInfo.streetAddress);
-    setDemographicError(result.errorMessage);
+    result = validate('alphaNum', 'Street Address', userInfo.streetAddress);
+    setStreetAddressError(result.errorMessage);
     if (!result.dataIsValid) {
       formIsValid = false;
     }
     result = validate('text', 'City', userInfo.city);
-    setCategoryError(result.errorMessage);
+    setCityError(result.errorMessage);
     if (!result.dataIsValid) {
       formIsValid = false;
     }
-    result = validate('text', 'State', userInfo.state);
-    setTypeError(result.errorMessage);
+    result = validate('drop-down', 'State', userInfo.state);
+    setStateError(result.errorMessage);
     if (!result.dataIsValid) {
       formIsValid = false;
     }
-    result = validate('zip', 'Zip', userInfo.zipCode);
-    setMaterialError(result.errorMessage);
+    result = validate('zip', 'Zip Code', userInfo.zipCode);
+    setZipCodeError(result.errorMessage);
     if (!result.dataIsValid) {
       formIsValid = false;
     }
@@ -97,7 +99,7 @@ const UserProfile = () => {
                 onChange={onUserChange}
                 value={userInfo.firstName}
               />
-              {nameError && <p className={style.errMsg}>{nameError}</p>}
+              {firstNameError && <p className={style.errMsg}>{firstNameError}</p>}
               <TextInput
                 type="text"
                 id="lastName"
@@ -105,16 +107,16 @@ const UserProfile = () => {
                 onChange={onUserChange}
                 value={userInfo.lastName}
               />
-              {nameError && <p className={style.errMsg}>{nameError}</p>}
+              {lastNameError && <p className={style.errMsg}>{lastNameError}</p>}
               <TextInput
                 placeholder="e.g. 123 Sesame Street"
                 type="text"
                 id="streetAddress"
-                label="Street"
+                label="Street Address"
                 onChange={onUserChange}
                 value={userInfo.streetAddress}
               />
-              {descriptionError && <p className={style.errMsg}>{descriptionError}</p>}
+              {streetAddressError && <p className={style.errMsg}>{streetAddressError}</p>}
               <TextInput
                 placeholder="e.g. Unit #1"
                 type="text"
@@ -123,7 +125,6 @@ const UserProfile = () => {
                 onChange={onUserChange}
                 value={userInfo.streetAddress2}
               />
-              {demographicError && <p className={style.errMsg}>{demographicError}</p>}
               <TextInput
                 placeholder="e.g. Denver"
                 type="text"
@@ -132,25 +133,25 @@ const UserProfile = () => {
                 onChange={onUserChange}
                 value={userInfo.city}
               />
-              {categoryError && <p className={style.errMsg}>{categoryError}</p>}
-              <TextInput
+              {cityError && <p className={style.errMsg}>{cityError}</p>}
+              <FormItemDropdown
                 id="state"
                 label="State"
-                color="secondary"
+                options={usStates}
                 onChange={onUserChange}
                 placeholder="[Select State]"
                 value={userInfo.state}
               />
-              {typeError && <p className={style.errMsg}>{typeError}</p>}
+              {stateError && <p className={style.errMsg}>{stateError}</p>}
               <TextInput
                 placeholder="e.g. 12345"
                 type="text"
                 id="zipCode"
-                label="Zip"
+                label="Zip Code"
                 onChange={onUserChange}
                 value={userInfo.zipCode}
               />
-              {materialError && <p className={style.errMsg}>{materialError}</p>}
+              {zipCodeError && <p className={style.errMsg}>{zipCodeError}</p>}
             </div>
           </form>
         </>
