@@ -21,8 +21,10 @@ const UserProfile = () => {
   const [cityError, setCityError] = React.useState('');
   const [stateError, setStateError] = React.useState('');
   const [zipCodeError, setZipCodeError] = React.useState('');
+  const [disable, setDisable] = useState(true);
   const onUserChange = (e) => {
     setUserInfo((prevValue) => ({ ...prevValue, [e.target.id]: e.target.value }));
+    setDisable(e.target.value === false);
   };
 
   useEffect(() => {
@@ -82,6 +84,7 @@ const UserProfile = () => {
     }
     if (formIsValid) {
       handleSubmit();
+      setDisable(true);
     }
   }
   return (
@@ -158,7 +161,7 @@ const UserProfile = () => {
       </div>
       )}
       <div className={style.buttons}>
-        <button onClick={validateForm} type="button" className={style.saveButton}>
+        <button id="submit" onClick={validateForm} type="button" className={style.saveButton} disabled={disable}>
           Save changes
         </button>
         <button type="button" className={style.historyButton}>
