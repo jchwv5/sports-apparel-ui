@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { TextInput } from 'react-materialize';
-import { useLocation, NavLink } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import FormItemDropdown from '../form/FormItemDropdown';
 import UserProfileService from './UserProfileService';
-// import TextInputDropdown from '../form/TextInputDropdown';
 import style from './UserProfile.module.css';
-// import usStates from './usStates';
 import validate from '../../utils/validate';
 import Constants from '../../utils/constants';
 import usStates from './usStates';
 
 const UserProfile = () => {
+  const history = useHistory();
   const location = useLocation();
   const { email } = location.state;
   const [userInfo, setUserInfo] = React.useState([]);
@@ -26,7 +25,9 @@ const UserProfile = () => {
     setUserInfo((prevValue) => ({ ...prevValue, [e.target.id]: e.target.value }));
     setDisable(e.target.value === false);
   };
-
+  function handleRedirect() {
+    history.push('/user/purchases', { email });
+  }
   useEffect(() => {
     UserProfileService.fetchUserInfo(setUserInfo, setApiError, email);
   }, [email]);
@@ -164,11 +165,9 @@ const UserProfile = () => {
         <button id="submit" onClick={validateForm} type="button" className={style.saveButton} disabled={disable}>
           Save changes
         </button>
-        <NavLink to="/purchases-history-page/PurchasesHistoryPage">
-          <button type="button" className={style.historyButton}>
-            View product history
-          </button>
-        </NavLink>
+        <button type="button" className={style.historyButton} onClick={handleRedirect}>
+          View purchase history
+        </button>
       </div>
     </div>
   );

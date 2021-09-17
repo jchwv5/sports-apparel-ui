@@ -6,6 +6,7 @@ module.exports = Object.freeze({
     'https://www.signfix.com.au/wp-content/uploads/2017/09/placeholder-600x400.png',
   PURCHASE_ENDPOINT: '/purchases',
   SAVE_PURCHASE_ENDPOINT: '/purchases',
+  PURCHASE_BY_EMAIL_ENDPOINT: '/purchases?email=',
   ALL_PRODUCTS_ENDPOINT: '/products',
   USER_BY_EMAIL_ENDPOINT: '/users?email=',
   PRODUCTS_PROMOTIONS_ENDPOINT: '/products/promotions',
