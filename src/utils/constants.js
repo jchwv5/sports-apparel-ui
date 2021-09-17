@@ -1,7 +1,7 @@
 module.exports = Object.freeze({
   API_ERROR: 'Oops, something went wrong',
-  // BASE_URL_API: 'https://fo4s-sports-apparel-api.herokuapp.com',
-  BASE_URL_API: 'http://localhost:8085',
+  BASE_URL_API: 'https://fo4s-sports-apparel-api.herokuapp.com',
+  // BASE_URL_API: 'http://localhost:8085',
   PLACEHOLDER_IMAGE:
     'https://www.signfix.com.au/wp-content/uploads/2017/09/placeholder-600x400.png',
   PURCHASE_ENDPOINT: '/purchases',
@@ -20,6 +20,7 @@ module.exports = Object.freeze({
   RUNNING_SHORTS_ENDPOINT: '/products?category=Running&type=Short',
   USER__UPDATE_BY_EMAIL_ENDPOINT: '/users',
   SHIPPING_RATES_ENDPOINT: '/rates/type?t=shipping',
+  ACTIVE_PRODUCTS_PAGINATED: '/products/page/',
 
   GOOGLE_CLIENT_ID: '617323905633-81rrdqv26b283cs2rb9mqddbucmm23eo.apps.googleusercontent.com' // ENTER CLIENT ID HERE
 });

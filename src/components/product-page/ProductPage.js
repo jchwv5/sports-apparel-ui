@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
+import ReactPaginate from 'react-paginate';
 import ProductCard from '../product-card/ProductCard';
 import styles from './ProductPage.module.css';
 import Constants from '../../utils/constants';
@@ -18,10 +19,16 @@ const ProductPage = () => {
   const [apiError, setApiError] = useState(false);
   const [filterParam, setFilterParam] = useState('All');
   const [filteredProducts, setFilteredProducts] = useState([]);
-
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(0);
+  const [nextPage, setNextPage] = useState(0);
   function handleClick(filter) {
     setFilterParam(filter);
   }
+  const changePage = ({ selected }) => {
+    setNextPage(selected);
+  };
+
   /**
  * Filters all products into a separate array based on filterParam
  * to be returned for setting cards on products page
@@ -50,8 +57,8 @@ const ProductPage = () => {
   };
 
   useEffect(() => {
-    fetchProducts(setProducts, setApiError);
-  }, []);
+    fetchProducts(setProducts, setApiError, setCount, nextPage);
+  }, [nextPage]);
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js" />;
     return (
       <div>
@@ -66,7 +73,22 @@ const ProductPage = () => {
             </div>
           ))}
         </div>
+        <div>
+          <ReactPaginate
+            previousLabel="Previous"
+            nextLabel="Next"
+            pageCount={count}
+            marginPagesDisplayed={1}
+            onPageChange={changePage}
+            containerClassName={styles.paginationBttns}
+            previousLinkClassName={styles.previousBttn}
+            nextLinkClassName={styles.nextBttn}
+            disabledClassName={styles.paginationDisabled}
+            activeClassName={styles.paginationActive}
+          />
+        </div>
       </div>
+
     );
 };
 
