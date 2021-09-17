@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TextInput } from 'react-materialize';
-import { useLocation } from 'react-router-dom';
+import { useLocation, NavLink } from 'react-router-dom';
 import FormItemDropdown from '../form/FormItemDropdown';
 import UserProfileService from './UserProfileService';
 // import TextInputDropdown from '../form/TextInputDropdown';
@@ -164,9 +164,11 @@ const UserProfile = () => {
         <button id="submit" onClick={validateForm} type="button" className={style.saveButton} disabled={disable}>
           Save changes
         </button>
-        <button type="button" className={style.historyButton}>
-          View product history
-        </button>
+        <NavLink to="/purchases-history-page/PurchasesHistoryPage">
+          <button type="button" className={style.historyButton}>
+            View product history
+          </button>
+        </NavLink>
       </div>
     </div>
   );
