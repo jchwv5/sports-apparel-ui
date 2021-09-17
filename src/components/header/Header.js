@@ -119,13 +119,15 @@ const Header = () => {
               id={style.login}
             />
           ) : (
-            <GoogleLogout
-              clientId={constants.GOOGLE_CLIENT_ID}
-              buttonText="Logout"
-              onLogoutSuccess={handleGoogleLogoutSuccess}
-              onSuccess={handleGoogleLogoutFailure}
-              id={style.logout}
-            />
+            <NavLink to="/">
+              <GoogleLogout
+                clientId={constants.GOOGLE_CLIENT_ID}
+                buttonText="Logout"
+                onLogoutSuccess={handleGoogleLogoutSuccess}
+                onSuccess={handleGoogleLogoutFailure}
+                id={style.logout}
+              />
+            </NavLink>
           )}
         </li>
       </ul>

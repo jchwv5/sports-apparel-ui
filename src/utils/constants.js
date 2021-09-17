@@ -17,6 +17,7 @@ module.exports = Object.freeze({
   WOMEN_ACTIVE_PRODUCTS_ENDPOINT: '/products?active=true&demographic=Women',
   KIDS_ACTIVE_PRODUCTS_ENDPOINT: '/products?active=true&demographic=Kids',
   RUNNING_SHORTS_ENDPOINT: '/products?category=Running&type=Short',
+  USER__UPDATE_BY_EMAIL_ENDPOINT: '/users',
   SHIPPING_RATES_ENDPOINT: '/rates/type?t=shipping',
 
   GOOGLE_CLIENT_ID: '617323905633-81rrdqv26b283cs2rb9mqddbucmm23eo.apps.googleusercontent.com' // ENTER CLIENT ID HERE

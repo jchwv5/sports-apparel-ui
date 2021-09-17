@@ -1,107 +1,176 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import fetchUserInfo from './UserProfileService';
+import { TextInput } from 'react-materialize';
+import { useLocation, NavLink } from 'react-router-dom';
 import FormItemDropdown from '../form/FormItemDropdown';
+import UserProfileService from './UserProfileService';
+// import TextInputDropdown from '../form/TextInputDropdown';
 import style from './UserProfile.module.css';
+// import usStates from './usStates';
+import validate from '../../utils/validate';
+import Constants from '../../utils/constants';
 import usStates from './usStates';
-import FormItem from '../form/FormItem';
-
-/**
- * Handles the rendering of the user profile as well as updating the user info from the database
- * and displays that information to the user so they know what information is already saved
- * for them.
- */
 
 const UserProfile = () => {
   const location = useLocation();
   const { email } = location.state;
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, setUserInfo] = React.useState([]);
   const [apiError, setApiError] = useState(false);
-  useEffect(() => {
-    fetchUserInfo(setUserInfo, setApiError, email);
-  }, [email]);
-
+  const [firstNameError, setFirstNameError] = React.useState('');
+  const [lastNameError, setLastNameError] = React.useState('');
+  const [streetAddressError, setStreetAddressError] = React.useState('');
+  const [cityError, setCityError] = React.useState('');
+  const [stateError, setStateError] = React.useState('');
+  const [zipCodeError, setZipCodeError] = React.useState('');
+  const [disable, setDisable] = useState(true);
   const onUserChange = (e) => {
     setUserInfo((prevValue) => ({ ...prevValue, [e.target.id]: e.target.value }));
+    setDisable(e.target.value === false);
   };
 
+  useEffect(() => {
+    UserProfileService.fetchUserInfo(setUserInfo, setApiError, email);
+  }, [email]);
+  /**
+   *
+   * @name handleSubmit
+   * @description sends request to save valid form data, then displays status toast
+   */
+  function handleSubmit() {
+    UserProfileService.userUpdate(
+      userInfo.id,
+      userInfo.email,
+      userInfo.firstName,
+      userInfo.lastName,
+      userInfo.streetAddress,
+      userInfo.streetAddress2,
+      userInfo.city,
+      userInfo.state,
+      userInfo.zipCode,
+      userInfo.phoneNumber,
+      setApiError
+    );
+  }
+  function validateForm() {
+    let formIsValid = true;
+    let result = validate('text', 'First Name', userInfo.firstName);
+    setFirstNameError(result.errorMessage);
+    if (!result.dataIsValid) {
+      formIsValid = false;
+    }
+    result = validate('text', 'Last Name', userInfo.lastName);
+    setLastNameError(result.errorMessage);
+    if (!result.dataIsValid) {
+      formIsValid = false;
+    }
+    result = validate('alphaNum', 'Street Address', userInfo.streetAddress);
+    setStreetAddressError(result.errorMessage);
+    if (!result.dataIsValid) {
+      formIsValid = false;
+    }
+    result = validate('text', 'City', userInfo.city);
+    setCityError(result.errorMessage);
+    if (!result.dataIsValid) {
+      formIsValid = false;
+    }
+    result = validate('drop-down', 'State', userInfo.state);
+    setStateError(result.errorMessage);
+    if (!result.dataIsValid) {
+      formIsValid = false;
+    }
+    result = validate('zip', 'Zip Code', userInfo.zipCode);
+    setZipCodeError(result.errorMessage);
+    if (!result.dataIsValid) {
+      formIsValid = false;
+    }
+    if (formIsValid) {
+      handleSubmit();
+      setDisable(true);
+    }
+  }
   return (
-    <>
-      {apiError}
-      <div id={style.userField}>
-        <form className={style.form}>
-          <fieldset className={style.fieldset}>
+    <div className={style.userField}>
+      {apiError && <p className={style.errMsg} data-testid="errMsg">{Constants.API_ERROR}</p>}
+      {!apiError && (
+      <div className={style.form}>
+        <>
+          <form>
             <div className={style.userInfo}>
-              <FormItem
-                placeholder="e.g: Andrew"
+              <TextInput
                 type="text"
                 id="firstName"
                 label="First Name"
                 onChange={onUserChange}
                 value={userInfo.firstName}
               />
-              <FormItem
-                placeholder="e.g: LaNoue"
+              {firstNameError && <p className={style.errMsg}>{firstNameError}</p>}
+              <TextInput
                 type="text"
                 id="lastName"
                 label="Last Name"
                 onChange={onUserChange}
                 value={userInfo.lastName}
               />
-              <FormItem
-                placeholder="e.g: 5050 Columbus St SE #73"
+              {lastNameError && <p className={style.errMsg}>{lastNameError}</p>}
+              <TextInput
+                placeholder="e.g. 123 Sesame Street"
                 type="text"
-                id="userStreet"
-                label="Street"
+                id="streetAddress"
+                label="Street Address"
                 onChange={onUserChange}
-                value={userInfo.street}
+                value={userInfo.streetAddress}
               />
-              <FormItem
-                placeholder="e.g: 5050 Columbus St SE #72"
+              {streetAddressError && <p className={style.errMsg}>{streetAddressError}</p>}
+              <TextInput
+                placeholder="e.g. Unit #1"
                 type="text"
-                id="deliveryStreet2"
+                id="streetAddress2"
                 label="Street 2 (Optional)"
                 onChange={onUserChange}
-                value={userInfo.street2}
+                value={userInfo.streetAddress2}
               />
-              <FormItem
-                placeholder="e.g: Albany"
+              <TextInput
+                placeholder="e.g. Denver"
                 type="text"
-                id="userCity"
+                id="city"
                 label="City"
                 onChange={onUserChange}
                 value={userInfo.city}
               />
+              {cityError && <p className={style.errMsg}>{cityError}</p>}
               <FormItemDropdown
-                id="userState"
+                id="state"
                 label="State"
-                color="secondary"
+                options={usStates}
                 onChange={onUserChange}
                 placeholder="[Select State]"
-                options={usStates}
                 value={userInfo.state}
               />
-              <FormItem
-                placeholder="e.g: 97322"
+              {stateError && <p className={style.errMsg}>{stateError}</p>}
+              <TextInput
+                placeholder="e.g. 12345"
                 type="text"
-                id="deliveryZip"
-                label="Zip"
+                id="zipCode"
+                label="Zip Code"
                 onChange={onUserChange}
-                value={userInfo.zip}
+                value={userInfo.zipCode}
               />
+              {zipCodeError && <p className={style.errMsg}>{zipCodeError}</p>}
             </div>
-          </fieldset>
-        </form>
+          </form>
+        </>
       </div>
-      <div id={style.buttons}>
-        <button type="button" id={style.saveButton}>
+      )}
+      <div className={style.buttons}>
+        <button id="submit" onClick={validateForm} type="button" className={style.saveButton} disabled={disable}>
           Save changes
         </button>
-        <button type="button" id={style.historyButton}>
-          View product history
-        </button>
+        <NavLink to="/purchases-history-page/PurchasesHistoryPage">
+          <button type="button" className={style.historyButton}>
+            View product history
+          </button>
+        </NavLink>
       </div>
-    </>
+    </div>
   );
 };
 

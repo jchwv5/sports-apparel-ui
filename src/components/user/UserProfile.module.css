@@ -1,74 +1,56 @@
-    fieldset {
-      border: none !important;
-    }
+.userField {
+  margin-left: auto;
+  margin-right: auto;
+}
 
-    #userField {
-      margin-left: auto;
-      margin-right: auto;
-    }
+.form {
+    width: 800px;
+    height: 75%;
+    border: none;
+    position: absolute;
+    overflow-y: auto;
+    overflow-x: hidden;
+    top: 2%;
+    padding: 0.35em 0.35em 0.35em 0.35em;
+    transform: translate(-24%);
+}
 
-    .form {
-        width: 50%;
-        height: 80%;
-        border: none;
-        position: absolute;
-        overflow-y: auto;
-        overflow-x: hidden;
-        top: 2%;
-        padding: 0.35em 0.35em 0.35em 0.35em;
-        transform: translate(-50%);
-    }
-      
-      .inputError {
-        margin-top: .5em;
-        width: 100%;
-        padding: .5em;
-        box-sizing: border-box;
-        border-color: #F00 !important;
-        border-width: .001em !important;
-        border-style: solid !important;
-      }
+  .errMsg {
+    color: red;
+    font-size: 12px;
+    margin: -20px 0.3px 2px 6px;
+  }
 
-      .errorText {
-        color: #f00;
-      }
-      .edit {
-        display: none;
-      }
+  .userInfo {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1em;
+    background: #fff;
+    box-shadow: 0.2em 0.2em 0.2em rgb(0 0 0 / 23%);
+    padding: 1em;
+    position: relative;
+  }
+  .input-field {
+    position: relative;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+  .buttons {
+    margin: 0 auto;
+    padding-top: 30em;
+  }
+  .historyButton {
+    margin-left: 4em;
+  }
 
-      .userInfo {
-        height: 90%;
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1em;
-        background: #fff;
-        box-shadow: 0.2em 0.2em 0.2em rgb(0 0 0 / 23%);
-        padding: 1em;
-        position: relative;
-      }
-
-      #historyButton {
-        margin-left: 5em;
-      }
-
-      #saveButton {
-        margin-right: 5em;
-      }
-
-      #buttons {
-        margin: 0 auto;
-        padding-top: 30em;
-        padding-left: 0em;
-      }
-
-    #saveButton, #historyButton {
-        background: #666666;
-        border-radius: 20px;
-        color: #EEEEEE;
-        cursor: pointer;
-        height: 3em;
-        margin-top: 2em;
-        width: 12em;
-      }
-      
+  .saveButton {
+    margin-top: 2em;
+  }
+.saveButton, .historyButton {
+    background: #666666;
+    border-radius: 20px;
+    color: #EEEEEE;
+    cursor: pointer;
+    height: 3em;
+    width: 12em;
+  }
