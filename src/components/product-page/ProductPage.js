@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../product-card/ProductCard';
