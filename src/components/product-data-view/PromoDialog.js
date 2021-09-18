@@ -65,6 +65,12 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiButton-label': {
       color: '#EEEEEE'
     }
+  },
+  helperTextClasses: {
+    // '& .MuiFormHelperText-root .Mui-required': {
+
+    color: 'red'
+    // }
   }
 }));
 
@@ -74,8 +80,8 @@ const PromoDialog = ({ open, handleClose }) => {
   const [type, setType] = useState('');
   const [percentage, setPercentage] = useState('');
   const [flat, setFlat] = useState('');
-  const [percentageDisabled, setPercentageDisabled] = useState(false);
-  const [flatDisabled, setFlatDisabled] = useState(false);
+  const [percentageDisabled, setPercentageDisabled] = useState(true);
+  const [flatDisabled, setFlatDisabled] = useState(true);
 
   const [codeError, setCodeError] = useState(false);
   const [percentageError, setPercentageError] = useState(false);
@@ -92,9 +98,11 @@ const PromoDialog = ({ open, handleClose }) => {
     setType(event.target.value);
     if (event.target.value === 'Percentage') {
       setFlatDisabled(true);
+      setPercentageDisabled(false);
     }
     if (event.target.value === 'Flat') {
       setPercentageDisabled(true);
+      setFlatDisabled(false);
     }
   };
 
@@ -115,8 +123,8 @@ const PromoDialog = ({ open, handleClose }) => {
     setPercentageError(false);
     setFlatError(false);
     setHelperTextError(false);
-    setFlatDisabled(false);
-    setPercentageDisabled(false);
+    setFlatDisabled(true);
+    setPercentageDisabled(true);
   };
 
   useEffect(() => {
@@ -193,6 +201,7 @@ const PromoDialog = ({ open, handleClose }) => {
               value={percentage}
               type="number"
               helperText="Must be filled out"
+              FormHelperTextProps={{ className: classes.helperTextClasses }}
               onChange={handlePercentageChange}
               error={percentageError}
               InputProps={{
@@ -206,9 +215,11 @@ const PromoDialog = ({ open, handleClose }) => {
               label="Discount Amount $"
               required
               varian="outlined"
+              color="success"
               value={flat}
               type="number"
               helperText="Must be filled out"
+              FormHelperTextProps={{ className: classes.helperTextClasses }}
               onChange={handleFlatChange}
               error={flatError}
               InputProps={{
