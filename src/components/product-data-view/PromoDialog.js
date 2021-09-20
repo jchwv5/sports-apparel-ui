@@ -108,10 +108,12 @@ const PromoDialog = ({ open, handleClose }) => {
 
   const handlePercentageChange = (event) => {
     setPercentage(event.target.value);
+    setFlat('');
   };
 
   const handleFlatChange = (event) => {
     setFlat(event.target.value);
+    setPercentage('');
   };
 
   const handleReset = () => {
