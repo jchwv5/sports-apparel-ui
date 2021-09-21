@@ -10,7 +10,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-// import FormHelperText from '@material-ui/core/FormHelperText';
 import postPromotions from './PromoDialogService';
 
 /**
@@ -65,12 +64,6 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiButton-label': {
       color: '#EEEEEE'
     }
-  },
-  helperTextClasses: {
-    // '& .MuiFormHelperText-root .Mui-required': {
-
-    color: 'red'
-    // }
   }
 }));
 
@@ -79,16 +72,12 @@ const PromoDialog = ({ open, handleClose }) => {
   const [code, setCode] = useState('');
   const [type, setType] = useState('Percentage');
   const [amountLabel, setAmountLabel] = useState('Discount Amount %');
-
-  const [amountValue, setAmountValue] = useState();
-  const [percentage, setPercentage] = useState();
-  const [flat, setFlat] = useState();
+  const [amount, setAmount] = useState('');
   const [codeError, setCodeError] = useState(false);
   const [amountError, setAmountError] = useState(false);
 
   //  eslint-disable-next-line no-unused-vars
   const [apiError, setApiError] = useState(false);
-  // const [helperTextError, setHelperTextError] = useState('');
 
   const handleCodeChange = (event) => {
     setCode(event.target.value);
@@ -96,34 +85,25 @@ const PromoDialog = ({ open, handleClose }) => {
 
   const handleTypeChange = (event) => {
     setType(event.target.value);
+    setAmount('');
     if (event.target.value === 'Percentage') {
       setAmountLabel('Discount Amount %');
-    }
-    if (event.target.value === 'Flat') {
+    } if (event.target.value === 'Flat') {
       setAmountLabel('Flat Dollar Amount');
     }
   };
 
   const handleAmountChange = (event) => {
-    setAmountValue(event.target.value);
-    if (type === 'Percentage') {
-      setPercentage(event.target.value);
-      setFlat();
-    } else if (type === 'Flat') {
-      setFlat(event.target.value);
-      setPercentage();
-    }
+    setAmount(event.target.value);
   };
 
   const handleCancel = () => {
     setCode('');
     setType('Percentage');
-    setCodeError('');
-    setAmountValue('');
-    setPercentage('');
-    setFlat('');
+    setAmountLabel('Discount Amount %');
+    setCodeError(false);
+    setAmount('');
     setAmountError(false);
-    // setHelperTextError(false);
   };
 
   useEffect(() => {
@@ -135,11 +115,11 @@ const PromoDialog = ({ open, handleClose }) => {
     if (code === '') {
       setCodeError(true);
     }
-    if ((type === 'Percentage' && amountValue === '') || (type === 'Flat' && amountValue === '')) {
+    if ((type === 'Percentage' && amount === '') || (type === 'Flat' && amount === '')) {
       setAmountError(true);
     }
-    if (code && type && amountValue) {
-      postPromotions(code, type, percentage, flat, setApiError);
+    if (code && type && amount) {
+      postPromotions(code, type, amount, setApiError);
       handleCancel();
       handleClose();
     }
@@ -179,10 +159,9 @@ const PromoDialog = ({ open, handleClose }) => {
               label={amountLabel}
               required
               varian="outlined"
-              value={amountValue}
+              value={amount}
               type="number"
               helperText="Must be filled out"
-              // FormHelperTextProps={{ className: classes.helperTextClasses }}
               onChange={handleAmountChange}
               error={amountError}
               InputProps={{
