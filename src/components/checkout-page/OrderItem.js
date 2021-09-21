@@ -11,8 +11,8 @@ const OrderItem = ({
   price, title, description, quantity, image
 }) => (
   <div className={styles.orderItem}>
-    <div className={styles.image}>
-      <img src={image} alt={title} />
+    <div>
+      <img src={image} alt={title} className={styles.image} />
     </div>
     <div className={styles.item}>
       <p className={styles.itemTitle}>{title}</p>

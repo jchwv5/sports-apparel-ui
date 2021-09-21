@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import styles from '../product-page/ProductPage.module.css';
 import Constants from '../../utils/constants';
 import fetchProducts from './DataViewService';
@@ -13,6 +14,11 @@ import PromoDialog from './PromoDialog';
  * @return component
  */
 const useStyles = makeStyles({
+  divButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    display: 'flex'
+  },
   root: {
     '& .table-header': {
       backgroundColor: '#add8e6',
@@ -21,13 +27,21 @@ const useStyles = makeStyles({
     },
     '& .MuiDataGrid-root .MuiDataGrid-cell': {
       fontSize: '17px'
-    },
-
+    }
+  },
+  button: {
     '& .MuiButton-root': {
-      position: 'absolute',
-      diplay: 'inline-block',
-      bottom: '0.25px',
-      left: '60%'
+      background: '#666666',
+      borderRadius: '20px',
+      cursor: 'pointer',
+      height: '3em',
+      marginTop: '2em'
+    }
+  },
+  buttonLabel: {
+    '& .MuiButton-label': {
+      color: '#EEEEEE',
+      fontSize: '100%'
     }
   }
 });
@@ -156,6 +170,7 @@ const DataTable = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <div>
       {apiError && (
@@ -172,21 +187,28 @@ const DataTable = () => {
         }}
         className={classes.root}
       >
-        <DataGrid rows={products} columns={columns} rowsPerPageOptions={[20]} />
+        <DataGrid
+          rows={products}
+          columns={columns}
+          rowsPerPageOptions={[20]}
+        />
       </div>
-      <div className={classes.root}>
-        <Button href="/maintenance/create" color="primary" variant="contained">
-          Create
-        </Button>
-        <Button
-          style={{ marginLeft: '130px' }}
-          color="primary"
-          variant="contained"
-          onClick={handleClickOpen}
-        >
-          Create Promo
-        </Button>
+      <div className={classes.divButton}>
+        <ButtonGroup className={classes.button}>
+          <Button href="/maintenance/create" variant="contained" className={classes.buttonLabel}>
+            Create
+          </Button>
+          <Button
+            className={classes.buttonLabel}
+            style={{ marginLeft: '100px' }}
+            variant="contained"
+            onClick={handleClickOpen}
+          >
+            Create Promo
+          </Button>
+        </ButtonGroup>
         <PromoDialog open={open} handleClose={handleClose} />
+
       </div>
     </div>
   );

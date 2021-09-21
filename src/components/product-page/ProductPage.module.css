@@ -15,3 +15,36 @@
 .sidenavIsOpen {
   margin-left: 320px;
 }
+.paginationBttns {
+  width: 80%;
+  height: 40px;
+  list-style: none;
+  display: flex;
+  margin-left: 10%;
+  justify-content: center;
+}
+
+.paginationBttns a {
+  padding: 10px;
+  margin: 8px;
+  border-radius: 5px;
+  border: 1px solid black;
+  color: black;
+  cursor: pointer;
+}
+
+.paginationBttns a:hover {
+  color: white;
+  background-color: coral;
+}
+
+.paginationActive a {
+  color: white;
+  background-color: #ea526f ;
+}
+
+.paginationDisabled a {
+  display: none;
+  color: grey;
+  background-color: grey;
+}

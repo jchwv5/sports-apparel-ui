@@ -20,6 +20,10 @@
   margin: 0px 2px 4px 4px;
 }
 
+.errorDiv {
+  height: 30px;
+}
+
 .createButton {
   background: #666666;
   border-radius: 20px;
