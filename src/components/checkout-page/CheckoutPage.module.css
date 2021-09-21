@@ -1,4 +1,4 @@
-span {
+.span {
   text-align: center;
 }
 .checkoutContainer {
@@ -22,10 +22,6 @@ span {
 
 .delivery {
   grid-area: delivery;
-}
-
-select {
-  display: inline;
 }
 
 .order {
@@ -90,5 +86,3 @@ select {
   color: #666666;
   font-weight: 700;
 }
-
-

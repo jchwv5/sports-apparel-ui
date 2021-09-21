@@ -3,15 +3,15 @@ import Constants from '../../utils/constants';
 
 /**
  *
- * @name fetchProducts
+ * @name fetchShippingRates
  * @description Utilizes HttpHelper to make a get request to an API
- * @param {*} setProducts sets state for products
+ * @param {*} setShippingRates sets state for shipping rates
  * @param {*} setApiError sets error if response other than 200 is returned
- * @returns sets state for products if 200 response, else sets state for apiError
+ * @returns sets state for shipping rates if 200 response, else sets state for apiError
  */
 
-export default async function fetchProducts(setProducts, setApiError, setCount, nextPage) {
-  await HttpHelper(Constants.ACTIVE_PRODUCTS_PAGINATED + nextPage, 'GET')
+export default async function fetchShippingRates(setShippingRates, setApiError) {
+  await HttpHelper(Constants.SHIPPING_RATES_ENDPOINT, 'GET')
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -19,9 +19,11 @@ export default async function fetchProducts(setProducts, setApiError, setCount, 
       throw new Error(Constants.API_ERROR);
     })
     .then((body) => {
-      const { totalPages, products } = body;
-      setProducts(products);
-      setCount(totalPages);
+      setShippingRates(body.reduce((map, Rate) => {
+        const rates = map;
+        rates[Rate.code] = Rate.rate;
+        return rates;
+      }, {}));
     })
     .catch(() => {
       setApiError(true);

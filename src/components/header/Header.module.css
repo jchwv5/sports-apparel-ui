@@ -1,4 +1,4 @@
-ul {
+.ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -12,7 +12,7 @@ ul {
   /* padding-bottom: 30px; */
 }
 
-li {
+.li {
   float: left;
 }
 
@@ -31,6 +31,7 @@ li {
 #cart {
   float: right;
   padding-top: 7px;
+  
 }
 
 .logo {
@@ -43,9 +44,20 @@ li {
 .user {
   position: absolute;
   font-weight: 775;
-  right: 12.35em;
-  top: 1.6em;
+  right: 16.35em;
+  top: 1.8em;
   background-color: #ea526f;
+}
+
+.profileIcon {
+  position: absolute; 
+  top: .015em;
+  right: 2.45em;
+}
+
+#cart {
+  position: absolute;
+  right: 8em;
 }
 
 .mainbody,
@@ -54,7 +66,7 @@ li {
   text-decoration: none;
 }
 
-#cart {
+.googleLogin {
   position: absolute;
-  right: .2em;
+  right: -4em;
 }

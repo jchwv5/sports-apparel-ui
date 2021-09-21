@@ -4,6 +4,7 @@ import { Badge } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import GoogleLogin, { GoogleLogout } from 'react-google-login';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import PersonIcon from '@material-ui/icons/Person';
 import loginUser from './HeaderService';
 import constants from '../../utils/constants';
 import { useCart } from '../checkout-page/CartContext';
@@ -72,8 +73,8 @@ const Header = () => {
 
   return (
     <div className={style.header}>
-      <ul>
-        <li>
+      <ul className={style.ul}>
+        <li className={style.li}>
           <NavLink to="/">
             <img className={style.logo} src={logo} alt="" />
           </NavLink>
@@ -90,10 +91,24 @@ const Header = () => {
             </Badge>
           </NavLink>
         </li>
+        <li>
+          {user && (
+          <NavLink to={{
+            pathname: '/user',
+            state: { email: user.email }
+          }}
+          >
+            <PersonIcon
+              className={style.profileIcon}
+              style={{ fontSize: 72, color: 'black' }}
+            />
+          </NavLink>
+          )}
+        </li>
         {user && <span className={style.user}>{user.email}</span>}
         {googleError && <span>{googleError}</span>}
         {apiError && <span>Api Error</span>}
-        <li>
+        <li className={style.googleLogin}>
           {!user ? (
             <GoogleLogin
               clientId={constants.GOOGLE_CLIENT_ID}
@@ -101,14 +116,18 @@ const Header = () => {
               onSuccess={handleGoogleLoginSuccess}
               onFailure={handleGoogleLoginFailure}
               cookiePolicy="single_host_origin"
+              id={style.login}
             />
           ) : (
-            <GoogleLogout
-              clientId={constants.GOOGLE_CLIENT_ID}
-              buttonText="Logout"
-              onLogoutSuccess={handleGoogleLogoutSuccess}
-              onSuccess={handleGoogleLogoutFailure}
-            />
+            <NavLink to="/">
+              <GoogleLogout
+                clientId={constants.GOOGLE_CLIENT_ID}
+                buttonText="Logout"
+                onLogoutSuccess={handleGoogleLogoutSuccess}
+                onSuccess={handleGoogleLogoutFailure}
+                id={style.logout}
+              />
+            </NavLink>
           )}
         </li>
       </ul>

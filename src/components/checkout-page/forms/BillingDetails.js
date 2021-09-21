@@ -143,7 +143,7 @@ const BillingDetails = ({
         isValid={errorInfo.email.dataIsValid}
       />
       <FormItem
-        placeholder="e.g. 555-555-5555"
+        placeholder="e.g. (555) 555-5555"
         type="text"
         id="phone"
         label="Phone"

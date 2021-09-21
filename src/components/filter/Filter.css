@@ -22,3 +22,7 @@
     border-width: 1px;
     border-color: black;
 }
+
+.checkbox {
+    margin-right: 15px;
+}
