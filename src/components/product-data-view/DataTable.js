@@ -187,7 +187,11 @@ const DataTable = () => {
         }}
         className={classes.root}
       >
-        <DataGrid rows={products} columns={columns} rowsPerPageOptions={[20]} />
+        <DataGrid
+          rows={products}
+          columns={columns}
+          rowsPerPageOptions={[20]}
+        />
       </div>
       <div className={classes.divButton}>
         <ButtonGroup className={classes.button}>

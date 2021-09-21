@@ -198,110 +198,144 @@ const Create = () => {
 
   return (
     <div>
-      {apiError && <p className={styles.errMsg} data-testid="errMsg">{Constants.API_ERROR}</p>}
+      {apiError && (
+        <p className={styles.errMsg} data-testid="errMsg">
+          {Constants.API_ERROR}
+        </p>
+      )}
       {!apiError && (
-      <div className={styles.container}>
-        <>
-          <h2>Create new item:</h2>
-          <FormItem
-            placeholder="Enter Product Name"
-            type="textarea"
-            id="name"
-            label="Name"
-            onChange={onNameChange}
-            value={name.value}
-          />
-          {nameError && <p className={styles.errMsg}>{nameError}</p>}
+        <div className={styles.container}>
+          <>
+            <h2>Create new item:</h2>
+            <FormItem
+              placeholder="Enter Product Name"
+              type="textarea"
+              id="name"
+              label="Name"
+              onChange={onNameChange}
+              value={name.value}
+            />
+            <div className={styles.errorDiv}>
+              {nameError && <p className={styles.errMsg}>{nameError}</p>}
+            </div>
 
-          <FormItem
-            placeholder="Enter Product Description"
-            type="textarea"
-            id="description"
-            label="Description"
-            onChange={onDescriptionChange}
-            value={description.value}
-          />
-          {descriptionError && <p className={styles.errMsg}>{descriptionError}</p>}
+            <FormItem
+              placeholder="Enter Product Description"
+              type="textarea"
+              id="description"
+              label="Description"
+              onChange={onDescriptionChange}
+              value={description.value}
+            />
+            <div className={styles.errorDiv}>
+              {descriptionError && (
+                <p className={styles.errMsg}>{descriptionError}</p>
+              )}
+            </div>
 
-          <FormItemDropdown
-            id="productDemographic"
-            label="Demographic"
-            onChange={onDemographicChange}
-            placeholder="[Select Product Demographic]"
-            value={demographic.value}
-            options={demographics}
-          />
-          {demographicError && <p className={styles.errMsg}>{demographicError}</p>}
+            <FormItemDropdown
+              id="productDemographic"
+              label="Demographic"
+              onChange={onDemographicChange}
+              placeholder="[Select Product Demographic]"
+              value={demographic.value}
+              options={demographics}
+            />
+            <div className={styles.errorDiv}>
+              {demographicError && (
+                <p className={styles.errMsg}>{demographicError}</p>
+              )}
+            </div>
 
-          <FormItemDropdown
-            id="productCategory"
-            label="Category"
-            onChange={onCategoryChange}
-            placeholder="[Select Product Category]"
-            value={category.value}
-            options={categories}
-          />
-          {categoryError && <p className={styles.errMsg}>{categoryError}</p>}
+            <FormItemDropdown
+              id="productCategory"
+              label="Category"
+              onChange={onCategoryChange}
+              placeholder="[Select Product Category]"
+              value={category.value}
+              options={categories}
+            />
+            <div className={styles.errorDiv}>
+              {categoryError && (
+                <p className={styles.errMsg}>{categoryError}</p>
+              )}
+            </div>
 
-          <FormItemDropdown
-            id="type"
-            label="Type"
-            onChange={onTypeChange}
-            placeholder="[Select Product Type]"
-            value={type.value}
-            options={types}
-          />
-          {typeError && <p className={styles.errMsg}>{typeError}</p>}
+            <FormItemDropdown
+              id="type"
+              label="Type"
+              onChange={onTypeChange}
+              placeholder="[Select Product Type]"
+              value={type.value}
+              options={types}
+            />
+            <div className={styles.errorDiv}>
+              {typeError && <p className={styles.errMsg}>{typeError}</p>}
+            </div>
 
-          <DatePicker
-            selected={releaseDate}
-            onChange={(date) => setReleaseDate(date)}
-          />
+            <DatePicker
+              selected={releaseDate}
+              onChange={(date) => setReleaseDate(date)}
+            />
 
-          <FormItem
-            placeholder="Enter Product Brand"
-            type="textarea"
-            id="brand"
-            label="Brand"
-            onChange={onBrandChange}
-            value={brand.value}
-          />
-          {brandError && <p className={styles.errMsg}>{brandError}</p>}
+            <FormItem
+              placeholder="Enter Product Brand"
+              type="textarea"
+              id="brand"
+              label="Brand"
+              onChange={onBrandChange}
+              value={brand.value}
+            />
+            <div className={styles.errorDiv}>
+              {brandError && <p className={styles.errMsg}>{brandError}</p>}
+            </div>
 
-          <FormItem
-            placeholder="Enter Product Material"
-            type="textarea"
-            id="material"
-            label="Material"
-            onChange={onMaterialChange}
-            value={material.value}
-          />
-          {materialError && <p className={styles.errMsg}>{materialError}</p>}
+            <FormItem
+              placeholder="Enter Product Material"
+              type="textarea"
+              id="material"
+              label="Material"
+              onChange={onMaterialChange}
+              value={material.value}
+            />
+            <div className={styles.errorDiv}>
+              {materialError && (
+                <p className={styles.errMsg}>{materialError}</p>
+              )}
+            </div>
 
-          <FormItem
-            placeholder="Enter Product Price"
-            type="textarea"
-            id="price"
-            label="Price"
-            onChange={onPriceChange}
-            value={priceAsString.value}
-          />
-          {priceError && <p className={styles.errMsg}>{priceError}</p>}
+            <FormItem
+              placeholder="Enter Product Price"
+              type="textarea"
+              id="price"
+              label="Price"
+              onChange={onPriceChange}
+              value={priceAsString.value}
+            />
+            <div className={styles.errorDiv}>
+              {priceError && <p className={styles.errMsg}>{priceError}</p>}
+            </div>
 
-          <FormItemDropdown
-            id="activeStatus"
-            label="Active Status"
-            onChange={onActiveStatusChange}
-            placeholder="[Choose Product Status]"
-            value={activeStatus.value}
-            options={activeChoices}
-          />
-          {activeError && <p className={styles.errMsg}>{activeError}</p>}
-          <button onClick={validateForm} type="button" className={styles.createButton}>
-            Create Product
-          </button>
-        </>
-      </div>
+            <FormItemDropdown
+              id="activeStatus"
+              label="Active Status"
+              onChange={onActiveStatusChange}
+              placeholder="[Choose Product Status]"
+              value={activeStatus.value}
+              options={activeChoices}
+            />
+            <div className={styles.errorDiv}>
+              {activeError && <p className={styles.errMsg}>{activeError}</p>}
+            </div>
+            <button
+              onClick={validateForm}
+              type="button"
+              className={styles.createButton}
+            >
+              Create Product
+            </button>
+          </>
+        </div>
       )}
     </div>
   );

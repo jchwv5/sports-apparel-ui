@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import ReactColorSquare from 'react-color-square';
 import M from 'materialize-css/dist/js/materialize.min';
 import styles from './Filter.css';
-import fetchProducts from '../product-page/ProductPageService';
+import fetchAllProducts from './FilterService';
 
 const SidebarFilter = () => {
   const [products, setProducts] = useState([]);
@@ -82,7 +82,7 @@ const SidebarFilter = () => {
   }
 
   useEffect(() => {
-    fetchProducts(setProducts, setApiError);
+    fetchAllProducts(setProducts, setApiError);
   }, []);
   return (
     <div className={styles}>

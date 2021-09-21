@@ -12,6 +12,7 @@ import Create from '../create-product-page/Create';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import DataTable from '../product-data-view/DataTable';
+import PurchaseHistoryPage from '../purchases-history-page/PurchasesHistoryPage';
 
 /**
  * @name App
@@ -32,6 +33,7 @@ const App = () => (
           <Route exact path="/maintenance/create" render={() => <Create />} />
           <Route exact path="/confirmation" render={() => <ConfirmationPage />} />
           <Route exact path="/maintenance" render={() => <DataTable />} />
+          <Route exact path="/user/purchases" render={() => <PurchaseHistoryPage />} />
         </div>
       </Switch>
       <Footer />
