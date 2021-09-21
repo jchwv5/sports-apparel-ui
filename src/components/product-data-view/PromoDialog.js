@@ -10,7 +10,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import FormHelperText from '@material-ui/core/FormHelperText';
+// import FormHelperText from '@material-ui/core/FormHelperText';
 import postPromotions from './PromoDialogService';
 
 /**
@@ -77,18 +77,18 @@ const useStyles = makeStyles((theme) => ({
 const PromoDialog = ({ open, handleClose }) => {
   const classes = useStyles();
   const [code, setCode] = useState('');
-  const [type, setType] = useState('');
-  const [percentage, setPercentage] = useState('');
-  const [flat, setFlat] = useState('');
-  const [percentageDisabled, setPercentageDisabled] = useState(true);
-  const [flatDisabled, setFlatDisabled] = useState(true);
+  const [type, setType] = useState('Percentage');
+  const [amountLabel, setAmountLabel] = useState('Discount Amount %');
 
+  const [amountValue, setAmountValue] = useState();
+  const [percentage, setPercentage] = useState();
+  const [flat, setFlat] = useState();
   const [codeError, setCodeError] = useState(false);
-  const [percentageError, setPercentageError] = useState(false);
-  const [flatError, setFlatError] = useState(false);
-  // eslint-disable-next-line no-unused-vars
+  const [amountError, setAmountError] = useState(false);
+
+  //  eslint-disable-next-line no-unused-vars
   const [apiError, setApiError] = useState(false);
-  const [helperTextError, setHelperTextError] = useState('');
+  // const [helperTextError, setHelperTextError] = useState('');
 
   const handleCodeChange = (event) => {
     setCode(event.target.value);
@@ -97,40 +97,37 @@ const PromoDialog = ({ open, handleClose }) => {
   const handleTypeChange = (event) => {
     setType(event.target.value);
     if (event.target.value === 'Percentage') {
-      setFlatDisabled(true);
-      setPercentageDisabled(false);
+      setAmountLabel('Discount Amount %');
     }
     if (event.target.value === 'Flat') {
-      setPercentageDisabled(true);
-      setFlatDisabled(false);
+      setAmountLabel('Flat Dollar Amount');
     }
   };
 
-  const handlePercentageChange = (event) => {
-    setPercentage(event.target.value);
-    setFlat('');
+  const handleAmountChange = (event) => {
+    setAmountValue(event.target.value);
+    if (type === 'Percentage') {
+      setPercentage(event.target.value);
+      setFlat();
+    } else if (type === 'Flat') {
+      setFlat(event.target.value);
+      setPercentage();
+    }
   };
 
-  const handleFlatChange = (event) => {
-    setFlat(event.target.value);
-    setPercentage('');
-  };
-
-  const handleReset = () => {
+  const handleCancel = () => {
     setCode('');
-    setType('');
+    setType('Percentage');
+    setCodeError('');
+    setAmountValue('');
     setPercentage('');
     setFlat('');
-    setCodeError(false);
-    setPercentageError(false);
-    setFlatError(false);
-    setHelperTextError(false);
-    setFlatDisabled(true);
-    setPercentageDisabled(true);
+    setAmountError(false);
+    // setHelperTextError(false);
   };
 
   useEffect(() => {
-    handleReset();
+    handleCancel();
   }, [handleClose]);
 
   const handleSubmit = (event) => {
@@ -138,29 +135,12 @@ const PromoDialog = ({ open, handleClose }) => {
     if (code === '') {
       setCodeError(true);
     }
-    if (type === '') {
-      setHelperTextError(true);
+    if ((type === 'Percentage' && amountValue === '') || (type === 'Flat' && amountValue === '')) {
+      setAmountError(true);
     }
-
-    if (type === 'Percentage' && percentage === '') {
-      setPercentageError(true);
-    }
-
-    if (type === 'Flat' && percentage === '') {
-      setPercentageError(false);
-    }
-
-    if (type === 'Flat' && flat === '') {
-      setFlatError(true);
-    }
-
-    if (type === 'Percentage' && flat === '') {
-      setFlatError(false);
-    }
-
-    if ((code && type && percentage) || (code && type && flat)) {
+    if (code && type && amountValue) {
       postPromotions(code, type, percentage, flat, setApiError);
-      handleReset();
+      handleCancel();
       handleClose();
     }
   };
@@ -193,47 +173,26 @@ const PromoDialog = ({ open, handleClose }) => {
               <FormControlLabel value="Percentage" control={<Radio />} label="Percentage" />
               <FormControlLabel value="Flat" control={<Radio />} label="Flat Dollar Amount" />
             </RadioGroup>
-            <FormHelperText error={helperTextError}>Must select a type</FormHelperText>
           </div>
           <div className={classes.field}>
             <TextField
-              label="Discount Amount %"
+              label={amountLabel}
               required
               varian="outlined"
-              value={percentage}
+              value={amountValue}
               type="number"
               helperText="Must be filled out"
-              FormHelperTextProps={{ className: classes.helperTextClasses }}
-              onChange={handlePercentageChange}
-              error={percentageError}
+              // FormHelperTextProps={{ className: classes.helperTextClasses }}
+              onChange={handleAmountChange}
+              error={amountError}
               InputProps={{
                 disableUnderline: true
               }}
-              disabled={percentageDisabled}
-            />
-          </div>
-          <div className={classes.field}>
-            <TextField
-              label="Discount Amount $"
-              required
-              varian="outlined"
-              color="success"
-              value={flat}
-              type="number"
-              helperText="Must be filled out"
-              FormHelperTextProps={{ className: classes.helperTextClasses }}
-              onChange={handleFlatChange}
-              error={flatError}
-              InputProps={{
-                disableUnderline: true,
-                shrink: true
-              }}
-              disabled={flatDisabled}
             />
           </div>
           <DialogActions>
             <div className={classes.cancelButton}>
-              <Button onClick={handleReset} className={classes.buttonLabel} variant="contained">
+              <Button onClick={handleCancel} className={classes.buttonLabel} variant="contained">
                 Cancel
               </Button>
             </div>
