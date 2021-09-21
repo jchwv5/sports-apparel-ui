@@ -6,19 +6,17 @@ import notify from '../Toast/Toast';
  *
  * @name postPromotions
  * @description Utilizes HttpHelper to make a post request to an API
- * @param {*} code, title for promotions
- * @param {*} type, type for promotions
- * @param {*} percentage, percentage amount for discount
- * @param {*} flat, flat dollar amount for discount
+ * @param {*} code, promotion titile
+ * @param {*} type, promotions type
+ * @param {*} amount, discount amount
  * @param {*} setApiError sets error if response other than 200 is returned
  * @returns sets state for promotions if 200 response, else sets state for apiError
  */
-export default async function postPromotions(code, type, percentage, flat, setApiError) {
+export default async function postPromotions(code, type, amount, setApiError) {
   await HttpHelper(constants.PRODUCTS_PROMOTIONS_ENDPOINT, 'POST', {
     code,
     type,
-    percentage,
-    flat
+    amount
   })
     .then((response) => {
       if (response.ok) {
