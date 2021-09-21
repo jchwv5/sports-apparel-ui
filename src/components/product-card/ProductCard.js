@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { Chip, Popper } from '@material-ui/core';
+import { Popper } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -33,14 +33,20 @@ const StyledRating = withStyles({
  */
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345
+    width: 300,
+    height: 470
   },
   header: {
     height: 130
   },
+  CardContent:
+   {
+     height: '100px',
+     padding: '16px'
+   },
   media: {
     backgroundSize: '50%',
-    height: 0,
+    height: '165px',
     paddingTop: '56.25%'
   },
   expand: {
@@ -60,7 +66,13 @@ const useStyles = makeStyles((theme) => ({
     color: red[500]
   },
   stars: {
-    padding: 6
+    padding: 0,
+    border: 0,
+    backgroundColor: 'transparent',
+    margin: 0
+  },
+  price: {
+    paddingLeft: '25px'
   }
 }));
 
@@ -71,21 +83,19 @@ const useStyles = makeStyles((theme) => ({
  * @return component
  */
 const ProductCard = ({ product }) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const handlePopoverOpen = (event) => {
+  const [anchorEl, setAnchorEl] = React.useState();
+  const handlePopperOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handlePopoverClose = () => {
-    setAnchorEl(null);
+  const handlePopperClose = () => {
+    setAnchorEl('hidden', '');
   };
   const open = Boolean(anchorEl);
   const [reviewRatingAverage, setReviewRatingAverage] = useState(0);
-  const [reviewRatingCount, setReviewRatingCount] = useState(0);
   useEffect(() => {
     if (product.reviews.length !== 0 && product.reviews !== null) {
       const accumulator = product.reviews.reduce((a, b) => ((a.rating ?? a) + b.rating), 0);
       setReviewRatingAverage((accumulator / product.reviews.length).toFixed(2));
-      setReviewRatingCount(product.reviews.length);
     }
   }, [product.reviews]);
   const classes = useStyles();
@@ -143,16 +153,16 @@ const ProductCard = ({ product }) => {
           title="placeholder"
           onClick={() => setShow(true)}
         />
-        <CardContent onClick={() => setShow(true)}>
+        <CardContent onClick={() => setShow(true)} className={classes.CardContent}>
           <Typography variant="body2" color="textSecondary" component="p">
             {product.description}
           </Typography>
           <br />
-          <Typography variant="body2" color="textSecondary" component="p">
-            Price: $
-            {product.price}
-          </Typography>
         </CardContent>
+        <Typography className={classes.price} variant="body2" color="textSecondary" component="p">
+          Price: $
+          {product.price}
+        </Typography>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
@@ -164,39 +174,30 @@ const ProductCard = ({ product }) => {
             <AddShoppingCartIcon />
           </IconButton>
           <Typography
-            aria-owns={open ? 'mouse-over-popover' : undefined}
+            aria-owns={open ? 'mouse-over-popper' : undefined}
             aria-haspopup="true"
-            onMouseEnter={handlePopoverOpen}
-            onMouseLeave={handlePopoverClose}
+            onMouseEnter={handlePopperOpen}
+            onMouseLeave={handlePopperClose}
           >
-            <StyledRating
-              className={classes.stars}
-              name="review-rating"
-              value={reviewRatingAverage}
-              readOnly
-              precision={0.1}
-              size="medium"
-            />
+            <button type="submit" className={classes.stars} disabled={isDisabled()} onClick={() => setVisual(true)}>
+              <StyledRating
+                className={classes.stars}
+                name="review-rating"
+                value={reviewRatingAverage}
+                readOnly
+                precision={0.1}
+                size="medium"
+              />
+            </button>
           </Typography>
-          <Chip
-            label={reviewRatingCount}
-            disabled={isDisabled()}
-            clickable
-            onClick={() => setVisual(true)}
-            color="default"
-          />
           <Popper
-            id="mouse-over-popover"
+            id="mouse-over-popper"
             anchorEl={anchorEl}
             placement="top"
             disablePortal={false}
             modifiers={{
               flip: {
                 enabled: false
-              },
-              preventOverflow: {
-                enabled: true,
-                boundariesElement: 'scrollParent'
               }
             }}
             open={open}
