@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
@@ -22,9 +21,9 @@ const ProductPage = () => {
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(0);
   const [nextPage, setNextPage] = useState(0);
-  function handleClick(filter) {
+  const handleClick = (filter) => {
     setFilterParam(filter);
-  }
+  };
   const changePage = ({ selected }) => {
     setNextPage(selected);
   };
