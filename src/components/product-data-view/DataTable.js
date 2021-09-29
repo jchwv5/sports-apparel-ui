@@ -1,12 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import styles from '../product-page/ProductPage.module.css';
 import Constants from '../../utils/constants';
 import fetchProducts from './DataViewService';
 import PromoDialog from './PromoDialog';
+import handleDeleteCheck from './HandleDeleteCheck';
 import updateProducts from './ProductEditInfoService';
 import notify from '../Toast/Toast';
 
@@ -52,8 +55,16 @@ const columns = [
   {
     field: 'id',
     headerName: 'ID',
+    headerClassName: 'table-header'
+    // hide: true
+  },
+  {
+    field: 'delete',
+    headerName: <DeleteIcon />,
     headerClassName: 'table-header',
-    hide: true
+    width: 100,
+    renderCell:
+      handleDeleteCheck
   },
   {
     editable: true,
@@ -175,19 +186,17 @@ const DataTable = () => {
   const classes = useStyles();
   const [products, setProducts] = useState([]);
   const [apiError, setApiError] = useState(false);
-  const updatedProducts = [];
-  useEffect(() => {
-    fetchProducts(setProducts, setApiError);
-  }, []);
-
   const [open, setOpen] = useState(false);
+  const updatedProducts = [];
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
-
+  useEffect(() => {
+    fetchProducts(setProducts, setApiError);
+  }, [products]);
   /**
    * given changed cells save to the product field
    * and the product to a new array to update the product info
