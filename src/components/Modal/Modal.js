@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import style from './Modal.module.css';
+import updateProducts from '../product-data-view/ProductEditInfoService';
 
 function ButtonIncrement(num) {
   return (
@@ -37,13 +38,19 @@ const Modal = (props) => {
   const { item, onClose } = props;
   const [counter, setCounter] = useState(1);
   const incrementCounter = () => setCounter(counter + 1);
+  const viewCounterUpdate = [];
   let decrementCounter = () => setCounter(counter - 1);
   if (counter <= 1) {
     decrementCounter = () => setCounter(1);
   }
-
+  const updateViewCount = () => {
+    item.viewCount += 0.5;
+    viewCounterUpdate.push(item);
+    updateProducts(viewCounterUpdate);
+  };
   return (
     <div className={style.modal}>
+      {updateViewCount()}
       <div className={style.gridContainer}>
         <div className={style.cartButton}>
           <div className={style.closeDiv}>

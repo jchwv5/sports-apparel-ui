@@ -12,6 +12,7 @@ module.exports = Object.freeze({
   ALL_PRODUCTS_ENDPOINT: '/products',
   USER_BY_EMAIL_ENDPOINT: '/users?email=',
   PRODUCTS_PROMOTIONS_ENDPOINT: '/products/promotions',
+  POPULAR_PRODUCTS_ENDPOINT: '/products/popular',
   ACTIVE_PRODUCTS_ENDPOINT: '/products?active=true',
   CREATE_PRODUCT_ENDPOINT: '/maintenance/create',
   PRODUCT_CATEGORIES_ENDPOINT: '/products/categories',
