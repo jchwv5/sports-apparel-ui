@@ -38,6 +38,11 @@
   background-color: coral;
 }
 
+.delete {
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
 .paginationActive a {
   color: white;
   background-color: #ea526f ;

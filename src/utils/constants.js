@@ -7,6 +7,8 @@ module.exports = Object.freeze({
   PURCHASE_ENDPOINT: '/purchases',
   SAVE_PURCHASE_ENDPOINT: '/purchases',
   PURCHASE_BY_EMAIL_ENDPOINT: '/purchases?email=',
+  PURCHASE_BY_PRODUCT_ID_ENDPOINT: '/purchases/product/?id=',
+  DELETE_PRODUCT_BY_ID_ENDPOINT: '/products/delete/',
   ALL_PRODUCTS_ENDPOINT: '/products',
   USER_BY_EMAIL_ENDPOINT: '/users?email=',
   PRODUCTS_PROMOTIONS_ENDPOINT: '/products/promotions',
