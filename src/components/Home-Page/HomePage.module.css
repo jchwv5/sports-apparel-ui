@@ -1,0 +1,45 @@
+.homePageContainer {
+    display: grid;
+    grid-template-columns: 1fr .5fr 1fr;
+    grid-template-areas:
+      'trending    deals    featured'
+      'trending    deals    featured'
+      'trending    deals    featured';
+    gap: 1em 2em;
+    padding: 0 2em;
+    margin: 2em 0;
+  }
+  
+  .step {
+    background: #eeeeee;
+    /* border-radius: 2px; */
+    /* box-shadow: 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.23); */
+    padding: 1em;
+  }
+  
+  .deals {
+    grid-area: deals;
+  }
+  
+  .featured {
+    grid-area: featured;
+  }
+  
+  .trending {
+    grid-area: trending;
+  }
+  
+  .title {
+    color: #666666;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    min-height: 0.3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    width: 100%;
+    min-width: 1px;
+    text-align: center;
+    text-transform: uppercase;
+  }

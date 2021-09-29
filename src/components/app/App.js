@@ -13,6 +13,7 @@ import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import DataTable from '../product-data-view/DataTable';
 import PurchaseHistoryPage from '../purchases-history-page/PurchasesHistoryPage';
+import HomePage from '../Home-Page/HomePage';
 
 /**
  * @name App
@@ -27,7 +28,8 @@ const App = () => (
       </div>
       <Switch>
         <div className="content-container">
-          <Route exact path="/" render={() => <ProductPage />} />
+          <Route exact path="/" render={() => <HomePage />} />
+          <Route exact path="/products" render={() => <ProductPage />} />
           <Route exact path="/checkout" render={() => <CheckoutPage />} />
           <Route exact path="/user" render={() => <UserProfile />} />
           <Route exact path="/maintenance/create" render={() => <Create />} />
