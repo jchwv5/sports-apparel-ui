@@ -24,7 +24,6 @@ const CheckoutPage = () => {
   const {
     state: { products }
   } = useCart();
-
   const history = useHistory();
   const { promiseInProgress } = usePromiseTracker();
   const [apiError, setApiError] = useState(false);

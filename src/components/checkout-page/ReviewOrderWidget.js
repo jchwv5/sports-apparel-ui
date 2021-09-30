@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from './CartContext';
@@ -37,16 +38,21 @@ const ReviewOrderWidget = ({
       )}
 
       {products.map(({
-        price, title, description, quantity, image
+        id, price, title, description, quantity, image
       }) => (
-        <OrderItem
-          key={title}
-          price={price}
-          title={title}
-          description={description}
-          quantity={quantity}
-          image={image}
-        />
+
+        <>
+
+          <OrderItem
+            key={title}
+            price={price}
+            title={title}
+            description={description}
+            quantity={quantity}
+            image={image}
+            id={id}
+          />
+        </>
       ))}
 
       {productsInCart && (
@@ -67,7 +73,7 @@ const ReviewOrderWidget = ({
             <div className={styles.price}>
               {!apiError && <p>{getShippingSubtotal(shippingSubtotal)}</p>}
               {apiError && (
-                <p className={styles.errMsg}>Error</p>
+              <p className={styles.errMsg}>Error</p>
               )}
             </div>
           </div>

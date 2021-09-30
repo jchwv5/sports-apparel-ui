@@ -80,7 +80,15 @@ const Header = () => {
           </NavLink>
         </li>
         <li id={style.cart}>
-          <NavLink to="/checkout">
+          <NavLink to={{
+            pathname: '/checkout',
+            state: {
+              email: user.email,
+              firstName: user.firstName,
+              lastName: user.lastName
+            }
+          }}
+          >
             <Badge
               className={style.root}
               badgeContent={products.length}
