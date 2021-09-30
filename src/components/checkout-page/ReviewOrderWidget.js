@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from './CartContext';
 import OrderItem from './OrderItem';
-import { getSubtotal, getShippingSubtotal } from './ReviewOrderWidgetService';
+import {
+  getSubtotal, getShippingSubtotal, getTaxTwoDigitsPlace, getTotalChargesTwoDigitsPlace
+} from './ReviewOrderWidgetService';
 import styles from './ReviewOrderWidget.module.css';
 
 /**
@@ -10,7 +12,9 @@ import styles from './ReviewOrderWidget.module.css';
  * @description Displays order items and subtotal
  * @return component
  */
-const ReviewOrderWidget = ({ shippingSubtotal, apiError }) => {
+const ReviewOrderWidget = ({
+  shippingSubtotal, taxTotal, apiError, totalCharges
+}) => {
   const {
     state: { products }
   } = useCart();
@@ -56,7 +60,6 @@ const ReviewOrderWidget = ({ shippingSubtotal, apiError }) => {
               <p>{getSubtotal(products)}</p>
             </div>
           </div>
-
           <div className={styles.subtotal}>
             <div>
               <p>Shipping</p>
@@ -65,6 +68,28 @@ const ReviewOrderWidget = ({ shippingSubtotal, apiError }) => {
               {!apiError && <p>{getShippingSubtotal(shippingSubtotal)}</p>}
               {apiError && (
                 <p className={styles.errMsg}>Error</p>
+              )}
+            </div>
+          </div>
+          <div className={styles.subtotal}>
+            <div>
+              <p>Tax</p>
+            </div>
+            <div className={styles.price}>
+              {!apiError && <p>{getTaxTwoDigitsPlace(taxTotal)}</p>}
+              {apiError && (
+                <p className={styles.errMsg}>Error</p>
+              )}
+            </div>
+          </div>
+          <div className={styles.subtotal}>
+            <div>
+              <p>Total To Pay</p>
+            </div>
+            <div className={styles.price}>
+              {!apiError && <p>{getTotalChargesTwoDigitsPlace(totalCharges)}</p>}
+              {apiError && (
+              <p className={styles.errMsg}>Error</p>
               )}
             </div>
           </div>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { trackPromise, usePromiseTracker } from 'react-promise-tracker';
 import { useCart } from './CartContext';
-import makePurchase, { getDeliverySubtotal } from './CheckoutService';
+import makePurchase, { getDeliverySubtotal, getTotalCharges, getCartSubtotal } from './CheckoutService';
 import BillingDetails from './forms/BillingDetails';
 import DeliveryAddress from './forms/DeliveryAddress';
 import ReviewOrderWidget from './ReviewOrderWidget';
@@ -12,6 +12,8 @@ import notify from '../Toast/Toast';
 import Spinner from '../Spinner/Spinner';
 import styles from './CheckoutPage.module.css';
 import validate from '../../utils/validate';
+
+// import fetchTotalCharges from './TaxRateService';
 
 /**
  * @name CheckoutPage
@@ -55,19 +57,20 @@ const CheckoutPage = () => {
 
   const [shippingSubtotal, setShippingSubtotal] = useState(0);
   const [shippingRates, setShippingRates] = useState([]);
+  /* eslint-disable no-unused-vars */
+  const [taxRate, setTaxRate] = useState(0);
+  const [taxTotal, setTaxTotal] = useState(0);
+  const [total, setTotal] = useState(0);// purchase total
+  const [totalCharges, setTotalCharges] = useState(0);
 
   useEffect(() => {
     fetchShippingRates(setShippingRates, setApiError);
   }, [setShippingRates, setApiError]);
 
+  // load total charge when a product is put in a cart
   useEffect(() => {
-    getDeliverySubtotal(
-      setShippingSubtotal,
-      shippingRates,
-      ' ',
-      products
-    );
-  }, [shippingRates, products]);
+    getCartSubtotal(setTotalCharges, shippingSubtotal, products, setTotal);
+  }, [shippingSubtotal, products]);
 
   const onDeliveryChange = (e) => {
     setDeliveryData((prevValue) => ({ ...prevValue, [e.target.id]: e.target.value }));
@@ -77,6 +80,14 @@ const CheckoutPage = () => {
         shippingRates,
         e.target.value,
         products
+      );
+      getTotalCharges(
+        setTaxTotal,
+        setTaxRate,
+        e.target.value,
+        setTotalCharges,
+        products,
+        setTotal
       );
     }
   };
@@ -193,7 +204,7 @@ const CheckoutPage = () => {
 
     if ((!hasBillingErrors && !hasDeliveryErrors) && productData.length > 0) {
       trackPromise(
-        makePurchase(productData, deliveryAddress, billingAddress, creditCard).then(
+        makePurchase(productData, deliveryAddress, billingAddress, creditCard, taxTotal, totalCharges, shippingSubtotal, total).then(
           () => history.push('/confirmation')
         )
       );
@@ -210,6 +221,8 @@ const CheckoutPage = () => {
           <h3 className={styles.title}>1. Review Order</h3>
           <ReviewOrderWidget
             shippingSubtotal={shippingSubtotal}
+            taxTotal={taxTotal}
+            totalCharges={totalCharges}
             apiError={apiError}
           />
         </div>

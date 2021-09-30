@@ -1,7 +1,9 @@
 /* eslint-disable no-console */
+
 import HttpHelper from '../../utils/HttpHelper';
 import constants from '../../utils/constants';
 import notify from '../Toast/Toast';
+import fetchTotalCharges from './TaxRateService';
 
 /**
  *
@@ -10,13 +12,20 @@ import notify from '../Toast/Toast';
  * @param {*} cartContents items to purchase
  * @returns payment confirmation response
  */
-export default async function makePurchase(products, deliveryAddress, billingAddress, creditCard,
-  setApiError) {
+
+// shippingSubtotal
+export default async function makePurchase(products, deliveryAddress,
+  billingAddress, creditCard, taxTotal, totalCharges, shippingSubtotal,
+  setApiError, total) {
   await HttpHelper(constants.PURCHASE_ENDPOINT, 'POST', {
     products,
     deliveryAddress,
     billingAddress,
-    creditCard
+    creditCard,
+    taxTotal,
+    totalCharges,
+    shippingSubtotal,
+    total
   })
     .then((response) => {
       if (response.ok) {
@@ -55,4 +64,37 @@ export const getDeliverySubtotal = (
     }
   }
   setShippingSubtotal(deliverySubtotal);
+  console.log(`mike's' ${deliverySubtotal}`);
+  return deliverySubtotal;
+};
+
+export const getCartSubtotal = (
+  setTotalCharges,
+  shippingSubtotal,
+  products,
+  setTotal
+
+) => {
+  let cartSubTotal = 0;
+  if (products.length) {
+    cartSubTotal = products.reduce(
+      (acc, item) => acc + (item.quantity * item.price), 0
+    );
+  }
+  const totalCharges = cartSubTotal + shippingSubtotal;
+  setTotal(cartSubTotal);
+  setTotalCharges(totalCharges);
+};
+
+export const getTotalCharges = (
+  setTaxTotal,
+  setTaxRate,
+  deliveryState,
+  setTotalCharges,
+  products,
+  setApiError,
+  setTotal
+) => {
+  fetchTotalCharges(setTaxTotal, setTaxRate, deliveryState, setTotalCharges,
+    products, setTotal, setApiError);
 };

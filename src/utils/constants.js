@@ -23,6 +23,7 @@ module.exports = Object.freeze({
   RUNNING_SHORTS_ENDPOINT: '/products?category=Running&type=Short',
   USER__UPDATE_BY_EMAIL_ENDPOINT: '/users',
   SHIPPING_RATES_ENDPOINT: '/rates/type?t=shipping',
+  CALCULATE_TOTAL_CHARGES: '/purchases/calculateTotalCharges',
   ACTIVE_PRODUCTS_PAGINATED: '/products/page/',
 
   GOOGLE_CLIENT_ID: '617323905633-81rrdqv26b283cs2rb9mqddbucmm23eo.apps.googleusercontent.com' // ENTER CLIENT ID HERE
