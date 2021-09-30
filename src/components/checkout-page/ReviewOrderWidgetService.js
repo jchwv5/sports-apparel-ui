@@ -25,3 +25,7 @@ export const getShippingSubtotal = (shippingSubtotal) => {
   }
   return toPrice(shippingSubtotal);
 };
+
+export const getTaxTwoDigitsPlace = (taxTotal) => `$${taxTotal.toFixed(2)}`;
+
+export const getTotalChargesTwoDigitsPlace = (totalCharges) => `$${totalCharges.toFixed(2)}`;
