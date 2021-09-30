@@ -60,6 +60,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+/**
+ * Logic for the modal that pops up when there's a purchase log in the database for the product
+ * that's trying to be deleted.
+ *
+ * @param {*} param0 Used to pass open, handleClose and the product in question to the delete
+ *  product modal.
+ * @returns
+ */
+
 const DeleteDialog = ({ open, handleClose, product }) => {
   const classes = useStyles();
   const updatedProduct = [];

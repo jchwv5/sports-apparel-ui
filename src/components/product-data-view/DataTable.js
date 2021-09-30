@@ -196,7 +196,8 @@ const DataTable = () => {
   };
   useEffect(() => {
     fetchProducts(setProducts, setApiError);
-  }, [products]);
+  }, []);
+
   /**
    * given changed cells save to the product field
    * and the product to a new array to update the product info
