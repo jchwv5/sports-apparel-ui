@@ -2,14 +2,14 @@ import HttpHelper from '../../utils/HttpHelper';
 import Constants from '../../utils/constants';
 
 /**
- * Handles the request to the endpoint on the backend to fetch the user information from
- * the database with matching email
- * @name fetchUserInfo
+ * Handles the request to the endpoint on the backend to fetch the product information from
+ * the database to check for purchases.
+ * @name fetchPurchaseInfo
  * @description Utilizes HttpHelper to make a get request to an API
- * @param {*} setUserInfo sets state for the userInfo
+ * @param {*} setPurchases sets state for the purchases
  * @param {*} setApiError sets error if response other than 200 is returned
- * @param {*} email The email to check the database for the users
- * @returns sets state for userInfo if 200 response, else sets state for apiError
+ * @param {*} id The product ID to check the database for purchases
+ * @returns sets state for purchases if 200 response, else sets state for apiError
  */
 async function fetchPurchaseInfo(setPurchases, setApiError, id) {
   await HttpHelper(Constants.PURCHASE_BY_PRODUCT_ID_ENDPOINT + id, 'GET')

@@ -8,6 +8,18 @@ import fetchPurchaseInfo from './DeleteDialogService';
 import deleteProductById from './DeleteProductService';
 import styles from '../product-page/ProductPage.module.css';
 
+/**
+ * Checks the row that's being rendered to see if the product in that row has any reviews. If
+ * it does not, it renders a delete button and when pressed it does one of two things.
+ * 1) If there ARE purchases for that product in the database, it pops up a modal and tells you
+ * that there are purchases and asks if you would like to set the product to inactive instead.
+ * 2) If there are not purchases for that product, it deletes the product from the database.
+ *
+ * @param {*} cellInfo - The information for the row that is being checked to see if the
+ * product has reviews/purchases
+ * @returns
+ */
+
 const HandleDeleteCheck = (cellInfo) => {
   const [open, setOpen] = useState(false);
   const [purchases, setPurchases] = useState([]);
