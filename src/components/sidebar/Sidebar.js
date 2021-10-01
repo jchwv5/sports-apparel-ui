@@ -1,11 +1,10 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/destructuring-assignment */
 import React, { useEffect } from 'react';
 import M from 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import styles from './Sidebar.css';
 import SidebarFilter from '../filter/Filter';
+
 /**
  * Function to initialize sidebar component
  * @param {*} props sidebar returns filterParam to ProductPage.js
@@ -19,7 +18,6 @@ const Sidebar = (props) => {
       document.getElementById('productCards').style.marginLeft = '50px';
     };
     const elem = document.querySelector('.sidenav');
-    // eslint-disable-next-line no-unused-vars
     const instance = M.Sidenav.init(elem, {
       edge: 'left',
       inDuration: 250,
@@ -30,8 +28,9 @@ const Sidebar = (props) => {
     });
     instance.open();
   }, []);
+
   /**
-   *Function to pass data-id value of licked link to product page as filterParam
+   *Function to pass data-id value of clicked link to product page as filterParam
    * @param {*} e click event target
    */
   const handleClick = (e) => {
