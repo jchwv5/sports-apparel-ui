@@ -5,7 +5,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import ReactColorSquare from 'react-color-square';
 import M from 'materialize-css/dist/js/materialize.min';
 import styles from './Filter.css';
 import fetchAllProducts from './FilterService';
@@ -138,9 +137,7 @@ const SidebarFilter = () => {
             {colors.map((color) => (
               <li data-id={color} className="filterColor">
                 <input type="checkbox" className="checkbox" />
-                <div className="square">
-                  <ReactColorSquare className="square" height={20} width={20} color={color} />
-                </div>
+                <div className="square" />
               </li>
             ))}
           </div>
