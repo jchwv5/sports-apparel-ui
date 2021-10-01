@@ -55,8 +55,8 @@ const columns = [
   {
     field: 'id',
     headerName: 'ID',
-    headerClassName: 'table-header'
-    // hide: true
+    headerClassName: 'table-header',
+    hide: true
   },
   {
     field: 'delete',
