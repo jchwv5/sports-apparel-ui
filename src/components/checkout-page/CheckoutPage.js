@@ -26,10 +26,12 @@ const CheckoutPage = () => {
   } = useCart();
   const history = useHistory();
   const { promiseInProgress } = usePromiseTracker();
+  // eslint-disable-next-line no-unused-vars
   const [apiError, setApiError] = useState(false);
-
   const [billingData, setBillingData] = useState({});
   const [deliveryData, setDeliveryData] = useState({});
+  // eslint-disable-next-line no-unused-vars
+  const [chargeDiscount, setChargeDiscount] = useState(0);
 
   const [checked, setChecked] = useState(false);
 
@@ -203,7 +205,9 @@ const CheckoutPage = () => {
 
     if ((!hasBillingErrors && !hasDeliveryErrors) && productData.length > 0) {
       trackPromise(
-        makePurchase(productData, deliveryAddress, billingAddress, creditCard, taxTotal, totalCharges, shippingSubtotal, total).then(
+        makePurchase(products, deliveryAddress,
+          billingAddress, creditCard, taxTotal, totalCharges, shippingSubtotal,
+          setApiError, total, chargeDiscount).then(
           () => history.push('/confirmation')
         )
       );
@@ -219,10 +223,11 @@ const CheckoutPage = () => {
         <div className={`${styles.step} ${styles.order}`}>
           <h3 className={styles.title}>1. Review Order</h3>
           <ReviewOrderWidget
+            setChargeDiscount={setChargeDiscount}
             shippingSubtotal={shippingSubtotal}
             taxTotal={taxTotal}
-            totalCharges={totalCharges}
             apiError={apiError}
+            totalCharges={totalCharges}
           />
         </div>
         <div className={`${styles.step} ${styles.delivery}`}>

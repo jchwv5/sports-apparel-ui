@@ -6,3 +6,32 @@
 .price {
   justify-self: end;
 }
+
+.errMsg {
+  display: block;
+  margin-top: 10px;
+  color: red;
+  float:  right;
+}
+
+.success {
+  margin-left: 10px;
+  display: inline-block;
+
+  font-size: x-large;
+  color: green;
+}
+
+.discount {
+  display: block;
+  margin-top: 10px;
+  float: right;
+}
+
+.applyButton{
+  padding: .5em;
+}
+
+#promofield{
+  padding-left: 10px;
+}

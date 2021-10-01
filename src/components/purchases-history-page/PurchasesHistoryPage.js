@@ -103,7 +103,7 @@ const PurchaseHistoryPage = () => {
               </td>
               <td className={classes.td}>
                 $
-                {purchase.total}
+                {purchase.totalCharges}
               </td>
               <Collapsible className={classes.products} triggerWhenOpen="Click here to close Products List" trigger="Click here to open Products List">
                 <TableHead>
