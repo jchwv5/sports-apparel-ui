@@ -67,8 +67,8 @@ const ProductCarouselWidget = () => {
           <Carousel
             afterChange={(previousSlide, { currentSlide, onMove }) => {
               element.className = styles.carouselCoverShow;
-              if (currentSlide === 1) {
-                updateActiveProduct(currentSlide - 1);
+              if (currentSlide === 0) {
+                updateActiveProduct(currentSlide);
               } else {
                 updateActiveProduct(currentSlide - 2);
               }

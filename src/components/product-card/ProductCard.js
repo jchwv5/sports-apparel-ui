@@ -200,7 +200,7 @@ const ProductCard = ({ product, setPlayCarousel }) => {
             onMouseEnter={handlePopperOpen}
             onMouseLeave={handlePopperClose}
           >
-            <button type="submit" className={classes.stars} disabled={isDisabled()} onClick={() => showModal()}>
+            <button type="submit" className={classes.stars} disabled={isDisabled()} onClick={() => setShowReviewModal(true)}>
               <StyledRating
                 className={classes.stars}
                 name="review-rating"
