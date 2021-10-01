@@ -28,4 +28,26 @@ export const getShippingSubtotal = (shippingSubtotal) => {
 
 export const getTaxTwoDigitsPlace = (taxTotal) => `$${taxTotal.toFixed(2)}`;
 
-export const getTotalChargesTwoDigitsPlace = (totalCharges) => `$${totalCharges.toFixed(2)}`;
+export const getTotalChargesTwoDigitsPlace = (totalCharges, discount) => `$${(totalCharges - discount).toFixed(2)}`;
+
+/**
+ * parses the amount and type of currently applied promotion to determine the actual numerical
+ * value of the discount to be applied, then applies that value to the ui-side discount state
+ * and the api-side chargeDiscountstate
+ * @param {*} products products in cart
+ * @param {*} type promotion type (flat or percentage)
+ * @param {*} amount promotion amount
+ * @param {*} setDiscount sets ui-side discount state to reflect the factored disocunt
+ * @param {*} setChargeDiscount sets the api-side discount state to reflect the factored discount
+ */
+export const findDiscount = (products, type, amount, setDiscount, setChargeDiscount) => {
+  if (type === 'Flat') {
+    setDiscount(Number(amount).toFixed(2));
+    setChargeDiscount(Number(amount).toFixed(2));
+  } if (type === 'Percentage') {
+    const subtotal = getSubtotal(products);
+    const percent = (amount / 100);
+    setDiscount((subtotal.substring(1) * percent).toFixed(2));
+    setChargeDiscount((subtotal.substring(1) * percent).toFixed(2));
+  }
+};

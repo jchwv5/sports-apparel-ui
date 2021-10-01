@@ -16,7 +16,7 @@ import fetchTotalCharges from './TaxRateService';
 // shippingSubtotal
 export default async function makePurchase(products, deliveryAddress,
   billingAddress, creditCard, taxTotal, totalCharges, shippingSubtotal,
-  setApiError, total) {
+  setApiError, total, chargeDiscount) {
   await HttpHelper(constants.PURCHASE_ENDPOINT, 'POST', {
     products,
     deliveryAddress,
@@ -25,7 +25,8 @@ export default async function makePurchase(products, deliveryAddress,
     taxTotal,
     totalCharges,
     shippingSubtotal,
-    total
+    total,
+    chargeDiscount
   })
     .then((response) => {
       if (response.ok) {

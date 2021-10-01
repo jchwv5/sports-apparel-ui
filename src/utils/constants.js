@@ -25,6 +25,7 @@ module.exports = Object.freeze({
   SHIPPING_RATES_ENDPOINT: '/rates/type?t=shipping',
   CALCULATE_TOTAL_CHARGES: '/purchases/calculateTotalCharges',
   ACTIVE_PRODUCTS_PAGINATED: '/products/page/',
+  PROMOTIONS_BY_CODE: '/products/promotions/',
 
   GOOGLE_CLIENT_ID: '617323905633-81rrdqv26b283cs2rb9mqddbucmm23eo.apps.googleusercontent.com' // ENTER CLIENT ID HERE
 });
