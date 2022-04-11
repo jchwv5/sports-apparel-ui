@@ -91,19 +91,18 @@ span{
     background-color:#eeeeee;
     border: 1px solid grey;
     border-radius: 4px;
-    box-shadow: 10px 5px 10px 5px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 10px 5px 10px 5px rgba(0, 0, 0, 0.2); */
     height: auto;
     left: 50%;
     position: fixed;
     top: 50%;
     transform: translate(-50%, -50%);
     width: inherit;
-    z-index: 1000;
+    z-index: 1001;
     max-width: 600px;
     word-wrap: break-word;
-   
-    
 }
+
 .modalBody {
     word-wrap: break-word;
     width: auto;

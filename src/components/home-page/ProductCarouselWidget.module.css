@@ -1,0 +1,42 @@
+.carouselCoverShow {
+  align-items: center;
+  border-radius: 7px;
+  display: block;
+  margin: 1em;
+  position: absolute;
+  z-index: 85;
+}
+
+.carouselCoverHide {
+  display: none;
+}
+
+.container {
+  align-items: center;
+  border-radius: 7px;
+  display:flex;
+  margin: 1em;
+  height: 1000px;
+  position:absolute;
+  width: 300px;
+  z-index: 80;
+}
+
+.item {
+  border-radius: 7px;
+  height: 1000px;
+  width: 300px;
+  z-index: 80;
+  pointer-events: none;
+}
+
+.slide {
+  height: 900px;
+  width: 300px;
+}
+
+.errMsg {
+  color: red;
+  font-size: 14px;
+  margin: 0px 2px 4px 4px;
+}

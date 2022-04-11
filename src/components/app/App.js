@@ -4,6 +4,7 @@ import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import HomePage from '../home-page/HomePage';
 import ProductPage from '../product-page/ProductPage';
 import CheckoutPage from '../checkout-page/CheckoutPage';
 import ConfirmationPage from '../confirmation-page/ConfirmationPage';
@@ -13,7 +14,6 @@ import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import DataTable from '../product-data-view/DataTable';
 import PurchaseHistoryPage from '../purchases-history-page/PurchasesHistoryPage';
-import HomePage from '../Home-Page/HomePage';
 
 /**
  * @name App
@@ -32,9 +32,9 @@ const App = () => (
           <Route exact path="/products" render={() => <ProductPage />} />
           <Route exact path="/checkout" render={() => <CheckoutPage />} />
           <Route exact path="/user" render={() => <UserProfile />} />
+          <Route exact path="/maintenance" render={() => <DataTable />} />
           <Route exact path="/maintenance/create" render={() => <Create />} />
           <Route exact path="/confirmation" render={() => <ConfirmationPage />} />
-          <Route exact path="/maintenance" render={() => <DataTable />} />
           <Route exact path="/user/purchases" render={() => <PurchaseHistoryPage />} />
         </div>
       </Switch>

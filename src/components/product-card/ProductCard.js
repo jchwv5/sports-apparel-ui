@@ -1,3 +1,5 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -82,24 +84,29 @@ const useStyles = makeStyles((theme) => ({
  * @param {*} props product
  * @return component
  */
-const ProductCard = ({ product }) => {
-  const [anchorEl, setAnchorEl] = React.useState();
+const ProductCard = ({ product, setPlayCarousel }) => {
+  const [anchorEl, setAnchorEl] = useState();
+  const [reviewRatingAverage, setReviewRatingAverage] = useState(0);
+  const [showProductModal, setShowProductModal] = useState(false);
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const { dispatch } = useCart();
+  const classes = useStyles();
+  const showReviewRating = Boolean(anchorEl);
+
   const handlePopperOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handlePopperClose = () => {
     setAnchorEl('hidden', '');
   };
-  const open = Boolean(anchorEl);
-  const [reviewRatingAverage, setReviewRatingAverage] = useState(0);
+
   useEffect(() => {
     if (product.reviews.length !== 0 && product.reviews !== null) {
       const accumulator = product.reviews.reduce((a, b) => ((a.rating ?? a) + b.rating), 0);
       setReviewRatingAverage((accumulator / product.reviews.length).toFixed(2));
     }
   }, [product.reviews]);
-  const classes = useStyles();
-  const { dispatch } = useCart();
+
   const onAdd = () => {
     dispatch({
       type: 'add',
@@ -114,26 +121,40 @@ const ProductCard = ({ product }) => {
     });
     notify('success', 'Item added');
   };
-  const [show, setShow] = useState(false);
+
+  const hideModal = () => {
+    setShowProductModal(false);
+    if (setPlayCarousel) {
+      setPlayCarousel(true);
+    }
+  };
+
+  const showModal = () => {
+    setShowProductModal(true);
+    if (setPlayCarousel) {
+      setPlayCarousel(false);
+    }
+  };
+
   const isDisabled = () => {
     if (product.reviews.length === 0) {
       return true;
     }
     return false;
   };
-  const [visual, setVisual] = useState(false);
+
   return (
     <>
-      <OutsideClickHandler onOutsideClick={() => setShow(false)}>
-        {show && <Modal onClose={() => setShow(false)} item={product} />}
+      <OutsideClickHandler onOutsideClick={() => hideModal()}>
+        {showProductModal && <Modal onClose={() => hideModal()} item={product} />}
       </OutsideClickHandler>
-      <OutsideClickHandler onOutsideClick={() => setVisual(false)}>
-        {visual && <ProductReview onClose={() => setVisual(false)} item={product} />}
+      <OutsideClickHandler onOutsideClick={() => setShowReviewModal(false)}>
+        {showReviewModal && <ProductReview onClose={() => setShowReviewModal(false)} item={product} />}
       </OutsideClickHandler>
       <Card className={classes.root}>
         <CardHeader
           className={classes.header}
-          onClick={() => setShow(true)}
+          onClick={() => showModal()}
           avatar={(
             <Avatar aria-label="demographics" className={classes.avatar}>
               {product.demographic.charAt(0)}
@@ -151,9 +172,9 @@ const ProductCard = ({ product }) => {
           className={classes.media}
           image={product.imageSrc}
           title="placeholder"
-          onClick={() => setShow(true)}
+          onClick={() => showModal()}
         />
-        <CardContent onClick={() => setShow(true)} className={classes.CardContent}>
+        <CardContent onClick={() => showModal()} className={classes.CardContent}>
           <Typography variant="body2" color="textSecondary" component="p">
             {product.description}
           </Typography>
@@ -174,12 +195,12 @@ const ProductCard = ({ product }) => {
             <AddShoppingCartIcon />
           </IconButton>
           <Typography
-            aria-owns={open ? 'mouse-over-popper' : undefined}
+            aria-owns={showReviewRating ? 'mouse-over-popper' : undefined}
             aria-haspopup="true"
             onMouseEnter={handlePopperOpen}
             onMouseLeave={handlePopperClose}
           >
-            <button type="submit" className={classes.stars} disabled={isDisabled()} onClick={() => setVisual(true)}>
+            <button type="submit" className={classes.stars} disabled={isDisabled()} onClick={() => setShowReviewModal(true)}>
               <StyledRating
                 className={classes.stars}
                 name="review-rating"
@@ -200,7 +221,7 @@ const ProductCard = ({ product }) => {
                 enabled: false
               }
             }}
-            open={open}
+            open={showReviewRating}
           >
             <Typography className={classes.rating} variant="body1" component="p">
               <b>Rating:</b>

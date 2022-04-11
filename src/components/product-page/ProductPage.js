@@ -12,18 +12,18 @@ import Sidebar from '../sidebar/Sidebar';
  * @description fetches products from API and displays products as product cards
  * @return component
  */
-
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const [apiError, setApiError] = useState(false);
   const [filterParam, setFilterParam] = useState('All');
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [page, setPage] = useState(1);
   const [count, setCount] = useState(0);
   const [nextPage, setNextPage] = useState(0);
+
   const handleClick = (filter) => {
     setFilterParam(filter);
   };
+
   const changePage = ({ selected }) => {
     setNextPage(selected);
   };
@@ -31,21 +31,25 @@ const ProductPage = () => {
   /**
  * Filters all products into a separate array based on filterParam
  * to be returned for setting cards on products page
- * @param {*} el - product passed in to be filtered
+ *
+ * @param {Object} product - product passed in to be filtered
  * @returns filteredProducts array
  */
-  const filterProducts = (el) => {
+  const filterProducts = (product) => {
     if (filterParam === 'All') {
-      filteredProducts.push(el);
+      filteredProducts.push(product);
       return filteredProducts.setFilteredProducts;
-    } if (el.demographic === filterParam) {
-      filteredProducts.push(el);
     }
-    return filteredProducts.setProducts;
+    if (product.demographic === filterParam) {
+      filteredProducts.push(product);
+    }
+    return filteredProducts.setFilteredProducts;
   };
+
   /**
-   * empties the filteredProducts array so that it can be populated from a clean state
+   * Empties the filteredProducts array so that it can be populated from a clean state
    * whenever the filterProducts function is called
+   *
    * @returns empty filteredProducts array
    */
   const clearFilteredProducts = () => {
